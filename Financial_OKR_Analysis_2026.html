@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CFO 战略评估报告 | 第一曲线专注版</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0F172A;
+            --card-bg: #1E293B;
+            --text-primary: #F8FAFC;
+            --text-secondary: #94A3B8;
+            --accent-green: #10B981;
+            --accent-red: #EF4444;
+            --accent-yellow: #F59E0B;
+            --accent-blue: #3B82F6;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            margin: 0;
+            padding: 40px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        header {
+            margin-bottom: 50px;
+            border-bottom: 1px solid #334155;
+            padding-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin: 0;
+            background: linear-gradient(90deg, #3B82F6, #8B5CF6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-top: 10px;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            border: 1px solid #334155;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #334155;
+            padding-bottom: 15px;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .score-badge {
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .score-pass {
+            background-color: rgba(16, 185, 129, 0.2);
+            color: var(--accent-green);
+            border: 1px solid var(--accent-green);
+        }
+
+        .score-fail {
+            background-color: rgba(239, 68, 68, 0.2);
+            color: var(--accent-red);
+            border: 1px solid var(--accent-red);
+        }
+
+        .score-warn {
+            background-color: rgba(245, 158, 11, 0.2);
+            color: var(--accent-yellow);
+            border: 1px solid var(--accent-yellow);
+        }
+
+        .analysis-section {
+            margin-bottom: 20px;
+        }
+
+        .analysis-title {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 8px;
+        }
+
+        .analysis-content {
+            font-size: 1.05rem;
+        }
+
+        .theory-tag {
+            display: inline-block;
+            background-color: #334155;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            color: #E2E8F0;
+            margin-right: 5px;
+            font-family: monospace;
+        }
+
+        .highlight-box {
+            border-left: 4px solid var(--accent-blue);
+            padding-left: 15px;
+            margin-top: 15px;
+            background-color: rgba(59, 130, 246, 0.05);
+            padding: 10px 15px;
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        .summary-box {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(16, 185, 129, 0.1));
+            border: 1px solid #3B82F6;
+        }
+
+        .critical-gap {
+            border-left: 4px solid var(--accent-red);
+            padding-left: 15px;
+            margin-top: 15px;
+            background-color: rgba(239, 68, 68, 0.05);
+            padding: 10px 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <nav style="margin-bottom: 30px; font-size: 0.9rem;">
+            <a href="index.html" style="color: #94A3B8; text-decoration: none; transition: color 0.2s;">&larr; 返回首页
+                (Home)</a>
+        </nav>
+        <header>
+            <h1>CFO 战略评估报告</h1>
+            <div class="subtitle">针对 第一曲线（存量业务）利润与风控的诊断 · 基于 CFO Skill (Curve 1 Focus)</div>
+        </header>
+
+        <!-- Executive Summary -->
+        <div class="card summary-box">
+            <div class="card-header" style="border-bottom: none; padding-bottom: 0;">
+                <div class="card-title">💰 核心综述</div>
+                <span class="score-badge score-pass">✅ 胜任 (Competent)</span>
+            </div>
+            <div class="analysis-content">
+                <p><strong>当前角色定位：</strong> 称职的<strong>“守门员”</strong>。</p>
+                <p><strong>诊断结论：</strong> 针对第一曲线“保 1.5 亿利润”的目标，该 OKR 表现合格。CFO
+                    高度关注“资源管控”、“降本增效”和“合规风险排查”。这对于一个进入成熟期、需要榨取利润的业务来说，是非常务实的策略。</p>
+            </div>
+        </div>
+
+        <!-- Core OKR Summary -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">📋 核心 OKR 方案摘要 (Curve 1 Focus)</div>
+            </div>
+            <div class="analysis-content">
+                <div style="margin-bottom: 20px;">
+                    <strong style="color: var(--accent-blue);">O1：资源管控与风控 (Control)</strong>
+                    <ul style="margin-top: 10px; color: #cbd5e1;">
+                        <li><strong>K1:</strong> 第一曲线可持续盈利模型优化。</li>
+                        <li><strong>K3:</strong> 梳理排查重大财税合规风险，输出解决方案。</li>
+                        <li><strong>K4:</strong> 针对业务侧需求进行资源合理分配。</li>
+                    </ul>
+                </div>
+                <div style="margin-bottom: 20px;">
+                    <strong style="color: var(--accent-blue);">O3：流程标准化提效 (Efficiency)</strong>
+                    <ul style="margin-top: 10px; color: #cbd5e1;">
+                        <li><strong>K1:</strong> 定期做流程健康度扫描，降低经营/税务风险。</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 1: Survival & Profit -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">Step 1: 利润保护 (Profit Protection)</div>
+                <span class="score-badge score-pass">✅ 通过</span>
+            </div>
+            <div class="analysis-section">
+                <div class="analysis-title">相关 OKR 条目</div>
+                <div class="analysis-content"><code>O1-K1</code> 可持续盈利模型。</div>
+            </div>
+            <div class="analysis-section">
+                <div class="analysis-title">基于理论：<span class="theory-tag">Cost Control</span><span
+                        class="theory-tag">ZBB (Zero-Based Budgeting)</span></div>
+                <div class="highlight-box">
+                    <strong>亮点诊断：</strong>
+                    CFO 关注“可持续盈利模型”，意味着会对第一曲线的各项成本（获客、交付、人力）进行监控。
+                    <br>建议引入 **零基预算 (ZBB)**，对所有存量费用进行重新审查，确保每一分钱都花在“保利润”上。
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 2: Risk Control -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">Step 2: 风险排雷 (Risk Audit)</div>
+                <span class="score-badge score-pass">✅ 通过</span>
+            </div>
+            <div class="analysis-section">
+                <div class="analysis-title">相关 OKR 条目</div>
+                <div class="analysis-content"><code>O1-K3</code> 梳理排查重大财税合规风险。</div>
+            </div>
+            <div class="analysis-section">
+                <div class="analysis-title">基于理论：<span class="theory-tag">Internal Control</span><span
+                        class="theory-tag">Altman Z-Score</span></div>
+                <div class="highlight-box">
+                    <strong>亮点诊断：</strong>
+                    第一曲线最大的风险通常是“历史遗留问题”（如税务、退费债务）。
+                    <br>CFO 将其作为 O1 的核心 KR，方向非常正确。只有排雷完毕，1.5 亿利润才是真实的，否则随时会被历史债务吞噬。
+                </div>
+            </div>
+        </div>
+
+        <!-- Recommendation -->
+        <div class="card" style="border-color: var(--accent-blue);">
+            <div class="card-header">
+                <div class="card-title">💡 改进建议 (For First Curve)</div>
+            </div>
+            <div class="analysis-content">
+                <ul style="list-style-type: none; padding-left: 0;">
+                    <li style="margin-bottom: 20px;">
+                        <strong style="color: var(--accent-green);">1. 强化“现金流”考核：</strong> <br>
+                        第一曲线不仅要看利润（账面），更要看现金流。建议增加指标：“经营性现金流净额”达标率。防止业务为了做利润而堆积应收账款。
+                    </li>
+                    <li>
+                        <strong style="color: var(--accent-green);">2. 建立“退费准备金”：</strong> <br>
+                        针对教育业务的高退费风险，CFO 应建立动态的“退费准备金”机制，确保账面利润已经剔除了潜在的退费风险。
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+
+</html>

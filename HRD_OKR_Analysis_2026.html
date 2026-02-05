@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HRD 战略评估报告 | 第一曲线专注版</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0F172A;
+            --card-bg: #1E293B;
+            --text-primary: #F8FAFC;
+            --text-secondary: #94A3B8;
+            --accent-purple: #8B5CF6;
+            --accent-green: #10B981;
+            --accent-red: #EF4444;
+            --accent-pink: #EC4899;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            margin: 0;
+            padding: 40px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        header {
+            margin-bottom: 50px;
+            border-bottom: 1px solid #334155;
+            padding-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin: 0;
+            background: linear-gradient(90deg, #EC4899, #8B5CF6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-top: 10px;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            border: 1px solid #334155;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #334155;
+            padding-bottom: 15px;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .score-badge {
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .score-pass {
+            background-color: rgba(16, 185, 129, 0.2);
+            color: var(--accent-green);
+            border: 1px solid var(--accent-green);
+        }
+
+        .score-fail {
+            background-color: rgba(239, 68, 68, 0.2);
+            color: var(--accent-red);
+            border: 1px solid var(--accent-red);
+        }
+
+        .score-outstanding {
+            background-color: rgba(139, 92, 246, 0.2);
+            color: var(--accent-purple);
+            border: 1px solid var(--accent-purple);
+        }
+
+        .analysis-section {
+            margin-bottom: 20px;
+        }
+
+        .analysis-title {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 8px;
+        }
+
+        .analysis-content {
+            font-size: 1.05rem;
+        }
+
+        .theory-tag {
+            display: inline-block;
+            background-color: #334155;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            color: #E2E8F0;
+            margin-right: 5px;
+            font-family: monospace;
+        }
+
+        .highlight-box {
+            border-left: 4px solid var(--accent-purple);
+            padding-left: 15px;
+            margin-top: 15px;
+            background-color: rgba(139, 92, 246, 0.05);
+            padding: 10px 15px;
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        .summary-box {
+            background: linear-gradient(135deg, rgba(236, 72, 153, 0.1), rgba(139, 92, 246, 0.1));
+            border: 1px solid #EC4899;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <nav style="margin-bottom: 30px; font-size: 0.9rem;">
+            <a href="index.html" style="color: #94A3B8; text-decoration: none; transition: color 0.2s;">&larr; 返回首页
+                (Home)</a>
+        </nav>
+        <header>
+            <h1>HRD 战略评估报告</h1>
+            <div class="subtitle">针对 第一曲线（存量业务）人效与组织的诊断 · 基于 HRD Skill (Curve 1 Focus)</div>
+        </header>
+
+        <!-- Executive Summary -->
+        <div class="card summary-box">
+            <div class="card-header" style="border-bottom: none; padding-bottom: 0;">
+                <div class="card-title">🦄 核心综述</div>
+                <span class="score-badge score-outstanding">S级 (Outstanding)</span>
+            </div>
+            <div class="analysis-content">
+                <p><strong>当前角色定位：</strong> 冷酷的<strong>“组织瘦身专家”</strong>。</p>
+                <p><strong>诊断结论：</strong> 针对第一曲线“降本增效”的目标，该 OKR 表现卓越。通过强制性的 **Topgrading (人才升级)** 和 **AI
+                    岗位重构**，能有效清洗掉“小白兔”和低效产能，确保现金牛业务的利润率。
+                    <br><strong>关键价值：</strong> 在业务存量期，HRD 通过“减人增效”直接贡献了净利润。
+                </p>
+            </div>
+        </div>
+
+        <!-- Core OKR Summary -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">📋 核心 OKR 方案摘要 (Curve 1 Focus)</div>
+            </div>
+            <div class="analysis-content">
+                <div style="margin-bottom: 20px;">
+                    <strong style="color: var(--accent-pink);">O1：岗位 AI 重构 (Efficiency)</strong>
+                    <ul style="margin-top: 10px; color: #cbd5e1;">
+                        <li><strong>KR1:</strong> 100% P5+ 岗位完成《岗位 AI 重构说明书》，通过率控制在 80% 以下。</li>
+                        <li><strong>KR3:</strong> 输出《2027年组织瘦身白皮书》，识别可替代/合并的 HC。</li>
+                    </ul>
+                </div>
+                <div style="margin-bottom: 20px;">
+                    <strong style="color: var(--accent-pink);">O2：高潜清洗 (Talent Density)</strong>
+                    <ul style="margin-top: 10px; color: #cbd5e1;">
+                        <li><strong>KR1:</strong> 无法指导重构的管理者末位淘汰 10%。</li>
+                        <li><strong>KR2:</strong> 清洗 100% 无法回答“如何用 AI 重做工作”的伪高潜。</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 1: Efficiency & Structure -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">Step 1: 组织效能 (Operational Efficiency)</div>
+                <span class="score-badge score-outstanding">🚀 卓越</span>
+            </div>
+            <div class="analysis-section">
+                <div class="analysis-title">相关 OKR 条目</div>
+                <div class="analysis-content"><code>O1-KR3</code> 组织瘦身白皮书。</div>
+            </div>
+            <div class="analysis-section">
+                <div class="analysis-title">基于理论：<span class="theory-tag">Span of Control</span><span
+                        class="theory-tag">AI Substitution</span></div>
+                <div class="highlight-box">
+                    <strong>亮点诊断：</strong>
+                    HRD 明确提出了要通过 AI 重构来“瘦身”。这对于第一曲线至关重要：
+                    <br>随着业务进入成熟期，组织往往会变得臃肿。利用 AI 替代低端重复劳动（如基础教研、客服、运营助理），可以直接降低 SG&A 费用，提升净利率。
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 2: Talent Density -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">Step 2: 人才密度 (Density Test)</div>
+                <span class="score-badge score-pass">✅ 通过</span>
+            </div>
+            <div class="analysis-section">
+                <div class="analysis-title">相关 OKR 条目</div>
+                <div class="analysis-content"><code>O2-KR2</code> 剔除 100% 伪高潜。</div>
+            </div>
+            <div class="analysis-section">
+                <div class="analysis-title">基于理论：<span class="theory-tag">Topgrading</span></div>
+                <div class="highlight-box">
+                    <strong>亮点诊断：</strong>
+                    在第一曲线，最怕“平庸的管理者”霸占关键岗位。
+                    <br>HRD 提出的用“AI 重构能力”作为试金石，清洗掉那些“只会做 PPT 不会用工具”的伪高管，能有效防止“大公司病”。
+                </div>
+            </div>
+        </div>
+
+        <!-- Recommendation -->
+        <div class="card" style="border-color: var(--accent-purple);">
+            <div class="card-header">
+                <div class="card-title">💡 改进建议 (For First Curve)</div>
+            </div>
+            <div class="analysis-content">
+                <ul style="list-style-type: none; padding-left: 0;">
+                    <li style="margin-bottom: 20px;">
+                        <strong style="color: var(--accent-green);">1. 严控“管理者膨胀”：</strong> <br>
+                        第一曲线应严格控制 M 序列编制。建议增加指标：“管理人员/一线员工比例”需在 2026 年下降 X%。
+                    </li>
+                    <li>
+                        <strong style="color: var(--accent-green);">2. 锁定核心“交付型”人才：</strong> <br>
+                        在清洗伪高潜的同时，要确保“金牌班主任/教研”等直接产出利润的岗位流失率 < 5%。不能因为激进改革把干活的人洗走了。 </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+
+</html>
