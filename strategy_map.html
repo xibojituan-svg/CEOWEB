@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>喜播 2026 战略全景地图 (SP-BP-BSC-Battles)</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --success-color: #27ae60;
+            --warning-color: #f39c12;
+            --info-color: #3498db;
+            --light-bg: #ecf0f1;
+            --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background-color: #f4f7f6;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: var(--card-shadow);
+        }
+
+        h1 {
+            margin: 0;
+            color: var(--primary-color);
+        }
+
+        .subtitle {
+            color: #7f8c8d;
+            margin-top: 10px;
+            font-size: 1.1em;
+        }
+
+        /* Level Structure */
+        .level {
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .level-title {
+            text-align: center;
+            font-size: 1.5em;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+            background: #f4f7f6;
+            padding: 0 20px;
+            z-index: 1;
+        }
+
+        .level-divider {
+            border-top: 2px dashed #bdc3c7;
+            position: absolute;
+            top: 20px;
+            width: 100%;
+            z-index: 0;
+        }
+
+        .level-content {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        /* Cards */
+        .card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            width: 300px;
+            box-shadow: var(--card-shadow);
+            transition: transform 0.2s;
+            position: relative;
+            border-top: 4px solid var(--info-color);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .card h3 {
+            margin-top: 0;
+            font-size: 1.1em;
+            color: var(--primary-color);
+        }
+
+        .card p {
+            font-size: 0.9em;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .card-tag {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            color: white;
+            margin-bottom: 10px;
+        }
+
+        /* Specific Colors */
+        .bg-red {
+            background-color: var(--accent-color);
+            color: white;
+        }
+
+        .bg-green {
+            background-color: var(--success-color);
+            color: white;
+        }
+
+        .bg-blue {
+            background-color: var(--info-color);
+            color: white;
+        }
+
+        .bg-yellow {
+            background-color: var(--warning-color);
+            color: white;
+        }
+
+        .border-red {
+            border-top-color: var(--accent-color);
+        }
+
+        .border-green {
+            border-top-color: var(--success-color);
+        }
+
+        .border-yellow {
+            border-top-color: var(--warning-color);
+        }
+
+        /* Connections (Visual Lines) */
+        .connection-line {
+            height: 30px;
+            width: 2px;
+            background: #bdc3c7;
+            margin: 0 auto;
+        }
+
+        /* Detailed Lists within Cards */
+        ul.card-list {
+            padding-left: 20px;
+            margin: 10px 0;
+            font-size: 0.9em;
+            color: #555;
+        }
+
+        /* Floating Action Button for Home */
+        .fab {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--primary-color);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            text-decoration: none;
+            font-size: 24px;
+            transition: background 0.3s;
+        }
+
+        .fab:hover {
+            background-color: #34495e;
+        }
+
+        /* Navigation */
+        .breadcrumb {
+            margin-bottom: 20px;
+            font-size: 0.9em;
+        }
+
+        .breadcrumb a {
+            color: #7f8c8d;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--info-color);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="index.html">&larr; 返回首页 (Home)</a>
+        </div>
+        <header>
+            <h1>喜播 2026 战略全景地图</h1>
+            <div class="subtitle">Strategic Alignment Map: SP ➤ BP ➤ BSC ➤ Battles</div>
+            <div style="margin-top:20px; font-size: 0.9em; color: #e74c3c;">
+                <strong>核心逻辑：</strong> 战略目标(SP) 决定 业务引擎(BP)，业务引擎 拆解为 平衡计分卡(BSC)，最终落地为 四场必赢战役(Battles)
+            </div>
+        </header>
+
+
+        <!-- LEVEL 1: SP -->
+        <div class="level">
+            <div class="level-divider"></div>
+            <div style="text-align: center;"><span class="level-title">Level 1: 战略规划 (SP)</span></div>
+            <div class="level-content">
+                <div class="card border-red" style="width: 400px;">
+                    <span class="card-tag bg-red">残酷真相</span>
+                    <h3>商业模式原罪</h3>
+                    <p>问题不是"业务风险"，而是"卖承诺"模式。退费率24%意味着信任负债累积。</p>
+                </div>
+
+                <div class="card border-green" style="width: 400px;">
+                    <span class="card-tag bg-green">2026 战略目标</span>
+                    <h3>软着陆 (Soft Landing)</h3>
+                    <ul>
+                        <li><strong>第一曲线：</strong> "解毒" (不暴雷，拦截大黑用户)</li>
+                        <li><strong>第二曲线：</strong> "验证" (健康业务跑通MVP)</li>
+                        <li><strong>底线：</strong> 活下来，不发生系统性风险</li>
+                    </ul>
+                    <div style="margin-top:10px; text-align:center;">
+                        <a href="2026TODO.html" style="color:#27ae60; text-decoration:underline;">👉 战略白皮书</a>
+                    </div>
+                </div>
+
+                <div class="card border-blue" style="width: 400px;">
+                    <span class="card-tag bg-blue">2028 愿景</span>
+                    <h3>个人健康与幸福服务平台</h3>
+                    <p>从"培训公司"转型为"服务平台"。10万学员转化为分布式顾问网络。</p>
+                    <div style="margin-top:10px; text-align:center;">
+                        <a href="2026TalentBattles.html" style="color:#3498db; text-decoration:underline;">👉 人才战役部署</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="connection-line"></div>
+
+        <!-- LEVEL 2: BP -->
+        <div class="level">
+            <div class="level-divider"></div>
+            <div style="text-align: center;"><span class="level-title">Level 2: 业务计划 (BP - 6大引擎)</span></div>
+            <div class="level-content">
+                <div class="card border-red">
+                    <h3>引擎A：飞轮诊断</h3>
+                    <p><strong>现状：</strong> 毒飞轮 (夸大承诺 -> 高收入 -> 信任透支)</p>
+                    <p><strong>目标：</strong> 健康飞轮 (效果 -> 口碑 -> 信任累积)</p>
+                </div>
+                <div class="card border-yellow">
+                    <h3>引擎B：控制点</h3>
+                    <p><strong>短期：</strong> 合规能力</p>
+                    <p><strong>中期：</strong> 顾问网络</p>
+                    <p><strong>长期：</strong> AI + 数据资产</p>
+                </div>
+                <div class="card border-green">
+                    <h3>引擎C：两难困境</h3>
+                    <p>打破"利润 vs 合规"零和博弈</p>
+                    <p>策略：大黑拦截 + 新利润源补位</p>
+                </div>
+                <div class="card border-blue">
+                    <h3>引擎E：系统动力学</h3>
+                    <p>重构激励机制：GMV -> 满意度/投诉率</p>
+                    <p>重构用户筛选：漏斗 -> 筛子</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="connection-line"></div>
+
+        <!-- LEVEL 3: BSC -->
+        <div class="level">
+            <div class="level-divider"></div>
+            <div style="text-align: center;">
+                <span class="level-title">Level 3: 平衡计分卡 (BSC)</span>
+                <div style="margin-top: 10px; margin-bottom: 10px;">
+                    <a href="BSC_2026.html"
+                        style="display:inline-block; background:white; border:1px solid #ddd; padding:5px 15px; border-radius:20px; color:#333; text-decoration:none; font-size:0.9em; box-shadow:0 2px 5px rgba(0,0,0,0.05); transition:all 0.2s;">
+                        📊 查看完整指标详情 (View Full Scorecard) &rarr;
+                    </a>
+                </div>
+            </div>
+            <div class="level-content">
+                <div class="card border-yellow">
+                    <span class="card-tag bg-yellow">财务 (30%)</span>
+                    <h3>保利润，控现金</h3>
+                    <ul class="card-list">
+                        <li><strong>收入：</strong> 6亿 (现金牛)</li>
+                    </ul>
+                    <div style="margin-top:10px; text-align:right;">
+                        <a href="Financial_OKR_Analysis_2026.html" style="color:#f39c12; font-size:0.8em;">📊 CFO 报告</a>
+                    </div>
+                </div>
+                <div class="card border-red">
+                    <span class="card-tag bg-red">客户 (30%)</span>
+                    <h3>倒逼质量，严控风险</h3>
+                    <ul class="card-list">
+                        <li><strong>百万投诉率：</strong> ↓15% (毒性检测)</li>
+                        <li><strong>学员合格率：</strong> 75% (需明确定义)</li>
+                    </ul>
+                    <div style="margin-top:10px; text-align:right;">
+                        <a href="CX_OKR_Analysis_2026.html" style="color:#e74c3c; font-size:0.8em;">📊 VOC 报告</a>
+                    </div>
+                </div>
+                <div class="card border-green">
+                    <span class="card-tag bg-green">内部运营 (30%)</span>
+                    <h3>爆品与人效</h3>
+                    <ul class="card-list">
+                        <li><strong>新课上线：</strong> 成功数 (需补目标)</li>
+                        <li><strong>兼职人效：</strong> ↑10% (压榨 vs 赋能?)</li>
+                    </ul>
+                    <div style="margin-top:10px; text-align:right;">
+                        <a href="Curve1_Ops_Analysis_2026.html" style="color:#27ae60; font-size:0.8em;">📊 运营报告</a> |
+                        <a href="Content_OKR_Analysis_2026.html" style="color:#27ae60; font-size:0.8em;">教研报告</a>
+                    </div>
+                </div>
+                <div class="card border-blue">
+                    <span class="card-tag bg-blue">学习成长 (10%)</span>
+                    <h3>AI 转型</h3>
+                    <ul class="card-list">
+                        <li><strong>AI Native组织：</strong> 100%覆盖</li>
+                        <li><strong>岗位重构：</strong> 人+AI模式</li>
+                    </ul>
+                    <div style="margin-top:10px; text-align:right;">
+                        <a href="HRD_OKR_Analysis_2026.html" style="color:#3498db; font-size:0.8em;">📊 HRD 报告</a> |
+                        <a href="CTO_OKR_Analysis_2026.html" style="color:#3498db; font-size:0.8em;">CTO 报告</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="connection-line"></div>
+
+        <!-- LEVEL 4: BATTLES -->
+        <div class="level">
+            <div class="level-divider"></div>
+            <div style="text-align: center;"><span class="level-title" style="color:#e74c3c;">Level 4: 核心战役 (Key
+                    Battles)</span></div>
+            <div class="level-content">
+
+                <!-- Battle 1 -->
+                <div class="card border-red" style="width: 300px; background-color: #fff5f5;">
+                    <span class="card-tag bg-red">战役一：第一曲线生存之战</span>
+                    <h3>🛡️ 服务：保卫延安</h3>
+                    <p><strong>指挥官：</strong> 杜康杰</p>
+                    <hr>
+                    <p><strong>必胜结果 (O)：</strong><br>百万元投诉率 ↓15%</p>
+                    <ul class="card-list">
+                        <li><strong>KR1:</strong> 建立全链路特殊关怀拦截 (外溢率↓80%)</li>
+                        <li><strong>KR2:</strong> 质检红线违规率 ↓80%</li>
+                        <li><strong>KR3:</strong> 外部百万元投诉率 ↓20%</li>
+                    </ul>
+                    <div style="margin-top:10px; font-size:0.8em; color:#e74c3c;">
+                        🔗 关联BSC：百万元投诉率 (一票否决)
+                    </div>
+                </div>
+
+                <!-- Battle 2 -->
+                <div class="card border-yellow" style="width: 300px; background-color: #fffff0;">
+                    <span class="card-tag bg-yellow">战役二：健康利润之战</span>
+                    <h3>⛰️ 挺进大别山</h3>
+                    <p><strong>指挥官：</strong> 马长久</p>
+                    <hr>
+                    <p><strong>必胜结果 (O)：</strong><br>净利润率 > 10%</p>
+                    <ul class="card-list">
+                        <li><strong>KR1:</strong> 恢复高转化安全素材 (4月重启)</li>
+                        <li><strong>KR2:</strong> 0元转化率 ≥ 2.5%</li>
+                        <li><strong>KR3:</strong> 复购“精准爆破” (复购率↑20%)</li>
+                    </ul>
+                    <div style="margin-top:10px; font-size:0.8em; color:#f39c12;">
+                        🔗 关联BSC：净利润 / 收入
+                    </div>
+                </div>
+
+                <!-- Battle 3 -->
+                <div class="card border-blue" style="width: 300px; background-color: #f0f8ff;">
+                    <span class="card-tag bg-blue">战役三：硅基员工登陆日</span>
+                    <h3>🤖 Silicon Employee D-Day</h3>
+                    <p><strong>指挥官：</strong> 姚涣</p>
+                    <hr>
+                    <p><strong>必胜结果 (O)：</strong><br>兼职人效 ↑15%</p>
+                    <ul class="card-list">
+                        <li><strong>KR1:</strong> AI 替代后40%助教</li>
+                        <li><strong>KR2:</strong> AI 替代后30%班主任</li>
+                        <li><strong>KR3:</strong> AI 替代尾部30%点评官</li>
+                    </ul>
+                    <div style="margin-top:10px; font-size:0.8em; color:#3498db;">
+                        🔗 关联BSC：兼职人效
+                    </div>
+                </div>
+
+                <!-- Battle 4 -->
+                <div class="card border-green" style="width: 300px; background-color: #f0fff4;">
+                    <span class="card-tag bg-green">战役四：换芯行动</span>
+                    <h3>🧠 AI Native 组织重构</h3>
+                    <p><strong>指挥官：</strong> 王俊</p>
+                    <hr>
+                    <p><strong>必胜结果 (O)：</strong><br>关键岗位 AI化 100%</p>
+                    <ul class="card-list">
+                        <li><strong>KR1:</strong> 核心流边际交付成本 ↓40%</li>
+                        <li><strong>KR2:</strong> 关键与腰部岗位 100% 换芯</li>
+                        <li><strong>KR3:</strong> 双曲线人才通道 (20+高潜)</li>
+                    </ul>
+                    <div style="margin-top:10px; font-size:0.8em; color:#27ae60;">
+                        🔗 关联BSC：AI Native 组织
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="connection-line"></div>
+        <!-- Logic Explanation Section -->
+        <div class="card"
+            style="width: 100%; box-sizing: border-box; margin-bottom: 40px; background: #fffcf0; border-top: 4px solid #f1c40f;">
+            <div style="display: flex; gap: 40px; flex-wrap: wrap;">
+                <div style="flex: 1; min-width: 300px;">
+                    <h3 style="color: #d35400;">🚀 核心逻辑链 (The Why-How-What)</h3>
+                    <ul style="line-height: 1.8; color: #555;">
+                        <li><strong>SP (Strategic Plan)</strong>: <strong>"要去哪里?"</strong> (顶层设计) <br> <span
+                                style="font-size:0.9em; color:#7f8c8d;">例：软着陆 / 转型双曲线</span></li>
+                        <li><strong>BP (Business Plan)</strong>: <strong>"凭什么去?"</strong> (商业引擎) <br> <span
+                                style="font-size:0.9em; color:#7f8c8d;">例：解决毒飞轮 / 建立合规控制点</span></li>
+                        <li><strong>BSC (Scorecard)</strong>: <strong>"怎么衡量?"</strong> (过程指标) <br> <span
+                                style="font-size:0.9em; color:#7f8c8d;">例：投诉率↓15% / 净利20%</span></li>
+                        <li><strong>Battles (Key Battles)</strong>: <strong>"先做什么?"</strong> (必赢之战) <br> <span
+                                style="font-size:0.9em; color:#7f8c8d;">例：硅基员工登陆 / 高管换血</span></li>
+                    </ul>
+                </div>
+                <div style="flex: 1; min-width: 300px; border-left: 2px solid #eee; padding-left: 40px;">
+                    <h3 style="color: #c0392b;">⚡️ 常见误解与矛盾 (Conflicts)</h3>
+                    <ul style="line-height: 1.8; color: #555;">
+                        <li><strong>SP vs BP (理想 vs 现实)</strong>: <br> SP 说要"长期主义"，BP
+                            却在处理"退费率炸雷"的烂摊子。这是正常的<strong>"修飞机"</strong>过程。</li>
+                        <li><strong>BSC vs Battles (平衡 vs 聚焦)</strong>: <br> BSC 追求"全面平衡"，Battles
+                            追求"单点突破"。战役期间，<strong>Battle 优先级 > BSC 常规指标</strong>。</li>
+                        <li><strong>短期利润 vs 长期合规</strong>: <br> 这是 2026 年最大的矛盾。BSC 给出了 <strong>1.2亿净利</strong> (生存) 和
+                            <strong>↓15% 投诉率</strong> (安全) 的双底线，缺一不可。
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Methodology Dictionary Section -->
+        <div class="card"
+            style="width: 100%; box-sizing: border-box; margin-bottom: 40px; background: #f0faff; border-top: 4px solid #3498db;">
+            <div style="display: flex; gap: 40px; flex-wrap: wrap;">
+                <div style="flex: 1; min-width: 300px;">
+                    <h3 style="color: #2980b9;">📚 方法论词典 (Definitions)</h3>
+                    <ul style="line-height: 1.8; color: #555;">
+                        <li><strong>BSC (平衡计分卡)</strong>: <strong>战略仪表盘</strong>。从四个维度(财务/客户/内部/成长)衡量企业健康度。<br><span
+                                style="background:#eee; padding:2px 5px; font-size:0.8em;">关键字：平衡 (Balance)</span></li>
+                        <li><strong>OKR (目标与关键结果)</strong>: <strong>变革助推器</strong>。用于管理"非确定性业务"或"突破性目标"。<br><span
+                                style="background:#eee; padding:2px 5px; font-size:0.8em;">关键字：挑战 (Ambitious)</span>
+                        </li>
+                        <li><strong>KPI (关键绩效指标)</strong>: <strong>保底考核线</strong>。用于管理"确定性业务"或"岗位职责底线"。<br><span
+                                style="background:#eee; padding:2px 5px; font-size:0.8em;">关键字：达标 (Standard)</span></li>
+                        <li><strong>GSA (目标-策略-行动)</strong>: <strong>执行路径图</strong>。Goal(目标) -> Strategy(策略) ->
+                            Action(行动)。<br><span style="background:#eee; padding:2px 5px; font-size:0.8em;">关键字：落地
+                                (Execution)</span></li>
+                    </ul>
+                </div>
+                <div style="flex: 1; min-width: 300px; border-left: 2px solid #eee; padding-left: 40px;">
+                    <h3 style="color: #8e44ad;">🔗 组合拳逻辑 (The Relationship)</h3>
+                    <p style="line-height: 1.6; color: #555;">在喜播 2026 战略中，这些工具是组合使用的：</p>
+                    <ul style="line-height: 1.8; color: #555;">
+                        <li><strong>SP 导出 BSC</strong>: 战略规划决定了我们需要看哪四个维度的仪表盘。</li>
+                        <li><strong>BSC 分解为 KPI</strong>: 那些成熟的指标 (如收入、出勤率) 变成部门/个人的 KPI。</li>
+                        <li><strong>Battle 采用 OKR</strong>: 那些未知的战役 (如硅基员工、去毒飞轮) 采用 OKR 管理，允许试错。</li>
+                        <li><strong>落地皆为 GSA</strong>: 无论是 OKR 还是 KPI，最终都要拆解为 GSA (具体的策略和动作) 才能执行。</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Logic Cascade Section -->
+        <div class="card" id="logic-cascade"
+            style="width: 100%; box-sizing: border-box; margin-bottom: 40px; background: #fdf2f8; border-top: 4px solid #db2777;">
+            <div class="card-header">
+                <div class="card-title"
+                    style="color: #db2777; font-size: 1.1em; font-weight: bold; margin-bottom: 15px;">🔗 战略穿透逻辑
+                    (Strategic Cascade Logic)</div>
+            </div>
+            <div class="content-text">
+                <div
+                    style="margin-bottom: 20px; padding: 15px; background: rgba(219, 39, 119, 0.1); border-left: 4px solid #db2777; border-radius: 4px; color: #555;">
+                    <strong>核心逻辑：</strong> 公司战略 (BSC) 是“方向盘”，关键战役 (Battles) 是“发动机”。
+                    负责人 (Owner) 通过 <strong>OKR</strong> 承接战役目标，通过 <strong>KPI</strong> 兜底BSC红线。
+                    <br>
+                    <span style="font-size: 0.9em; color: #94A3B8;">(Company BSC → Key Battles → Leader OKR/KPI → Member
+                        OKR/KPI)</span>
+                </div>
+
+                <!-- Case Study: Du Kangjie -->
+                <h3 style="color: #be185d; margin-top: 30px; border-bottom: 1px solid #e5e7eb; padding-bottom: 10px;">
+                    🧩 穿透案例：杜康杰 (客户体验部负责人)
+                </h3>
+
+                <div class="cascade-container"
+                    style="display: flex; flex-direction: column; gap: 15px; margin-top: 20px;">
+
+                    <!-- Level 1: Company BSC -->
+                    <div class="cascade-step"
+                        style="border: 1px solid #8b5cf6; padding: 15px; border-radius: 8px; position: relative; background: white;">
+                        <div
+                            style="position: absolute; top: -10px; left: 15px; background: #fdf2f8; padding: 0 10px; color: #8b5cf6; font-weight: bold; font-size: 0.9rem;">
+                            1. 公司级 BSC (Strategic Goal)
+                        </div>
+                        <div style="display: flex; gap: 20px; align-items: center; margin-top: 5px;">
+                            <div style="flex: 1;">
+                                <div style="color: #94A3B8; font-size: 0.9rem;">指标 (Metric)</div>
+                                <div style="font-size: 1.1rem; font-weight: 600; color: #333;">百万元投诉率 (Million Complaint
+                                    Rate)</div>
+                            </div>
+                            <div style="flex: 1;">
+                                <div style="color: #94A3B8; font-size: 0.9rem;">目标 (Target)</div>
+                                <div style="color: #10b981; font-weight: bold;">📉 降低 15%</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="text-align: center; color: #cbd5e1; font-size: 1.2rem;">⬇️</div>
+
+                    <!-- Level 2: Key Battle -->
+                    <div class="cascade-step"
+                        style="border: 1px solid #ef4444; padding: 15px; border-radius: 8px; position: relative; background: white;">
+                        <div
+                            style="position: absolute; top: -10px; left: 15px; background: #fdf2f8; padding: 0 10px; color: #ef4444; font-weight: bold; font-size: 0.9rem;">
+                            2. 关键战役 (Key Battle)
+                        </div>
+                        <div>
+                            <div style="font-size: 1.1rem; font-weight: 600; color: #333;">⚔️ 第一曲线风控与315保卫战</div>
+                            <div style="color: #64748b; font-size: 0.9rem; margin-top: 5px;">
+                                任务：筑牢安全防线，确保业务不暴雷，平稳度过315敏感期。
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="text-align: center; color: #cbd5e1; font-size: 1.2rem;">⬇️</div>
+
+                    <!-- Level 3: Leader OKR & KPI -->
+                    <div class="cascade-step"
+                        style="border: 1px solid #06b6d4; padding: 15px; border-radius: 8px; position: relative; background: white;">
+                        <div
+                            style="position: absolute; top: -10px; left: 15px; background: #fdf2f8; padding: 0 10px; color: #06b6d4; font-weight: bold; font-size: 0.9rem;">
+                            3. 负责人 OKR & KPI (Owner: 杜康杰)
+                        </div>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 5px;">
+                            <div style="background: rgba(6, 182, 212, 0.1); padding: 10px; border-radius: 6px;">
+                                <div style="color: #0891b2; font-weight: 600; margin-bottom: 5px;">OKR (进取目标)</div>
+                                <div style="font-size: 0.9rem; color: #333;">
+                                    <strong>O:</strong> 筑牢业务安全防线<br>
+                                    <strong>KR:</strong> 外部投诉率降低 <span
+                                        style="color: #10b981; font-weight: bold;">20%</span> (挑战值)
+                                </div>
+                            </div>
+                            <div style="background: rgba(245, 158, 11, 0.1); padding: 10px; border-radius: 6px;">
+                                <div style="color: #d97706; font-weight: 600; margin-bottom: 5px;">KPI (底线考核)</div>
+                                <div style="font-size: 0.9rem; color: #333;">
+                                    <strong>指标:</strong> 百万元投诉率<br>
+                                    <strong>红线:</strong> 不得高于 2025 年水平
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="text-align: center; color: #cbd5e1; font-size: 1.2rem;">⬇️</div>
+
+                    <!-- Level 4: Member OKR & KPI -->
+                    <div class="cascade-step"
+                        style="border: 1px solid #10b981; padding: 15px; border-radius: 8px; position: relative; background: white;">
+                        <div
+                            style="position: absolute; top: -10px; left: 15px; background: #fdf2f8; padding: 0 10px; color: #10b981; font-weight: bold; font-size: 0.9rem;">
+                            4. 团队成员 OKR & KPI (e.g., 客服经理 / 质检主管)
+                        </div>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 5px;">
+                            <div style="background: rgba(16, 185, 129, 0.1); padding: 10px; border-radius: 6px;">
+                                <div style="color: #059669; font-weight: 600; margin-bottom: 5px;">Action (执行动作)</div>
+                                <div style="font-size: 0.9rem; color: #333;">
+                                    <strong>KR:</strong> 智能客服解决率提升至 <span
+                                        style="color: #059669; font-weight: bold;">85%</span><br>
+                                    (通过技术手段降低投诉基数)
+                                </div>
+                            </div>
+                            <div style="background: rgba(245, 158, 11, 0.1); padding: 10px; border-radius: 6px;">
+                                <div style="color: #d97706; font-weight: 600; margin-bottom: 5px;">KPI (过程指标)</div>
+                                <div style="font-size: 0.9rem; color: #333;">
+                                    <strong>指标:</strong> 48h 投诉处理及时率<br>
+                                    <strong>要求:</strong> > 90%
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 50px; color: #95a5a6;">
+            <p>Xibo Education Group &copy; 2026 CEO David</p>
+        </div>
+    </div>
+
+    <a href="index.html" class="fab" title="返回首页">🏠</a>
+
+</body>
+
+</html>
