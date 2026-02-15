@@ -165,6 +165,43 @@
         .fab:hover {
             background: #1e293b;
         }
+
+        .math-formula {
+            display: inline-flex;
+            align-items: center;
+            font-family: "Times New Roman", serif;
+            font-size: 1.1em;
+            color: var(--primary);
+        }
+
+        .math-term {
+            white-space: nowrap;
+        }
+
+        .math-operator {
+            margin: 0 8px;
+        }
+
+        .math-fraction {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            vertical-align: middle;
+        }
+
+        .math-numerator {
+            border-bottom: 2px solid currentColor;
+            padding: 0 10px 4px;
+            margin-bottom: 4px;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .math-denominator {
+            padding: 2px 10px 0;
+            text-align: center;
+            font-weight: 500;
+        }
     </style>
 </head>
 
@@ -206,8 +243,18 @@
                 </tr>
                 <tr>
                     <td><strong>计算公式</strong></td>
-                    <td>$ \frac{\sum (\text{L1金额} \times 5 + \text{L2金额} \times 1)}{\text{当期现金流收入 (百万)}} $ <br><span
-                            style="font-size:0.85em;color:#64748b">（不再区分内外部占比，统一按风险等级加权）</span></td>
+                    <td>
+                        <div class="math-formula">
+                            <span class="math-term" style="font-weight:bold;">百万元投诉风险率</span>
+                            <span class="math-operator"> = </span>
+                            <div class="math-fraction">
+                                <span class="math-numerator">∑ ( L1金额 × 5 + L2金额 × 1 )</span>
+                                <span class="math-denominator">当期现金流收入 (百万)</span>
+                            </div>
+                        </div>
+                        <span
+                            style="font-size:0.85em;color:#64748b;display:block;margin-top:8px;">（不再区分内外部占比，统一按风险等级加权）</span>
+                    </td>
                 </tr>
                 <tr>
                     <td><strong>目标</strong></td>
