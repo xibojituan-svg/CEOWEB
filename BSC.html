@@ -13,32 +13,68 @@
             --bg: #f4f5f7;
             --card: #fff;
         }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
             background: var(--bg);
             color: #1f2937;
             line-height: 1.7;
         }
-        .container { max-width: 1100px; margin: 0 auto; padding: 0 24px 60px; }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px 60px;
+        }
+
         .hero {
             background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 50%, #1a2a6c 100%);
             color: white;
             padding: 48px 0 36px;
         }
-        .hero h1 { font-size: 2em; margin-bottom: 8px; }
-        .hero .meta { opacity: 0.8; font-size: 0.95em; }
-        .breadcrumb { padding: 0 0 16px 0; font-size: 0.9em; }
-        .breadcrumb a { color: rgba(255,255,255,0.9); text-decoration: none; }
-        .breadcrumb a:hover { text-decoration: underline; }
-        .breadcrumb span { color: rgba(255,255,255,0.5); }
+
+        .hero h1 {
+            font-size: 2em;
+            margin-bottom: 8px;
+        }
+
+        .hero .meta {
+            opacity: 0.8;
+            font-size: 0.95em;
+        }
+
+        .breadcrumb {
+            padding: 0 0 16px 0;
+            font-size: 0.9em;
+        }
+
+        .breadcrumb a {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .breadcrumb span {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
         section {
             background: var(--card);
             border-radius: 12px;
             padding: 28px 32px;
             margin-bottom: 24px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
         }
+
         section h2 {
             color: var(--primary);
             font-size: 1.35em;
@@ -46,20 +82,36 @@
             padding-bottom: 10px;
             border-bottom: 2px solid var(--accent);
         }
-        section h3 { font-size: 1.1em; color: #374151; margin: 24px 0 12px; }
-        table { width: 100%; border-collapse: collapse; font-size: 0.9em; }
-        th, td { border: 1px solid #e5e7eb; padding: 12px 14px; text-align: left; }
-        th { background: #f1f5f9; color: var(--primary); font-weight: 600; }
-        tr:nth-child(even) { background: #f8fafc; }
-        .chain-box {
-            background: linear-gradient(90deg, #f0fdf4 0%, #eff6ff 33%, #fefce8 66%, #fef2f2 100%);
-            border-radius: 10px;
-            padding: 20px 24px;
-            margin: 16px 0;
-            font-size: 0.9em;
-            overflow-x: auto;
+
+        section h3 {
+            font-size: 1.1em;
+            color: #374151;
+            margin: 24px 0 12px;
         }
-        .chain-box pre { margin: 0; white-space: pre; font-family: inherit; }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9em;
+        }
+
+        th,
+        td {
+            border: 1px solid #e5e7eb;
+            padding: 12px 14px;
+            text-align: left;
+        }
+
+        th {
+            background: #f1f5f9;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) {
+            background: #f8fafc;
+        }
+
         .note {
             background: #f0fdf4;
             border-left: 4px solid var(--success);
@@ -67,6 +119,7 @@
             margin: 16px 0;
             border-radius: 0 8px 8px 0;
         }
+
         .link-card {
             display: inline-block;
             background: linear-gradient(135deg, #1e3a5f 0%, #1a2a6c 100%);
@@ -78,7 +131,11 @@
             margin-top: 12px;
             transition: transform 0.2s;
         }
-        .link-card:hover { transform: translateY(-2px); }
+
+        .link-card:hover {
+            transform: translateY(-2px);
+        }
+
         .fab {
             position: fixed;
             bottom: 24px;
@@ -92,11 +149,124 @@
             align-items: center;
             justify-content: center;
             text-decoration: none;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         }
-        .fab:hover { background: #1e293b; }
-        a.metric-link { color: #2563eb; text-decoration: underline; }
-        a.metric-link:hover { color: #1d4ed8; }
+
+        .fab:hover {
+            background: #1e293b;
+        }
+
+        a.metric-link {
+            color: #2563eb;
+            text-decoration: underline;
+        }
+
+        a.metric-link:hover {
+            color: #1d4ed8;
+        }
+
+        /* New Cause and Effect Chain Styles */
+        .chain-container {
+            display: flex;
+            align-items: stretch;
+            justify-content: space-between;
+            gap: 10px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .chain-step {
+            flex: 1;
+            min-width: 200px;
+            background: #fff;
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chain-step:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.06);
+            border-color: var(--accent);
+        }
+
+        .step-header {
+            padding: 12px;
+            background: #f8fafc;
+            border-bottom: 1px solid #e5e7eb;
+            font-weight: 600;
+            color: var(--primary);
+            text-align: center;
+            border-radius: 8px 8px 0 0;
+            font-size: 0.95em;
+        }
+
+        .step-learning .step-header {
+            border-top: 3px solid #8b5cf6;
+        }
+
+        /* Purple */
+        .step-internal .step-header {
+            border-top: 3px solid #3b82f6;
+        }
+
+        /* Blue */
+        .step-customer .step-header {
+            border-top: 3px solid #f59e0b;
+        }
+
+        /* Amber */
+        .step-finance .step-header {
+            border-top: 3px solid #10b981;
+        }
+
+        /* Green */
+
+        .step-body {
+            padding: 12px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            font-size: 0.85em;
+        }
+
+        .metric-item {
+            background: #f9fafb;
+            padding: 6px 8px;
+            border-radius: 4px;
+            border: 1px solid #f3f4f6;
+            color: #4b5563;
+        }
+
+        .metric-item strong {
+            display: block;
+            color: #1f2937;
+            margin-bottom: 2px;
+        }
+
+        .chain-arrow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #9ca3af;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        @media (max-width: 860px) {
+            .chain-container {
+                flex-direction: column;
+            }
+
+            .chain-arrow {
+                transform: rotate(90deg);
+                margin: 5px 0;
+            }
+        }
     </style>
 </head>
 
@@ -124,61 +294,235 @@
             <p style="margin-bottom: 16px; color: #6b7280;">设计原则：每条因果链必须「讲得通一个故事」。底层做到了，顶层必然实现。</p>
 
             <h3>因果链总览</h3>
-            <div class="chain-box">
-                <pre>学习与成长 (10%)     →    内部运营 (30%)      →    客户 (30%)        →    财务 (30%)
-AI Agent 实际上岗率      兼职人效↑15%            百万元投诉率↓15%       净营收 6亿
-(10%)                   单SKU产能密度≥4个        大黑拦截率≥90%        净利润率≥10%
-                         (15%+15%)                服务满意度≥85分
-                                                  (10%+10%+10%)          (15%+15%)</pre>
+            <div class="chain-container">
+                <!-- Learning & Growth -->
+                <div class="chain-step step-learning">
+                    <div class="step-header">学习与成长 (10%)</div>
+                    <div class="step-body">
+                        <div class="metric-item">
+                            <strong>AI Agent 实际上岗率</strong>
+                            目标: ≥30% (10%)
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chain-arrow">→</div>
+
+                <!-- Internal Process -->
+                <div class="chain-step step-internal">
+                    <div class="step-header">内部运营 (30%)</div>
+                    <div class="step-body">
+                        <div class="metric-item">
+                            <strong>兼职人效</strong>
+                            目标: ↑15% (15%)
+                        </div>
+                        <div class="metric-item">
+                            <strong>单SKU产能密度</strong>
+                            目标: ≥4个 (15%)
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chain-arrow">→</div>
+
+                <!-- Customer -->
+                <div class="chain-step step-customer">
+                    <div class="step-header">客户 (30%)</div>
+                    <div class="step-body">
+                        <div class="metric-item">
+                            <strong>百万元投诉率</strong>
+                            目标: ↓15% (10%)
+                        </div>
+                        <div class="metric-item">
+                            <strong>大黑拦截率</strong>
+                            目标: ≥90% (10%)
+                        </div>
+                        <div class="metric-item">
+                            <strong>服务满意度 (NPS)</strong>
+                            目标: ≥85分 (10%)
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chain-arrow">→</div>
+
+                <!-- Finance -->
+                <div class="chain-step step-finance">
+                    <div class="step-header">财务 (30%)</div>
+                    <div class="step-body">
+                        <div class="metric-item">
+                            <strong>净营收</strong>
+                            目标: 6亿 (15%)
+                        </div>
+                        <div class="metric-item">
+                            <strong>净利润率</strong>
+                            目标: ≥10% (15%)
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="note"><strong>因果逻辑：</strong>AI 上岗 → 人效提升 → 满意度兜底 → 投诉下降 + 大黑拦截 → 干净收入 + 健康利润。</div>
 
             <h3>财务维度 · 30%</h3>
             <table>
-                <thead><tr><th>指标</th><th>权重</th><th>定义</th><th>计算方法</th><th>目标</th><th>责任人</th></tr></thead>
+                <thead>
+                    <tr>
+                        <th>指标</th>
+                        <th>权重</th>
+                        <th>定义</th>
+                        <th>计算方法</th>
+                        <th>目标</th>
+                        <th>责任人</th>
+                    </tr>
+                </thead>
                 <tbody>
-                    <tr><td><strong>净营收 (Clean Revenue)</strong></td><td>15%</td><td>训练营+硬件收入，不含税，扣除退款，扣除 180 天内退费预提</td><td>年总和；退费预提按历史退费率对未到期订单计提</td><td>6 亿</td><td>@马长久</td></tr>
-                    <tr><td><strong>净利润率</strong></td><td>15%</td><td>净利润 / 净营收</td><td>年末</td><td>≥ 10%</td><td>@马长久</td></tr>
+                    <tr>
+                        <td><strong>净营收 (Clean Revenue)</strong></td>
+                        <td>15%</td>
+                        <td>训练营+硬件收入，不含税，扣除退款，扣除 180 天内退费预提</td>
+                        <td>年总和；退费预提按历史退费率对未到期订单计提</td>
+                        <td>6 亿</td>
+                        <td>@马长久</td>
+                    </tr>
+                    <tr>
+                        <td><strong>净利润率</strong></td>
+                        <td>15%</td>
+                        <td>净利润 / 净营收</td>
+                        <td>年末</td>
+                        <td>≥ 10%</td>
+                        <td>@马长久</td>
+                    </tr>
                 </tbody>
             </table>
             <p class="note" style="margin-top: 10px;">对冲机制：若年退费率 &gt; 20%，财务维度得分乘以 0.5 系数。</p>
 
             <h3>客户维度 · 30%</h3>
             <table>
-                <thead><tr><th>指标</th><th>权重</th><th>定义</th><th>计算方法</th><th>目标</th><th>责任人</th></tr></thead>
+                <thead>
+                    <tr>
+                        <th>指标</th>
+                        <th>权重</th>
+                        <th>定义</th>
+                        <th>计算方法</th>
+                        <th>目标</th>
+                        <th>责任人</th>
+                    </tr>
+                </thead>
                 <tbody>
-                    <tr><td><strong><a href="GSA_2_1.html" class="metric-link">百万元投诉率</a></strong></td><td>10%</td><td>每百万元现金流收入中的投诉订单金额</td><td>(外部投诉订单金额/现金流)×60% + (内部投诉订单金额/现金流)×40%</td><td>较 2025 Q4 降 15%</td><td>@杜康杰</td></tr>
-                    <tr><td><strong>大黑用户拦截率</strong></td><td>10%</td><td>系统识别为高风险（特殊关怀）用户中，未被转化的比例</td><td>未转化高风险用户 / 系统标记高风险用户总数</td><td>≥ 90%</td><td>@杜康杰</td></tr>
-                    <tr><td><strong>服务满意度 (NPS)</strong></td><td>10%</td><td>正价课学员的 NPS 或综合满意度评分</td><td>月末抽样调研，取年加权平均</td><td>≥ 85 分 (百分制)</td><td>@马长久</td></tr>
+                    <tr>
+                        <td><strong><a href="GSA_2_1.html" class="metric-link">百万元投诉率</a></strong></td>
+                        <td>10%</td>
+                        <td>每百万元现金流收入中的投诉订单金额</td>
+                        <td>(外部投诉订单金额/现金流)×60% + (内部投诉订单金额/现金流)×40%</td>
+                        <td>较 2025 Q4 降 15%</td>
+                        <td>@杜康杰</td>
+                    </tr>
+                    <tr>
+                        <td><strong>大黑用户拦截率</strong></td>
+                        <td>10%</td>
+                        <td>系统识别为高风险（特殊关怀）用户中，未被转化的比例</td>
+                        <td>未转化高风险用户 / 系统标记高风险用户总数</td>
+                        <td>≥ 90%</td>
+                        <td>@杜康杰</td>
+                    </tr>
+                    <tr>
+                        <td><strong>服务满意度 (NPS)</strong></td>
+                        <td>10%</td>
+                        <td>正价课学员的 NPS 或综合满意度评分</td>
+                        <td>月末抽样调研，取年加权平均</td>
+                        <td>≥ 85 分 (百分制)</td>
+                        <td>@马长久</td>
+                    </tr>
                 </tbody>
             </table>
             <p class="note" style="margin-top: 10px;">对冲机制：大黑拦截率 &lt; 80% 时，收入维度得分自动归零。</p>
 
             <h3>内部运营维度 · 30%</h3>
             <table>
-                <thead><tr><th>指标</th><th>权重</th><th>定义</th><th>计算方法</th><th>目标</th><th>责任人</th></tr></thead>
+                <thead>
+                    <tr>
+                        <th>指标</th>
+                        <th>权重</th>
+                        <th>定义</th>
+                        <th>计算方法</th>
+                        <th>目标</th>
+                        <th>责任人</th>
+                    </tr>
+                </thead>
                 <tbody>
-                    <tr><td><strong>单 SKU 产能密度</strong></td><td>15%</td><td>在 UE 模型健康（净利润为正）的前提下，月均 GMV ≥ 150 万的 SKU 数量</td><td>年末盘点：满足条件的 SKU 数</td><td>≥ 4 个达标 SKU</td><td>@苏秦</td></tr>
-                    <tr><td><strong>兼职人效</strong></td><td>15%</td><td>(助教人数×助教人均 GMV + 班主任人数×班主任人均 GMV + 点评官人数×点评官人均服务 GMV) / 总兼职人数</td><td>月度平均</td><td>较 2025 提升 15%</td><td>@姚涣</td></tr>
+                    <tr>
+                        <td><strong>单 SKU 产能密度</strong></td>
+                        <td>15%</td>
+                        <td>在 UE 模型健康（净利润为正）的前提下，月均 GMV ≥ 150 万的 SKU 数量</td>
+                        <td>年末盘点：满足条件的 SKU 数</td>
+                        <td>≥ 4 个达标 SKU</td>
+                        <td>@苏秦</td>
+                    </tr>
+                    <tr>
+                        <td><strong>兼职人效</strong></td>
+                        <td>15%</td>
+                        <td>(助教人数×助教人均 GMV + 班主任人数×班主任人均 GMV + 点评官人数×点评官人均服务 GMV) / 总兼职人数</td>
+                        <td>月度平均</td>
+                        <td>较 2025 提升 15%</td>
+                        <td>@姚涣</td>
+                    </tr>
                 </tbody>
             </table>
 
             <h3>学习与成长维度 · 10%</h3>
             <table>
-                <thead><tr><th>指标</th><th>权重</th><th>定义</th><th>计算方法</th><th>目标</th><th>责任人</th></tr></thead>
+                <thead>
+                    <tr>
+                        <th>指标</th>
+                        <th>权重</th>
+                        <th>定义</th>
+                        <th>计算方法</th>
+                        <th>目标</th>
+                        <th>责任人</th>
+                    </tr>
+                </thead>
                 <tbody>
-                    <tr><td><strong>AI Agent 实际上岗率</strong></td><td>10%</td><td>在已完成 AI 重构的关键岗位中，AI Agent 实际承担工作量占总工作量的比例</td><td>(AI 处理的工单/对话/点评数) / 总处理量，月度平均</td><td>≥ 30%</td><td>@王俊 + @姚涣</td></tr>
+                    <tr>
+                        <td><strong>AI Agent 实际上岗率</strong></td>
+                        <td>10%</td>
+                        <td>在已完成 AI 重构的关键岗位中，AI Agent 实际承担工作量占总工作量的比例</td>
+                        <td>(AI 处理的工单/对话/点评数) / 总处理量，月度平均</td>
+                        <td>≥ 30%</td>
+                        <td>@王俊 + @姚涣</td>
+                    </tr>
                 </tbody>
             </table>
 
             <h3>权重汇总</h3>
             <table>
-                <thead><tr><th>维度</th><th>权重</th><th>指标构成</th></tr></thead>
+                <thead>
+                    <tr>
+                        <th>维度</th>
+                        <th>权重</th>
+                        <th>指标构成</th>
+                    </tr>
+                </thead>
                 <tbody>
-                    <tr><td>财务</td><td>30%</td><td>净营收 15% + 净利润率 15%</td></tr>
-                    <tr><td>客户</td><td>30%</td><td>百万元投诉率 10% + 大黑拦截率 10% + NPS 10%</td></tr>
-                    <tr><td>内部运营</td><td>30%</td><td>单 SKU 产能密度 15% + 兼职人效 15%</td></tr>
-                    <tr><td>学习与成长</td><td>10%</td><td>AI Agent 实际上岗率 10%</td></tr>
+                    <tr>
+                        <td>财务</td>
+                        <td>30%</td>
+                        <td>净营收 15% + 净利润率 15%</td>
+                    </tr>
+                    <tr>
+                        <td>客户</td>
+                        <td>30%</td>
+                        <td>百万元投诉率 10% + 大黑拦截率 10% + NPS 10%</td>
+                    </tr>
+                    <tr>
+                        <td>内部运营</td>
+                        <td>30%</td>
+                        <td>单 SKU 产能密度 15% + 兼职人效 15%</td>
+                    </tr>
+                    <tr>
+                        <td>学习与成长</td>
+                        <td>10%</td>
+                        <td>AI Agent 实际上岗率 10%</td>
+                    </tr>
                 </tbody>
             </table>
             <p style="margin-top: 8px;"><strong>合计：</strong>100%</p>
