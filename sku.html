@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>单 SKU 产能密度 | 2026 第一曲线 BSC</title>
+    <style>
+        :root {
+            --primary: #1a2a6c;
+            --accent: #2563eb;
+            --success: #059669;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --bg: #f4f5f7;
+            --card: #fff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+            background: var(--bg);
+            color: #1f2937;
+            line-height: 1.7;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 24px 60px;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 50%, #1a2a6c 100%);
+            color: white;
+            padding: 48px 0 36px;
+        }
+
+        .hero h1 {
+            font-size: 2em;
+            margin-bottom: 8px;
+        }
+
+        .hero .meta {
+            opacity: 0.8;
+            font-size: 0.95em;
+        }
+
+        .breadcrumb {
+            padding: 0 0 16px 0;
+            font-size: 0.9em;
+        }
+
+        .breadcrumb a {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .breadcrumb span {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        section {
+            background: var(--card);
+            border-radius: 12px;
+            padding: 28px 32px;
+            margin-bottom: 24px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+        }
+
+        section h2 {
+            color: var(--primary);
+            font-size: 1.35em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--accent);
+        }
+
+        section h3 {
+            font-size: 1.1em;
+            color: #374151;
+            margin: 24px 0 12px;
+            font-weight: 700;
+        }
+
+        section h4 {
+            font-size: 1em;
+            color: #4b5563;
+            margin: 16px 0 8px;
+            font-weight: 600;
+        }
+
+        p {
+            margin-bottom: 16px;
+            color: #4b5563;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9em;
+            margin-bottom: 20px;
+        }
+
+        th,
+        td {
+            border: 1px solid #e5e7eb;
+            padding: 12px 14px;
+            text-align: left;
+        }
+
+        th {
+            background: #f1f5f9;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) {
+            background: #f8fafc;
+        }
+
+        .alert {
+            padding: 16px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid;
+            font-size: 0.95em;
+        }
+
+        .alert-info {
+            background: #eff6ff;
+            border-color: var(--accent);
+            color: #1e3a8a;
+        }
+
+        .alert-warning {
+            background: #fffbeb;
+            border-color: var(--warning);
+            color: #92400e;
+        }
+
+        .alert-success {
+            background: #ecfdf5;
+            border-color: var(--success);
+            color: #065f46;
+        }
+
+        .fab {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transition: background 0.2s;
+        }
+
+        .fab:hover {
+            background: #1e293b;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            font-weight: 600;
+        }
+
+        .badge-core {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="hero">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="index.html">首页</a>
+                <span> / </span>
+                <a href="BSC.html">BSC</a>
+                <span> / </span>
+                <span>单 SKU 产能密度</span>
+            </div>
+            <h1>单 SKU 产能密度</h1>
+            <p class="meta">内部运营维度 · 核心战略指标 · 能力建设风向标</p>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <!-- 1. 核心指标定义 -->
+        <section>
+            <h2>一、指标定义与核心信息</h2>
+            <div class="alert alert-info">
+                <strong>战略定位：</strong> 这是衡量 Xibo 从“收割模式”转向“健康农耕模式”的关键指标。它代表了我们打造“也赚钱、也叫好”的爆品的能力。
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 20%">项目</th>
+                        <th>内容</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>指标名称</strong></td>
+                        <td>单 SKU 产能密度</td>
+                    </tr>
+                    <tr>
+                        <td><strong>定义</strong></td>
+                        <td>在 UE 模型健康（净利润为正）的前提下，月均 GMV ≥ 150 万的 SKU 数量。<br>
+                            <span style="font-size: 0.85em; color: #666;">（注：必须同时满足“赚钱”和“有量”两个条件）</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>计算方法</strong></td>
+                        <td>年末盘点：满足条件的 SKU 数</td>
+                    </tr>
+                    <tr>
+                        <td><strong>2026 目标</strong></td>
+                        <td><span class="badge badge-core">≥ 4 个达标 SKU</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>权重</strong></td>
+                        <td>15% (内部运营维度)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>责任人</strong></td>
+                        <td>@苏秦 (主责) / @马长久 (协同) / @姚涣 (协同)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- 2. 深度分析与校验 -->
+        <section>
+            <h2>二、深度分析：为什么这必须是一个 OKR？</h2>
+            <p>基于 BSC 校验 SKILL 的逻辑，我们对该指标进行了深度剖析。结论是：<strong>KPI 可能会毁了这个指标，必须用 OKR 来管理。</strong></p>
+
+            <h3>1. 为什么 KPI 会失效？（风险提示）</h3>
+            <div class="alert alert-warning">
+                KPI 适合“维持性”指标，而这是一个“探索性”指标。
+            </div>
+            <ul>
+                <li><strong>KPI 的局限性：</strong> 如果只把这个挂在 @苏秦 的 KPI 上，她为了达标，可能会疯狂向 @马长久 要流量。
+                    <ul>
+                        <li>如果流量不准，UE（单位经济模型）会崩，亏损做规模。</li>
+                        <li>如果为了保利润不投流，GMV 就不达标。</li>
+                    </ul>
+                </li>
+                <li><strong>单靠教研做不到：</strong> 苏秦一个人控制不了所有变量。这是一个需要“教研（产品）+ 市场（流量）+ 技术（AI降本）”发生化学反应才能做成的“新物种”。</li>
+            </ul>
+
+            <h3>2. 为什么 OKR 是最佳解法？</h3>
+            <div class="alert alert-success">
+                OKR 解决的是“跨部门协同”和“敏捷试错”的问题。
+            </div>
+            <p>我们将“单 SKU 产能密度”定义为公司级的<strong>共享 OKR (Shared OKR)</strong>，建立“第一曲线解毒特战队”。</p>
+            <ul>
+                <li><strong>利益共同体：</strong> 苏秦、马长久、姚涣共同背负这个 O，而不是互相博弈。</li>
+                <li><strong>容错空间：</strong> 前三个月允许失败。Q1 重点是“找到模型”，Q2 才是“放量”。KPI 是刚性的，OKR 是弹性的，适合从 0 到 1 的探索。</li>
+            </ul>
+        </section>
+
+        <!-- 3. OKR 落地规划 -->
+        <section>
+            <h2>三、OKR 落地规划 (2026)</h2>
+            <p>为了实现“2026 及未来三年公司战略目标”，我们制定了如下的 OKR 推进路径。</p>
+
+            <h3>年度终极 OKR (2026)</h3>
+            <div style="background: #f8fafc; padding: 20px; border-radius: 8px; border: 1px solid #e2e8f0;">
+                <h4 style="margin-top:0; color: var(--primary);">O: 跑通“单爆品+强交付+净利正”的健康增长模型，验证第一曲线解毒成功。</h4>
+                <ul style="padding-left: 20px; margin-bottom: 0;">
+                    <li><strong>KR1:</strong> 全年打磨出 <strong>4 个</strong> 月销 >150万 且 净利 >10% 的超级 SKU。</li>
+                    <li><strong>KR2:</strong> 核心 SKU 的退款率控制在 10% 以内（行业平均 20%）。</li>
+                    <li><strong>KR3:</strong> AI Agent 介入履约，将单客服务成本降低 30%。</li>
+                </ul>
+            </div>
+
+            <h3>季度推进节奏 (Q1-Q3)</h3>
+
+            <div style="margin-top: 20px;">
+                <h4 style="color: #2563eb;">Q1：寻找 MVP (最小可行性模型)</h4>
+                <p><strong>主题：在小规模下验证“不亏钱”。</strong></p>
+                <ul>
+                    <li><strong>O:</strong> 找到 1 个能跑通“正向 UE”的潜力 SKU。</li>
+                    <li><strong>KR (教研):</strong> 选定 2 个老品进行内容升级，NPS 提升至 90 分。</li>
+                    <li><strong>KR (市场):</strong> 在不亏损的前提下，单 SKU 跑通 30 万 GMV 测试闭环。</li>
+                    <li><strong>KR (财务):</strong> 建立单 SKU 独立核算模型，算清楚每一分钱账。</li>
+                </ul>
+
+                <h4 style="color: #2563eb;">Q2：放量与复制</h4>
+                <p><strong>主题：验证“可规模化”。</strong></p>
+                <ul>
+                    <li><strong>O:</strong> 将 Q1 验证成功的 SKU 放大 5 倍，并复制到第 2 个 SKU。</li>
+                    <li><strong>KR (市场):</strong> 核心 SKU 月销突破 150 万，ROI 维持在健康水平。</li>
+                    <li><strong>KR (技术):</strong> AI 助教全面介入该 SKU 服务，承接 50% 标准化咨询，防止人效崩塌。</li>
+                </ul>
+
+                <h4 style="color: #2563eb;">Q3：矩阵化与护城河</h4>
+                <p><strong>主题：构筑“多爆品矩阵”。</strong></p>
+                <ul>
+                    <li><strong>O:</strong> 形成 3-4 个爆品矩阵，覆盖不同用户层级。</li>
+                    <li><strong>KR:</strong> 达标 SKU 数量达到 3 个。</li>
+                    <li><strong>KR:</strong> 沉淀出一套标准的“爆品打造 SOP”，赋能给第二曲线业务。</li>
+                </ul>
+            </div>
+        </section>
+
+        <div style="text-align: center; padding: 32px 0; color: #9ca3af; font-size: 0.85em;">
+            <p>Xibo Education Group © 2026</p>
+        </div>
+
+    </div>
+
+    <a href="BSC.html" class="fab" title="返回 BSC">←</a>
+
+</body>
+
+</html>
