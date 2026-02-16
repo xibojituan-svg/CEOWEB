@@ -636,7 +636,7 @@
                     </div>
                     <div class="chain-item" style="background:#fef2f2; border-radius:8px;">
                         <div class="chain-label">财务 30%</div>
-                        <div class="chain-name">净营收 + 净利润率</div>
+                        <div class="chain-name">净利润率 + 净营收</div>
                         <div class="chain-weight">6亿 / ≥10%</div>
                     </div>
                 </div>
@@ -652,28 +652,6 @@
                     <div class="dim-icon" style="background:linear-gradient(135deg,#dc2626,#ef4444);">💰</div>
                     <div class="dim-title">财务维度</div>
                     <div class="dim-weight">总权重 30%</div>
-                </div>
-
-                <div class="metric-card">
-                    <h4><span class="tag tag-new">🔄 升级</span> 净营收 (Clean Revenue) · 15%</h4>
-                    <div class="metric-row">
-                        <div class="metric-field">
-                            <label>定义</label>
-                            <p>训练营+硬件收入，不含税，扣除退款，<b>扣除 180 天内退费预提</b></p>
-                        </div>
-                        <div class="metric-field">
-                            <label>计算方法</label>
-                            <p>年总和。增加"退费预提"：按历史退费率对未到期订单计提</p>
-                        </div>
-                        <div class="metric-field">
-                            <label>目标</label>
-                            <p><b>6 亿</b></p>
-                        </div>
-                        <div class="metric-field">
-                            <label>修正理由</label>
-                            <p>原"收入"不含退费预提，Q4冲量的退费会延迟到次年爆雷</p>
-                        </div>
-                    </div>
                 </div>
 
                 <div class="metric-card">
@@ -698,6 +676,28 @@
                     </div>
                 </div>
 
+                <div class="metric-card">
+                    <h4><span class="tag tag-new">🔄 升级</span> 净营收 (Clean Revenue) · 15%</h4>
+                    <div class="metric-row">
+                        <div class="metric-field">
+                            <label>定义</label>
+                            <p>训练营+硬件收入，不含税，扣除退款，<b>扣除 180 天内退费预提</b></p>
+                        </div>
+                        <div class="metric-field">
+                            <label>计算方法</label>
+                            <p>年总和。增加"退费预提"：按历史退费率对未到期订单计提</p>
+                        </div>
+                        <div class="metric-field">
+                            <label>目标</label>
+                            <p><b>6 亿</b></p>
+                        </div>
+                        <div class="metric-field">
+                            <label>修正理由</label>
+                            <p>原"收入"不含退费预提，Q4冲量的退费会延迟到次年爆雷</p>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="alert alert-red">
                     <strong>⚡ 对冲机制</strong>
                     若年退费率 > 20%，财务维度得分乘以 0.5 系数
@@ -713,7 +713,8 @@
                 </div>
 
                 <div class="metric-card">
-                    <h4><span class="tag tag-gray">保留</span> <a href="GSA_2_1.html" style="color:inherit; text-decoration:underline;">百万元投诉率</a> · 10%</h4>
+                    <h4><span class="tag tag-gray">保留</span> <a href="GSA_2_1.html"
+                            style="color:inherit; text-decoration:underline;">百万元投诉率</a> · 10%</h4>
                     <div class="metric-row">
                         <div class="metric-field">
                             <label>定义</label>
@@ -920,7 +921,7 @@
                             <tr>
                                 <td><b>财务</b></td>
                                 <td>30%（收入10 + 利润20）</td>
-                                <td>30%（净营收15 + 利润率15）</td>
+                                <td>30%（利润率15 + 净营收15）</td>
                                 <td>总量不变，从绝对值转向比率</td>
                             </tr>
                             <tr>
