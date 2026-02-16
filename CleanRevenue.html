@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>净营收 (Clean Revenue) 专题 | 喜播 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #f97316;
+            --primary-glow: rgba(249, 115, 22, 0.4);
+            --bg: #0f172a;
+            --card-bg: rgba(30, 41, 59, 0.7);
+            --text-main: #f8fafc;
+            --text-dim: #94a3b8;
+            --border: rgba(255, 255, 255, 0.1);
+            --success: #22c55e;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text-main);
+            margin: 0;
+            padding: 40px 20px;
+            line-height: 1.6;
+            background-image:
+                radial-gradient(circle at 20% 20%, rgba(249, 115, 22, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 80% 80%, rgba(30, 64, 175, 0.15) 0%, transparent 40%);
+            background-attachment: fixed;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #fff 30%, var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            color: var(--text-dim);
+            font-size: 1.1rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-glow);
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+        }
+
+        h2::before {
+            content: '';
+            width: 4px;
+            height: 24px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .info-item {
+            margin-bottom: 20px;
+        }
+
+        .label {
+            display: block;
+            color: var(--text-dim);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .value {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .highlight-value {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .tag {
+            background: rgba(249, 115, 22, 0.1);
+            color: var(--primary);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .reasoning {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 20px;
+            border-left: 3px solid var(--primary);
+        }
+
+        .comparison {
+            display: flex;
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .comp-box {
+            flex: 1;
+            padding: 20px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .comp-title {
+            font-weight: 800;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        ul {
+            padding-left: 20px;
+            color: var(--text-dim);
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        .badge-gsa {
+            color: #f97316;
+            background: rgba(249, 115, 22, 0.1);
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
+        .badge-okr {
+            color: #3b82f6;
+            background: rgba(59, 130, 246, 0.1);
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 60px;
+            color: var(--text-dim);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <header>
+            <h1>净营收 (Clean Revenue)</h1>
+            <div class="subtitle">2026 第一曲线财务核心指标深度拆解</div>
+        </header>
+
+        <!-- 模块一：口径定义与责任主体 -->
+        <div class="card">
+            <h2>口径展示与责任主体</h2>
+            <div class="grid">
+                <div class="info-item">
+                    <span class="label">指标名称</span>
+                    <span class="value">净营收 (Clean Revenue) <span class="tag">BSC 财务维度</span></span>
+                </div>
+                <div class="info-item">
+                    <span class="label">权重</span>
+                    <span class="value">15%</span>
+                </div>
+                <div class="info-item">
+                    <span class="label">年度总目标</span>
+                    <div class="highlight-value">6.0 亿</div>
+                </div>
+                <div class="info-item">
+                    <span class="label">责任人</span>
+                    <span class="value">@马长久</span>
+                </div>
+            </div>
+
+            <div style="margin-top: 20px;">
+                <div class="info-item">
+                    <span class="label">官方定义</span>
+                    <p class="value" style="font-weight: normal; color: var(--text-main);">训练营+硬件收入，不含税，扣除退款，并<b>扣除 180
+                            天内退费预提</b>。</p>
+                </div>
+                <div class="info-item">
+                    <span class="label">计算逻辑</span>
+                    <p class="value" style="font-weight: normal; color: var(--text-main);">
+                        年总和。增加“退费预提”机制：按历史退费率对未到期订单进行计提，确保收入反映真实经营质量。</p>
+                </div>
+            </div>
+
+            <div class="reasoning">
+                <strong>💡 为什么要“去毒”？ (修正理由)</strong>
+                <p style="margin: 10px 0 0; font-size: 0.95rem; color: var(--text-dim);">
+                    原“收入”指标不含退费预提，导致 Q4 冲量带来的退费会延迟到次年第一季度爆雷，造成业绩假象。
+                    引入 180 天预提后，收入更加“干净”，倒逼业务团队从源头拦截“大黑用户”，追求健康、可持续的增长。
+                </p>
+            </div>
+        </div>
+
+        <!-- 模块二：战略路径建议 (GSA vs OKR) -->
+        <div class="card">
+            <h2>战略路径建议：GSA 还是 OKR？</h2>
+            <p>针对“净营收 6 亿”目标的达成，我们进行了管理框架的适配分析：</p>
+
+            <div class="comparison">
+                <div class="comp-box">
+                    <div class="comp-title"><span class="badge-okr">OKR</span> 变革助推器</div>
+                    <ul>
+                        <li><b>适用场景：</b> 解决“如何把收入做干净”的变革难题。</li>
+                        <li><b>核心作用：</b> 用于 1-2 季度的“战役式”突破，如建立大黑拦截机制、重塑销售话术。</li>
+                        <li><b>结论：</b> 适合作为<b>初期变革</b>的抓手。</li>
+                    </ul>
+                </div>
+                <div class="comp-box">
+                    <div class="comp-title"><span class="badge-gsa">GSA</span> 执行路径图</div>
+                    <ul>
+                        <li><b>适用场景：</b> 确保 6 亿数值目标的稳健落地。</li>
+                        <li><b>核心作用：</b> 将“Clean”的要求转化为一线员工的具体<b>标准动作 (Action)</b>，防止执行变形。</li>
+                        <li><b>结论：</b> 适合作为<b>长期稳态执行</b>的基石。</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="reasoning" style="border-left-color: var(--success);">
+                <strong>✅ 专家建议：采用“OKR 战役起手 + GSA 闭环落地”的复合模式</strong>
+                <ol style="margin: 10px 0 0; font-size: 0.95rem; color: var(--text-dim);">
+                    <li><b>Phase 1 (变革期):</b> 建立一个 <b>OKR 战役</b>（如：干净收入 1.0 战役），重点在于攻克“去毒”机制和筛选模型的冷启动。</li>
+                    <li><b>Phase 2 (落地期):</b> 将战役成果固化为 <b>GSA 表</b>。只有拆解到 A (具体的动作，如：系统自动拦截黑名单)，6
+                        亿的目标才不会在执行中因为追求流量而再次“变脏”。</li>
+                </ol>
+                <p style="margin-top: 15px; font-weight: 600; color: var(--text-main);">
+                    根据 2026 战略，"落地皆为 GSA"。因此，净营收的深度落地最终应采用 GSA。
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        Generated by Antigravity Agent • 喜播战略咨询部 2026
+    </footer>
+
+</body>
+
+</html>
