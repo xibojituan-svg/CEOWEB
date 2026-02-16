@@ -210,6 +210,38 @@
         .breadcrumb span {
             opacity: 0.5;
         }
+
+        /* Table Styles for GSA */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0 30px;
+            font-size: 0.95rem;
+        }
+
+        th,
+        td {
+            border: 1px solid var(--border);
+            padding: 14px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        th {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--primary);
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        td {
+            color: var(--text-main);
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        tr:hover td {
+            background: rgba(255, 255, 255, 0.05);
+        }
     </style>
 </head>
 
@@ -272,41 +304,116 @@
             </div>
         </div>
 
-        <!-- 模块二：战略路径建议 (GSA vs OKR) -->
+        <!-- 模块二：GSA 落地拆解 (Goal-Strategy-Action) -->
         <div class="card">
-            <h2>战略路径建议：GSA 还是 OKR？</h2>
-            <p>针对“净营收 6 亿”目标的达成，我们进行了管理框架的适配分析：</p>
-
-            <div class="comparison">
-                <div class="comp-box">
-                    <div class="comp-title"><span class="badge-okr">OKR</span> 变革助推器</div>
-                    <ul>
-                        <li><b>适用场景：</b> 解决“如何把收入做干净”的变革难题。</li>
-                        <li><b>核心作用：</b> 用于 1-2 季度的“战役式”突破，如建立大黑拦截机制、重塑销售话术。</li>
-                        <li><b>结论：</b> 适合作为<b>初期变革</b>的抓手。</li>
-                    </ul>
-                </div>
-                <div class="comp-box">
-                    <div class="comp-title"><span class="badge-gsa">GSA</span> 执行路径图</div>
-                    <ul>
-                        <li><b>适用场景：</b> 确保 6 亿数值目标的稳健落地。</li>
-                        <li><b>核心作用：</b> 将“Clean”的要求转化为一线员工的具体<b>标准动作 (Action)</b>，防止执行变形。</li>
-                        <li><b>结论：</b> 适合作为<b>长期稳态执行</b>的基石。</li>
-                    </ul>
-                </div>
+            <h2>GSA 落地拆解 (Goal-Strategy-Action)</h2>
+            <div class="reasoning" style="margin-top: 0; margin-bottom: 25px; border-left-color: var(--success);">
+                <strong>🎯 核心逻辑：</strong> 只有通过 <strong>“源头去毒 + 过程真实 + 财务兜底”</strong> 的组合拳，才能确保 6
+                亿营收是“干净”的，实现从“流量收割”到“价值创造”的转型。
             </div>
 
-            <div class="reasoning" style="border-left-color: var(--success);">
-                <strong>✅ 专家建议：采用“OKR 战役起手 + GSA 闭环落地”的复合模式</strong>
-                <ol style="margin: 10px 0 0; font-size: 0.95rem; color: var(--text-dim);">
-                    <li><b>Phase 1 (变革期):</b> 建立一个 <b>OKR 战役</b>（如：干净收入 1.0 战役），重点在于攻克“去毒”机制和筛选模型的冷启动。</li>
-                    <li><b>Phase 2 (落地期):</b> 将战役成果固化为 <b>GSA 表</b>。只有拆解到 A (具体的动作，如：系统自动拦截黑名单)，6
-                        亿的目标才不会在执行中因为追求流量而再次“变脏”。</li>
-                </ol>
-                <p style="margin-top: 15px; font-weight: 600; color: var(--text-main);">
-                    根据 2026 战略，"落地皆为 GSA"。因此，净营收的深度落地最终应采用 GSA。
-                </p>
-            </div>
+            <!-- G Goal -->
+            <h3
+                style="color: var(--text-main); border-left: 4px solid var(--primary); padding-left: 10px; margin-bottom: 15px;">
+                1. G (Goal) — 必胜目标</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th width="25%">指标名称</th>
+                        <th width="25%">目标值</th>
+                        <th>定义锁定</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>净营收 (Clean Revenue)</strong></td>
+                        <td><span class="highlight-value" style="font-size: 1.2rem;">6.0 亿</span></td>
+                        <td>扣除退款及 <strong>180天退费预提</strong> (Risk Provision)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>净利润率</strong></td>
+                        <td><span class="highlight-value" style="font-size: 1.2rem; color: var(--success);">≥ 10%</span>
+                        </td>
+                        <td>(净营收 - 总成本) / 净营收</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- S Strategy -->
+            <h3
+                style="color: var(--text-main); border-left: 4px solid var(--primary); padding-left: 10px; margin-bottom: 15px; margin-top: 40px;">
+                2. S (Strategy) — 关键策略</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th width="15%">策略编号</th>
+                        <th width="20%">策略名称</th>
+                        <th>策略内容（做什么 / 不做什么）</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>S1</strong></td>
+                        <td><strong>源头去毒</strong></td>
+                        <td><strong>只做高潜用户：</strong> 放弃“低价引流+强转”模式，改用“高客单价直投+筛选”模式。在投放端坚决排除“羊毛党”与“非目标用户”。</td>
+                    </tr>
+                    <tr>
+                        <td><strong>S2</strong></td>
+                        <td><strong>真实交付</strong></td>
+                        <td><strong>拒绝过度承诺：</strong> 销售话术与交付内容 1:1 对齐。禁止使用“极速致富”、“躺赚”等诱导性词汇，防止“货不对板”导致的退费。</td>
+                    </tr>
+                    <tr>
+                        <td><strong>S3</strong></td>
+                        <td><strong>机制锁定</strong></td>
+                        <td><strong>180天预提兜底：</strong> 财务系统自动对所有订单提取风险准备金，180天内无理由退费期结束后，方可确认为营收。</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- A Action -->
+            <h3
+                style="color: var(--text-main); border-left: 4px solid var(--primary); padding-left: 10px; margin-bottom: 15px; margin-top: 40px;">
+                3. A (Action) — 关键行动</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th width="15%">对应策略</th>
+                        <th width="35%">行动内容 (Action)</th>
+                        <th width="30%">交付物 (Deliverable)</th>
+                        <th>责任人</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td rowspan="2"><strong>S1 源头</strong></td>
+                        <td>建立“高净值用户”投放模型</td>
+                        <td>ROI ≥ 1.5 的新模型测试报告</td>
+                        <td>@马长久</td>
+                    </tr>
+                    <tr>
+                        <td>全渠道“负面标签”排除</td>
+                        <td>黑名单库上线，广告系统拦截率 100%</td>
+                        <td>@姚涣</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2"><strong>S2 过程</strong></td>
+                        <td>销售素材/话术“去毒”审查</td>
+                        <td>审查通过的白名单话术库 (V1.0)</td>
+                        <td>@杜康杰</td>
+                    </tr>
+                    <tr>
+                        <td>实施“冷静期确认”流程</td>
+                        <td>支付前双向确认录音/截图存档率 100%</td>
+                        <td>@马长久</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="1"><strong>S3 机制</strong></td>
+                        <td>上线“退费预提”自动核算系统</td>
+                        <td>财务系统自动计提功能上线，首月报表产出</td>
+                        <td>@CFO</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
 
     </div>
