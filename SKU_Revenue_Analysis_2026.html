@@ -230,8 +230,9 @@
                 <span style="margin: 0 5px; opacity: 0.5;">&gt;</span>
                 <span style="color: var(--accent-color); font-weight: 500;">SKU 营收拆解</span>
             </div>
-            <h1>2026 SKU 战略拆解分析</h1>
-            <div class="subtitle">Based on Target Net Revenue: ¥600,000,000 (Clean Revenue)</div>
+            <h1>2026 SKU 战略拆解分析 (Based on 2025 Actuals)</h1>
+            <div class="subtitle">Based on Target Net Revenue: ¥600,000,000 (Clean Revenue) | Data Source: 2025 YTD GMV
+            </div>
         </header>
 
         <!-- Assumptions Control Panel -->
@@ -317,15 +318,16 @@
                 </tbody>
             </table>
             <div class="info-box">
-                <strong>💡 战略洞察：</strong>
+                <strong>💡 2025 数据洞察与 2026 战略调整：</strong>
                 <ul style="margin: 5px 0 0 20px;">
-                    <li><strong>攀登计划 (Cash Cow):</strong> 两个SKU贡献了60%的销售份额，是绝对的现金牛。必须保证交付质量以维持低<a
-                            href="RefundAnalysis.html" target="_blank"
-                            style="color: inherit; text-decoration: underline;">退费率</a>。</li>
-                    <li><strong>AI系列 (Growth):</strong> 虽然单价较低，但作为第二曲线的增长点，承担了用户心智转型的重任。</li>
+                    <li><strong>硬件不仅是工具 (Hardware as Revenue):</strong> "攀登硬件包"等硬件复购贡献了约 <strong>22%</strong>
+                        的销售额。这表明我们的用户有极强的支付能力和专业进阶意愿，但也意味着我们的 SKU 过度依赖后端复购。</li>
+                    <li><strong>中台产品崛起 (Mid-tier):</strong> "有声精英课"和"音频剪辑"合计占 23%，说明除了顶层的"大师班"和底层的"攀登计划"，腰部产品线已经跑通。</li>
+                    <li><strong>AI 仍在早期 (AI Nascent):</strong> AI 系列目前总占比约 16%，距离成为真正的"第二曲线"还有很大增长空间 (目标 30%+)。</li>
                     <li><strong>风险提示:</strong> 如果<a href="RefundAnalysis.html" target="_blank"
                             style="color: inherit; text-decoration: underline;">退费率</a>从 15% 上升到 25%，我们需要多卖出
-                        <strong>14.2%</strong> 的课程才能达成同样的净营收目标。</li>
+                        <strong>14.2%</strong> 的课程才能达成同样的净营收目标。
+                    </li>
                 </ul>
             </div>
         </div>
@@ -333,15 +335,17 @@
 
     <script>
         // Data Source from CSV
+        // Data Source: 2025 YTD GMV Analysis (Total ~1.2B)
+        // Re-aligned to reflect actual sales mix: High reliance on basic L1+L2 and Hardware repurchases.
         const skuData = [
-            { name: "攀登计划", price: 3980, share: 0.40, category: "Education" },
-            { name: "攀登计划-设备版", price: 6979, share: 0.20, category: "Education" },
-            { name: "攀登计划-线下大师班", price: 6880, share: 0.05, category: "Premium" },
-            { name: "声音美化基础课", price: 1999, share: 0.05, category: "Education" },
-            { name: "AI短视频L1", price: 2980, share: 0.05, category: "AI" },
-            { name: "Ai短视频L2+L1", price: 3980, share: 0.10, category: "AI" },
-            { name: "Ai短故事写作L1", price: 2880, share: 0.05, category: "AI" },
-            { name: "AI短故事写作L2+L1", price: 4380, share: 0.10, category: "AI" }
+            { name: "攀登计划 (L1+L2)", price: 3980, share: 0.36, category: "Education" },
+            { name: "攀登硬件包 (复购)", price: 2980, share: 0.19, category: "Hardware" },
+            { name: "有声精英课 (L1)", price: 2980, share: 0.15, category: "Education" },
+            { name: "音频剪辑课", price: 1980, share: 0.08, category: "Skills" },
+            { name: "AI 写作 (L1+L2+L3)", price: 2580, share: 0.09, category: "AI" },
+            { name: "剪辑硬件包", price: 1980, share: 0.03, category: "Hardware" },
+            { name: "攀登大师班", price: 6880, share: 0.03, category: "Premium" },
+            { name: "AI 短视频系列", price: 2980, share: 0.07, category: "AI" }
         ];
 
         const targetCleanRevenue = 600000000;
@@ -407,9 +411,15 @@
                 if (sku.category === "Education" || sku.category === "Premium") {
                     categoryBadge = '<span class="badge badge-education">Education</span>';
                     chartColors.push('#3b82f6');
-                } else {
+                } else if (sku.category === "AI") {
                     categoryBadge = '<span class="badge badge-ai">AI</span>';
                     chartColors.push('#8b5cf6');
+                } else if (sku.category === "Hardware") {
+                    categoryBadge = '<span class="badge" style="background:rgba(245, 158, 11, 0.2); color:#f59e0b;">Hardware</span>';
+                    chartColors.push('#f59e0b');
+                } else {
+                    categoryBadge = '<span class="badge" style="background:rgba(100, 116, 139, 0.2); color:#94a3b8;">Skills</span>';
+                    chartColors.push('#64748b');
                 }
 
                 row.innerHTML = `
