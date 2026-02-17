@@ -389,14 +389,14 @@
         // Data Source: 2025 YTD GMV Analysis (Total ~1.2B)
         // Re-aligned to reflect actual sales mix: High reliance on basic L1+L2 and Hardware repurchases.
         const skuData = [
-            { name: "攀登计划 (L1+L2)", price: 3980, share: 0.36, category: "Education" },
-            { name: "攀登硬件包 (复购)", price: 2980, share: 0.19, category: "Hardware" },
-            { name: "有声精英课 (L1)", price: 2980, share: 0.15, category: "Education" },
-            { name: "音频剪辑课", price: 1980, share: 0.08, category: "Skills" },
-            { name: "AI 写作 (L1+L2+L3)", price: 2580, share: 0.09, category: "AI" },
-            { name: "剪辑硬件包", price: 1980, share: 0.03, category: "Hardware" },
-            { name: "攀登大师班", price: 6880, share: 0.03, category: "Premium" },
-            { name: "AI 短视频系列", price: 2980, share: 0.07, category: "AI" }
+            { name: "攀登计划 (L1+L2)", price: 3980, share: 0.36, category: "Education", link: "SKU/L1_Plus_L2.html" },
+            { name: "攀登硬件包 (复购)", price: 2980, share: 0.19, category: "Hardware", link: "SKU/攀登复购硬件硬件复购.html" },
+            { name: "有声精英课 (L1)", price: 2980, share: 0.15, category: "Education", link: "SKU/精英L1.html" },
+            { name: "音频剪辑课", price: 1980, share: 0.08, category: "Skills", link: "SKU/音频剪辑.html" },
+            { name: "AI 写作 (L1+L2+L3)", price: 2580, share: 0.09, category: "AI", link: "SKU/AI写作L1.html" },
+            { name: "剪辑硬件包", price: 1980, share: 0.03, category: "Hardware", link: "SKU/剪辑复购硬件实物硬件.html" },
+            { name: "攀登大师班", price: 6880, share: 0.03, category: "Premium", link: "SKU/攀登大师班.html" },
+            { name: "AI 短视频系列", price: 2980, share: 0.07, category: "AI", link: "SKU/AI短视频L1.html" }
         ];
 
         let revenueChart = null;
@@ -541,8 +541,8 @@
 
                 row.innerHTML = `
                     <td style="font-weight:600; display:flex; align-items:center;">
-                        ${sku.name} 
-                        <span style="margin-left:5px; font-weight:normal;">${categoryBadge}</span>
+                        <a href="${sku.link}" target="_blank" style="color: inherit; text-decoration: underline; text-decoration-color: rgba(255,255,255,0.3); margin-right: 5px;">${sku.name}</a>
+                        <span style="font-weight:normal;">${categoryBadge}</span>
                     </td>
                     <td>
                         <input type="number" class="price-input" value="${sku.price}" style="width: 80px; padding: 5px; background: rgba(0,0,0,0.2); border: 1px solid var(--border-color); color: white; border-radius: 4px;">
@@ -570,6 +570,8 @@
 
             updateCharts(chartLabels, chartRevenueData, chartUnitsData, chartColors);
         }
+
+
 
         function updateCharts(labels, revenueData, unitsData, colors) {
             // Common Options
