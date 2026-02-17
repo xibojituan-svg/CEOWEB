@@ -241,7 +241,8 @@
             <div class="dashboard-grid" style="margin-bottom: 0;">
                 <div class="form-group">
                     <label>净营收目标 (Clean Revenue Target)</label>
-                    <input type="text" value="600,000,000" disabled style="color: #10b981; font-weight: bold;">
+                    <input type="text" id="targetRevenue" value="600,000,000"
+                        style="color: #10b981; font-weight: bold;">
                 </div>
                 <div class="form-group">
                     <label>综合<a href="RefundAnalysis.html" target="_blank"
@@ -348,7 +349,6 @@
             { name: "AI 短视频系列", price: 2980, share: 0.07, category: "AI" }
         ];
 
-        const targetCleanRevenue = 600000000;
         let revenueChart = null;
         let unitsChart = null;
 
@@ -362,6 +362,8 @@
 
         function calculate() {
             // Get inputs
+            const targetRevInput = document.getElementById('targetRevenue').value;
+            const targetCleanRevenue = parseFloat(targetRevInput.replace(/,/g, ''));
             const refundRate = parseFloat(document.getElementById('refundRate').value) / 100;
             const riskRate = parseFloat(document.getElementById('riskRate').value) / 100;
 
