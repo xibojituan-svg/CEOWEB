@@ -265,6 +265,34 @@
                         style="font-size: 1.2rem; font-weight: bold; padding: 10px; color: #ef4444;">20%</div>
                 </div>
             </div>
+
+            <h3
+                style="margin-top: 20px; color: var(--accent-color); border-top: 1px solid var(--border-color); padding-top: 20px;">
+                💰 成本与利润模拟 (Profit Simulation)</h3>
+            <div class="dashboard-grid" style="margin-bottom: 0;">
+                <div class="form-group">
+                    <label>投放/销售费用率 (Marketing Cost %)</label>
+                    <div style="display: flex; gap: 10px; align-items: center;">
+                        <input type="number" id="marketingRate" value="45" style="width: 80px;">
+                        <span>%</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>交付/服务成本率 (Service/COGS %)</label>
+                    <div style="display: flex; gap: 10px; align-items: center;">
+                        <input type="number" id="serviceRate" value="20" style="width: 80px;">
+                        <span>%</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>固定人力/分摊 (Fixed Costs)</label>
+                    <div style="display: flex; gap: 10px; align-items: center;">
+                        <input type="text" id="fixedCost" value="100000000" style="width: 120px;">
+                        <span>¥</span>
+                    </div>
+                </div>
+            </div>
+
             <button class="btn-update" onclick="calculate()">🔁 重新计算 (Recalculate)</button>
         </div>
 
@@ -284,6 +312,28 @@
                 <div class="stat-label">平均客单价 (WAP)</div>
                 <div class="stat-value" id="avgPrice">¥4,560</div>
                 <div style="font-size: 0.8rem; color: var(--text-dim);">加权平均售价</div>
+            </div>
+
+            <!-- Profit KPI Cards -->
+            <div class="card"
+                style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(6, 95, 70, 0.1)); border: 1px solid rgba(16, 185, 129, 0.3);">
+                <div class="dashboard-grid" style="margin-bottom: 0;">
+                    <div class="stat-card" style="background: transparent; border: none; box-shadow: none;">
+                        <div class="stat-label">模拟净利润 (Net Profit)</div>
+                        <div class="stat-value" id="netProfit" style="color: #10b981;">¥1.50亿</div>
+                        <div style="font-size: 0.8rem; color: var(--text-dim);">目标: ≥1.5亿</div>
+                    </div>
+                    <div class="stat-card" style="background: transparent; border: none; box-shadow: none;">
+                        <div class="stat-label">净利润率 (Net Margin)</div>
+                        <div class="stat-value" id="netMargin" style="color: #10b981;">25.0%</div>
+                        <div style="font-size: 0.8rem; color: var(--text-dim);">目标: ≥10%</div>
+                    </div>
+                    <div class="stat-card" style="background: transparent; border: none; box-shadow: none;">
+                        <div class="stat-label">盈亏平衡点 (Break-even Revenue)</div>
+                        <div class="stat-value" id="breakEven">¥2.85亿</div>
+                        <div style="font-size: 0.8rem; color: var(--text-dim);">固定成本 / 边际贡献率</div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -367,6 +417,11 @@
             const refundRate = parseFloat(document.getElementById('refundRate').value) / 100;
             const riskRate = parseFloat(document.getElementById('riskRate').value) / 100;
 
+            const marketingRate = parseFloat(document.getElementById('marketingRate').value) / 100;
+            const serviceRate = parseFloat(document.getElementById('serviceRate').value) / 100;
+            const fixedCostInput = document.getElementById('fixedCost').value;
+            const fixedCost = parseFloat(fixedCostInput.replace(/,/g, ''));
+
             // Assumptions
             const totalReduction = refundRate + riskRate;
             const cleanFactor = 1 - totalReduction;
@@ -391,6 +446,32 @@
             document.getElementById('totalUnits').innerText = formatNumber(totalUnits);
             document.getElementById('totalGross').innerText = "¥" + (targetGrossRevenue / 100000000).toFixed(2) + "亿";
             document.getElementById('avgPrice').innerText = formatCurrency(weightedAvgPrice);
+
+            // 4. Calculate Net Profit
+            const variableCost = targetCleanRevenue * (marketingRate + serviceRate);
+            const contributionMargin = targetCleanRevenue - variableCost; // 边际贡献
+            const netProfit = contributionMargin - fixedCost;
+            const netMargin = netProfit / targetCleanRevenue;
+
+            // Break-even
+            const contributionMarginRatio = 1 - (marketingRate + serviceRate);
+            const breakEvenPoint = fixedCost / contributionMarginRatio;
+
+            // Update Profit KPIs
+            document.getElementById('netProfit').innerText = "¥" + (netProfit / 100000000).toFixed(2) + "亿";
+            document.getElementById('netMargin').innerText = (netMargin * 100).toFixed(1) + "%";
+            document.getElementById('breakEven').innerText = "¥" + (breakEvenPoint / 100000000).toFixed(2) + "亿";
+
+            // Color coding for profit
+            const profitEl = document.getElementById('netProfit');
+            const marginEl = document.getElementById('netMargin');
+            if (netProfit < 0) {
+                profitEl.style.color = '#ef4444';
+                marginEl.style.color = '#ef4444';
+            } else {
+                profitEl.style.color = '#10b981';
+                marginEl.style.color = '#10b981';
+            }
 
             // Update Table & Charts Data
             const tbody = document.querySelector("#skuTable tbody");
