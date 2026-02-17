@@ -234,7 +234,46 @@
             <div class="subtitle">Based on Target Net Revenue: ¥600,000,000 (Clean Revenue) | Data Source: 2025 YTD GMV
             </div>
         </header>
+        <div class="card"
+            style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(6, 95, 70, 0.1)); border: 1px solid rgba(16, 185, 129, 0.3);">
+            <div class="dashboard-grid" style="margin-bottom: 0;">
+                <div class="stat-card" style="background: transparent; border: none; box-shadow: none;">
+                    <div class="stat-label">模拟净利润 (Net Profit)</div>
+                    <div class="stat-value" id="netProfit" style="color: #10b981;">¥1.50亿</div>
+                    <div style="font-size: 0.8rem; color: var(--text-dim);">目标: ≥1.5亿</div>
+                </div>
+                <div class="stat-card" style="background: transparent; border: none; box-shadow: none;">
+                    <div class="stat-label">净利润率 (Net Margin)</div>
+                    <div class="stat-value" id="netMargin" style="color: #10b981;">25.0%</div>
+                    <div style="font-size: 0.8rem; color: var(--text-dim);">目标: ≥10%</div>
+                </div>
+                <div class="stat-card" style="background: transparent; border: none; box-shadow: none;">
+                    <div class="stat-label">盈亏平衡点 (Break-even Revenue)</div>
+                    <div class="stat-value" id="breakEven">¥2.85亿</div>
+                    <div style="font-size: 0.8rem; color: var(--text-dim);">固定成本 / 边际贡献率</div>
+                </div>
+            </div>
+        </div>
+        <div class="dashboard-grid">
+            <div class="stat-card">
+                <div class="stat-label">所需总销量 (Total Units)</div>
+                <div class="stat-value" id="totalUnits" style="color: var(--accent-color);">164,474</div>
+                <div style="font-size: 0.8rem; color: var(--text-dim);">基于当前SKU组合</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">所需总流水 (Gross Revenue)</div>
+                <div class="stat-value" id="totalGross">¥7.50亿</div>
+                <div style="font-size: 0.8rem; color: var(--text-dim);">含退费与预提</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">平均客单价 (WAP)</div>
+                <div class="stat-value" id="avgPrice">¥4,560</div>
+                <div style="font-size: 0.8rem; color: var(--text-dim);">加权平均售价</div>
+            </div>
 
+            <!-- Profit KPI Cards -->
+
+        </div>
         <!-- Assumptions Control Panel -->
         <div class="card">
             <h3 style="margin-top: 0; color: var(--accent-color);">⚙️ 核心假设模型 (Assumptions)</h3>
@@ -297,45 +336,7 @@
         </div>
 
         <!-- KPI Cards -->
-        <div class="dashboard-grid">
-            <div class="stat-card">
-                <div class="stat-label">所需总销量 (Total Units)</div>
-                <div class="stat-value" id="totalUnits" style="color: var(--accent-color);">164,474</div>
-                <div style="font-size: 0.8rem; color: var(--text-dim);">基于当前SKU组合</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-label">所需总流水 (Gross Revenue)</div>
-                <div class="stat-value" id="totalGross">¥7.50亿</div>
-                <div style="font-size: 0.8rem; color: var(--text-dim);">含退费与预提</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-label">平均客单价 (WAP)</div>
-                <div class="stat-value" id="avgPrice">¥4,560</div>
-                <div style="font-size: 0.8rem; color: var(--text-dim);">加权平均售价</div>
-            </div>
 
-            <!-- Profit KPI Cards -->
-            <div class="card"
-                style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(6, 95, 70, 0.1)); border: 1px solid rgba(16, 185, 129, 0.3);">
-                <div class="dashboard-grid" style="margin-bottom: 0;">
-                    <div class="stat-card" style="background: transparent; border: none; box-shadow: none;">
-                        <div class="stat-label">模拟净利润 (Net Profit)</div>
-                        <div class="stat-value" id="netProfit" style="color: #10b981;">¥1.50亿</div>
-                        <div style="font-size: 0.8rem; color: var(--text-dim);">目标: ≥1.5亿</div>
-                    </div>
-                    <div class="stat-card" style="background: transparent; border: none; box-shadow: none;">
-                        <div class="stat-label">净利润率 (Net Margin)</div>
-                        <div class="stat-value" id="netMargin" style="color: #10b981;">25.0%</div>
-                        <div style="font-size: 0.8rem; color: var(--text-dim);">目标: ≥10%</div>
-                    </div>
-                    <div class="stat-card" style="background: transparent; border: none; box-shadow: none;">
-                        <div class="stat-label">盈亏平衡点 (Break-even Revenue)</div>
-                        <div class="stat-value" id="breakEven">¥2.85亿</div>
-                        <div style="font-size: 0.8rem; color: var(--text-dim);">固定成本 / 边际贡献率</div>
-                    </div>
-                </div>
-            </div>
-        </div>
 
         <!-- Charts -->
         <div class="card">
