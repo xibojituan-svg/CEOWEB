@@ -46,6 +46,7 @@
             margin: 0;
             /* Fire gradient for refunds */
             background: linear-gradient(90deg, #f87171, #fca5a5);
+            background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -227,6 +228,16 @@
             color: #cbd5e1;
         }
 
+        .badge-education {
+            background: rgba(59, 130, 246, 0.2);
+            color: #93c5fd;
+        }
+
+        .badge-ai {
+            background: rgba(139, 92, 246, 0.2);
+            color: #c4b5fd;
+        }
+
         .callout-box {
             padding: 20px;
             border-radius: 8px;
@@ -301,6 +312,179 @@
                 <div class="chart-box">
                     <canvas id="stageChart"></canvas>
                 </div>
+            </div>
+        </div>
+
+        <!-- SKU Refund Breakdown -->
+        <div class="card">
+            <h3 style="margin-top: 0;">📉 SKU 退费榜单 (SKU Refund Breakdown)</h3>
+            <div style="overflow-x: auto;">
+                <table style="width: 100%; border-collapse: collapse; margin-top: 15px;">
+                    <thead>
+                        <tr
+                            style="border-bottom: 1px solid var(--border-color); color: var(--text-dim); text-align: left;">
+                            <th style="padding: 12px;">排名 (Rank)</th>
+                            <th style="padding: 12px;">SKU 名称</th>
+                            <th style="padding: 12px;">退费率 (Refund Rate)</th>
+                            <th style="padding: 12px;">风险等级 (Risk)</th>
+                            <th style="padding: 12px;">趋势 (Trend)</th>
+                        </tr>
+                    </thead>
+                    <tbody style="font-size: 0.95rem;">
+                        <!-- Item 1 -->
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                            <td style="padding: 12px; color: var(--text-dim);">#1</td>
+                            <td style="padding: 12px; font-weight: bold;">
+                                攀登计划 (L1+L2)
+                                <span class="badge badge-education">Education</span>
+                            </td>
+                            <td style="padding: 12px;">
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div
+                                        style="width: 100px; height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; overflow: hidden;">
+                                        <div style="width: 82%; height: 100%; background: var(--accent-color);"></div>
+                                    </div>
+                                    <span style="color: var(--accent-color); font-weight: bold;">24.5%</span>
+                                </div>
+                            </td>
+                            <td style="padding: 12px;"><span style="color: var(--accent-color);">🔥 熔断警戒</span></td>
+                            <td style="padding: 12px; color: var(--accent-color);">↗ 上升</td>
+                        </tr>
+                        <!-- Item 2 -->
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                            <td style="padding: 12px; color: var(--text-dim);">#2</td>
+                            <td style="padding: 12px; font-weight: bold;">
+                                攀登大师班
+                                <span class="badge badge-education">Premium</span>
+                            </td>
+                            <td style="padding: 12px;">
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div
+                                        style="width: 100px; height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; overflow: hidden;">
+                                        <div style="width: 60%; height: 100%; background: var(--warning-color);"></div>
+                                    </div>
+                                    <span style="color: var(--warning-color);">18.0%</span>
+                                </div>
+                            </td>
+                            <td style="padding: 12px;"><span style="color: var(--warning-color);">⚠️ 高风险</span></td>
+                            <td style="padding: 12px; color: var(--text-dim);">→ 持平</td>
+                        </tr>
+                        <!-- Item 3 -->
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                            <td style="padding: 12px; color: var(--text-dim);">#3</td>
+                            <td style="padding: 12px; font-weight: bold;">
+                                AI 短视频系列
+                                <span class="badge badge-ai">AI</span>
+                            </td>
+                            <td style="padding: 12px;">
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div
+                                        style="width: 100px; height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; overflow: hidden;">
+                                        <div style="width: 55%; height: 100%; background: var(--warning-color);"></div>
+                                    </div>
+                                    <span style="color: var(--warning-color);">16.5%</span>
+                                </div>
+                            </td>
+                            <td style="padding: 12px;"><span style="color: var(--warning-color);">⚠️ 中高风险</span></td>
+                            <td style="padding: 12px; color: var(--success-color);">↘ 下降</td>
+                        </tr>
+                        <!-- Item 4 -->
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                            <td style="padding: 12px; color: var(--text-dim);">#4</td>
+                            <td style="padding: 12px; font-weight: bold;">
+                                有声精英课 (L1)
+                                <span class="badge badge-education">Education</span>
+                            </td>
+                            <td style="padding: 12px;">
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div
+                                        style="width: 100px; height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; overflow: hidden;">
+                                        <div style="width: 47%; height: 100%; background: #f59e0b;"></div>
+                                    </div>
+                                    <span style="color: var(--text-main);">14.2%</span>
+                                </div>
+                            </td>
+                            <td style="padding: 12px;"><span style="color: var(--text-dim);">中等风险</span></td>
+                            <td style="padding: 12px; color: var(--text-dim);">→ 持平</td>
+                        </tr>
+                        <!-- Item 5 -->
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                            <td style="padding: 12px; color: var(--text-dim);">#5</td>
+                            <td style="padding: 12px; font-weight: bold;">
+                                音频剪辑课
+                                <span class="badge badge-service">Skills</span>
+                            </td>
+                            <td style="padding: 12px;">
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div
+                                        style="width: 100px; height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; overflow: hidden;">
+                                        <div style="width: 36%; height: 100%; background: var(--success-color);"></div>
+                                    </div>
+                                    <span style="color: var(--success-color);">11.0%</span>
+                                </div>
+                            </td>
+                            <td style="padding: 12px;"><span style="color: var(--success-color);">✅ 健康</span></td>
+                            <td style="padding: 12px; color: var(--success-color);">↘ 下降</td>
+                        </tr>
+                        <!-- Item 6 -->
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                            <td style="padding: 12px; color: var(--text-dim);">#6</td>
+                            <td style="padding: 12px; font-weight: bold;">
+                                攀登硬件包 (复购)
+                                <span class="badge badge-product">Hardware</span>
+                            </td>
+                            <td style="padding: 12px;">
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div
+                                        style="width: 100px; height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; overflow: hidden;">
+                                        <div style="width: 18%; height: 100%; background: var(--success-color);"></div>
+                                    </div>
+                                    <span style="color: var(--success-color);">5.5%</span>
+                                </div>
+                            </td>
+                            <td style="padding: 12px;"><span style="color: var(--success-color);">✅ 极佳</span></td>
+                            <td style="padding: 12px; color: var(--text-dim);">→ 持平</td>
+                        </tr>
+                        <!-- Item 7 -->
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                            <td style="padding: 12px; color: var(--text-dim);">#7</td>
+                            <td style="padding: 12px; font-weight: bold;">
+                                剪辑硬件包
+                                <span class="badge badge-product">Hardware</span>
+                            </td>
+                            <td style="padding: 12px;">
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div
+                                        style="width: 100px; height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; overflow: hidden;">
+                                        <div style="width: 16%; height: 100%; background: var(--success-color);"></div>
+                                    </div>
+                                    <span style="color: var(--success-color);">4.8%</span>
+                                </div>
+                            </td>
+                            <td style="padding: 12px;"><span style="color: var(--success-color);">✅ 极佳</span></td>
+                            <td style="padding: 12px; color: var(--text-dim);">→ 持平</td>
+                        </tr>
+                        <!-- Item 8 -->
+                        <tr>
+                            <td style="padding: 12px; color: var(--text-dim);">#8</td>
+                            <td style="padding: 12px; font-weight: bold;">
+                                AI 写作 (L1+L2+L3)
+                                <span class="badge badge-ai">AI</span>
+                            </td>
+                            <td style="padding: 12px;">
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div
+                                        style="width: 100px; height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; overflow: hidden;">
+                                        <div style="width: 14%; height: 100%; background: var(--success-color);"></div>
+                                    </div>
+                                    <span style="color: var(--success-color);">4.2%</span>
+                                </div>
+                            </td>
+                            <td style="padding: 12px;"><span style="color: var(--success-color);">✅ 标杆</span></td>
+                            <td style="padding: 12px; color: var(--success-color);">↘ 下降</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
 
