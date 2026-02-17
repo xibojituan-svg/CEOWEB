@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>百万元投诉率 (Complaint Rate) 专题 | 喜播 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        :root {
+            --primary: #f97316;
+            --primary-glow: rgba(249, 115, 22, 0.4);
+            --bg: #0f172a;
+            --card-bg: rgba(30, 41, 59, 0.7);
+            --text-main: #f8fafc;
+            --text-dim: #94a3b8;
+            --border: rgba(255, 255, 255, 0.1);
+            --success: #22c55e;
+            --danger: #ef4444;
+            --warning: #d97706;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text-main);
+            margin: 0;
+            padding: 40px 20px;
+            line-height: 1.6;
+            background-image:
+                radial-gradient(circle at 20% 20%, rgba(249, 115, 22, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 80% 80%, rgba(30, 64, 175, 0.15) 0%, transparent 40%);
+            background-attachment: fixed;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #fff 30%, var(--primary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            color: var(--text-dim);
+            font-size: 1.1rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-glow);
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+        }
+
+        h2::before {
+            content: '';
+            width: 4px;
+            height: 24px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .info-item {
+            margin-bottom: 20px;
+        }
+
+        .label {
+            display: block;
+            color: var(--text-dim);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .value {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .highlight-value {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .tag {
+            background: rgba(249, 115, 22, 0.1);
+            color: var(--primary);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .reasoning {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 20px;
+            border-left: 3px solid var(--primary);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0 30px;
+            font-size: 0.95rem;
+        }
+
+        th,
+        td {
+            border: 1px solid var(--border);
+            padding: 14px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        th {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--primary);
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        td {
+            color: var(--text-main);
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        tr:hover td {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .breadcrumb {
+            display: flex;
+            gap: 8px;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            margin-bottom: 30px;
+        }
+
+        .breadcrumb a {
+            color: var(--text-dim);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--primary);
+        }
+
+        .breadcrumb span {
+            opacity: 0.5;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 60px;
+            color: var(--text-dim);
+            font-size: 0.9rem;
+        }
+
+        /* Math formula specific */
+        .formula-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            font-family: 'Courier New', monospace;
+            font-size: 1.1rem;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 10px;
+        }
+
+        .formula-box {
+            text-align: center;
+            padding: 8px 12px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .L1-tag {
+            color: var(--danger);
+            font-weight: bold;
+        }
+
+        .L2-tag {
+            color: var(--warning);
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <nav class="breadcrumb">
+            <a href="index.html">首页</a>
+            <span>/</span>
+            <a href="BSC.html">BSC 总览</a>
+            <span>/</span>
+            <span style="color: var(--text-main);">百万元投诉率专题</span>
+        </nav>
+        <header>
+            <h1>百万元投诉率</h1>
+            <div class="subtitle">2026 第一曲线客户/风控核心指标深度拆解 (GSA 2.1)</div>
+        </header>
+
+        <!-- 模块一：口径定义与责任主体 -->
+        <div class="card">
+            <h2>口径展示与责任主体</h2>
+            <div class="grid">
+                <div class="info-item">
+                    <span class="label">指标名称</span>
+                    <span class="value">百万元投诉率 <span class="tag">BSC 客户维度</span></span>
+                </div>
+                <div class="info-item">
+                    <span class="label">权重</span>
+                    <span class="value">10%</span>
+                </div>
+                <div class="info-item">
+                    <span class="label">年度总目标</span>
+                    <div class="highlight-value">↓ 15%</div>
+                </div>
+                <div class="info-item">
+                    <span class="label">责任人</span>
+                    <span class="value">@杜康杰 (CX VP)</span>
+                </div>
+            </div>
+
+            <div style="margin-top: 20px;">
+                <div class="info-item">
+                    <span class="label">官方定义</span>
+                    <p class="value" style="font-weight: normal; color: var(--text-main);">每百万元现金流收入中的<b>分级加权毒性</b>订单金额
+                        (Risk Exposure)。升级为<b>“行为触发”</b>判定，不依赖结果。</p>
+                </div>
+
+                <div class="info-item"
+                    style="grid-column: 1 / -1; background: rgba(255,255,255,0.03); padding: 20px; border-radius: 12px; margin-top: 10px;">
+                    <span class="label" style="margin-bottom: 15px; display: block;">🧮 计算公式可视化</span>
+                    <div
+                        style="display: flex; align-items: center; justify-content: center; gap: 15px; flex-wrap: wrap; font-family: 'Courier New', monospace; font-size: 1.1rem;">
+                        <div class="formula-box"
+                            style="border-color: var(--primary); background: rgba(249, 115, 22, 0.1);">
+                            <div style="font-weight: bold; color: var(--primary);">∑ ( L1×5 + L2×1 )</div>
+                            <div style="font-size: 0.7rem; opacity: 0.7;">加权风险总额</div>
+                        </div>
+                        <div style="font-size: 1.5rem; color: var(--text-dim);">÷</div>
+                        <div class="formula-box">
+                            <div>当期总现金流</div>
+                            <div style="font-size: 0.7rem; opacity: 0.7;">(百万)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="reasoning">
+                <strong>💡 为什么要改口径？ (战略升级)</strong>
+                <p style="margin: 10px 0 0; font-size: 0.95rem; color: var(--text-dim);">
+                    原定义依赖“工单是否录入”或“用户是否撤诉”，容易导致一线人员为了指标好看而“捂盖子”。
+                    新定义改为<b style="color:var(--text-main)">“行为触发”</b>：只要用户表达了欺骗感或高危意图（如“骗子”、“退钱”），无论是否安抚成功，均自动计入。
+                    这倒逼团队关注<b>过程质量</b>而非<b>掩盖结果</b>。
+                </p>
+            </div>
+        </div>
+
+        <!-- 模块二：分级判定标准 -->
+        <div class="card">
+            <h2>风险分级定义 (Risk Classification)</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th width="15%">级别</th>
+                        <th width="15%">权重</th>
+                        <th width="70%">定义描述与触发条件</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="L1-tag">L1 核爆性</span></td>
+                        <td><span class="L1-tag">5.0</span></td>
+                        <td>触发行政处罚、监管约谈、公安立案、主流媒体报道。任何一单都足以“炸穿”当月绩效。</td>
+                    </tr>
+                    <tr>
+                        <td><span class="L2-tag">L2 实质性</span></td>
+                        <td><span class="L2-tag">1.0</span></td>
+                        <td>用户明确表达“被欺骗”、“诱导消费”、“承诺未兑现”并要求退款；或已在黑猫/12345等平台投诉。</td>
+                    </tr>
+                    <tr>
+                        <td><span>L3 预警性</span></td>
+                        <td>0.2</td>
+                        <td>因“没时间”、“学不会”等非合规原因退费，情绪平稳。需剥离以免业务不敢做良性退费。</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 模块三：GSA 落地拆解 -->
+        <div class="card">
+            <h2>GSA 落地拆解 (Goal-Strategy-Action)</h2>
+
+            <!-- G Goal -->
+            <h3
+                style="color: var(--text-main); border-left: 4px solid var(--primary); padding-left: 10px; margin-bottom: 15px;">
+                1. G (Goal) — 必胜目标</h3>
+            <p>百万元投诉率较 2025 Q4 下降 15%。姊妹指标：<a href="BlackUserInterception.html" style="color:var(--primary)">大黑用户拦截率</a>
+                ≥ 90%。</p>
+
+            <!-- S Strategy -->
+            <h3
+                style="color: var(--text-main); border-left: 4px solid var(--primary); padding-left: 10px; margin-bottom: 15px; margin-top: 40px;">
+                2. S (Strategy) — 关键策略</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th width="15%">策略编号</th>
+                        <th width="20%">策略名称</th>
+                        <th>策略内容</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>S1</strong></td>
+                        <td><strong>减源</strong></td>
+                        <td>在成交前识别并拦截高风险（大黑/特殊关怀）用户，不使其进入分母。</td>
+                    </tr>
+                    <tr>
+                        <td><strong>S2</strong></td>
+                        <td><strong>控过程</strong></td>
+                        <td>严控承诺与交付一致性：销售/素材不夸大，质检红线零容忍，承诺可追溯。</td>
+                    </tr>
+                    <tr>
+                        <td><strong>S3</strong></td>
+                        <td><strong>防外溢</strong></td>
+                        <td>内部投诉优先解决；每一单“由内到外”的外投做穿透式根因分析。</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- A Action -->
+            <h3
+                style="color: var(--text-main); border-left: 4px solid var(--primary); padding-left: 10px; margin-bottom: 15px; margin-top: 40px;">
+                3. A (Action) — 关键行动</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th width="15%">对应策略</th>
+                        <th width="35%">行动内容 (Action)</th>
+                        <th width="30%">交付物 (Deliverable)</th>
+                        <th>责任人</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>S1 减源</strong></td>
+                        <td>建立全链路特殊关怀（大黑）用户识别与名单机制</td>
+                        <td>规则文档 + 系统名单 + 拦截网</td>
+                        <td>@杜康杰</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2"><strong>S2 控过程</strong></td>
+                        <td>Antigravity AI 全量质检与抓取</td>
+                        <td>部署 AI 扫描企微/电话；命中高危词直接计入 L2</td>
+                        <td>@姚涣</td>
+                    </tr>
+                    <tr>
+                        <td>设立“交易管理官”与投诉定性独立裁判权</td>
+                        <td>岗位任命 + 定性 SOP</td>
+                        <td>@杜康杰</td>
+                    </tr>
+                    <tr>
+                        <td><strong>S3 防外溢</strong></td>
+                        <td>实施“追溯回扣”（Clawback）机制</td>
+                        <td>D60 内发生 L1/L2 投诉，追回该单全额提成</td>
+                        <td>@HR</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <footer>
+        Generated by Antigravity Agent • 喜播战略咨询部 2026
+    </footer>
+
+</body>
+
+</html>
