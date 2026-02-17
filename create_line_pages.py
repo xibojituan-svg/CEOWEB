@@ -1,0 +1,409 @@
+
+import csv
+import os
+import re
+import json
+
+# Configuration
+SOURCE_CSV = "/Users/jdm/Downloads/xiboceoweb/CompanyAnalysis/SKU销售GMV及占比.csv"
+OUTPUT_DIR = "/Users/jdm/Downloads/xiboceoweb/SKU"
+
+# HTML Template for Product Line Page
+HTML_TEMPLATE = """
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{line_name} - 产品线战略规划 | Xibo Education</title>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {{
+            --primary: {theme_color};
+            --dark: #1a1a1a;
+            --light: #f5f5f5;
+            --text: #333;
+        }}
+        body {{
+            font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Microsoft YaHei", sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--text);
+            background: #f8fafc;
+            line-height: 1.6;
+        }}
+        .container {{
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }}
+        
+        /* Breadcrumb */
+        .breadcrumb {{
+            padding: 20px 0;
+            font-size: 0.9rem;
+            color: #666;
+        }}
+        .breadcrumb a {{
+            color: #666;
+            text-decoration: none;
+        }}
+        .breadcrumb a:hover {{
+            color: var(--primary);
+            text-decoration: underline;
+        }}
+        .breadcrumb span {{
+            margin: 0 5px;
+            color: #ccc;
+        }}
+
+        /* Header */
+        header {{
+            background: white;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 30px 0;
+        }}
+        header h1 {{
+            margin: 0;
+            font-size: 2.5rem;
+            color: var(--dark);
+        }}
+        header .subtitle {{
+            color: #64748b;
+            margin-top: 10px;
+            font-size: 1.1rem;
+        }}
+
+        /* Sections */
+        section {{
+            padding: 40px 0;
+        }}
+        .card {{
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }}
+        h2 {{
+            border-left: 5px solid var(--primary);
+            padding-left: 15px;
+            margin-top: 0;
+            margin-bottom: 25px;
+            font-size: 1.5rem;
+        }}
+
+        /* Product Matrix Grid */
+        .matrix-grid {{
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 20px;
+        }}
+        .matrix-col {{
+            background: #f8fafc;
+            border: 1px dashed #cbd5e1;
+            border-radius: 8px;
+            padding: 20px;
+        }}
+        .matrix-col h3 {{
+            text-align: center;
+            font-size: 1.1rem;
+            color: #475569;
+            margin-top: 0;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 10px;
+        }}
+        .sku-card {{
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            padding: 15px;
+            margin-bottom: 15px;
+            transition: transform 0.2s;
+        }}
+        .sku-card:hover {{
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }}
+        .sku-card a {{
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: bold;
+            display: block;
+        }}
+        .sku-card .tag {{
+            font-size: 0.8rem;
+            color: #64748b;
+            margin-top: 5px;
+            display: block;
+        }}
+
+        /* Funnel & Rhythm */
+        .chart-container {{
+            position: relative; 
+            height: 300px; 
+            width: 100%;
+        }}
+        
+        /* Timeline */
+        .timeline {{
+            position: relative;
+            margin: 20px 0;
+            padding-left: 20px;
+        }}
+        .timeline-item {{
+            position: relative;
+            padding-bottom: 20px;
+            border-left: 2px solid #e2e8f0;
+            padding-left: 20px;
+        }}
+        .timeline-item::before {{
+            content: '';
+            position: absolute;
+            left: -6px;
+            top: 0;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--primary);
+        }}
+        .timeline-item strong {{
+            display: block;
+            margin-bottom: 5px;
+            font-size: 1.1rem;
+        }}
+        
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Breadcrumb -->
+        <div class="breadcrumb">
+            <a href="../index.html">首页</a>
+            <span>&gt;</span>
+            <a href="../SKU_Revenue_Analysis_2026.html">SKU 营收拆解</a>
+            <span>&gt;</span>
+            <span style="color: #333;">{line_name}战略规划</span>
+        </div>
+
+        <header>
+            <h1>{line_name}产品线战略规划</h1>
+            <div class="subtitle">2026年 净营收目标拆解与用户生命周期管理</div>
+        </header>
+
+        <!-- 1. Product Matrix -->
+        <div class="card">
+            <h2>产品矩阵设计 (Product Matrix)</h2>
+            <p style="color: #666;">
+                构建从流量入口到高阶专精的完整产品生态，确保用户在不同阶段都有对应的技能解决方案。
+            </p>
+            <div class="matrix-grid">
+                <div class="matrix-col">
+                    <h3>入门 / 流量品 (L1)</h3>
+                    <div id="l1-products">
+                        {l1_html}
+                    </div>
+                    <div style="text-align: center; color: #94a3b8; font-size: 0.8rem; margin-top: 10px;">
+                        目标: 低门槛，高口碑，做大流量漏斗
+                    </div>
+                </div>
+                <div class="matrix-col">
+                    <h3>进阶 / 利润品 (L2)</h3>
+                    <div id="l2-products">
+                        {l2_html}
+                    </div>
+                    <div style="text-align: center; color: #94a3b8; font-size: 0.8rem; margin-top: 10px;">
+                        目标: 强实战，高交付，贡献核心利润
+                    </div>
+                </div>
+                <div class="matrix-col">
+                    <h3>高阶 / 私域品 (L3/Master)</h3>
+                    <div id="l3-products">
+                        {l3_html}
+                    </div>
+                    <div style="text-align: center; color: #94a3b8; font-size: 0.8rem; margin-top: 10px;">
+                        目标: 树标杆，做品牌，延展生命周期
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
+            <!-- 2. Sales Funnel -->
+            <div class="card">
+                <h2>销售漏斗预测 (Sales Funnel)</h2>
+                <div class="chart-container">
+                    <canvas id="funnelChart"></canvas>
+                </div>
+                <div style="margin-top: 20px; background: #fffbeb; padding: 15px; border-radius: 6px; font-size: 0.9rem; color: #92400e;">
+                    <strong>💡 核心假设:</strong>
+                    每 1000 名 L1 付费用户中，预计有 <strong>30%</strong> (300人) 会在 30 天内复购 L2 进阶课程。
+                </div>
+            </div>
+
+            <!-- 3. Sales Rhythm -->
+            <div class="card">
+                <h2>销售节奏规划 (Sales Cadence)</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <strong>Day 1-7: 入门学习期 (L1)</strong>
+                        <p style="color: #666; margin: 0;">重点关注完课率。班主任每日跟进学习进度，建立信任感。</p>
+                    </div>
+                    <div class="timeline-item">
+                        <strong>Day 14: 学习成果验收</strong>
+                        <p style="color: #666; margin: 0;">举办"声音/作品秀"，激发用户成就感。已完成 L1 核心模块的用户。</p>
+                    </div>
+                    <div class="timeline-item">
+                        <strong>Day 21: 进阶需求挖掘 (Pre-sale)</strong>
+                        <p style="color: #666; margin: 0;">发布 L2 实战招募令，展示 L2 学员接单案例。定向邀约高潜用户。</p>
+                    </div>
+                    <div class="timeline-item">
+                        <strong>Day 30: 升单转化 (Upsell)</strong>
+                        <p style="color: #666; margin: 0;">L1 结营仪式。限时优惠开启，完成 30% 复购目标。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Funnel Chart
+        const ctx = document.getElementById('funnelChart').getContext('2d');
+        new Chart(ctx, {{
+            type: 'bar',
+            data: {{
+                labels: ['L1 入门用户', 'L2 进阶用户 (30% 复购)', 'L3/大师 (5% 顶层)'],
+                datasets: [{{
+                    label: '用户规模预测',
+                    data: [1000, 300, 50],
+                    backgroundColor: [
+                        '{theme_color_op05}',
+                        '{theme_color_op08}',
+                        '{theme_color}'
+                    ],
+                    borderColor: '{theme_color}',
+                    borderWidth: 1
+                }}]
+            }},
+            options: {{
+                indexAxis: 'y', // Horizontal bar to look like funnel
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {{
+                    legend: {{ display: false }}
+                }},
+                scales: {{
+                    x: {{
+                        beginAtZero: true,
+                        grid: {{ display: false }}
+                    }}
+                }}
+            }}
+        }});
+    </script>
+</body>
+</html>
+"""
+
+def clean_filename(name):
+    """Sanitize sku name for filename."""
+    name = name.replace('L1+L2', 'L1_Plus_L2')
+    name = re.sub(r'[^\w\u4e00-\u9fff\-_]', '', name)
+    return name
+
+def generate_line_pages():
+    if not os.path.exists(OUTPUT_DIR):
+        os.makedirs(OUTPUT_DIR)
+
+    # Buckets for products
+    lines = {
+        "Voice": {"name": "有声攀登", "color": "#3b82f6", "l1": [], "l2": [], "l3": []},
+        "Writing": {"name": "AI写作", "color": "#8b5cf6", "l1": [], "l2": [], "l3": []},
+        "Shorts": {"name": "AI短视频", "color": "#f59e0b", "l1": [], "l2": [], "l3": []},
+    }
+
+    raw_skus = []
+    
+    with open(SOURCE_CSV, 'r', encoding='utf-8') as f:
+        reader = csv.reader(f)
+        header = next(reader) 
+        
+        # Check column index, CSV structure changed recently?
+        # Expect: 产品线, 售卖端, SKU, GMV, GMV占比
+        # Index: 0, 1, 2, 3, 4
+        
+        for row in reader:
+            if not row or len(row) < 3: 
+                continue
+            
+            line_tag = row[0].strip()
+            sku_name = row[2].strip()
+            
+            if not sku_name or "合计" in sku_name:
+                continue
+
+            # Determine Line
+            target_line = None
+            if "有声" in line_tag or "音频" in sku_name or "攀登" in sku_name:
+                target_line = "Voice"
+            elif "写作" in line_tag or "写作" in sku_name:
+                target_line = "Writing"
+            elif "短视频" in line_tag or "短视频" in sku_name or "视频" in sku_name:
+                target_line = "Shorts"
+            
+            # Fallback for "张震IP" etc
+            if not target_line:
+                if "IP" in sku_name: target_line = "Voice" # Assume Voice IP
+                else: target_line = "Voice" # Default
+
+            # Determine Level
+            if "L3" in sku_name or "大师" in sku_name or "IP" in sku_name:
+                level = "l3"
+            elif "L2" in sku_name or "进阶" in sku_name or "复购" in sku_name:
+                level = "l2"
+            else:
+                level = "l1"
+
+            # Add to bucket
+            link = clean_filename(sku_name) + ".html"
+            html_snippet = f'<div class="sku-card"><a href="{link}">{sku_name}</a></div>'
+            
+            lines[target_line][level].append(html_snippet)
+
+    # Generate Pages
+    for key, data in lines.items():
+        filename = f"ProductLine_{key}.html"
+        filepath = os.path.join(OUTPUT_DIR, filename)
+        
+        # Helper for color opacity
+        hex_color = data['color']
+        # Hex to RGB assumption for opacity string is handled simply in JS or we pass simple strings
+        # A simpler way is to pass prepared strings
+        # But for template format, let's just pass the hex and handle opacity manually in template if needed?
+        # Actually template uses {theme_color} directly.
+        # Let's generate opacity variants crudely
+        
+        l1_html = "\n".join(data['l1']) if data['l1'] else '<div style="color:#ccc; padding:10px;">暂无产品</div>'
+        l2_html = "\n".join(data['l2']) if data['l2'] else '<div style="color:#ccc; padding:10px;">暂无产品</div>'
+        l3_html = "\n".join(data['l3']) if data['l3'] else '<div style="color:#ccc; padding:10px;">暂无产品</div>'
+
+        content = HTML_TEMPLATE.format(
+            line_name=data['name'],
+            theme_color=data['color'],
+            theme_color_op05=data['color'] + "33", # Hex opacity ~20%
+            theme_color_op08=data['color'] + "80", # Hex opacity ~50%
+            l1_html=l1_html,
+            l2_html=l2_html,
+            l3_html=l3_html
+        )
+
+        with open(filepath, 'w', encoding='utf-8') as f:
+            f.write(content)
+        print(f"Generated {filepath}")
+
+if __name__ == "__main__":
+    generate_line_pages()
