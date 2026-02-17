@@ -28,6 +28,25 @@
             padding: 0 20px;
         }
         
+        /* Breadcrumb */
+        .breadcrumb {
+            padding: 20px 0;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        .breadcrumb a {
+            color: #666;
+            text-decoration: none;
+        }
+        .breadcrumb a:hover {
+            color: var(--primary);
+            text-decoration: underline;
+        }
+        .breadcrumb span {
+            margin: 0 5px;
+            color: #ccc;
+        }
+
         /* Header */
         header {
             background: var(--dark);
@@ -89,7 +108,7 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 50px;
-            align-items: center;
+            align-items: start;
         }
         .feature-list li {
             margin-bottom: 15px;
@@ -104,17 +123,58 @@
             left: 0;
             font-weight: bold;
         }
-
-        /* Curriculum */
-        .curriculum-card {
-            background: var(--light);
+        
+        /* Teacher Profile */
+        .teacher-profile {
+            background: #fff;
+            border: 1px solid #eee;
             padding: 30px;
             border-radius: 8px;
-            margin-bottom: 20px;
-            border-left: 5px solid var(--primary);
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
         }
-        .curriculum-card h3 {
-            margin-top: 0;
+        .teacher-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: #ddd;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: #888;
+        }
+
+        /* Detailed Curriculum Table */
+        .curriculum-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 30px;
+            background: white;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+        }
+        .curriculum-table th, .curriculum-table td {
+            padding: 15px 20px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        .curriculum-table th {
+            background: #f8fafc;
+            font-weight: 600;
+            color: var(--dark);
+        }
+        .curriculum-table tr:hover {
+            background: #fdfdfd;
+        }
+        .module-tag {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            background: #e0f2fe;
+            color: #0284c7;
+            margin-right: 5px;
         }
 
         /* Simulation Dashboard */
@@ -190,6 +250,16 @@
         </div>
     </header>
 
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="../index.html">首页</a>
+            <span>&gt;</span>
+            <a href="../SKU_Revenue_Analysis_2026.html">SKU 营收拆解</a>
+            <span>&gt;</span>
+            <span style="color: #333;">攀登复购硬件（硬件复购）</span>
+        </div>
+    </div>
+
     <div class="hero">
         <div class="container">
             <div style="text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; margin-bottom: 20px; opacity: 0.8;">职业技能认证课程</div>
@@ -209,18 +279,24 @@
                         帮助学员掌握攀登复购硬件（硬件复购）的核心技能。课程采用“学-练-测-评”闭环模式，
                         确保每一位学员都能达到行业交付标准。
                     </p>
-                    <ul class="feature-list">
-                        <li><strong>适用人群：</strong> 零基础学员</li>
-                        <li><strong>技能目标：</strong> 掌握攀登复购硬件（硬件复购）全流程操作与商业化能力</li>
-                        <li><strong>交付形式：</strong> 视频录播 + 直播答疑 + 1v1作业批改</li>
-                        <li><strong>认证证书：</strong> 结业颁发喜播教育职业技能认证证书</li>
-                    </ul>
+                    <div style="background: #fff8f0; padding: 20px; border-left: 4px solid var(--primary); margin-bottom: 25px;">
+                        <h4 style="margin: 0 0 10px 0; color: var(--primary);">✨ 课程亮点 (Highlights)</h4>
+                        <ul class="feature-list" style="margin: 0;">
+                            <li>结业即推荐就业，对接海量副业资源</li><li>独家签约名师亲自授课，保障教学质量</li><li>AI 辅助作业批改，实时反馈学习问题</li><li>终身免费复训权限，持续跟进行业新技术</li>
+                        </ul>
+                    </div>
                 </div>
-                <div style="text-align: center;">
-                    <div style="background: #f1f5f9; padding: 40px; border-radius: 20px; display: inline-block; width: 80%;">
-                        <div style="font-size: 5rem; color: var(--primary);">📚</div>
-                        <h3>标准化教材</h3>
-                        <p>行业Top10%专家联合研发</p>
+                
+                <div class="teacher-profile">
+                    <div class="teacher-img">王</div>
+                    <h3 style="margin: 0 0 5px 0;">王明军</h3>
+                    <div style="color: var(--primary); font-weight: bold; margin-bottom: 15px;">中国演播艺术大师</div>
+                    <p style="font-size: 0.9rem; color: #666; font-style: italic;">
+                        "声音是有温度的，我教你如何用声音传递情感。"
+                    </p>
+                    <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
+                    <div style="font-size: 0.85rem; color: #999;">
+                        行业经验：15年+ | 累计学员：50,000+
                     </div>
                 </div>
             </div>
@@ -229,19 +305,71 @@
 
     <section style="background: #f9f9f9;">
         <div class="container">
-            <h2>职业学校课程设计</h2>
-            <div class="curriculum-card">
-                <h3>第一阶段：基础夯实 (Week 1-2)</h3>
-                <p>从零开始构建攀登复购硬件（硬件复购）的底层逻辑，掌握基础工具与规范。重点解决“会用”的问题。</p>
+            <h2>职业学校课程设计 (Curriculum)</h2>
+            <div style="text-align: center; max-width: 800px; margin: 0 auto;">
+                <p>对标行业标准，实战驱动教学。</p>
             </div>
-            <div class="curriculum-card">
-                <h3>第二阶段：进阶实战 (Week 3-6)</h3>
-                <p>引入真实商业通过，进行高强度实战演练。重点解决“好用”与“交付”的问题。</p>
-            </div>
-            <div class="curriculum-card">
-                <h3>第三阶段：商业变现 (Week 7-8)</h3>
-                <p>通过账号运营、接单技巧与个人IP打造，实现技能变现。重点解决“赚钱”的问题。</p>
-            </div>
+            
+            <table class="curriculum-table">
+                <thead>
+                    <tr>
+                        <th style="width: 15%;">周次</th>
+                        <th style="width: 25%;">模块主题</th>
+                        <th>核心内容 & 实战任务</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+            <tr>
+                <td><span class="module-tag">Week 1</span></td>
+                <td><strong>行业认知与基础入门</strong></td>
+                <td style="color: #666;">了解行业发展趋势，掌握软件基础操作，完成第一次声音/作品录制。</td>
+            </tr>
+            
+            <tr>
+                <td><span class="module-tag">Week 2</span></td>
+                <td><strong>核心技能专项训练</strong></td>
+                <td style="color: #666;">针对性突破核心难点（如气息、剪辑逻辑、AI提示词），建立专业护城河。</td>
+            </tr>
+            
+            <tr>
+                <td><span class="module-tag">Week 3</span></td>
+                <td><strong>商业案例拆解与模仿</strong></td>
+                <td style="color: #666;">精选10+真实商业爆款案例，逐帧/逐句拆解，还原大神创作思路。</td>
+            </tr>
+            
+            <tr>
+                <td><span class="module-tag">Week 4</span></td>
+                <td><strong>实战项目演练 (PBL)</strong></td>
+                <td style="color: #666;">领取真实模拟订单，在助教指导下完成全流程交付，模拟真实职场环境。</td>
+            </tr>
+            
+            <tr>
+                <td><span class="module-tag">Week 5</span></td>
+                <td><strong>进阶技巧与风格化</strong></td>
+                <td style="color: #666;">探索个人风格，差异化竞争。掌握高级技巧，提升作品质感。</td>
+            </tr>
+            
+            <tr>
+                <td><span class="module-tag">Week 6</span></td>
+                <td><strong>运营变现与渠道对接</strong></td>
+                <td style="color: #666;">账号运营SOP，接单平台入驻指南，报价与谈判技巧。</td>
+            </tr>
+            
+            <tr>
+                <td><span class="module-tag">Week 7</span></td>
+                <td><strong>毕业作品打磨</strong></td>
+                <td style="color: #666;">导师1v1指导毕业设计，打造可以写进简历的完美作品集。</td>
+            </tr>
+            
+            <tr>
+                <td><span class="module-tag">Week 8</span></td>
+                <td><strong>职业规划与签约</strong></td>
+                <td style="color: #666;">模拟面试，简历优化，优秀学员签约考核。</td>
+            </tr>
+            
+                </tbody>
+            </table>
         </div>
     </section>
 
@@ -268,19 +396,19 @@
             <div class="dashboard">
                 <div class="stats-grid">
                     <div class="stat-box">
-                        <div class="stat-value" style="color: var(--success);">93%</div>
+                        <div class="stat-value" style="color: var(--success);">95%</div>
                         <div class="stat-label">课程通关率</div>
                     </div>
                     <div class="stat-box">
-                        <div class="stat-value" style="color: var(--primary);">93%</div>
+                        <div class="stat-value" style="color: var(--primary);">85%</div>
                         <div class="stat-label">副业/就业接单率</div>
                     </div>
                     <div class="stat-box">
-                        <div class="stat-value">95</div>
+                        <div class="stat-value">98</div>
                         <div class="stat-label">学员满意度 (NPS)</div>
                     </div>
                     <div class="stat-box">
-                        <div class="stat-value" style="color: var(--warning);">+500</div>
+                        <div class="stat-value" style="color: var(--warning);">+2000</div>
                         <div class="stat-label">平均月增收 (元)</div>
                     </div>
                 </div>
@@ -317,7 +445,7 @@
                     <!-- Testimonial -->
                     <div style="background: white; padding: 20px; border-radius: 8px; display: flex; flex-direction: column; justify-content: center;">
                         <div style="font-style: italic; color: #666;">
-                            "这门课程完全改变了我的职业轨迹。特别是实战环节，让我第一次接到了500元的商单！"
+                            "这门课程完全改变了我的职业轨迹。特别是实战环节，让我第一次接到了2000元的商单！"
                         </div>
                         <div style="margin-top: 15px; font-weight: bold; text-align: right;">
                             —— 优秀学员 王*

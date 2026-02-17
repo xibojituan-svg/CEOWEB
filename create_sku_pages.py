@@ -8,7 +8,7 @@ import re
 SOURCE_CSV = "/Users/jdm/Downloads/xiboceoweb/CompanyAnalysis/SKU销售GMV及占比.csv"
 OUTPUT_DIR = "/Users/jdm/Downloads/xiboceoweb/SKU"
 
-# Template
+# Enhanced Template
 HTML_TEMPLATE = """
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -39,6 +39,25 @@ HTML_TEMPLATE = """
             padding: 0 20px;
         }}
         
+        /* Breadcrumb */
+        .breadcrumb {{
+            padding: 20px 0;
+            font-size: 0.9rem;
+            color: #666;
+        }}
+        .breadcrumb a {{
+            color: #666;
+            text-decoration: none;
+        }}
+        .breadcrumb a:hover {{
+            color: var(--primary);
+            text-decoration: underline;
+        }}
+        .breadcrumb span {{
+            margin: 0 5px;
+            color: #ccc;
+        }}
+
         /* Header */
         header {{
             background: var(--dark);
@@ -100,7 +119,7 @@ HTML_TEMPLATE = """
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 50px;
-            align-items: center;
+            align-items: start;
         }}
         .feature-list li {{
             margin-bottom: 15px;
@@ -115,17 +134,58 @@ HTML_TEMPLATE = """
             left: 0;
             font-weight: bold;
         }}
-
-        /* Curriculum */
-        .curriculum-card {{
-            background: var(--light);
+        
+        /* Teacher Profile */
+        .teacher-profile {{
+            background: #fff;
+            border: 1px solid #eee;
             padding: 30px;
             border-radius: 8px;
-            margin-bottom: 20px;
-            border-left: 5px solid var(--primary);
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
         }}
-        .curriculum-card h3 {{
-            margin-top: 0;
+        .teacher-img {{
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: #ddd;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: #888;
+        }}
+
+        /* Detailed Curriculum Table */
+        .curriculum-table {{
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 30px;
+            background: white;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+        }}
+        .curriculum-table th, .curriculum-table td {{
+            padding: 15px 20px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }}
+        .curriculum-table th {{
+            background: #f8fafc;
+            font-weight: 600;
+            color: var(--dark);
+        }}
+        .curriculum-table tr:hover {{
+            background: #fdfdfd;
+        }}
+        .module-tag {{
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            background: #e0f2fe;
+            color: #0284c7;
+            margin-right: 5px;
         }}
 
         /* Simulation Dashboard */
@@ -201,6 +261,16 @@ HTML_TEMPLATE = """
         </div>
     </header>
 
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="../index.html">首页</a>
+            <span>&gt;</span>
+            <a href="../SKU_Revenue_Analysis_2026.html">SKU 营收拆解</a>
+            <span>&gt;</span>
+            <span style="color: #333;">{sku_name}</span>
+        </div>
+    </div>
+
     <div class="hero">
         <div class="container">
             <div style="text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; margin-bottom: 20px; opacity: 0.8;">职业技能认证课程</div>
@@ -220,18 +290,24 @@ HTML_TEMPLATE = """
                         帮助学员掌握{sku_name}的核心技能。课程采用“学-练-测-评”闭环模式，
                         确保每一位学员都能达到行业交付标准。
                     </p>
-                    <ul class="feature-list">
-                        <li><strong>适用人群：</strong> {target_audience}</li>
-                        <li><strong>技能目标：</strong> 掌握{sku_name}全流程操作与商业化能力</li>
-                        <li><strong>交付形式：</strong> 视频录播 + 直播答疑 + 1v1作业批改</li>
-                        <li><strong>认证证书：</strong> 结业颁发喜播教育职业技能认证证书</li>
-                    </ul>
+                    <div style="background: #fff8f0; padding: 20px; border-left: 4px solid var(--primary); margin-bottom: 25px;">
+                        <h4 style="margin: 0 0 10px 0; color: var(--primary);">✨ 课程亮点 (Highlights)</h4>
+                        <ul class="feature-list" style="margin: 0;">
+                            {highlights_html}
+                        </ul>
+                    </div>
                 </div>
-                <div style="text-align: center;">
-                    <div style="background: #f1f5f9; padding: 40px; border-radius: 20px; display: inline-block; width: 80%;">
-                        <div style="font-size: 5rem; color: var(--primary);">📚</div>
-                        <h3>标准化教材</h3>
-                        <p>行业Top10%专家联合研发</p>
+                
+                <div class="teacher-profile">
+                    <div class="teacher-img">{teacher_last_name}</div>
+                    <h3 style="margin: 0 0 5px 0;">{teacher_name}</h3>
+                    <div style="color: var(--primary); font-weight: bold; margin-bottom: 15px;">{teacher_title}</div>
+                    <p style="font-size: 0.9rem; color: #666; font-style: italic;">
+                        "{teacher_quote}"
+                    </p>
+                    <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
+                    <div style="font-size: 0.85rem; color: #999;">
+                        行业经验：15年+ | 累计学员：50,000+
                     </div>
                 </div>
             </div>
@@ -240,19 +316,23 @@ HTML_TEMPLATE = """
 
     <section style="background: #f9f9f9;">
         <div class="container">
-            <h2>职业学校课程设计</h2>
-            <div class="curriculum-card">
-                <h3>第一阶段：基础夯实 (Week 1-2)</h3>
-                <p>从零开始构建{sku_name}的底层逻辑，掌握基础工具与规范。重点解决“会用”的问题。</p>
+            <h2>职业学校课程设计 (Curriculum)</h2>
+            <div style="text-align: center; max-width: 800px; margin: 0 auto;">
+                <p>对标行业标准，实战驱动教学。</p>
             </div>
-            <div class="curriculum-card">
-                <h3>第二阶段：进阶实战 (Week 3-6)</h3>
-                <p>引入真实商业通过，进行高强度实战演练。重点解决“好用”与“交付”的问题。</p>
-            </div>
-            <div class="curriculum-card">
-                <h3>第三阶段：商业变现 (Week 7-8)</h3>
-                <p>通过账号运营、接单技巧与个人IP打造，实现技能变现。重点解决“赚钱”的问题。</p>
-            </div>
+            
+            <table class="curriculum-table">
+                <thead>
+                    <tr>
+                        <th style="width: 15%;">周次</th>
+                        <th style="width: 25%;">模块主题</th>
+                        <th>核心内容 & 实战任务</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {curriculum_rows}
+                </tbody>
+            </table>
         </div>
     </section>
 
@@ -349,9 +429,37 @@ HTML_TEMPLATE = """
 </html>
 """
 
+TEACHERS = [
+    {"name": "王明军", "title": "中国演播艺术大师", "quote": "声音是有温度的，我教你如何用声音传递情感。"},
+    {"name": "艾宝良", "title": "顶级有声演播家", "quote": "演播不是念字，而是创造画面。"},
+    {"name": "李野墨", "title": "资深演播艺术家", "quote": "基本功是艺术的灵魂。"},
+    {"name": "张震", "title": "商业配音专家", "quote": "不仅要好听，更要值钱。"},
+    {"name": "苏秦", "title": "金牌课程制作人", "quote": "做最懂学员的实战课程。"}
+]
+
+HIGHLIGHTS_POOL = [
+    "独家签约名师亲自授课，保障教学质量",
+    "提供真实商业项目练手，优秀学员直接签约",
+    "1v1 助教全天候答疑，拒绝孤单学习",
+    "AI 辅助作业批改，实时反馈学习问题",
+    "结业即推荐就业，对接海量副业资源",
+    "终身免费复训权限，持续跟进行业新技术",
+    "配套千元级专业硬件设备，一步到位",
+]
+
+CURRICULUM_MODULES = [
+    {"week": "Week 1", "title": "行业认知与基础入门", "content": "了解行业发展趋势，掌握软件基础操作，完成第一次声音/作品录制。"},
+    {"week": "Week 2", "title": "核心技能专项训练", "content": "针对性突破核心难点（如气息、剪辑逻辑、AI提示词），建立专业护城河。"},
+    {"week": "Week 3", "title": "商业案例拆解与模仿", "content": "精选10+真实商业爆款案例，逐帧/逐句拆解，还原大神创作思路。"},
+    {"week": "Week 4", "title": "实战项目演练 (PBL)", "content": "领取真实模拟订单，在助教指导下完成全流程交付，模拟真实职场环境。"},
+    {"week": "Week 5", "title": "进阶技巧与风格化", "content": "探索个人风格，差异化竞争。掌握高级技巧，提升作品质感。"},
+    {"week": "Week 6", "title": "运营变现与渠道对接", "content": "账号运营SOP，接单平台入驻指南，报价与谈判技巧。"},
+    {"week": "Week 7", "title": "毕业作品打磨", "content": "导师1v1指导毕业设计，打造可以写进简历的完美作品集。"},
+    {"week": "Week 8", "title": "职业规划与签约", "content": "模拟面试，简历优化，优秀学员签约考核。"},
+]
+
 def clean_filename(name):
     """Sanitize sku name for filename."""
-    # Replace L1+L2 with L1_L2, remove special chars
     name = name.replace('L1+L2', 'L1_Plus_L2')
     name = re.sub(r'[^\w\u4e00-\u9fff\-_]', '', name)
     return name
@@ -369,10 +477,8 @@ def generate_sku_pages():
             if not row or len(row) < 2: 
                 continue
             
-            # Row structure: Region, SKU, GMV, GMV%
             sku_name = row[1].strip()
             
-            # Skip invalid or empty names
             if not sku_name or sku_name == "SKU" or sku_name == "Total" or sku_name == "合计":
                 continue
                 
@@ -384,7 +490,7 @@ def generate_sku_pages():
         filename = clean_filename(sku_name) + ".html"
         filepath = os.path.join(OUTPUT_DIR, filename)
         
-        # Generate random simulation data
+        # Simulation Data
         pass_rate = random.randint(85, 99)
         employment_rate = random.randint(55, 95)
         sat_score = random.randint(80, 98)
@@ -399,6 +505,24 @@ def generate_sku_pages():
             
         duration = random.choice([4, 8, 12, 16])
 
+        # Teacher Info
+        teacher = random.choice(TEACHERS)
+        
+        # Highlights
+        highlights = random.sample(HIGHLIGHTS_POOL, 4)
+        highlights_html = "".join([f"<li>{h}</li>" for h in highlights])
+
+        # Curriculum Rows
+        curriculum_html = ""
+        for mod in CURRICULUM_MODULES:
+            curriculum_html += f"""
+            <tr>
+                <td><span class="module-tag">{mod['week']}</span></td>
+                <td><strong>{mod['title']}</strong></td>
+                <td style="color: #666;">{mod['content']}</td>
+            </tr>
+            """
+
         html_content = HTML_TEMPLATE.format(
             sku_name=sku_name,
             pass_rate=pass_rate,
@@ -407,7 +531,13 @@ def generate_sku_pages():
             income_boost=income_boost,
             student_name=student_name,
             target_audience=target_audience,
-            duration=duration
+            duration=duration,
+            teacher_name=teacher['name'],
+            teacher_title=teacher['title'],
+            teacher_quote=teacher['quote'],
+            teacher_last_name=teacher['name'][0],
+            highlights_html=highlights_html,
+            curriculum_rows=curriculum_html
         )
         
         with open(filepath, 'w', encoding='utf-8') as f:
