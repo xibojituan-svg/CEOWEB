@@ -285,13 +285,44 @@
             <div style="margin-top: 20px;">
                 <div class="info-item">
                     <span class="label">官方定义</span>
-                    <p class="value" style="font-weight: normal; color: var(--text-main);">训练营+硬件收入，不含税，扣除退款，并<b>扣除 180
-                            天内退费预提</b>。</p>
-                </div>
-                <div class="info-item">
-                    <span class="label">计算逻辑</span>
                     <p class="value" style="font-weight: normal; color: var(--text-main);">
-                        年总和。增加“退费预提”机制：按历史退费率对未到期订单进行计提，确保收入反映真实经营质量。</p>
+                        不含税训练营+硬件收入，扣除退款及<b>180天退费预提</b>。</p>
+                </div>
+
+                <div class="info-item"
+                    style="grid-column: 1 / -1; background: rgba(255,255,255,0.03); padding: 20px; border-radius: 12px; margin-top: 10px;">
+                    <span class="label" style="margin-bottom: 15px; display: block;">🧮 计算公式可视化</span>
+                    <div
+                        style="display: flex; align-items: center; justify-content: center; gap: 15px; flex-wrap: wrap; font-family: 'Courier New', monospace; font-size: 1.1rem;">
+                        <div style="text-align: center;">
+                            <div style="font-weight: bold; color: var(--success); font-size: 1.3rem;">净营收</div>
+                            <div style="font-size: 0.8rem; color: var(--text-dim);">(Clean Revenue)</div>
+                        </div>
+                        <div style="font-size: 1.5rem; color: var(--text-dim);">=</div>
+                        <div
+                            style="text-align: center; background: rgba(59, 130, 246, 0.1); padding: 8px 12px; border-radius: 8px; border: 1px solid rgba(59, 130, 246, 0.3);">
+                            <div>总流水</div>
+                            <div style="font-size: 0.7rem; opacity: 0.7;">(GMV)</div>
+                        </div>
+                        <div style="font-size: 1.5rem; color: var(--text-dim);">-</div>
+                        <div
+                            style="text-align: center; background: rgba(239, 68, 68, 0.1); padding: 8px 12px; border-radius: 8px; border: 1px solid rgba(239, 68, 68, 0.3);">
+                            <div>增值税</div>
+                            <div style="font-size: 0.7rem; opacity: 0.7;">(Tax)</div>
+                        </div>
+                        <div style="font-size: 1.5rem; color: var(--text-dim);">-</div>
+                        <div
+                            style="text-align: center; background: rgba(239, 68, 68, 0.1); padding: 8px 12px; border-radius: 8px; border: 1px solid rgba(239, 68, 68, 0.3);">
+                            <div>实际退款</div>
+                            <div style="font-size: 0.7rem; opacity: 0.7;">(Refunds)</div>
+                        </div>
+                        <div style="font-size: 1.5rem; color: var(--text-dim);">-</div>
+                        <div
+                            style="text-align: center; background: rgba(249, 115, 22, 0.15); padding: 8px 12px; border-radius: 8px; border: 1px solid var(--primary); box-shadow: 0 0 10px rgba(249, 115, 22, 0.2);">
+                            <div style="color: var(--primary); font-weight: bold;">180天预提</div>
+                            <div style="font-size: 0.7rem; opacity: 0.7; color: var(--primary);">(Risk Provision)</div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
