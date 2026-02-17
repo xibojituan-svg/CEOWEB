@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026 SKU 销售目标分析 (6.0亿净营收)</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --text-main: #e2e8f0;
+            --text-dim: #94a3b8;
+            --accent-color: #3b82f6;
+            --accent-hover: #2563eb;
+            --card-bg: #1e293b;
+            --border-color: #334155;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --danger-color: #ef4444;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            margin-bottom: 40px;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin: 0;
+            background: linear-gradient(90deg, #60a5fa, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            color: var(--text-dim);
+            font-size: 1.1rem;
+            margin-top: 10px;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--text-main);
+            margin: 10px 0;
+        }
+
+        .stat-label {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            color: var(--text-dim);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        td {
+            font-size: 1rem;
+        }
+
+        .highlight-row {
+            background-color: rgba(59, 130, 246, 0.1);
+        }
+
+        .progress-bar-container {
+            width: 100%;
+            height: 8px;
+            background-color: #334155;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 5px;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background-color: var(--accent-color);
+        }
+
+        .chart-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-top: 20px;
+        }
+
+        .chart-box {
+            flex: 1;
+            min-width: 400px;
+            height: 300px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .badge-education {
+            background-color: rgba(16, 185, 129, 0.2);
+            color: #34d399;
+        }
+
+        .badge-ai {
+            background-color: rgba(139, 92, 246, 0.2);
+            color: #c4b5fd;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-dim);
+        }
+
+        select,
+        input {
+            width: 100%;
+            padding: 10px;
+            background: #0f172a;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            color: var(--text-main);
+            font-size: 1rem;
+        }
+
+        .info-box {
+            background-color: rgba(59, 130, 246, 0.1);
+            border-left: 4px solid var(--accent-color);
+            padding: 15px;
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #cbd5e1;
+        }
+
+        .btn-update {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.3s;
+        }
+
+        .btn-update:hover {
+            background-color: var(--accent-hover);
+        }
+    </style>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+    <div class="container">
+        <header>
+            <div style="margin-bottom: 10px;">
+                <a href="weekly_analysis_20260126.html" style="color: var(--text-dim); text-decoration: none;">&larr;
+                    返回分析中心</a>
+            </div>
+            <h1>2026 SKU 战略拆解分析</h1>
+            <div class="subtitle">Based on Target Net Revenue: ¥600,000,000 (Clean Revenue)</div>
+        </header>
+
+        <!-- Assumptions Control Panel -->
+        <div class="card">
+            <h3 style="margin-top: 0; color: var(--accent-color);">⚙️ 核心假设模型 (Assumptions)</h3>
+            <div class="dashboard-grid" style="margin-bottom: 0;">
+                <div class="form-group">
+                    <label>净营收目标 (Clean Revenue Target)</label>
+                    <input type="text" value="600,000,000" disabled style="color: #10b981; font-weight: bold;">
+                </div>
+                <div class="form-group">
+                    <label>综合退费率 (Refund Rate)</label>
+                    <div style="display: flex; gap: 10px; align-items: center;">
+                        <input type="number" id="refundRate" value="15" style="width: 80px;">
+                        <span>% (战略目标)</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>风险预提 (Provision)</label>
+                    <div style="display: flex; gap: 10px; align-items: center;">
+                        <input type="number" id="riskRate" value="5" style="width: 80px;">
+                        <span>% (180天预留)</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>总去毒因子 (Total Reduction)</label>
+                    <div id="totalReductionDisplay"
+                        style="font-size: 1.2rem; font-weight: bold; padding: 10px; color: #ef4444;">20%</div>
+                </div>
+            </div>
+            <button class="btn-update" onclick="calculate()">🔁 重新计算 (Recalculate)</button>
+        </div>
+
+        <!-- KPI Cards -->
+        <div class="dashboard-grid">
+            <div class="stat-card">
+                <div class="stat-label">所需总销量 (Total Units)</div>
+                <div class="stat-value" id="totalUnits" style="color: var(--accent-color);">164,474</div>
+                <div style="font-size: 0.8rem; color: var(--text-dim);">基于当前SKU组合</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">所需总流水 (Gross Revenue)</div>
+                <div class="stat-value" id="totalGross">¥7.50亿</div>
+                <div style="font-size: 0.8rem; color: var(--text-dim);">含退费与预提</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">平均客单价 (WAP)</div>
+                <div class="stat-value" id="avgPrice">¥4,560</div>
+                <div style="font-size: 0.8rem; color: var(--text-dim);">加权平均售价</div>
+            </div>
+        </div>
+
+        <!-- Charts -->
+        <div class="card">
+            <h3 style="margin-top: 0;">📊 可视化分布 (Distribution)</h3>
+            <div class="chart-container">
+                <div class="chart-box">
+                    <canvas id="revenueChart"></canvas>
+                </div>
+                <div class="chart-box">
+                    <canvas id="unitsChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Detailed Table -->
+        <div class="card">
+            <h3 style="margin-top: 0;">📝 SKU 详细拆解 (Details)</h3>
+            <table id="skuTable">
+                <thead>
+                    <tr>
+                        <th style="width: 25%;">产品名称 (SKU)</th>
+                        <th>售价 (Price)</th>
+                        <th>销售占比 (Share)</th>
+                        <th>目标销量 (Units)</th>
+                        <th>贡献净营收 (Clean Rev)</th>
+                        <th>类别</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- JS will populate this -->
+                </tbody>
+            </table>
+            <div class="info-box">
+                <strong>💡 战略洞察：</strong>
+                <ul style="margin: 5px 0 0 20px;">
+                    <li><strong>攀登计划 (Cash Cow):</strong> 两个SKU贡献了60%的销售份额，是绝对的现金牛。必须保证交付质量以维持低退费率。</li>
+                    <li><strong>AI系列 (Growth):</strong> 虽然单价较低，但作为第二曲线的增长点，承担了用户心智转型的重任。</li>
+                    <li><strong>风险提示:</strong> 如果退费率从 15% 上升到 25%，我们需要多卖出 <strong>14.2%</strong> 的课程才能达成同样的净营收目标。</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Data Source from CSV
+        const skuData = [
+            { name: "攀登计划", price: 3980, share: 0.40, category: "Education" },
+            { name: "攀登计划-设备版", price: 6979, share: 0.20, category: "Education" },
+            { name: "攀登计划-线下大师班", price: 6880, share: 0.05, category: "Premium" },
+            { name: "声音美化基础课", price: 1999, share: 0.05, category: "Education" },
+            { name: "AI短视频L1", price: 2980, share: 0.05, category: "AI" },
+            { name: "Ai短视频L2+L1", price: 3980, share: 0.10, category: "AI" },
+            { name: "Ai短故事写作L1", price: 2880, share: 0.05, category: "AI" },
+            { name: "AI短故事写作L2+L1", price: 4380, share: 0.10, category: "AI" }
+        ];
+
+        const targetCleanRevenue = 600000000;
+        let revenueChart = null;
+        let unitsChart = null;
+
+        function formatCurrency(num) {
+            return new Intl.NumberFormat('zh-CN', { style: 'currency', currency: 'CNY', maximumFractionDigits: 0 }).format(num);
+        }
+
+        function formatNumber(num) {
+            return new Intl.NumberFormat('zh-CN').format(Math.round(num));
+        }
+
+        function calculate() {
+            // Get inputs
+            const refundRate = parseFloat(document.getElementById('refundRate').value) / 100;
+            const riskRate = parseFloat(document.getElementById('riskRate').value) / 100;
+
+            // Assumptions
+            const totalReduction = refundRate + riskRate;
+            const cleanFactor = 1 - totalReduction;
+
+            // Display Factor
+            document.getElementById('totalReductionDisplay').innerText = (totalReduction * 100).toFixed(1) + "%";
+
+            // 1. Calculate Weighted Average Price (Gross)
+            let weightedAvgPrice = 0;
+            skuData.forEach(sku => {
+                weightedAvgPrice += sku.price * sku.share;
+            });
+
+            // 2. Calculate Required Gross Revenue
+            // Required Gross = Target Clean / cleanFactor
+            const targetGrossRevenue = targetCleanRevenue / cleanFactor;
+
+            // 3. Calculate Total Units
+            const totalUnits = targetGrossRevenue / weightedAvgPrice;
+
+            // Update KPI Cards
+            document.getElementById('totalUnits').innerText = formatNumber(totalUnits);
+            document.getElementById('totalGross').innerText = "¥" + (targetGrossRevenue / 100000000).toFixed(2) + "亿";
+            document.getElementById('avgPrice').innerText = formatCurrency(weightedAvgPrice);
+
+            // Update Table & Charts Data
+            const tbody = document.querySelector("#skuTable tbody");
+            tbody.innerHTML = "";
+
+            const chartLabels = [];
+            const chartRevenueData = [];
+            const chartUnitsData = [];
+            const chartColors = [];
+
+            skuData.forEach(sku => {
+                const skuUnits = totalUnits * sku.share;
+                const skuGrossRev = skuUnits * sku.price;
+                const skuCleanRev = skuGrossRev * cleanFactor;
+
+                const row = document.createElement("tr");
+                if (sku.share >= 0.20) row.classList.add("highlight-row");
+
+                let categoryBadge = "";
+                if (sku.category === "Education" || sku.category === "Premium") {
+                    categoryBadge = '<span class="badge badge-education">Education</span>';
+                    chartColors.push('#3b82f6');
+                } else {
+                    categoryBadge = '<span class="badge badge-ai">AI</span>';
+                    chartColors.push('#8b5cf6');
+                }
+
+                row.innerHTML = `
+                    <td style="font-weight:600;">${sku.name}</td>
+                    <td>${formatCurrency(sku.price)}</td>
+                    <td>${(sku.share * 100).toFixed(0)}%</td>
+                    <td style="font-weight:bold; color:var(--text-main);">${formatNumber(skuUnits)}</td>
+                    <td>${"¥" + (skuCleanRev / 100000000).toFixed(2) + "亿"}</td>
+                    <td>${categoryBadge}</td>
+                `;
+                tbody.appendChild(row);
+
+                chartLabels.push(sku.name);
+                chartRevenueData.push(skuCleanRev);
+                chartUnitsData.push(skuUnits);
+            });
+
+            updateCharts(chartLabels, chartRevenueData, chartUnitsData, chartColors);
+        }
+
+        function updateCharts(labels, revenueData, unitsData, colors) {
+            // Common Options
+            const commonOptions = {
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: { color: '#94a3b8' }
+                    }
+                }
+            };
+
+            // Revenue Pie Chart
+            const ctxRev = document.getElementById('revenueChart').getContext('2d');
+            if (revenueChart) revenueChart.destroy();
+            revenueChart = new Chart(ctxRev, {
+                type: 'doughnut',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        data: revenueData,
+                        backgroundColor: [
+                            '#3b82f6', '#2563eb', '#1d4ed8', // Blues
+                            '#60a5fa', '#93c5fd', // Lighter Blues
+                            '#8b5cf6', '#7c3aed', '#6d28d9'  // Purples
+                        ],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    ...commonOptions,
+                    plugins: {
+                        ...commonOptions.plugins,
+                        title: { display: true, text: '净营收贡献 (Revenue Contribution)', color: '#fff' }
+                    }
+                }
+            });
+
+            // Units Bar Chart
+            const ctxUnits = document.getElementById('unitsChart').getContext('2d');
+            if (unitsChart) unitsChart.destroy();
+            unitsChart = new Chart(ctxUnits, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: '销量 (Units)',
+                        data: unitsData,
+                        backgroundColor: '#10b981',
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    plugins: {
+                        legend: { display: false },
+                        title: { display: true, text: '目标销量分布 (Target Sales Volume)', color: '#fff' }
+                    },
+                    scales: {
+                        y: { ticks: { color: '#94a3b8' }, grid: { color: '#334155' } },
+                        x: { ticks: { color: '#94a3b8', maxRotation: 45, minRotation: 45 }, grid: { display: false } }
+                    }
+                }
+            });
+        }
+
+        // Initialize
+        calculate();
+
+    </script>
+</body>
+
+</html>
