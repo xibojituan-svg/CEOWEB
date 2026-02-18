@@ -205,6 +205,57 @@
             font-size: 1.2em;
             z-index: 100;
         }
+
+        /* Mobile Optimization */
+        @media screen and (max-width: 768px) {
+            body {
+                padding: 15px !important;
+            }
+
+            .container {
+                padding: 0 !important;
+                width: 100% !important;
+                max-width: 100% !important;
+            }
+
+            section,
+            .metric-card,
+            .strategy-box {
+                padding: 20px !important;
+            }
+
+            h1 {
+                font-size: 1.8rem !important;
+                line-height: 1.3 !important;
+            }
+
+            h2 {
+                font-size: 1.5rem !important;
+            }
+
+            .strategy-grid,
+            div[style*="grid-template-columns: repeat(3, 1fr)"] {
+                grid-template-columns: 1fr !important;
+                gap: 20px !important;
+            }
+
+            /* Funnel: Allow full width for readability on small screens */
+            .funnel-step {
+                width: 100% !important;
+                flex-direction: column !important;
+                align-items: flex-start !important;
+                gap: 5px !important;
+            }
+
+            .funnel-step .value {
+                align-self: flex-end;
+            }
+
+            .funnel-container div[style*="text-align: center"] {
+                font-size: 14px !important;
+                margin: 5px 0 !important;
+            }
+        }
     </style>
 </head>
 
