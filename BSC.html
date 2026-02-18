@@ -304,17 +304,28 @@
         /* Mobile Optimization */
         @media screen and (max-width: 768px) {
             body {
-                padding: 15px !important;
+                padding: 0 !important;
+                /* Allow full-width hero */
             }
 
             .container {
-                padding: 0 !important;
+                padding: 0 20px !important;
+                /* Keep content away from edge */
                 width: 100% !important;
                 max-width: 100% !important;
+                box-sizing: border-box !important;
+            }
+
+            .hero .container {
+                padding-top: 20px !important;
             }
 
             section {
-                padding: 20px !important;
+                padding: 24px 20px !important;
+                /* Comfortable internal spacing */
+                border-radius: 8px !important;
+                margin-top: 20px !important;
+                /* Space between hero and section */
             }
 
             h1 {
@@ -334,11 +345,12 @@
             .chain-step {
                 width: 100% !important;
                 min-width: unset !important;
+                margin-bottom: 10px !important;
             }
 
             .chain-arrow {
                 transform: rotate(90deg);
-                margin: 10px 0 !important;
+                margin: 5px 0 !important;
             }
 
             table {
@@ -358,6 +370,7 @@
             /* Math formula adjustment */
             .math-formula {
                 font-size: 0.9em !important;
+
             }
         }
     </style>
