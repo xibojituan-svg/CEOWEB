@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>高管绩效追踪与评价日志 - Xibo 2026</title>
+    <style>
+        :root {
+            --primary: #1a2a6c;
+            --secondary: #b21f1f;
+            --accent: #fdbb2d;
+            --text: #333;
+            --light-bg: #f5f7fa;
+            --card-bg: #ffffff;
+            --border: #e1e4e8;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--text);
+            background: var(--light-bg);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            display: flex;
+            gap: 40px;
+        }
+
+        /* Sidebar Navigation */
+        .sidebar {
+            width: 250px;
+            flex-shrink: 0;
+            height: fit-content;
+            position: sticky;
+            top: 40px;
+            background: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            /* Default visible on desktop, will be adjusted for mobile */
+        }
+
+        .sidebar h3 {
+            margin-top: 0;
+            color: var(--primary);
+            font-size: 1.1rem;
+            border-bottom: 2px solid #f1f5f9;
+            padding-bottom: 10px;
+        }
+
+        .nav-link {
+            display: block;
+            padding: 10px;
+            color: #64748b;
+            text-decoration: none;
+            border-radius: 6px;
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        .nav-link:hover {
+            background: #f1f5f9;
+            color: var(--primary);
+        }
+
+        .nav-group {
+            margin-bottom: 15px;
+        }
+
+        .nav-group-title {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            color: #94a3b8;
+            margin-bottom: 5px;
+            font-weight: 700;
+            padding-left: 10px;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+        }
+
+        /* Header */
+        .page-header {
+            background: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+            border-left: 6px solid var(--secondary);
+        }
+
+        .page-header h1 {
+            margin: 0 0 10px 0;
+            color: var(--primary);
+        }
+
+        /* Executive Card */
+        .exec-card {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            margin-bottom: 40px;
+            overflow: hidden;
+            scroll-margin-top: 40px;
+            /* For anchor links */
+        }
+
+        .exec-header {
+            background: linear-gradient(to right, #f8fafc, #fff);
+            padding: 20px 30px;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .exec-info h2 {
+            margin: 0;
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        .exec-role {
+            color: #64748b;
+            font-size: 0.95rem;
+            margin-top: 5px;
+        }
+
+        .exec-kpi-tag {
+            background: #eff6ff;
+            color: #1e40af;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-top: 10px;
+            display: inline-block;
+        }
+
+        .exec-body {
+            padding: 30px;
+        }
+
+        /* Log Table */
+        .log-section {
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #334155;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .log-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        .log-table th {
+            text-align: left;
+            background: #f8fafc;
+            padding: 12px;
+            color: #475569;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .log-table td {
+            padding: 12px;
+            border-bottom: 1px solid #e2e8f0;
+            vertical-align: top;
+        }
+
+        .log-date {
+            width: 120px;
+            color: #64748b;
+            font-family: monospace;
+        }
+
+        .log-type {
+            width: 100px;
+            font-weight: 600;
+        }
+
+        .type-good {
+            color: var(--success);
+        }
+
+        .type-bad {
+            color: var(--danger);
+        }
+
+        .type-kpi {
+            color: var(--primary);
+        }
+
+        /* Review Box */
+        .review-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .review-box {
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .review-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 10px;
+        }
+
+        .rating-placeholder {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .rating-label {
+            font-weight: 600;
+            color: #555;
+        }
+
+        .rating-value {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: #cbd5e1;
+            /* Default gray */
+        }
+
+        .comment-area {
+            width: 100%;
+            min-height: 80px;
+            border: 1px dashed #cbd5e1;
+            background: #fff;
+            padding: 10px;
+            font-size: 0.9rem;
+            color: #94a3b8;
+            border-radius: 4px;
+        }
+
+        /* Mobile */
+        @media (min-width: 1024px) {
+            .sidebar {
+                display: block;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                padding: 10px;
+            }
+
+            .sidebar {
+                width: 100%;
+                position: relative;
+                top: 0;
+                margin-bottom: 20px;
+                display: block;
+                /* Show on mobile */
+            }
+
+            .nav-group {
+                display: inline-block;
+                width: 100%;
+            }
+
+            .nav-link {
+                display: inline-block;
+                width: auto;
+                margin-right: 10px;
+                background: #f1f5f9;
+                border: 1px solid #e2e8f0;
+            }
+
+            .exec-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            .review-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .log-table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            color: #64748b;
+        }
+
+        .breadcrumb a {
+            color: #64748b;
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--primary);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <h3>快速导航</h3>
+
+            <div class="nav-group">
+                <div class="nav-group-title">高管层 (Executive)</div>
+                <a href="#ma-changjiu" class="nav-link">马长久 (第一曲线)</a>
+                <a href="#su-qin" class="nav-link">苏秦 (教研)</a>
+                <a href="#yao-huan" class="nav-link">姚涣 (产研/第二曲线)</a>
+                <a href="#du-kangjie" class="nav-link">杜康杰 (CX/政府)</a>
+                <a href="#wang-jun" class="nav-link">王俊 (后台/HR)</a>
+            </div>
+
+            <div class="nav-group">
+                <div class="nav-group-title">客户体验部 (CX)</div>
+                <a href="#wang-yi" class="nav-link">王伊 (智能客服)</a>
+                <a href="#zhang-kai" class="nav-link">张凯 (大黑/数据)</a>
+                <a href="#zhang-yipeng" class="nav-link">张义鹏 (质检)</a>
+                <a href="#zhang-jingkai" class="nav-link">张靖恺 (客服组长)</a>
+            </div>
+
+            <div class="nav-group">
+                <div class="nav-group-title">学员成功部 (Success)</div>
+                <a href="#yang-rongrong" class="nav-link">杨蓉蓉 (投放)</a>
+                <a href="#li-ping" class="nav-link">李萍 (前端)</a>
+                <a href="#xie-yuan" class="nav-link">谢媛 (后端)</a>
+            </div>
+
+            <div class="nav-group">
+                <div class="nav-group-title">市场品牌部 (Marketing)</div>
+                <a href="#hu-yunyou" class="nav-link">胡云悠 (品牌/PR)</a>
+                <a href="#zhang-xueli" class="nav-link">张雪利 (品牌)</a>
+            </div>
+
+            <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #eee;">
+                <a href="#" onclick="window.scrollTo(0,0); return false;" class="nav-link">⬆️ 返回顶部</a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="breadcrumb">
+                <a href="index.html">首页</a> &gt; <a href="CoreTeam.html">核心团队</a> &gt; 绩效日志
+            </div>
+
+            <div class="page-header">
+                <h1>高管绩效追踪与评价日志 (Performance Log)</h1>
+                <p style="color: #64748b;">
+                    <strong>使用说明：</strong> 本页面为核心人才的“活体档案”。建议每月记录一次关键事件 (Critical Incident)，遵循 STAR 原则 (情境-任务-行动-结果)。
+                    <br>评价依据：以 <a href="BSC.html" style="color:var(--secondary); text-decoration: underline;">BSC</a> 和
+                    <a href="CoreTeam.html" style="color:var(--secondary); text-decoration: underline;">GSA 核心职责</a>
+                    为准绳。
+                </p>
+                <div
+                    style="margin-top: 15px; font-size: 0.85rem; background: #fffbeb; padding: 10px; border-radius: 4px; display: inline-block; color: #b45309;">
+                    🖊 <strong>记录格式建议：</strong> [日期] | [类型: ✅亮点/⚠️风险] | [详细描述 STAR] | [产生的业务影响]
+                </div>
+            </div>
+
+            <!-- ==============================
+                 高管层 Executive
+            ============================== -->
+
+            <!-- 马长久 -->
+            <div id="ma-changjiu" class="exec-card">
+                <div class="exec-header">
+                    <div class="exec-info">
+                        <h2>马长久</h2>
+                        <div class="exec-role">市场经营负责人 / 第一曲线第一责任人</div>
+                        <div class="exec-kpi-tag">🎯 核心指标：收入、利润率、合规</div>
+                    </div>
+                </div>
+                <div class="exec-body">
+                    <div class="log-section">
+                        <div class="section-title">📝 绩效日志 (Performance Log)</div>
+                        <table class="log-table">
+                            <thead>
+                                <tr>
+                                    <th>日期</th>
+                                    <th>类型</th>
+                                    <th>关键事件记录 (STAR)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Example Entry -->
+                                <tr>
+                                    <td class="log-date">2026-01-15</td>
+                                    <td class="type-good">✅ 亮点</td>
+                                    <td>
+                                        <strong>事件：</strong> 2026 Q1 启动会话术合规改造。<br>
+                                        <strong>结果：</strong> 成功规避 315 前期风险，合规质检通过率从 80% 提升至 98%。
+                                    </td>
+                                </tr>
+                                <!-- Add new rows here -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="review-section">
+                        <div class="section-title">⚖️ 综合评价 (Evaluation)</div>
+                        <div class="review-grid">
+                            <div class="review-box">
+                                <div class="review-title">📅 年中评价 (Mid-Year)</div>
+                                <div class="rating-placeholder">
+                                    <span class="rating-label">评级：</span>
+                                    <span class="rating-value">_</span>
+                                    <span style="font-size:0.8rem; color:#999;">(S/A/B/C)</span>
+                                </div>
+                                <div class="comment-area">在此处填写年中评价评语...</div>
+                            </div>
+                            <div class="review-box">
+                                <div class="review-title">📅 年度评价 (Year-End)</div>
+                                <div class="rating-placeholder">
+                                    <span class="rating-label">评级：</span>
+                                    <span class="rating-value">_</span>
+                                </div>
+                                <div class="comment-area">在此处填写年度总评...</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 苏秦 -->
+            <div id="su-qin" class="exec-card">
+                <div class="exec-header">
+                    <div class="exec-info">
+                        <h2>苏秦</h2>
+                        <div class="exec-role">教研第一责任人</div>
+                        <div class="exec-kpi-tag">🎯 核心指标：学员合格率、SKU 产能密度</div>
+                    </div>
+                </div>
+                <div class="exec-body">
+                    <div class="log-section">
+                        <div class="section-title">📝 绩效日志</div>
+                        <table class="log-table">
+                            <thead>
+                                <tr>
+                                    <th>日期</th>
+                                    <th>类型</th>
+                                    <th>关键事件记录</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="log-date">2026-02-10</td>
+                                    <td class="type-kpi">🎯 进度</td>
+                                    <td>SKU 产能提升项目启动，引入 AI 辅助大纲编写。目前单 SKU 研发周期缩短 2 天。</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="review-section">
+                        <div class="section-title">⚖️ 综合评价</div>
+                        <div class="review-grid">
+                            <div class="review-box">
+                                <div class="review-title">年中评价</div>
+                                <div class="comment-area">暂无</div>
+                            </div>
+                            <div class="review-box">
+                                <div class="review-title">年度评价</div>
+                                <div class="comment-area">暂无</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 姚涣 -->
+            <div id="yao-huan" class="exec-card">
+                <div class="exec-header">
+                    <div class="exec-info">
+                        <h2>姚涣</h2>
+                        <div class="exec-role">产研 / 第二曲线第一责任人</div>
+                        <div class="exec-kpi-tag">🎯 核心指标：兼职人效、AI 创新、第二曲线破局</div>
+                    </div>
+                </div>
+                <div class="exec-body">
+                    <div class="log-section">
+                        <div class="section-title">📝 绩效日志</div>
+                        <table class="log-table">
+                            <thead>
+                                <tr>
+                                    <th>日期</th>
+                                    <th>类型</th>
+                                    <th>关键事件记录</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="log-date">2026-02-15</td>
+                                    <td class="type-good">✅ 亮点</td>
+                                    <td>兼职人效 AI 工具台 v1.0 上线，助教反馈线索清洗效率提升 40%。</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="review-section">
+                        <div class="section-title">⚖️ 综合评价</div>
+                        <div class="review-grid">
+                            <div class="review-box">
+                                <div class="review-title">年中评价</div>
+                                <div class="comment-area">暂无</div>
+                            </div>
+                            <div class="review-box">
+                                <div class="review-title">年度评价</div>
+                                <div class="comment-area">暂无</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 杜康杰 -->
+            <div id="du-kangjie" class="exec-card">
+                <div class="exec-header">
+                    <div class="exec-info">
+                        <h2>杜康杰</h2>
+                        <div class="exec-role">客户满意 / 政府关系第一责任人</div>
+                        <div class="exec-kpi-tag">🎯 核心指标：投诉率、大黑拦截、舆情</div>
+                    </div>
+                </div>
+                <div class="exec-body">
+                    <div class="log-section">
+                        <div class="section-title">📝 绩效日志</div>
+                        <table class="log-table">
+                            <thead>
+                                <tr>
+                                    <th>日期</th>
+                                    <th>类型</th>
+                                    <th>关键事件记录</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="log-date">--</td>
+                                    <td>--</td>
+                                    <td>暂无记录</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="review-section">
+                        <div class="section-title">⚖️ 综合评价</div>
+                        <div class="review-grid">
+                            <div class="review-box">
+                                <div class="review-title">年中评价</div>
+                                <div class="comment-area">暂无</div>
+                            </div>
+                            <div class="review-box">
+                                <div class="review-title">年度评价</div>
+                                <div class="comment-area">暂无</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 王俊 -->
+            <div id="wang-jun" class="exec-card">
+                <div class="exec-header">
+                    <div class="exec-info">
+                        <h2>王俊</h2>
+                        <div class="exec-role">后台职能第一责任人</div>
+                        <div class="exec-kpi-tag">🎯 核心指标：关键岗位 AI 重构率</div>
+                    </div>
+                </div>
+                <div class="exec-body">
+                    <div class="log-section">
+                        <div class="section-title">📝 绩效日志</div>
+                        <table class="log-table">
+                            <thead>
+                                <tr>
+                                    <th>日期</th>
+                                    <th>类型</th>
+                                    <th>关键事件记录</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="log-date">2026-02-18</td>
+                                    <td class="type-kpi">🎯 调整</td>
+                                    <td>将核心指标从“AI 上岗率”调整为“关键岗位 AI 重构率”，更聚焦于组织基因改造。</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="review-section">
+                        <div class="section-title">⚖️ 综合评价</div>
+                        <div class="review-grid">
+                            <div class="review-box">
+                                <div class="review-title">年中评价</div>
+                                <div class="comment-area">暂无</div>
+                            </div>
+                            <div class="review-box">
+                                <div class="review-title">年度评价</div>
+                                <div class="comment-area">暂无</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==============================
+                 客户体验部 CX
+            ============================== -->
+
+            <!-- 王伊 -->
+            <div id="wang-yi" class="exec-card">
+                <div class="exec-header">
+                    <div class="exec-info">
+                        <h2>王伊</h2>
+                        <div class="exec-role">智能客服负责人</div>
+                        <div class="exec-kpi-tag">🎯 核心指标：智能解决率、客服人效</div>
+                    </div>
+                </div>
+                <div class="exec-body">
+                    <div class="log-section">
+                        <div class="section-title">📝 绩效日志</div>
+                        <table class="log-table">
+                            <thead>
+                                <tr>
+                                    <th>日期</th>
+                                    <th>类型</th>
+                                    <th>关键事件记录</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="log-date">--</td>
+                                    <td>--</td>
+                                    <td>暂无记录</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="review-section">
+                        <div class="section-title">⚖️ 综合评价</div>
+                        <div class="review-grid">
+                            <div class="review-box">
+                                <div class="review-title">年中评价</div>
+                                <div class="comment-area">暂无</div>
+                            </div>
+                            <div class="review-box">
+                                <div class="review-title">年度评价</div>
+                                <div class="comment-area">暂无</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 张凯 -->
+            <div id="zhang-kai" class="exec-card">
+                <div class="exec-header">
+                    <div class="exec-info">
+                        <h2>张凯</h2>
+                        <div class="exec-role">大黑用户项目负责人</div>
+                        <div class="exec-kpi-tag">🎯 核心指标：百万投诉率监测、大黑拦截</div>
+                    </div>
+                </div>
+                <div class="exec-body">
+                    <div class="log-section">
+                        <div class="section-title">📝 绩效日志</div>
+                        <table class="log-table">
+                            <thead>
+                                <tr>
+                                    <th>日期</th>
+                                    <th>类型</th>
+                                    <th>关键事件记录</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="log-date">--</td>
+                                    <td>--</td>
+                                    <td>暂无记录</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="review-section">
+                        <div class="section-title">⚖️ 综合评价</div>
+                        <div class="review-grid">
+                            <div class="review-box">
+                                <div class="review-title">年中评价</div>
+                                <div class="comment-area">暂无</div>
+                            </div>
+                            <div class="review-box">
+                                <div class="review-title">年度评价</div>
+                                <div class="comment-area">暂无</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 张义鹏 -->
+            <div id="zhang-yipeng" class="exec-card">
+                <div class="exec-header">
+                    <div class="exec-info">
+                        <h2>张义鹏</h2>
+                        <div class="exec-role">质检管控 / 外部投诉</div>
+                        <div class="exec-kpi-tag">🎯 核心指标：AI 质检准确率</div>
+                    </div>
+                </div>
+                <div class="exec-body">
+                    <div class="log-section">
+                        <div class="section-title">📝 绩效日志</div>
+                        <table class="log-table">
+                            <thead>
+                                <tr>
+                                    <th>日期</th>
+                                    <th>类型</th>
+                                    <th>关键事件记录</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="log-date">--</td>
+                                    <td>--</td>
+                                    <td>暂无记录</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="review-section">
+                        <div class="section-title">⚖️ 综合评价</div>
+                        <div class="review-grid">
+                            <div class="review-box">
+                                <div class="review-title">年中评价</div>
+                                <div class="comment-area">暂无</div>
+                            </div>
+                            <div class="review-box">
+                                <div class="review-title">年度评价</div>
+                                <div class="comment-area">暂无</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 张靖恺 -->
+            <div id="zhang-jingkai" class="exec-card">
+                <div class="exec-header">
+                    <div class="exec-info">
+                        <h2>张靖恺</h2>
+                        <div class="exec-role">客服组长</div>
+                        <div class="exec-kpi-tag">🎯 核心指标：接起率、退费时效</div>
+                    </div>
+                </div>
+                <div class="exec-body">
+                    <div class="log-section">
+                        <div class="section-title">📝 绩效日志</div>
+                        <table class="log-table">
+                            <thead>
+                                <tr>
+                                    <th>日期</th>
+                                    <th>类型</th>
+                                    <th>关键事件记录</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="log-date">--</td>
+                                    <td>--</td>
+                                    <td>暂无记录</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="review-section">
+                        <div class="section-title">⚖️ 综合评价</div>
+                        <div class="review-grid">
+                            <div class="review-box">
+                                <div class="review-title">年中评价</div>
+                                <div class="comment-area">暂无</div>
+                            </div>
+                            <div class="review-box">
+                                <div class="review-title">年度评价</div>
+                                <div class="comment-area">暂无</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==============================
+                 学员成功部 Success
+            ============================== -->
+
+            <!-- 杨蓉蓉 -->
+            <div id="yang-rongrong" class="exec-card">
+                <div class="exec-header">
+                    <div class="exec-info">
+                        <h2>杨蓉蓉</h2>
+                        <div class="exec-role">投放负责人</div>
+                        <div class="exec-kpi-tag">🎯 核心指标：投放 ROI、增长</div>
+                    </div>
+                </div>
+                <div class="exec-body">
+                    <div class="log-section">
+                        <div class="section-title">📝 绩效日志</div>
+                        <table class="log-table">
+                            <thead>
+                                <tr>
+                                    <th>日期</th>
+                                    <th>类型</th>
+                                    <th>关键事件记录</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="log-date">--</td>
+                                    <td>--</td>
+                                    <td>暂无记录</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="review-section">
+                        <div class="section-title">⚖️ 综合评价</div>
+                        <div class="review-grid">
+                            <div class="review-box">
+                                <div class="review-title">年中评价</div>
+                                <div class="comment-area">暂无</div>
+                            </div>
+                            <div class="review-box">
+                                <div class="review-title">年度评价</div>
+                                <div class="comment-area">暂无</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 李萍 -->
+            <div id="li-ping" class="exec-card">
+                <div class="exec-header">
+                    <div class="exec-info">
+                        <h2>李萍</h2>
+                        <div class="exec-role">前端负责人</div>
+                        <div class="exec-kpi-tag">🎯 核心指标：前端销售业绩、转化率</div>
+                    </div>
+                </div>
+                <div class="exec-body">
+                    <div class="log-section">
+                        <div class="section-title">📝 绩效日志</div>
+                        <table class="log-table">
+                            <thead>
+                                <tr>
+                                    <th>日期</th>
+                                    <th>类型</th>
+                                    <th>关键事件记录</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="log-date">--</td>
+                                    <td>--</td>
+                                    <td>暂无记录</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="review-section">
+                        <div class="section-title">⚖️ 综合评价</div>
+                        <div class="review-grid">
+                            <div class="review-box">
+                                <div class="review-title">年中评价</div>
+                                <div class="comment-area">暂无</div>
+                            </div>
+                            <div class="review-box">
+                                <div class="review-title">年度评价</div>
+                                <div class="comment-area">暂无</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 谢媛 -->
+            <div id="xie-yuan" class="exec-card">
+                <div class="exec-header">
+                    <div class="exec-info">
+                        <h2>谢媛</h2>
+                        <div class="exec-role">后端负责人</div>
+                        <div class="exec-kpi-tag">🎯 核心指标：留存、续报、口碑</div>
+                    </div>
+                </div>
+                <div class="exec-body">
+                    <div class="log-section">
+                        <div class="section-title">📝 绩效日志</div>
+                        <table class="log-table">
+                            <thead>
+                                <tr>
+                                    <th>日期</th>
+                                    <th>类型</th>
+                                    <th>关键事件记录</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="log-date">--</td>
+                                    <td>--</td>
+                                    <td>暂无记录</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="review-section">
+                        <div class="section-title">⚖️ 综合评价</div>
+                        <div class="review-grid">
+                            <div class="review-box">
+                                <div class="review-title">年中评价</div>
+                                <div class="comment-area">暂无</div>
+                            </div>
+                            <div class="review-box">
+                                <div class="review-title">年度评价</div>
+                                <div class="comment-area">暂无</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==============================
+                 市场品牌部 Marketing
+            ============================== -->
+
+            <!-- 胡云悠 -->
+            <div id="hu-yunyou" class="exec-card">
+                <div class="exec-header">
+                    <div class="exec-info">
+                        <h2>胡云悠</h2>
+                        <div class="exec-role">品牌 / PR 负责人</div>
+                        <div class="exec-kpi-tag">🎯 核心指标：品牌资产、口碑、公关</div>
+                    </div>
+                </div>
+                <div class="exec-body">
+                    <div class="log-section">
+                        <div class="section-title">📝 绩效日志</div>
+                        <table class="log-table">
+                            <thead>
+                                <tr>
+                                    <th>日期</th>
+                                    <th>类型</th>
+                                    <th>关键事件记录</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="log-date">--</td>
+                                    <td>--</td>
+                                    <td>暂无记录</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="review-section">
+                        <div class="section-title">⚖️ 综合评价</div>
+                        <div class="review-grid">
+                            <div class="review-box">
+                                <div class="review-title">年中评价</div>
+                                <div class="comment-area">暂无</div>
+                            </div>
+                            <div class="review-box">
+                                <div class="review-title">年度评价</div>
+                                <div class="comment-area">暂无</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 张雪利 -->
+            <div id="zhang-xueli" class="exec-card">
+                <div class="exec-header">
+                    <div class="exec-info">
+                        <h2>张雪利</h2>
+                        <div class="exec-role">品牌</div>
+                        <div class="exec-kpi-tag">🎯 核心指标：品牌推广、舆情管控</div>
+                    </div>
+                </div>
+                <div class="exec-body">
+                    <div class="log-section">
+                        <div class="section-title">📝 绩效日志</div>
+                        <table class="log-table">
+                            <thead>
+                                <tr>
+                                    <th>日期</th>
+                                    <th>类型</th>
+                                    <th>关键事件记录</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="log-date">--</td>
+                                    <td>--</td>
+                                    <td>暂无记录</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="review-section">
+                        <div class="section-title">⚖️ 综合评价</div>
+                        <div class="review-grid">
+                            <div class="review-box">
+                                <div class="review-title">年中评价</div>
+                                <div class="comment-area">暂无</div>
+                            </div>
+                            <div class="review-box">
+                                <div class="review-title">年度评价</div>
+                                <div class="comment-area">暂无</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <footer style="text-align: center; margin-top: 60px; color: #94a3b8; font-size: 0.8rem;">
+                &copy; 2026 Xibo Technology. Confidential.
+            </footer>
+        </main>
+    </div>
+
+</body>
+
+</html>
