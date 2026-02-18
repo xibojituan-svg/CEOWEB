@@ -234,6 +234,51 @@
             color: var(--warning);
             font-weight: bold;
         }
+
+        /* Mobile Optimization */
+        @media (max-width: 768px) {
+            body {
+                padding: 20px 15px;
+            }
+
+            .container {
+                padding: 0;
+            }
+
+            header {
+                margin-bottom: 30px;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .card {
+                padding: 25px 20px;
+                border-radius: 12px;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            table {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+
+            .formula-container {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .formula-box {
+                width: 100%;
+                box-sizing: border-box;
+            }
+        }
     </style>
 </head>
 

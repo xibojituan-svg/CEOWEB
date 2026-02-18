@@ -114,6 +114,100 @@
             font-size: 1.2em;
             z-index: 100;
         }
+
+        /* Mobile Optimization */
+        @media (max-width: 768px) {
+            body {
+                padding: 20px 15px;
+            }
+
+            .container {
+                padding: 0;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .metric-card {
+                padding: 25px 20px;
+                border-radius: 12px;
+            }
+
+            .strategy-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .formula-container {
+                font-size: 0.9em;
+                padding: 15px;
+            }
+
+            /* Responsive Table for Variable Breakdown */
+            table,
+            thead,
+            tbody,
+            th,
+            td,
+            tr {
+                display: block;
+            }
+
+            thead tr {
+                position: absolute;
+                top: -9999px;
+                left: -9999px;
+            }
+
+            tr {
+                border: 1px solid #ccc;
+                margin-bottom: 15px;
+                border-radius: 8px;
+                overflow: hidden;
+            }
+
+            td {
+                border: none;
+                border-bottom: 1px solid #eee;
+                position: relative;
+                padding-left: 50%;
+                text-align: right;
+            }
+
+            td:before {
+                position: absolute;
+                top: 15px;
+                left: 15px;
+                width: 45%;
+                padding-right: 10px;
+                white-space: nowrap;
+                text-align: left;
+                font-weight: bold;
+                color: #64748b;
+            }
+
+            /* Add labels for table cells */
+            td:nth-of-type(1):before {
+                content: "变量";
+            }
+
+            td:nth-of-type(2):before {
+                content: "权重";
+            }
+
+            td:nth-of-type(3):before {
+                content: "问题";
+            }
+
+            td:nth-of-type(4):before {
+                content: "对策";
+            }
+
+            td:nth-of-type(5):before {
+                content: "责任人";
+            }
+        }
     </style>
 </head>
 
