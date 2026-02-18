@@ -5,174 +5,324 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>关键岗位 AI 重构率 - BSC 2026</title>
-    <style>
-        :root {
-            --primary: #8b5cf6;
-            /* Matching Learning & Growth purple */
-            --dark: #1e293b;
-            --light: #f8fafc;
-            --text: #334155;
-            --danger: #ef4444;
-            --success: #10b981;
-            --warning: #f59e0b;
-        }
+    :root {
+    --primary: #8b5cf6;
+    --primary-light: #ddd6fe;
+    --dark: #1e293b;
+    --light: #f8fafc;
+    --text: #334155;
+    --danger: #ef4444;
+    --success: #10b981;
+    --warning: #f59e0b;
+    }
 
-        body {
-            font-family: "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
-            margin: 0;
-            padding: 0;
-            color: var(--text);
-            background: #f1f5f9;
-            line-height: 1.6;
-        }
+    body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: var(--text);
+    background: #f1f5f9;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    }
 
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 40px 20px;
-        }
+    .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    }
 
-        /* Header */
-        header {
-            background: #fff;
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-            margin-bottom: 30px;
-            border-left: 6px solid var(--primary);
-        }
+    /* Header */
+    header {
+    background: #fff;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.025);
+    margin-bottom: 30px;
+    border-left: 6px solid var(--primary);
+    position: relative;
+    overflow: hidden;
+    }
 
-        h1 {
-            color: var(--dark);
-            margin: 0 0 10px 0;
-            font-size: 2rem;
-        }
+    h1 {
+    color: var(--dark);
+    margin: 0 0 15px 0;
+    font-size: 2.2rem;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    }
 
-        .meta-info {
-            display: flex;
-            gap: 20px;
-            color: #64748b;
-            font-size: 0.9rem;
-            margin-top: 15px;
-        }
+    .meta-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px 25px;
+    color: #64748b;
+    font-size: 0.95rem;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #f1f5f9;
+    }
 
-        .tag {
-            background: rgba(139, 92, 246, 0.1);
-            color: var(--primary);
-            padding: 2px 10px;
-            border-radius: 4px;
-            font-weight: 600;
-        }
+    .meta-info span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    }
 
-        /* Cards */
-        .card {
-            background: #fff;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-            margin-bottom: 30px;
-        }
+    /* Support Links */
+    a {
+    color: var(--primary);
+    text-decoration: none;
+    transition: color 0.2s;
+    }
 
-        h2 {
-            color: var(--dark);
-            border-bottom: 2px solid #f1f5f9;
-            padding-bottom: 10px;
-            margin-top: 0;
-            font-size: 1.5rem;
-        }
+    a:hover {
+    color: #7c3aed;
+    text-decoration: underline;
+    }
 
-        h3 {
-            color: var(--dark);
-            font-size: 1.2rem;
-            margin-top: 25px;
-        }
+    /* Cards */
+    .card {
+    background: #fff;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    margin-bottom: 30px;
+    border: 1px solid #e2e8f0;
+    }
 
-        /* Comparison Box */
-        .compare-box {
-            display: flex;
-            gap: 20px;
-            margin: 20px 0;
-        }
+    h2 {
+    color: var(--dark);
+    padding-bottom: 12px;
+    margin-top: 0;
+    font-size: 1.5rem;
+    border-bottom: 2px solid #f1f5f9;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    }
 
-        .compare-item {
-            flex: 1;
-            padding: 20px;
-            border-radius: 8px;
-        }
+    h3 {
+    color: var(--dark);
+    font-size: 1.2rem;
+    margin-top: 25px;
+    margin-bottom: 12px;
+    }
 
-        .compare-old {
-            background: #fef2f2;
-            border: 1px solid #fee2e2;
-        }
+    /* Comparison Box */
+    .compare-box {
+    display: flex;
+    gap: 20px;
+    margin: 25px 0;
+    }
 
-        .compare-new {
-            background: #f0fdf4;
-            border: 1px solid #dcfce7;
-            position: relative;
-        }
+    .compare-item {
+    flex: 1;
+    padding: 24px;
+    border-radius: 12px;
+    transition: transform 0.2s;
+    }
 
-        .compare-new::after {
-            content: "✅ 推荐";
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            font-size: 0.8rem;
-            background: #10b981;
-            color: #fff;
-            padding: 2px 8px;
-            border-radius: 4px;
-        }
+    .compare-item:hover {
+    transform: translateY(-2px);
+    }
 
-        /* Formula Box */
-        .formula-box {
-            background: #1e293b;
-            color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            font-family: monospace;
-            font-size: 1.2rem;
-            text-align: center;
-            margin: 20px 0;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
+    .compare-old {
+    background: #fff1f2;
+    border: 1px solid #fecdd3;
+    }
 
-        /* Criteria List */
-        .criteria-list {
-            list-style: none;
-            padding: 0;
-        }
+    .compare-new {
+    background: #ecfdf5;
+    border: 1px solid #a7f3d0;
+    position: relative;
+    box-shadow: 0 4px 6px -1px rgba(16, 185, 129, 0.1);
+    }
 
-        .criteria-list li {
-            background: #f8fafc;
-            margin-bottom: 10px;
-            padding: 15px;
-            border-radius: 6px;
-            border-left: 4px solid var(--primary);
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
+    .compare-new::after {
+    content: "✅ 推荐";
+    position: absolute;
+    top: -12px;
+    right: 20px;
+    font-size: 0.85rem;
+    background: #10b981;
+    color: #fff;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-weight: 600;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
 
-        .criteria-icon {
-            font-size: 1.5rem;
-        }
+    /* Formula Box */
+    .formula-box {
+    background: #0f172a;
+    color: #e2e8f0;
+    padding: 25px;
+    border-radius: 12px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 1.1rem;
+    text-align: center;
+    margin: 25px 0;
+    border: 1px solid #334155;
+    line-height: 1.8;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
+    }
 
-        /* Breadcrumb */
-        .breadcrumb {
-            margin-bottom: 20px;
-            font-size: 0.9rem;
-            color: #64748b;
-        }
+    /* Criteria List */
+    .criteria-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+    }
 
-        .breadcrumb a {
-            color: #64748b;
-            text-decoration: none;
-        }
+    .criteria-list li {
+    background: #f8fafc;
+    margin-bottom: 12px;
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #e2e8f0;
+    border-left: 4px solid var(--primary);
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    transition: background 0.2s;
+    }
 
-        .breadcrumb a:hover {
-            color: var(--primary);
-        }
-    </style>
+    .criteria-list li:hover {
+    background: #f1f5f9;
+    }
+
+    .criteria-icon {
+    font-size: 1.8rem;
+    line-height: 1;
+    background: #fff;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    flex-shrink: 0;
+    }
+
+    /* Table Styles */
+    table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-top: 15px;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    overflow: hidden;
+    }
+
+    th {
+    background: #f8fafc;
+    padding: 15px;
+    font-weight: 600;
+    color: #475569;
+    text-align: left;
+    border-bottom: 2px solid #e2e8f0;
+    }
+
+    td {
+    padding: 15px;
+    border-bottom: 1px solid #e2e8f0;
+    vertical-align: top;
+    }
+
+    tr:last-child td {
+    border-bottom: none;
+    }
+
+    /* Breadcrumb */
+    .breadcrumb {
+    margin-bottom: 25px;
+    font-size: 0.9rem;
+    color: #64748b;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    }
+
+    /* Mobile Optimization */
+    @media screen and (max-width: 768px) {
+    .container {
+    padding: 20px 16px;
+    }
+
+    header {
+    padding: 24px 20px;
+    border-radius: 12px;
+    }
+
+    h1 {
+    font-size: 1.7rem;
+    }
+
+    h2 {
+    font-size: 1.3rem;
+    }
+
+    .card {
+    padding: 20px;
+    border-radius: 12px;
+    }
+
+    /* Stack comparison box */
+    .compare-box {
+    flex-direction: column;
+    gap: 15px;
+    }
+
+    .compare-item {
+    padding: 20px;
+    }
+
+    /* Adjust formula text */
+    .formula-box {
+    font-size: 1rem;
+    padding: 16px;
+    text-align: left; /* Align left for complex formulas on small screens */
+    word-break: break-all;
+    }
+
+    /* Adjust criteria list */
+    .criteria-list li {
+    padding: 16px;
+    gap: 12px;
+    }
+
+    .criteria-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 1.4rem;
+    }
+
+    /* Responsive Table */
+    table {
+    display: block;
+    overflow-x: auto;
+    white-space: min-content; /* Ensure columns don't squish too much */
+    }
+
+    th, td {
+    min-width: 120px; /* Force scroll */
+    }
+
+    th:last-child, td:last-child {
+    min-width: 100px;
+    }
+
+    /* Meta info stacking */
+    .meta-info {
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+    }
+    }
 </head>
 
 <body>
@@ -211,7 +361,8 @@
                     </p>
                     <p style="font-size:0.9rem; color:#7f1d1d;"><strong>缺陷：</strong><br>1.
                         <strong>容易造假</strong>：员工可能被迫点击，但工作方式从未改变。<br>2. <strong>技术导向</strong>：这更像是 CTO 或产品经理的 KPI，而非
-                        HR/组织负责人的 KPI。<br>3. <strong>与人效重叠</strong>：如果工具好用，人效自然高；如果不高，统计上岗率无意义。</p>
+                        HR/组织负责人的 KPI。<br>3. <strong>与人效重叠</strong>：如果工具好用，人效自然高；如果不高，统计上岗率无意义。
+                    </p>
                 </div>
                 <div class="compare-item compare-new">
                     <h3 style="margin-top:0; color:#065f46;">✅ 新指标：关键岗位 AI 重构率</h3>
@@ -219,7 +370,8 @@
                         People)<br>“这个岗位的工作模式是否被 AI 彻底改写？”</p>
                     <p style="font-size:0.9rem; color:#064e3b;"><strong>优势：</strong><br>1. <strong>HR 主导</strong>：直接挂钩
                         JD（岗位描述）、SOP 和薪酬，这是 HR 的核心抓手。<br>2. <strong>领先指标</strong>：只有岗位重构了，后面的人效提升才是必然结果。<br>3.
-                        <strong>不可逆</strong>：一旦岗位模型变了，员工就无法退回到旧的低效模式。</p>
+                        <strong>不可逆</strong>：一旦岗位模型变了，员工就无法退回到旧的低效模式。
+                    </p>
                 </div>
             </div>
             <p style="background: #fffbeb; padding: 10px; border-radius: 6px; color: #92400e; font-size: 0.9rem;">
