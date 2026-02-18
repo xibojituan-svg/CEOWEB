@@ -212,18 +212,25 @@
         /* Mobile Optimization */
         @media screen and (max-width: 768px) {
             body {
-                padding: 15px !important;
+                padding: 0 !important;
             }
 
             .container {
-                padding: 0 !important;
+                padding: 0 20px !important;
+                /* Keep content away from edge */
                 width: 100% !important;
                 max-width: 100% !important;
+                box-sizing: border-box !important;
+            }
+
+            /* Top padding for the breadcrumb or header inside container */
+            .container> :first-child {
+                margin-top: 20px;
             }
 
             header,
             .card {
-                padding: 20px !important;
+                padding: 24px 20px !important;
                 width: 100% !important;
                 box-sizing: border-box !important;
             }
