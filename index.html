@@ -352,6 +352,92 @@
         }
     </style>
 
+    <style>
+        /* Mobile Optimization / 手机端适配 */
+        @media screen and (max-width: 768px) {
+
+            /* 头部优化 */
+            header {
+                padding: 60px 0;
+            }
+
+            header h1 {
+                font-size: 2.0rem;
+                padding: 0 15px;
+            }
+
+            header p {
+                font-size: 1rem;
+                padding: 0 15px;
+            }
+
+            /* 容器边距 */
+            .container {
+                padding: 0 20px;
+            }
+
+            /* 战略背景文字适配 */
+            .strategy-section::before {
+                font-size: 4rem;
+                top: 20px;
+                width: 100%;
+                text-align: center;
+                opacity: 0.5;
+            }
+
+            /* 战略卡片单列显示 */
+            .strategy-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+                margin-top: 40px;
+            }
+
+            /* 口号框 */
+            .slogan-box {
+                margin: 30px 15px;
+            }
+
+            /* CEO板块堆叠 */
+            .ceo-container {
+                flex-direction: column;
+                gap: 30px;
+            }
+
+            /* 统计数据堆叠 */
+            .stats {
+                flex-direction: column;
+                gap: 30px;
+            }
+
+            /* 名师列表堆叠 nowrap -> wrap is already there, but justify-content needs care */
+            .master-list {
+                gap: 20px;
+            }
+
+            /* 强制覆盖 inline styles 的 padding */
+            .ceo-message,
+            .matrix,
+            .masters,
+            .social,
+            .team-building,
+            .strategy-section,
+            .bsc-core-section,
+            .weekly-reports {
+                padding: 40px 0 !important;
+            }
+
+            /* BSC 核心指标图表提示 */
+            .bsc-core-section .container::before {
+                content: "← 左右滑动查看完整因果链 →";
+                display: block;
+                text-align: center;
+                font-size: 0.8rem;
+                color: rgba(255, 255, 255, 0.5);
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+
     <section class="strategy-section">
         <div class="container">
             <h2 style="text-align: center; position: relative; z-index: 1;">2026 战略全景：双轮驱动</h2>
@@ -420,7 +506,7 @@
     </section>
 
     <!-- BSC Core Info Module -->
-    <section
+    <section class="bsc-core-section"
         style="padding: 70px 0; background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); color: #fff; border-top: 3px solid #FF4500;">
         <div class="container">
             <h2 style="text-align: center; color: #fff; margin-bottom: 10px; font-size: 2rem;">2026 第一曲线 BSC 核心指标</h2>
