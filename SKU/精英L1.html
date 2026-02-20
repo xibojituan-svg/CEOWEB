@@ -1,6 +1,6 @@
-
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,6 +14,7 @@
             --success: #22c55e;
             --warning: #f59e0b;
         }
+
         body {
             font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Microsoft YaHei", sans-serif;
             margin: 0;
@@ -22,26 +23,30 @@
             background: #fff;
             line-height: 1.6;
         }
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
         }
-        
+
         /* Breadcrumb */
         .breadcrumb {
             padding: 20px 0;
             font-size: 0.9rem;
             color: #666;
         }
+
         .breadcrumb a {
             color: #666;
             text-decoration: none;
         }
+
         .breadcrumb a:hover {
             color: var(--primary);
             text-decoration: underline;
         }
+
         .breadcrumb span {
             margin: 0 5px;
             color: #ccc;
@@ -53,6 +58,7 @@
             color: white;
             padding: 20px 0;
         }
+
         header .logo {
             font-weight: 800;
             font-size: 1.5rem;
@@ -67,16 +73,19 @@
             padding: 80px 0;
             text-align: center;
         }
+
         .hero h1 {
             font-size: 3rem;
             margin-bottom: 20px;
         }
+
         .hero p {
             font-size: 1.2rem;
             opacity: 0.8;
             max-width: 800px;
             margin: 0 auto 40px;
         }
+
         .btn {
             display: inline-block;
             background: var(--primary);
@@ -87,6 +96,7 @@
             font-weight: bold;
             transition: all 0.3s;
         }
+
         .btn:hover {
             background: #e03e00;
             transform: translateY(-2px);
@@ -97,6 +107,7 @@
             padding: 60px 0;
             border-bottom: 1px solid #eee;
         }
+
         h2 {
             text-align: center;
             font-size: 2rem;
@@ -110,12 +121,14 @@
             gap: 50px;
             align-items: start;
         }
+
         .feature-list li {
             margin-bottom: 15px;
             position: relative;
             padding-left: 25px;
             list-style: none;
         }
+
         .feature-list li::before {
             content: "✓";
             color: var(--primary);
@@ -123,7 +136,7 @@
             left: 0;
             font-weight: bold;
         }
-        
+
         /* Teacher Profile */
         .teacher-profile {
             background: #fff;
@@ -131,8 +144,9 @@
             padding: 30px;
             border-radius: 8px;
             text-align: center;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
         }
+
         .teacher-img {
             width: 120px;
             height: 120px;
@@ -152,21 +166,26 @@
             border-collapse: collapse;
             margin-top: 30px;
             background: white;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
         }
-        .curriculum-table th, .curriculum-table td {
+
+        .curriculum-table th,
+        .curriculum-table td {
             padding: 15px 20px;
             text-align: left;
             border-bottom: 1px solid #eee;
         }
+
         .curriculum-table th {
             background: #f8fafc;
             font-weight: 600;
             color: var(--dark);
         }
+
         .curriculum-table tr:hover {
             background: #fdfdfd;
         }
+
         .module-tag {
             display: inline-block;
             padding: 2px 8px;
@@ -184,29 +203,33 @@
             border-radius: 12px;
             border: 1px solid #e2e8f0;
         }
+
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 20px;
             margin-bottom: 40px;
         }
+
         .stat-box {
             background: white;
             padding: 20px;
             border-radius: 8px;
             text-align: center;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
         }
+
         .stat-value {
             font-size: 2.5rem;
             font-weight: 800;
             color: var(--dark);
         }
+
         .stat-label {
             color: #64748b;
             font-size: 0.9rem;
         }
-        
+
         /* Video Simulation */
         .video-placeholder {
             background: #000;
@@ -220,10 +243,11 @@
             flex-direction: column;
             position: relative;
         }
+
         .play-btn {
             width: 80px;
             height: 80px;
-            background: rgba(255,255,255,0.2);
+            background: rgba(255, 255, 255, 0.2);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -242,6 +266,7 @@
         }
     </style>
 </head>
+
 <body>
 
     <header>
@@ -262,7 +287,9 @@
 
     <div class="hero">
         <div class="container">
-            <div style="text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; margin-bottom: 20px; opacity: 0.8;">职业技能认证课程</div>
+            <div
+                style="text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; margin-bottom: 20px; opacity: 0.8;">
+                职业技能认证课程</div>
             <h1>精英L1</h1>
             <p>基于真实行业需求的实战课程，融合AI技术与名师指导，助力学员实现“技能变现”与“职业进阶”。</p>
             <a href="#" class="btn">立即加入训练营</a>
@@ -279,14 +306,18 @@
                         帮助学员掌握精英L1的核心技能。课程采用“学-练-测-评”闭环模式，
                         确保每一位学员都能达到行业交付标准。
                     </p>
-                    <div style="background: #fff8f0; padding: 20px; border-left: 4px solid var(--primary); margin-bottom: 25px;">
-                        <h4 style="margin: 0 0 10px 0; color: var(--primary);">✨ 课程亮点 (Highlights)</h4>
+                    <div
+                        style="background: #fff8f0; padding: 20px; border-left: 4px solid var(--primary); margin-bottom: 25px;">
+                        <h4 style="margin: 0 0 10px 0; color: var(--primary);">✨ 精英 L1 (小白入行) 阳光承诺亮点</h4>
                         <ul class="feature-list" style="margin: 0;">
-                            <li>独家签约名师亲自授课，保障教学质量</li><li>配套千元级专业硬件设备，一步到位</li><li>结业即推荐就业，对接海量副业资源</li><li>AI 辅助作业批改，实时反馈学习问题</li>
+                            <li><strong>破除“包过”虚假营销：</strong>开营即如实呈递声音变现的真实生态，拒绝“半小时日赚百元”的低劣毒鸡汤，建立合理预期。</li>
+                            <li><strong>保姆级 24H 技术扫盲：</strong>绝不让基础学员卡在“建文件夹/传音频”上。增设全天候答疑无人直播室与真人辅导兜底，铲除软件报错的绝望感。</li>
+                            <li><strong>安全感交付：</strong>营期内 100% “免打扰防销售锁”，坚决杜绝在 L1 未结业前跨期逼迫购买 L2、后期修音等进阶课程。</li>
+                            <li><strong>陪伴式情绪价值：</strong>助教与班主任聚焦辅导，利用智能标签系统秒懂你的背景（宝妈/退休人员），给与个性化与极高情绪包容的点评体系。</li>
                         </ul>
                     </div>
                 </div>
-                
+
                 <div class="teacher-profile">
                     <div class="teacher-img">王</div>
                     <h3 style="margin: 0 0 5px 0;">王明军</h3>
@@ -309,7 +340,7 @@
             <div style="text-align: center; max-width: 800px; margin: 0 auto;">
                 <p>对标行业标准，实战驱动教学。</p>
             </div>
-            
+
             <table class="curriculum-table">
                 <thead>
                     <tr>
@@ -319,55 +350,44 @@
                     </tr>
                 </thead>
                 <tbody>
-                    
-            <tr>
-                <td><span class="module-tag">Week 1</span></td>
-                <td><strong>行业认知与基础入门</strong></td>
-                <td style="color: #666;">了解行业发展趋势，掌握软件基础操作，完成第一次声音/作品录制。</td>
-            </tr>
-            
-            <tr>
-                <td><span class="module-tag">Week 2</span></td>
-                <td><strong>核心技能专项训练</strong></td>
-                <td style="color: #666;">针对性突破核心难点（如气息、剪辑逻辑、AI提示词），建立专业护城河。</td>
-            </tr>
-            
-            <tr>
-                <td><span class="module-tag">Week 3</span></td>
-                <td><strong>商业案例拆解与模仿</strong></td>
-                <td style="color: #666;">精选10+真实商业爆款案例，逐帧/逐句拆解，还原大神创作思路。</td>
-            </tr>
-            
-            <tr>
-                <td><span class="module-tag">Week 4</span></td>
-                <td><strong>实战项目演练 (PBL)</strong></td>
-                <td style="color: #666;">领取真实模拟订单，在助教指导下完成全流程交付，模拟真实职场环境。</td>
-            </tr>
-            
-            <tr>
-                <td><span class="module-tag">Week 5</span></td>
-                <td><strong>进阶技巧与风格化</strong></td>
-                <td style="color: #666;">探索个人风格，差异化竞争。掌握高级技巧，提升作品质感。</td>
-            </tr>
-            
-            <tr>
-                <td><span class="module-tag">Week 6</span></td>
-                <td><strong>运营变现与渠道对接</strong></td>
-                <td style="color: #666;">账号运营SOP，接单平台入驻指南，报价与谈判技巧。</td>
-            </tr>
-            
-            <tr>
-                <td><span class="module-tag">Week 7</span></td>
-                <td><strong>毕业作品打磨</strong></td>
-                <td style="color: #666;">导师1v1指导毕业设计，打造可以写进简历的完美作品集。</td>
-            </tr>
-            
-            <tr>
-                <td><span class="module-tag">Week 8</span></td>
-                <td><strong>职业规划与签约</strong></td>
-                <td style="color: #666;">模拟面试，简历优化，优秀学员签约考核。</td>
-            </tr>
-            
+
+                    <tr>
+                        <td><span class="module-tag">Week 1-2</span></td>
+                        <td><strong>预期纠偏与设备扫盲 (断崖挽救)</strong></td>
+                        <td style="color: #666;">打破宣发神话，还原演播真相。建立《小白常见致命报错100问》AI活字典；班主任手把手带设备连线、录屏实操，确保平稳落地。</td>
+                    </tr>
+
+                    <tr>
+                        <td><span class="module-tag">Week 3-4</span></td>
+                        <td><strong>基础吐字与发声破冰</strong></td>
+                        <td style="color: #666;">抛弃长篇晦涩的“大台词理论”，提供极短的（2分钟以内）、难度极低的文章练口，消除面对麦克风的恐惧感与张力。</td>
+                    </tr>
+
+                    <tr>
+                        <td><span class="module-tag">Week 5-6</span></td>
+                        <td><strong>多题材声音塑造 (分层测试)</strong></td>
+                        <td style="color: #666;">释放不同频率的文本库（言情、社科、儿童、老年）。彻底改变过去让 60 岁大爷念甜宠文的尴尬，利用标签下发高代入感作业。</td>
+                    </tr>
+
+                    <tr>
+                        <td><span class="module-tag">Week 7-8</span></td>
+                        <td><strong>工具脱敏与声音滤镜</strong></td>
+                        <td style="color: #666;">学习使用入门级的音频 AI 润色工具。不再追求让小白成为 AU 调音大拿，而是学会使用傻瓜式工具掩盖基础瑕疵，提升听感。</td>
+                    </tr>
+
+                    <tr>
+                        <td><span class="module-tag">Week 9-10</span></td>
+                        <td><strong>无痛点评与心理按摩</strong></td>
+                        <td style="color: #666;">点评官严禁使用“情感不足、节奏不准”等空泛模版打击信心；必须基于学员自身进步给出至少 3 条发光点及 1 条精准建议。</td>
+                    </tr>
+
+                    <tr>
+                        <td><span class="module-tag">Week 11-12</span></td>
+                        <td><strong>启蒙结业与微成果变现</strong></td>
+                        <td style="color: #666;">结业时不设定行业魔鬼标准，提供“喜播独家体验小单池”（均价10-20元的小程序录音单），确保每个毕业学员都能拿到第一笔钱，带走尊严与成就感。
+                        </td>
+                    </tr>
+
                 </tbody>
             </table>
         </div>
@@ -392,7 +412,7 @@
             <p style="text-align: center; color: #666; margin-bottom: 40px;">
                 实时监控教学质量，确保每一分投入都有回报。
             </p>
-            
+
             <div class="dashboard">
                 <div class="stats-grid">
                     <div class="stat-box">
@@ -420,22 +440,31 @@
                         <div style="margin-top: 20px;">
                             <div style="display: flex; align-items: center; margin-bottom: 10px;">
                                 <span style="width: 60px; font-size: 0.8rem;">优秀</span>
-                                <div style="flex: 1; height: 10px; background: #eee; border-radius: 5px; margin: 0 10px;">
-                                    <div style="width: 35%; height: 100%; background: var(--success); border-radius: 5px;"></div>
+                                <div
+                                    style="flex: 1; height: 10px; background: #eee; border-radius: 5px; margin: 0 10px;">
+                                    <div
+                                        style="width: 35%; height: 100%; background: var(--success); border-radius: 5px;">
+                                    </div>
                                 </div>
                                 <span style="font-size: 0.8rem;">35%</span>
                             </div>
                             <div style="display: flex; align-items: center; margin-bottom: 10px;">
                                 <span style="width: 60px; font-size: 0.8rem;">良好</span>
-                                <div style="flex: 1; height: 10px; background: #eee; border-radius: 5px; margin: 0 10px;">
-                                    <div style="width: 45%; height: 100%; background: var(--primary); border-radius: 5px;"></div>
+                                <div
+                                    style="flex: 1; height: 10px; background: #eee; border-radius: 5px; margin: 0 10px;">
+                                    <div
+                                        style="width: 45%; height: 100%; background: var(--primary); border-radius: 5px;">
+                                    </div>
                                 </div>
                                 <span style="font-size: 0.8rem;">45%</span>
                             </div>
                             <div style="display: flex; align-items: center; margin-bottom: 10px;">
                                 <span style="width: 60px; font-size: 0.8rem;">合格</span>
-                                <div style="flex: 1; height: 10px; background: #eee; border-radius: 5px; margin: 0 10px;">
-                                    <div style="width: 20%; height: 100%; background: var(--warning); border-radius: 5px;"></div>
+                                <div
+                                    style="flex: 1; height: 10px; background: #eee; border-radius: 5px; margin: 0 10px;">
+                                    <div
+                                        style="width: 20%; height: 100%; background: var(--warning); border-radius: 5px;">
+                                    </div>
                                 </div>
                                 <span style="font-size: 0.8rem;">20%</span>
                             </div>
@@ -443,7 +472,8 @@
                     </div>
 
                     <!-- Testimonial -->
-                    <div style="background: white; padding: 20px; border-radius: 8px; display: flex; flex-direction: column; justify-content: center;">
+                    <div
+                        style="background: white; padding: 20px; border-radius: 8px; display: flex; flex-direction: column; justify-content: center;">
                         <div style="font-style: italic; color: #666;">
                             "这门课程完全改变了我的职业轨迹。特别是实战环节，让我第一次接到了5000元的商单！"
                         </div>
@@ -463,4 +493,5 @@
     </footer>
 
 </body>
+
 </html>
