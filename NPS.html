@@ -16,6 +16,7 @@
             --card: #fff;
             --text-main: #1f2937;
             --text-secondary: #6b7280;
+            --huawei-red: #c8102e;
         }
 
         * {
@@ -116,53 +117,31 @@
             margin-bottom: 8px;
         }
 
-        /* Metrics Box */
-        .metric-box {
-            background: #f8fafc;
-            border: 1px solid #e2e8f0;
-            border-radius: 8px;
-            padding: 24px;
+        /* Callout Boxes */
+        .highlight-box {
+            background: #fffbeb;
+            border-left: 4px solid var(--warning);
+            padding: 20px;
+            border-radius: 4px;
             margin: 20px 0;
         }
 
-        .formula {
-            font-family: 'Courier New', Courier, monospace;
-            background: #1e293b;
-            color: #fbbf24;
-            padding: 12px 16px;
+        .highlight-box h4 {
+            color: #b45309;
+            margin-bottom: 8px;
+            font-size: 1.2em;
+        }
+
+        .itr-box {
+            border: 1px solid #e5e7eb;
+            border-top: 4px solid var(--huawei-red);
+            padding: 24px;
+            background: #fafafa;
             border-radius: 6px;
-            margin: 12px 0;
-            font-size: 1.1em;
-            text-align: center;
-            font-weight: bold;
+            margin-bottom: 20px;
         }
 
-        .analysis-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-
-        .analysis-item {
-            padding: 16px;
-            border-radius: 8px;
-        }
-
-        .pros {
-            background: #f0fdf4;
-            border-left: 4px solid var(--success);
-        }
-
-        .neutral {
-            background: #eff6ff;
-            border-left: 4px solid var(--accent);
-        }
-
-        .cons {
-            background: #fef2f2;
-            border-left: 4px solid var(--danger);
-        }
-
+        /* Chart Simulation */
         .nps-chart {
             display: flex;
             height: 40px;
@@ -190,18 +169,184 @@
             flex: 5;
         }
 
-        /* Mobile Optimization */
+        /* Coordinate Curve Graphic */
+        .curve-container {
+            background: #1e293b;
+            padding: 30px;
+            border-radius: 12px;
+            color: white;
+            margin: 20px 0;
+            position: relative;
+        }
+
+        .y-axis {
+            position: absolute;
+            left: 20px;
+            top: 30px;
+            bottom: 30px;
+            width: 2px;
+            background: #475569;
+        }
+
+        .x-axis {
+            position: absolute;
+            left: 20px;
+            right: 30px;
+            bottom: 30px;
+            height: 2px;
+            background: #475569;
+        }
+
+        .y-label-top {
+            position: absolute;
+            left: 30px;
+            top: 20px;
+            color: #10b981;
+            font-size: 0.8em;
+        }
+
+        .y-label-mid {
+            position: absolute;
+            left: 30px;
+            top: 50%;
+            color: #94a3b8;
+            font-size: 0.8em;
+            transform: translateY(-50%);
+        }
+
+        .y-label-bot {
+            position: absolute;
+            left: 30px;
+            bottom: 40px;
+            color: #ef4444;
+            font-size: 0.8em;
+        }
+
+        .timeline-flex {
+            display: flex;
+            justify-content: space-between;
+            padding-left: 60px;
+            padding-bottom: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .time-node {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 20%;
+        }
+
+        .dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            margin-bottom: 8px;
+            position: relative;
+        }
+
+        .dot::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.2);
+            left: 7px;
+            top: 6px;
+            z-index: -1;
+        }
+
+        .time-node:last-child .dot::after {
+            display: none;
+        }
+
+        .dot-high {
+            background: #10b981;
+            margin-top: 10px;
+        }
+
+        .dot-mid {
+            background: #f59e0b;
+            margin-top: 60px;
+        }
+
+        .dot-low {
+            background: #ef4444;
+            margin-top: 110px;
+            box-shadow: 0 0 10px #ef4444;
+        }
+
+        .time-label {
+            font-size: 0.85em;
+            color: #cbd5e1;
+            text-align: center;
+        }
+
+        .time-action {
+            font-size: 0.75em;
+            color: #94a3b8;
+            margin-top: 4px;
+            text-align: center;
+        }
+
+        /* Grid for Minefield */
+        .minefield-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin: 20px 0;
+        }
+
+        .mine-card {
+            border: 1px solid #fecaca;
+            background: #fff5f5;
+            padding: 16px;
+            border-radius: 8px;
+        }
+
+        .mine-card h4 {
+            color: var(--danger);
+            margin-bottom: 8px;
+            font-size: 1.1em;
+        }
+
         @media screen and (max-width: 768px) {
-            .container {
-                padding: 0 20px !important;
+            .minefield-grid {
+                grid-template-columns: 1fr;
             }
 
-            section {
-                padding: 24px 20px !important;
+            .timeline-flex {
+                flex-direction: column;
+                padding-left: 0;
             }
 
-            .analysis-grid {
-                grid-template-columns: 1fr !important;
+            .time-node {
+                width: 100%;
+                align-items: flex-start;
+                margin-bottom: 15px;
+                border-left: 2px solid #475569;
+                padding-left: 15px;
+            }
+
+            .curve-container {
+                padding: 20px;
+            }
+
+            .y-axis,
+            .x-axis,
+            .y-label-top,
+            .y-label-mid,
+            .y-label-bot {
+                display: none;
+            }
+
+            .dot {
+                margin-top: 0 !important;
+            }
+
+            .dot::after {
+                display: none;
             }
         }
     </style>
@@ -212,146 +357,207 @@
     <div class="hero">
         <div class="container">
             <div class="breadcrumb">
-                <a href="index.html">首页</a> / <a href="BSC.html">BSC</a> / <span>服务满意度 NPS</span>
+                <a href="index.html">首页</a> / <a href="BSC.html">BSC</a> / <span>服务满意度 NPS & 华为ITR体系</span>
             </div>
-            <h1>服务满意度 NPS：降本增效期的安全防线</h1>
-            <p class="meta">用户生命周期管理 · 品牌护城河 · 防范系统性崩塌指标</p>
+            <h1>服务满意度 NPS 与 AI 情绪罗盘</h1>
+            <p class="meta">对核心真问题的深剖 · AI 全生命周期坐标系 · 借鉴华为从问题到解决 (ITR) 标准流程</p>
         </div>
     </div>
 
     <div class="container">
 
-        <!-- 1. 核心逻辑 -->
+        <!-- 1. 真问题与唯一杠杆 -->
         <section>
-            <h2>一、用户满意度的核心逻辑</h2>
-            <div class="analysis-grid">
-                <div class="analysis-item neutral">
-                    <h4 style="color: var(--primary); margin-bottom: 8px;">NPS 的战略定位：不是为了讨好，而是“熔断保护”</h4>
-                    <p>在 2026 第一曲线健康利润大战略下，我们将通过引入 AI 进行大规模的成本压缩（替换人工点评、AI自动服务）。在“降本”的同时很容易不小心损伤到交付体验。</p>
-                    <p>因此，BSC 中设定的 <strong>NPS ≥ 85 分</strong> 的指标，是全公司在疯狂 AI 化和压缩编制过程中的一条<strong
-                            style="color:red">安全底线（Safety Net）</strong>。只要 NPS
-                        不跌破阈值，说明效率提升没损害到价值核心；一旦跌破阈值，必须立刻停止盲目压榨机器效率，呼叫人工补缺。</p>
-                </div>
-                <div class="analysis-item pros">
-                    <h4 style="color: var(--success); margin-bottom: 8px;">为什么强调净推荐值？</h4>
-                    <p>“老客户的转介绍拉新成本，只有新流量投放的十分之一。”</p>
+            <h2>一、灵魂拷问：真问题是什么？唯一该干的一件事是什么？</h2>
+
+            <p>在降本增效的关键期，如果把 NPS 理解为“客服态度好一点”，那就完全走偏了战略方向。我们深度剖析了目前的战略结构，得出了关于核心真问题的论断。</p>
+
+            <div class="highlight-box">
+                <h4>核心真问题：高预期营销承诺 与 AI 化无情交付 之间的剧烈断裂带</h4>
+                <p>真正伤害 NPS
+                    甚至引发群诉的，不是客服没有使用尊称。而是用户在前端（短视频/直播间）被“拉满了预期”（比如：包教包会、给A+资源、快速变现），但进入后端交付时，遇到的是<strong>“极低门槛的硬核学习”和“冰冷的流水线/AI系统支持”</strong>。
+                </p>
+                <p>这种极度的落差导致了强烈的情感受到剥夺感与被欺骗感。不解决承诺与交付的不对称，无论怎么堆人工客服都无法挽救跌落的 NPS。</p>
+            </div>
+
+            <div style="background: var(--primary); color: white; padding: 24px; border-radius: 8px; margin-top: 20px;">
+                <h3 style="color: #60a5fa; margin-top: 0;">💡 破局：如果我们只干一件事？</h3>
+                <p style="font-size: 1.3em; font-weight: bold; margin-bottom: 10px;">建立基于大模型的“全周期用户情绪自动监控与 ITR 熔断系统”</p>
+                <p style="opacity: 0.9;">在用户即将情绪爆发甚至退费报警前，通过他们停滞的作业、群内只言片语的负面词汇，让 AI
+                    提前感知，强制真人介入拦截。<strong>“在炸弹引爆前掐断引线，并提炼共性问题反哺研发（教研）闭环”。</strong></p>
+            </div>
+        </section>
+
+        <!-- 2. 穷举不满矩阵 -->
+        <section>
+            <h2>二、雷场透视：穷举用户不满意地图</h2>
+            <p>基于过去的客诉和退款记录，如果不满意是一场病，以下是病灶的穷举分析：</p>
+
+            <div class="minefield-grid">
+                <div class="mine-card">
+                    <h4>🤬 1. 营销错位雷区 (入营前与首周)</h4>
                     <ul>
-                        <li><strong>不赚带血的钱：</strong>不考核虚荣的表面满意，考核用户是否愿意拿自己的信誉来推荐我们。</li>
-                        <li><strong>消除潜藏危机：</strong>贬损者通常是未来高危客诉和退费的风向标，提前洞察能极大降低法务和售后成本。</li>
+                        <li><strong>虚假承诺感：</strong>“售前说每天半小时就能搞定，结果我上了两个小时还没懂。”</li>
+                        <li><strong>隐形强迫感：</strong>“我花了几十块体验，每天群里都在发截图催我买 3980 的进阶课，感觉像被割韭菜。”</li>
+                        <li><strong>背景误判：</strong>系统没识别我是高龄（70岁以上）或经济困难者，依然进行高压跟单。</li>
+                    </ul>
+                </div>
+                <!-- Mine 2 -->
+                <div class="mine-card">
+                    <h4>😫 2. 学习绝望雷区 (第二至四周)</h4>
+                    <ul>
+                        <li><strong>陡峭的山峰：</strong>某几节实操课（如AI软体操作、音轨剪辑）极其晦涩，教研没有说人话。</li>
+                        <li><strong>进度被抛弃感：</strong>晚了一天交作业，系统就一刀切不再发后续资料，也没有人来关心我为什么没交。</li>
+                        <li><strong>软体BUG卡死：</strong>提供的 AI 练习工具崩溃、排队或者收费额度不清晰。</li>
+                    </ul>
+                </div>
+                <!-- Mine 3 -->
+                <div class="mine-card">
+                    <h4>🤖 3. 服务冰冷雷区 (交付全过程)</h4>
+                    <ul>
+                        <li><strong>机器人鬼打墙：</strong>有问题疯狂被 AI 助教绕圈子，找不到真人客服，产生极大的无力感与愤怒。</li>
+                        <li><strong>回复延迟：</strong>晚上学习高潮期，班主任却下班了，第二天早上才回，学习热情已冷却。</li>
+                        <li><strong>点评敷衍：</strong>明明熬夜做的作业，只得到一句模板式的“继续努力，你的声音很有潜力”。</li>
+                    </ul>
+                </div>
+                <!-- Mine 4 -->
+                <div class="mine-card">
+                    <h4>💸 4. 变现虚无雷区 (结营后)</h4>
+                    <ul>
+                        <li><strong>能力与市场脱节：</strong>学完了所有理论，但去试音/接商单时发现要求极高，接不到单。</li>
+                        <li><strong>沉默的遗忘：</strong>课程结束后，再没有任何链接。资源成了空头支票，前期的许诺未兑现。</li>
                     </ul>
                 </div>
             </div>
         </section>
 
-        <!-- 2. 拆解公式 -->
+        <!-- 3. AI 满意度曲线 -->
         <section>
-            <h2>二、NPS 拆解公式</h2>
-            <div class="metric-box">
-                <h3>指标算法</h3>
-                <div class="formula">
-                    NPS = [推荐者(%) - 贬损者(%)] × 100
-                </div>
+            <h2>三、防御武器：AI 赋能的用户满意度坐标系曲线</h2>
+            <p>要消灭问题，首先得看见情绪。我们要利用文本分析引擎（NLP，例如智谱/文心等API），对每个学员的社交互动轨迹打分，构建实时的“情绪健康指数”。</p>
 
-                <div class="nps-chart">
-                    <div class="nps-detractor">贬损者 (0-6分)</div>
-                    <div class="nps-passive">中立者 (7-8分)</div>
-                    <div class="nps-promoter">推荐者 (9-10分)</div>
-                </div>
+            <div class="curve-container">
+                <div class="y-axis"></div>
+                <div class="x-axis"></div>
 
-                <ul style="margin-top:20px;">
-                    <li><strong style="color: #10b981;">推荐者 (Promoters, 打分 9-10)：</strong> 是我们最宝贵的资产，复购和转介绍的主力军（“自来水”）。
-                    </li>
-                    <li><strong style="color: #f59e0b;">中立者 (Passives, 打分 7-8)：</strong> 觉得课程普通，满意但无忠诚度，随时可能被竞品低价撬走。
-                    </li>
-                    <li><strong style="color: #ef4444;">贬损者 (Detractors, 打分 0-6)：</strong>
-                        对服务极不满意，很大概率在社交媒体制造负面评价，甚至申请退款维权。</li>
+                <div class="y-label-top">Promoter (极度满意 +100)</div>
+                <div class="y-label-mid">Passive (中立/沉默 0)</div>
+                <div class="y-label-bot">Detractor (愤怒/退费预警 -100)</div>
+
+                <div class="timeline-flex" style="margin-top: 40px; text-align: left;">
+
+                    <div class="time-node">
+                        <div class="dot dot-high"></div>
+                        <div class="time-label">开营日 (Day 1)</div>
+                        <div class="time-action">满怀期待，情绪激昂</div>
+                    </div>
+
+                    <div class="time-node">
+                        <div class="dot dot-mid"></div>
+                        <div class="time-label">软件受挫 (Day 5)</div>
+                        <div class="time-action">实操遇到BUG，发群无人秒回<br><span style="color:#f59e0b">AI 捕捉负能量下降</span></div>
+                    </div>
+
+                    <div class="time-node">
+                        <div class="dot dot-low"></div>
+                        <div class="time-label">作业卡卡死 (Day 10)</div>
+                        <div class="time-action">AI点评敷衍，且被推销正价课<br><span
+                                style="color:#ef4444; font-weight:bold;">触发红线：生成求救工单</span></div>
+                    </div>
+
+                    <div class="time-node" style="margin-top: -30px;">
+                        <span style="font-size: 2em; display:block; margin-bottom: 5px;">🦸🏻‍♂️</span>
+                        <div class="time-label" style="color: #38bdf8;">真人班主任介入</div>
+                        <div class="time-action">电话疏导、1V1技术解答</div>
+                    </div>
+
+                    <div class="time-node">
+                        <div class="dot dot-high"></div>
+                        <div class="time-label">顺利毕业 (Day 28)</div>
+                        <div class="time-action">拿到首单，极大满足<br><span style="color:#10b981">成为净推荐者 (Promoter)</span></div>
+                    </div>
+
+                </div>
+            </div>
+
+            <p><strong>计算维度 (AI 如何打分)：</strong></p>
+            <ul>
+                <li><strong>行为数据：</strong> 视频完播率骤降 (-10分)；漏交作业 (-20分)。</li>
+                <li><strong>NLP 词义识别：</strong> 企微聊天记录中出现“骗子、退款、听不懂、没人管” (直接触发 -50 红色预警)。</li>
+                <li><strong>交互频率：</strong> 连续 3 天对机器人的主动寒暄未回复 (沉默中立 预警)。</li>
+            </ul>
+        </section>
+
+        <!-- 4. ITR 流程 -->
+        <section>
+            <h2>四、借鉴华为 ITR (Issue to Resolution) 闭环流程</h2>
+            <p>问题捕捉到之后，最可怕的是无人响应，或者成了长期的“技术债/教研债”。我们要求建立一套 <strong>由前到后，从问题到解决</strong> 的端到端体系。</p>
+
+            <div class="itr-box">
+                <h3 style="margin-top: 0; color: var(--huawei-red);">1. 发现问题 (Issue Discovery)</h3>
+                <p>基于上述的 AI 曲线，只要系统判断学员情绪跌破 <strong>“中立基准线 (-20分)”</strong>，系统立刻自动在 CRM 中升起一个 <strong>Trouble Ticket
+                        (TT工单)</strong>，推送到对应前端主管。不再依靠用户去“提意见”，而是我们靠雷达感应问题。</p>
+            </div>
+
+            <div class="itr-box">
+                <h3 style="margin-top: 0; color: var(--huawei-red);">2. 响应与干预 (Issue Respond)</h3>
+                <p><strong>SLA 黄金两小时：</strong>触发红线后，对应的高级辅助班主任或客户关怀专员（而非机器）必须在 2 小时内实现 1V1
+                    的人工语音（或长文本）触达。了解并提供情绪安抚和实质性技术解决方案。此时，干预成本最低。</p>
+            </div>
+
+            <div class="itr-box">
+                <h3 style="margin-top: 0; color: var(--huawei-red);">3. 问题解决与根因闭环 (Resolve & Root Cause)</h3>
+                <p>这是整个 ITR 最具有价值的一步，如果不做这步，永远只是在擦屁股：</p>
+                <ul>
+                    <li>每个月末，将本月所有的工单提交至 AI 模型做 <strong>Top 3 根因缺陷归类</strong>。</li>
+                    <li>如果是教研问题（如某节音频处理课大家都听不懂），自动分发 TT 给苏秦教研组，拉入下月<strong>必须迭代的 OKR</strong> 中。</li>
+                    <li>如果是产品 Bug（如 AI 评测老报错），自动分发 TT 给姚涣产研组。</li>
                 </ul>
+                <p><strong>这就是 NPS 提升的飞轮：解决的不只是客诉，而是让后方的炮火(产研/教研)直接瞄准真实的缺陷。</strong></p>
             </div>
         </section>
 
-        <!-- 3. OKR 还是 GSA -->
+        <!-- 5. OKR 拆解 -->
         <section>
-            <h2>三、实现路径：OKR 还是 关键战役 (GSA)？</h2>
-            <div
-                style="background: #eff6ff; border: 1px solid #bfdbfe; padding: 16px; border-radius: 8px; margin-bottom: 24px;">
-                <strong>核心结论：</strong> 维持与提升 NPS，必须通过 <strong>OKR</strong> 机制来实现。
-            </div>
+            <h2>五、支撑 NPS 的 Q2 核心 OKR 拆解</h2>
+            <p>满意度是温度计，必须通过跨部门的对齐（OKR）而非一场运动（GSA）来落实。这是我们在 AI 降本期守住招牌的生命线。</p>
 
-            <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
+            <table style="width: 100%; border-collapse: collapse; margin-top: 10px;">
                 <thead>
                     <tr>
-                        <th style="padding: 12px; background: #f9fafb; border: 1px solid #e5e7eb;">为什么不能是 GSA？</th>
-                        <th style="padding: 12px; background: #f9fafb; border: 1px solid #e5e7eb;">为什么必须是 OKR？</th>
+                        <th style="padding: 12px; background: #f9fafb; border: 1px solid #e5e7eb;">部门角色</th>
+                        <th style="padding: 12px; background: #f9fafb; border: 1px solid #e5e7eb;">Q2 OKR: (O) 保底且提升满意度
+                        </th>
+                        <th style="padding: 12px; background: #f9fafb; border: 1px solid #e5e7eb;">关键结果 (KR)</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td style="padding: 12px; border: 1px solid #e5e7eb; vertical-align: top;">
-                            <p><strong>GSA 负责打硬仗和断崖式变革。</strong></p>
-                            <p>NPS
-                                不是一件可以通过某一个技术上线或某一周突击行动就能解决的事。它不像防范“黑猫投诉炸雷”那样可以通过一锤子买卖（比如设立防火墙或重构规章）彻底阻断。如果把体验拆解为战役，战役一结束，满意度很快又会随着执行松懈而回落。
-                            </p>
+                        <td style="padding: 12px; border: 1px solid #e5e7eb;"><strong>客户体验/合规部<br>(雷达中心)</strong></td>
+                        <td style="padding: 12px; border: 1px solid #e5e7eb;">建立极度敏锐的情绪监控网与工单生命周期管理</td>
+                        <td style="padding: 12px; border: 1px solid #e5e7eb;">
+                            1. 在 5 月前跑通并上线基于 AI 判断的“用户情绪健康坐标系”仪表盘。<br>
+                            2. TTR（Trouble Ticket 解析并分发）做到 100% 留档，超时工单追溯到人。
                         </td>
-                        <td style="padding: 12px; border: 1px solid #e5e7eb; vertical-align: top;">
-                            <p><strong>OKR 负责自下而上驱动每个微小细节。</strong></p>
-                            <p>NPS 是一把“温度计”。要让它保持在 85 分以上，需要前端服务响应快一分钟、助教语气更真诚一点、教研课程讲解更通俗一分。这种分布在各部门毛细血管里的工作，高度适配共享 OKR
-                                体系（Bottom-up，跨部门为同一个客满结果负责）。</p>
+                    </tr>
+                    <tr>
+                        <td style="padding: 12px; border: 1px solid #e5e7eb;"><strong>前端业务/班主任<br>(干预中心)</strong></td>
+                        <td style="padding: 12px; border: 1px solid #e5e7eb;">将人员精力抽离机械事务，专注情感高价值连接与熔断干预</td>
+                        <td style="padding: 12px; border: 1px solid #e5e7eb;">
+                            1. 面向“严重级客诉”的 2小时内人工接起介入率 > 95%。<br>
+                            2. 月度群诉/外部恶性投诉环比降低 50%。
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 12px; border: 1px solid #e5e7eb;"><strong>教研/产研<br>(根因修补)</strong></td>
+                        <td style="padding: 12px; border: 1px solid #e5e7eb;">依靠前端传回的系统战报，进行精准地消除结构性缺陷</td>
+                        <td style="padding: 12px; border: 1px solid #e5e7eb;">
+                            1. 收到 ITR 缺陷报告后，关键难懂单课/工具 Bug 的平均迭代修复时间缩短至 14 天。<br>
+                            2. 被重新修复的章节，在下批新生测试中客诉提及度趋近于 0。
                         </td>
                     </tr>
                 </tbody>
             </table>
-        </section>
-
-        <!-- 4. Q2 核心策略 -->
-        <section>
-            <h2>四、全年与 Q2 核心落地策略</h2>
-            <p>2026年是 AI 开始规模化接管教学服务的元年，提升满意度的过程也是“人工与机器寻找微妙平衡点”的过程。</p>
-
-            <div style="border-left: 4px solid var(--primary); padding-left: 16px; margin: 24px 0;">
-                <h3 style="margin-top: 0; color: var(--primary);">Q2 核心战役视角：人机协同下的体验“填坑”</h3>
-                <p><strong>背景环境：</strong>Q2 正值“AI 班主任”与“AI 点评官”规模化覆盖。冰冷的系统回复必定会引起一波学员感知的“服务体验下降”，这是必然阵痛。</p>
-            </div>
-
-            <div style="display: grid; grid-template-columns: 1fr; gap: 16px;">
-                <!-- 策略 1 -->
-                <div style="background: white; border: 1px solid #e5e7eb; border-radius: 8px; padding: 20px;">
-                    <h4 style="color: #1e40af; margin-bottom: 10px; display: flex; align-items: center; gap: 8px;">
-                        📌 策略一：服务资源的非对称分配（机器干脏活，人干高端活）
-                    </h4>
-                    <p style="font-size: 0.95em; color: #4b5563;">
-                        <strong>执行动作：</strong>全面剥离真人服务团队身上的“机械工作”（例行催课、通用Q&A解答、作业格式校对）。让真实的班主任将释放出来的 80% 时间，全部投资在
-                        <strong>“产生共情连接的高级情感支持”</strong> 上。<br><br>
-                        当系统识别到学员出现负面情绪、学习遇到长期瓶颈时，真人必须主动切入。**冰冷的代码省下成本，温润的人性赢取净推荐。**
-                    </p>
-                </div>
-
-                <!-- 策略 2 -->
-                <div style="background: white; border: 1px solid #e5e7eb; border-radius: 8px; padding: 20px;">
-                    <h4 style="color: #e74c3c; margin-bottom: 10px; display: flex; align-items: center; gap: 8px;">
-                        📌 策略二：针对“0-6分贬损者”的 2小时熔断机制
-                    </h4>
-                    <p style="font-size: 0.95em; color: #4b5563;">
-                        <strong>执行动作：</strong>前端业务不再忽视差评。将学员的 NPS 微型测量问卷常态化嵌入口袋。一旦捕获到 6 分以下的低分评价，直接触发工单。<br><br>
-                        客满团队必须在 <strong>2 小时内实现人工触达</strong>。这种快速反应能将 70% 的贬损者情绪消化在内部阶段，不仅防止了黑猫投诉的发生，还能大幅扭转该用户的态度边界。
-                    </p>
-                </div>
-
-                <!-- 策略 3 -->
-                <div style="background: white; border: 1px solid #e5e7eb; border-radius: 8px; padding: 20px;">
-                    <h4 style="color: #10b981; margin-bottom: 10px; display: flex; align-items: center; gap: 8px;">
-                        📌 策略三：用大模型逆向反哺“教研进化”
-                    </h4>
-                    <p style="font-size: 0.95em; color: #4b5563;">
-                        <strong>执行动作：</strong>很多客户的怒气来源不是客服差，而是“课太难学不懂”或“实操卡顿而产生挫败感”。<br><br>
-                        每月收集所有 NPS 低于中立的负面反馈，使用 AI
-                        工具分析关键词聚类，寻找出“最容易出错的知识点”。<strong>反向倒逼教研组快速迭代课程</strong>，以从源头截断负体验产生的原因。
-                    </p>
-                </div>
-            </div>
-
-            <div style="margin-top:20px; text-align:right;">
-                <p style="font-size: 0.85em; color: #9ca3af;">责任部门：@杜康杰 (客户体验部中心) / 协同：全体业务前端</p>
-            </div>
         </section>
 
     </div>
