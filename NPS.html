@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>服务满意度 NPS (Net Promoter Score) | 2026 BSC</title>
+    <style>
+        :root {
+            --primary: #1a2a6c;
+            --accent: #2563eb;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #e74c3c;
+            --bg: #f4f5f7;
+            --card: #fff;
+            --text-main: #1f2937;
+            --text-secondary: #6b7280;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
+            background: var(--bg);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 24px 60px;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: #eef2ff;
+            color: var(--primary);
+            padding: 48px 0 36px;
+            margin-bottom: 32px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .hero h1 {
+            font-size: 2.2em;
+            margin-bottom: 12px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .hero .meta {
+            color: #4b5563;
+            font-size: 1.1em;
+            max-width: 800px;
+        }
+
+        .breadcrumb {
+            padding-bottom: 16px;
+            font-size: 0.9em;
+            color: #6b7280;
+        }
+
+        .breadcrumb a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        /* Cards */
+        section {
+            background: var(--card);
+            border-radius: 12px;
+            padding: 32px;
+            margin-bottom: 24px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        h2 {
+            color: var(--primary);
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #e5e7eb;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        h3 {
+            font-size: 1.2em;
+            color: #374151;
+            margin: 24px 0 12px;
+        }
+
+        p {
+            margin-bottom: 16px;
+            color: #4b5563;
+        }
+
+        ul,
+        ol {
+            margin-bottom: 16px;
+            padding-left: 24px;
+            color: #4b5563;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        /* Metrics Box */
+        .metric-box {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 24px;
+            margin: 20px 0;
+        }
+
+        .formula {
+            font-family: 'Courier New', Courier, monospace;
+            background: #1e293b;
+            color: #fbbf24;
+            padding: 12px 16px;
+            border-radius: 6px;
+            margin: 12px 0;
+            font-size: 1.1em;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .analysis-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .analysis-item {
+            padding: 16px;
+            border-radius: 8px;
+        }
+
+        .pros {
+            background: #f0fdf4;
+            border-left: 4px solid var(--success);
+        }
+
+        .neutral {
+            background: #eff6ff;
+            border-left: 4px solid var(--accent);
+        }
+
+        .cons {
+            background: #fef2f2;
+            border-left: 4px solid var(--danger);
+        }
+
+        .nps-chart {
+            display: flex;
+            height: 40px;
+            margin: 20px 0;
+            border-radius: 4px;
+            overflow: hidden;
+            font-weight: bold;
+            color: white;
+            text-align: center;
+            line-height: 40px;
+        }
+
+        .nps-detractor {
+            background: #ef4444;
+            flex: 3;
+        }
+
+        .nps-passive {
+            background: #f59e0b;
+            flex: 2;
+        }
+
+        .nps-promoter {
+            background: #10b981;
+            flex: 5;
+        }
+
+        /* Mobile Optimization */
+        @media screen and (max-width: 768px) {
+            .container {
+                padding: 0 20px !important;
+            }
+
+            section {
+                padding: 24px 20px !important;
+            }
+
+            .analysis-grid {
+                grid-template-columns: 1fr !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="hero">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="index.html">首页</a> / <a href="BSC.html">BSC</a> / <span>服务满意度 NPS</span>
+            </div>
+            <h1>服务满意度 NPS：降本增效期的安全防线</h1>
+            <p class="meta">用户生命周期管理 · 品牌护城河 · 防范系统性崩塌指标</p>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <!-- 1. 核心逻辑 -->
+        <section>
+            <h2>一、用户满意度的核心逻辑</h2>
+            <div class="analysis-grid">
+                <div class="analysis-item neutral">
+                    <h4 style="color: var(--primary); margin-bottom: 8px;">NPS 的战略定位：不是为了讨好，而是“熔断保护”</h4>
+                    <p>在 2026 第一曲线健康利润大战略下，我们将通过引入 AI 进行大规模的成本压缩（替换人工点评、AI自动服务）。在“降本”的同时很容易不小心损伤到交付体验。</p>
+                    <p>因此，BSC 中设定的 <strong>NPS ≥ 85 分</strong> 的指标，是全公司在疯狂 AI 化和压缩编制过程中的一条<strong
+                            style="color:red">安全底线（Safety Net）</strong>。只要 NPS
+                        不跌破阈值，说明效率提升没损害到价值核心；一旦跌破阈值，必须立刻停止盲目压榨机器效率，呼叫人工补缺。</p>
+                </div>
+                <div class="analysis-item pros">
+                    <h4 style="color: var(--success); margin-bottom: 8px;">为什么强调净推荐值？</h4>
+                    <p>“老客户的转介绍拉新成本，只有新流量投放的十分之一。”</p>
+                    <ul>
+                        <li><strong>不赚带血的钱：</strong>不考核虚荣的表面满意，考核用户是否愿意拿自己的信誉来推荐我们。</li>
+                        <li><strong>消除潜藏危机：</strong>贬损者通常是未来高危客诉和退费的风向标，提前洞察能极大降低法务和售后成本。</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. 拆解公式 -->
+        <section>
+            <h2>二、NPS 拆解公式</h2>
+            <div class="metric-box">
+                <h3>指标算法</h3>
+                <div class="formula">
+                    NPS = [推荐者(%) - 贬损者(%)] × 100
+                </div>
+
+                <div class="nps-chart">
+                    <div class="nps-detractor">贬损者 (0-6分)</div>
+                    <div class="nps-passive">中立者 (7-8分)</div>
+                    <div class="nps-promoter">推荐者 (9-10分)</div>
+                </div>
+
+                <ul style="margin-top:20px;">
+                    <li><strong style="color: #10b981;">推荐者 (Promoters, 打分 9-10)：</strong> 是我们最宝贵的资产，复购和转介绍的主力军（“自来水”）。
+                    </li>
+                    <li><strong style="color: #f59e0b;">中立者 (Passives, 打分 7-8)：</strong> 觉得课程普通，满意但无忠诚度，随时可能被竞品低价撬走。
+                    </li>
+                    <li><strong style="color: #ef4444;">贬损者 (Detractors, 打分 0-6)：</strong>
+                        对服务极不满意，很大概率在社交媒体制造负面评价，甚至申请退款维权。</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 3. OKR 还是 GSA -->
+        <section>
+            <h2>三、实现路径：OKR 还是 关键战役 (GSA)？</h2>
+            <div
+                style="background: #eff6ff; border: 1px solid #bfdbfe; padding: 16px; border-radius: 8px; margin-bottom: 24px;">
+                <strong>核心结论：</strong> 维持与提升 NPS，必须通过 <strong>OKR</strong> 机制来实现。
+            </div>
+
+            <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
+                <thead>
+                    <tr>
+                        <th style="padding: 12px; background: #f9fafb; border: 1px solid #e5e7eb;">为什么不能是 GSA？</th>
+                        <th style="padding: 12px; background: #f9fafb; border: 1px solid #e5e7eb;">为什么必须是 OKR？</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="padding: 12px; border: 1px solid #e5e7eb; vertical-align: top;">
+                            <p><strong>GSA 负责打硬仗和断崖式变革。</strong></p>
+                            <p>NPS
+                                不是一件可以通过某一个技术上线或某一周突击行动就能解决的事。它不像防范“黑猫投诉炸雷”那样可以通过一锤子买卖（比如设立防火墙或重构规章）彻底阻断。如果把体验拆解为战役，战役一结束，满意度很快又会随着执行松懈而回落。
+                            </p>
+                        </td>
+                        <td style="padding: 12px; border: 1px solid #e5e7eb; vertical-align: top;">
+                            <p><strong>OKR 负责自下而上驱动每个微小细节。</strong></p>
+                            <p>NPS 是一把“温度计”。要让它保持在 85 分以上，需要前端服务响应快一分钟、助教语气更真诚一点、教研课程讲解更通俗一分。这种分布在各部门毛细血管里的工作，高度适配共享 OKR
+                                体系（Bottom-up，跨部门为同一个客满结果负责）。</p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- 4. Q2 核心策略 -->
+        <section>
+            <h2>四、全年与 Q2 核心落地策略</h2>
+            <p>2026年是 AI 开始规模化接管教学服务的元年，提升满意度的过程也是“人工与机器寻找微妙平衡点”的过程。</p>
+
+            <div style="border-left: 4px solid var(--primary); padding-left: 16px; margin: 24px 0;">
+                <h3 style="margin-top: 0; color: var(--primary);">Q2 核心战役视角：人机协同下的体验“填坑”</h3>
+                <p><strong>背景环境：</strong>Q2 正值“AI 班主任”与“AI 点评官”规模化覆盖。冰冷的系统回复必定会引起一波学员感知的“服务体验下降”，这是必然阵痛。</p>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr; gap: 16px;">
+                <!-- 策略 1 -->
+                <div style="background: white; border: 1px solid #e5e7eb; border-radius: 8px; padding: 20px;">
+                    <h4 style="color: #1e40af; margin-bottom: 10px; display: flex; align-items: center; gap: 8px;">
+                        📌 策略一：服务资源的非对称分配（机器干脏活，人干高端活）
+                    </h4>
+                    <p style="font-size: 0.95em; color: #4b5563;">
+                        <strong>执行动作：</strong>全面剥离真人服务团队身上的“机械工作”（例行催课、通用Q&A解答、作业格式校对）。让真实的班主任将释放出来的 80% 时间，全部投资在
+                        <strong>“产生共情连接的高级情感支持”</strong> 上。<br><br>
+                        当系统识别到学员出现负面情绪、学习遇到长期瓶颈时，真人必须主动切入。**冰冷的代码省下成本，温润的人性赢取净推荐。**
+                    </p>
+                </div>
+
+                <!-- 策略 2 -->
+                <div style="background: white; border: 1px solid #e5e7eb; border-radius: 8px; padding: 20px;">
+                    <h4 style="color: #e74c3c; margin-bottom: 10px; display: flex; align-items: center; gap: 8px;">
+                        📌 策略二：针对“0-6分贬损者”的 2小时熔断机制
+                    </h4>
+                    <p style="font-size: 0.95em; color: #4b5563;">
+                        <strong>执行动作：</strong>前端业务不再忽视差评。将学员的 NPS 微型测量问卷常态化嵌入口袋。一旦捕获到 6 分以下的低分评价，直接触发工单。<br><br>
+                        客满团队必须在 <strong>2 小时内实现人工触达</strong>。这种快速反应能将 70% 的贬损者情绪消化在内部阶段，不仅防止了黑猫投诉的发生，还能大幅扭转该用户的态度边界。
+                    </p>
+                </div>
+
+                <!-- 策略 3 -->
+                <div style="background: white; border: 1px solid #e5e7eb; border-radius: 8px; padding: 20px;">
+                    <h4 style="color: #10b981; margin-bottom: 10px; display: flex; align-items: center; gap: 8px;">
+                        📌 策略三：用大模型逆向反哺“教研进化”
+                    </h4>
+                    <p style="font-size: 0.95em; color: #4b5563;">
+                        <strong>执行动作：</strong>很多客户的怒气来源不是客服差，而是“课太难学不懂”或“实操卡顿而产生挫败感”。<br><br>
+                        每月收集所有 NPS 低于中立的负面反馈，使用 AI
+                        工具分析关键词聚类，寻找出“最容易出错的知识点”。<strong>反向倒逼教研组快速迭代课程</strong>，以从源头截断负体验产生的原因。
+                    </p>
+                </div>
+            </div>
+
+            <div style="margin-top:20px; text-align:right;">
+                <p style="font-size: 0.85em; color: #9ca3af;">责任部门：@杜康杰 (客户体验部中心) / 协同：全体业务前端</p>
+            </div>
+        </section>
+
+    </div>
+
+</body>
+
+</html>
