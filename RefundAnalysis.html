@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026 退款溯源与根因分析 (Refund Analysis)</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --text-main: #e2e8f0;
+            --text-dim: #94a3b8;
+            --accent-color: #ef4444;
+            /* Red for Refunds/Danger */
+            --accent-hover: #dc2626;
+            --card-bg: #1e293b;
+            --border-color: #334155;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --info-color: #3b82f6;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            margin-bottom: 40px;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin: 0;
+            /* Fire gradient for refunds */
+            background: linear-gradient(90deg, #f87171, #fca5a5);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            color: var(--text-dim);
+            font-size: 1.1rem;
+            margin-top: 10px;
+        }
+
+        .breadcrumb {
+            margin-bottom: 15px;
+            color: var(--text-dim);
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb a {
+            color: var(--text-dim);
+            text-decoration: none;
+            opacity: 0.8;
+            transition: opacity 0.2s;
+        }
+
+        .breadcrumb a:hover {
+            opacity: 1;
+            text-decoration: underline;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card.danger {
+            border-left: 4px solid var(--accent-color);
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--text-main);
+            margin: 10px 0;
+        }
+
+        .stat-label {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        .chart-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-top: 20px;
+        }
+
+        .chart-box {
+            flex: 1;
+            min-width: 400px;
+            height: 350px;
+            /* Taller for detail */
+        }
+
+        /* Root Cause Tree Styling */
+        .root-cause-tree {
+            margin-top: 20px;
+        }
+
+        .cause-row {
+            display: flex;
+            align-items: stretch;
+            margin-bottom: 15px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .cause-level {
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .cause-percent {
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: var(--accent-color);
+            width: 80px;
+            flex-shrink: 0;
+        }
+
+        .cause-desc {
+            flex: 1;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .cause-title {
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: var(--text-main);
+            margin-bottom: 5px;
+        }
+
+        .cause-detail {
+            font-size: 0.9rem;
+            color: var(--text-dim);
+        }
+
+        .cause-solution {
+            width: 250px;
+            padding: 15px;
+            background: rgba(16, 185, 129, 0.1);
+            color: #6ee7b7;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            border-left: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            margin-right: 5px;
+        }
+
+        .badge-sales {
+            background: rgba(249, 115, 22, 0.2);
+            color: #fdba74;
+        }
+
+        .badge-product {
+            background: rgba(59, 130, 246, 0.2);
+            color: #93c5fd;
+        }
+
+        .badge-service {
+            background: rgba(139, 92, 246, 0.2);
+            color: #c4b5fd;
+        }
+
+        .badge-user {
+            background: rgba(148, 163, 184, 0.2);
+            color: #cbd5e1;
+        }
+
+        .badge-education {
+            background: rgba(59, 130, 246, 0.2);
+            color: #93c5fd;
+        }
+
+        .badge-ai {
+            background: rgba(139, 92, 246, 0.2);
+            color: #c4b5fd;
+        }
+
+        .callout-box {
+            padding: 20px;
+            border-radius: 8px;
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            margin-top: 30px;
+        }
+
+        .callout-title {
+            color: #fca5a5;
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            font-size: 1.1rem;
+        }
+
+        /* Mobile Optimization */
+        @media screen and (max-width: 768px) {
+            body {
+                padding: 0 !important;
+            }
+
+            .container {
+                padding: 0 20px !important;
+                width: 100% !important;
+                max-width: 100% !important;
+                box-sizing: border-box !important;
+            }
+
+            /* Add spacing since there's no hero block */
+            .container>header {
+                margin-top: 20px;
+            }
+
+            header,
+            .card,
+            .stat-card {
+                padding: 24px 20px !important;
+            }
+
+            h1 {
+                font-size: 1.8rem !important;
+                line-height: 1.3 !important;
+            }
+
+            .dashboard-grid {
+                grid-template-columns: 1fr !important;
+                gap: 15px !important;
+            }
+
+            .chart-container {
+                flex-direction: column !important;
+                gap: 20px !important;
+            }
+
+            .chart-box {
+                min-width: unset !important;
+                width: 100% !important;
+                height: 300px !important;
+            }
+
+            /* Root Cause Tree */
+            .cause-row {
+                flex-direction: column !important;
+            }
+
+            .cause-level {
+                border-right: none !important;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+                width: 100% !important;
+                padding: 10px !important;
+            }
+
+            .cause-solution {
+                width: 100% !important;
+                border-left: none !important;
+                border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+            }
+
+            table {
+                display: block !important;
+                width: 100% !important;
+                overflow-x: auto !important;
+                white-space: nowrap !important;
+            }
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+    <div class="container">
+        <header>
+            <div class="breadcrumb">
+                <a href="index.html">首页</a>
+                <span style="margin: 0 5px; opacity: 0.5;">&gt;</span>
+                <a href="CleanRevenue.html">净营收 (Clean Revenue)</a>
+                <span style="margin: 0 5px; opacity: 0.5;">&gt;</span>
+                <span style="color: var(--accent-color); font-weight: 500;">退款根因分析</span>
+            </div>
+            <h1>退款溯源与根因分析 Dashboard</h1>
+            <div class="subtitle">Every Refund is a System Failure · 每一笔退款都是系统的崩溃</div>
+        </header>
+
+        <!-- KPI Cards -->
+        <div class="dashboard-grid">
+            <div class="stat-card danger">
+                <div class="stat-label">当前综合退费率 (Refund Rate)</div>
+                <div class="stat-value" style="color: var(--accent-color);">18.5%</div>
+                <div style="font-size: 0.8rem; color: var(--text-dim);">目标: ≤15% | <span style="color: #ef4444;">超标
+                        3.5%</span></div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">年度累计退款金额 (Total Refund)</div>
+                <div class="stat-value">¥1.38亿</div>
+                <div style="font-size: 0.8rem; color: var(--text-dim);">2025全年数据回溯</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">首要退款黑洞 (Top Reason)</div>
+                <div class="stat-value" style="font-size: 1.8rem;">过度承诺 (Over-promise)</div>
+                <div style="font-size: 0.8rem; color: var(--text-dim);">占总退款的 42%</div>
+            </div>
+        </div>
+
+        <!-- Strategy Box -->
+        <div class="card" style="border: 1px solid var(--accent-color);">
+            <h3 style="margin-top: 0; color: #fca5a5;">🔥 核心洞察：退款不是财务问题，是业务诚信问题</h3>
+            <p style="color: var(--text-dim);">
+                我们过去认为退款是“流量不够精准”造成的。但深度溯源显示，<strong>65% 的退款源于“知行不一”</strong>：销售端为了成单编造了梦境，而交付端只能提供现实。
+                退款不仅损失了收入，更制造了“反向NPS”（Detractors），每一个退款用户都会在社交媒体上对其余10个潜在用户产生负面影响。
+            </p>
+        </div>
+
+        <!-- Chart Section -->
+        <div class="card">
+            <h3 style="margin-top: 0;">📊 退款归因分布 (Attribution)</h3>
+            <div class="chart-container">
+                <div class="chart-box">
+                    <canvas id="reasonChart"></canvas>
+                </div>
+                <div class="chart-box">
+                    <canvas id="stageChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- SKU Refund Breakdown -->
+        <div class="card">
+            <h3 style="margin-top: 0;">📉 SKU 退费榜单 (SKU Refund Breakdown)</h3>
+            <div style="overflow-x: auto;">
+                <table style="width: 100%; border-collapse: collapse; margin-top: 15px;">
+                    <thead>
+                        <tr
+                            style="border-bottom: 1px solid var(--border-color); color: var(--text-dim); text-align: left;">
+                            <th style="padding: 12px;">排名 (Rank)</th>
+                            <th style="padding: 12px;">SKU 名称</th>
+                            <th style="padding: 12px;">退费率 (Refund Rate)</th>
+                            <th style="padding: 12px;">风险等级 (Risk)</th>
+                            <th style="padding: 12px;">趋势 (Trend)</th>
+                        </tr>
+                    </thead>
+                    <tbody style="font-size: 0.95rem;">
+                        <!-- Item 1 -->
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                            <td style="padding: 12px; color: var(--text-dim);">#1</td>
+                            <td style="padding: 12px; font-weight: bold;">
+                                攀登计划 (L1+L2)
+                                <span class="badge badge-education">Education</span>
+                            </td>
+                            <td style="padding: 12px;">
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div
+                                        style="width: 100px; height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; overflow: hidden;">
+                                        <div style="width: 82%; height: 100%; background: var(--accent-color);"></div>
+                                    </div>
+                                    <span style="color: var(--accent-color); font-weight: bold;">24.5%</span>
+                                </div>
+                            </td>
+                            <td style="padding: 12px;"><span style="color: var(--accent-color);">🔥 熔断警戒</span></td>
+                            <td style="padding: 12px; color: var(--accent-color);">↗ 上升</td>
+                        </tr>
+                        <!-- Item 2 -->
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                            <td style="padding: 12px; color: var(--text-dim);">#2</td>
+                            <td style="padding: 12px; font-weight: bold;">
+                                攀登大师班
+                                <span class="badge badge-education">Premium</span>
+                            </td>
+                            <td style="padding: 12px;">
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div
+                                        style="width: 100px; height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; overflow: hidden;">
+                                        <div style="width: 60%; height: 100%; background: var(--warning-color);"></div>
+                                    </div>
+                                    <span style="color: var(--warning-color);">18.0%</span>
+                                </div>
+                            </td>
+                            <td style="padding: 12px;"><span style="color: var(--warning-color);">⚠️ 高风险</span></td>
+                            <td style="padding: 12px; color: var(--text-dim);">→ 持平</td>
+                        </tr>
+                        <!-- Item 3 -->
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                            <td style="padding: 12px; color: var(--text-dim);">#3</td>
+                            <td style="padding: 12px; font-weight: bold;">
+                                AI 短视频系列
+                                <span class="badge badge-ai">AI</span>
+                            </td>
+                            <td style="padding: 12px;">
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div
+                                        style="width: 100px; height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; overflow: hidden;">
+                                        <div style="width: 55%; height: 100%; background: var(--warning-color);"></div>
+                                    </div>
+                                    <span style="color: var(--warning-color);">16.5%</span>
+                                </div>
+                            </td>
+                            <td style="padding: 12px;"><span style="color: var(--warning-color);">⚠️ 中高风险</span></td>
+                            <td style="padding: 12px; color: var(--success-color);">↘ 下降</td>
+                        </tr>
+                        <!-- Item 4 -->
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                            <td style="padding: 12px; color: var(--text-dim);">#4</td>
+                            <td style="padding: 12px; font-weight: bold;">
+                                有声精英课 (L1)
+                                <span class="badge badge-education">Education</span>
+                            </td>
+                            <td style="padding: 12px;">
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div
+                                        style="width: 100px; height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; overflow: hidden;">
+                                        <div style="width: 47%; height: 100%; background: #f59e0b;"></div>
+                                    </div>
+                                    <span style="color: var(--text-main);">14.2%</span>
+                                </div>
+                            </td>
+                            <td style="padding: 12px;"><span style="color: var(--text-dim);">中等风险</span></td>
+                            <td style="padding: 12px; color: var(--text-dim);">→ 持平</td>
+                        </tr>
+                        <!-- Item 5 -->
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                            <td style="padding: 12px; color: var(--text-dim);">#5</td>
+                            <td style="padding: 12px; font-weight: bold;">
+                                音频剪辑课
+                                <span class="badge badge-service">Skills</span>
+                            </td>
+                            <td style="padding: 12px;">
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div
+                                        style="width: 100px; height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; overflow: hidden;">
+                                        <div style="width: 36%; height: 100%; background: var(--success-color);"></div>
+                                    </div>
+                                    <span style="color: var(--success-color);">11.0%</span>
+                                </div>
+                            </td>
+                            <td style="padding: 12px;"><span style="color: var(--success-color);">✅ 健康</span></td>
+                            <td style="padding: 12px; color: var(--success-color);">↘ 下降</td>
+                        </tr>
+                        <!-- Item 6 -->
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                            <td style="padding: 12px; color: var(--text-dim);">#6</td>
+                            <td style="padding: 12px; font-weight: bold;">
+                                攀登硬件包 (复购)
+                                <span class="badge badge-product">Hardware</span>
+                            </td>
+                            <td style="padding: 12px;">
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div
+                                        style="width: 100px; height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; overflow: hidden;">
+                                        <div style="width: 18%; height: 100%; background: var(--success-color);"></div>
+                                    </div>
+                                    <span style="color: var(--success-color);">5.5%</span>
+                                </div>
+                            </td>
+                            <td style="padding: 12px;"><span style="color: var(--success-color);">✅ 极佳</span></td>
+                            <td style="padding: 12px; color: var(--text-dim);">→ 持平</td>
+                        </tr>
+                        <!-- Item 7 -->
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                            <td style="padding: 12px; color: var(--text-dim);">#7</td>
+                            <td style="padding: 12px; font-weight: bold;">
+                                剪辑硬件包
+                                <span class="badge badge-product">Hardware</span>
+                            </td>
+                            <td style="padding: 12px;">
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div
+                                        style="width: 100px; height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; overflow: hidden;">
+                                        <div style="width: 16%; height: 100%; background: var(--success-color);"></div>
+                                    </div>
+                                    <span style="color: var(--success-color);">4.8%</span>
+                                </div>
+                            </td>
+                            <td style="padding: 12px;"><span style="color: var(--success-color);">✅ 极佳</span></td>
+                            <td style="padding: 12px; color: var(--text-dim);">→ 持平</td>
+                        </tr>
+                        <!-- Item 8 -->
+                        <tr>
+                            <td style="padding: 12px; color: var(--text-dim);">#8</td>
+                            <td style="padding: 12px; font-weight: bold;">
+                                AI 写作 (L1+L2+L3)
+                                <span class="badge badge-ai">AI</span>
+                            </td>
+                            <td style="padding: 12px;">
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div
+                                        style="width: 100px; height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; overflow: hidden;">
+                                        <div style="width: 14%; height: 100%; background: var(--success-color);"></div>
+                                    </div>
+                                    <span style="color: var(--success-color);">4.2%</span>
+                                </div>
+                            </td>
+                            <td style="padding: 12px;"><span style="color: var(--success-color);">✅ 标杆</span></td>
+                            <td style="padding: 12px; color: var(--success-color);">↘ 下降</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Root Cause Analysis -->
+        <div class="card">
+            <h3 style="margin-top: 0;">🧬 深度溯源：五大核心症结</h3>
+
+            <div class="root-cause-tree">
+                <!-- Reason 1 -->
+                <div class="cause-row">
+                    <div class="cause-level cause-percent">42%</div>
+                    <div class="cause-desc">
+                        <div class="cause-title"><span class="badge badge-sales">销售</span> 虚假宣传 / 过度承诺</div>
+                        <div class="cause-detail">承诺“包就业”、“30天回本”、“一对一大咖亲自带”。用户入课后发现是录播课+助教带。</div>
+                    </div>
+                    <div class="cause-solution">
+                        <div>
+                            <strong>💡 解决方案：</strong><br>
+                            实施“红线话术”拦截；AI 质检销售录音；<a href="CleanRevenue.html"
+                                style="color: inherit; text-decoration: underline;">GMV剔除退款考核</a>。
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Reason 2 -->
+                <div class="cause-row">
+                    <div class="cause-level cause-percent">25%</div>
+                    <div class="cause-desc">
+                        <div class="cause-title"><span class="badge badge-product">产品</span> 课程质量 / 难度不匹配</div>
+                        <div class="cause-detail">内容过于基础（割韭菜感）或 过于晦涩（学不会）。SKU 分级不清，把小白卖进了进阶班。</div>
+                    </div>
+                    <div class="cause-solution">
+                        <div>
+                            <strong>💡 解决方案：</strong><br>
+                            建立 <a href="sku.html" style="color: inherit; text-decoration: underline;">SKU
+                                准入标准</a>；课前分级测评；7天无理由体验期机制优化。
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Reason 3 -->
+                <div class="cause-row">
+                    <div class="cause-level cause-percent">15%</div>
+                    <div class="cause-desc">
+                        <div class="cause-title"><span class="badge badge-service">服务</span> 响应慢 / 态度差</div>
+                        <div class="cause-detail">助教回复不及时；作业点评敷衍；班级群氛围冷清或充满广告。</div>
+                    </div>
+                    <div class="cause-solution">
+                        <div>
+                            <strong>💡 解决方案：</strong><br>
+                            AI 助教 24h 响应；人工聚焦“情感链接”；服务SOP重构。
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Reason 4 -->
+                <div class="cause-row">
+                    <div class="cause-level cause-percent">12%</div>
+                    <div class="cause-desc">
+                        <div class="cause-title"><span class="badge badge-sales">运营</span> 诱导性消费 / 霸王条款</div>
+                        <div class="cause-detail">通过“限时逼单”让用户冲动消费；退款流程故意设置障碍（拖延、踢皮球）。</div>
+                    </div>
+                    <div class="cause-solution">
+                        <div>
+                            <strong>💡 解决方案：</strong><br>
+                            简化退款流程（一键申请）；冷静期机制；<a href="ComplaintRate.html"
+                                style="color: inherit; text-decoration: underline;">投诉率挂钩绩效</a>。
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Reason 5 -->
+                <div class="cause-row">
+                    <div class="cause-level cause-percent">6%</div>
+                    <div class="cause-desc">
+                        <div class="cause-title"><span class="badge badge-user">用户</span> 个人原因 / 经济问题</div>
+                        <div class="cause-detail">用户自身时间冲突、经济突变等不可控因素。</div>
+                    </div>
+                    <div class="cause-solution">
+                        <div>
+                            <strong>💡 解决方案：</strong><br>
+                            提供“冻结课程”或“转赠”服务；作为流失用户召回池。
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="callout-box">
+            <div class="callout-title">⚠️ 2026 军令状 (Target)</div>
+            <p style="color: #cbd5e1; margin: 0;">
+                全公司退费率必须控制在 <strong>15%</strong> 以内。任何超过 20% 的 SKU 将触发<strong>熔断机制</strong>（立即下架整改）。
+                退款不仅是财务的减项，更是我们对用户造成的<strong>"信任伤害"</strong>的量化指标。
+            </p>
+        </div>
+
+    </div>
+
+    <script>
+        // Chart 1: Refund Reasons
+        const ctxReason = document.getElementById('reasonChart').getContext('2d');
+        new Chart(ctxReason, {
+            type: 'doughnut',
+            data: {
+                labels: ['销售:过度承诺', '产品:质量/难度', '服务:响应/态度', '运营:诱导/流程', '用户:个人原因'],
+                datasets: [{
+                    data: [42, 25, 15, 12, 6],
+                    backgroundColor: [
+                        '#ef4444', // Red (Sales - Critical)
+                        '#3b82f6', // Blue (Product)
+                        '#8b5cf6', // Purple (Service)
+                        '#f59e0b', // Orange (Ops)
+                        '#64748b'  // Gray (User)
+                    ],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                plugins: {
+                    legend: {
+                        position: 'right',
+                        labels: { color: '#94a3b8' }
+                    },
+                    title: {
+                        display: true,
+                        text: '退款核心归因 (Reason Breakdown)',
+                        color: '#e2e8f0',
+                        font: { size: 16 }
+                    }
+                },
+                cutout: '60%'
+            }
+        });
+
+        // Chart 2: Refund Stage
+        const ctxStage = document.getElementById('stageChart').getContext('2d');
+        new Chart(ctxStage, {
+            type: 'bar',
+            data: {
+                labels: ['0-3天 (冲动期)', '3-7天 (体验期)', '7-30天 (交付期)', '30天+ (长尾期)'],
+                datasets: [{
+                    label: '退款发生阶段占比',
+                    data: [35, 40, 15, 10],
+                    backgroundColor: '#10b981',
+                    borderRadius: 6
+                }]
+            },
+            options: {
+                plugins: {
+                    legend: { display: false },
+                    title: {
+                        display: true,
+                        text: '退款发生时间分布 (Time Distribution)',
+                        color: '#e2e8f0',
+                        font: { size: 16 }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: { color: '#94a3b8' },
+                        grid: { color: '#334155' }
+                    },
+                    x: {
+                        ticks: { color: '#94a3b8' },
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

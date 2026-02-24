@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Agent 实际上岗率分析 - Xibo 2026</title>
+    <style>
+        :root {
+            --primary: #a855f7;
+            /* Matching the purple color from index.html for Learning/Growth */
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --text: #334155;
+            --danger: #ef4444;
+            --success: #22c55e;
+            --warning: #f59e0b;
+        }
+
+        body {
+            font-family: "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--text);
+            background: #f1f5f9;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Header */
+        header {
+            background: #fff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+            border-left: 6px solid var(--primary);
+        }
+
+        h1 {
+            color: var(--dark);
+            margin: 0 0 10px 0;
+            font-size: 2rem;
+        }
+
+        .meta-info {
+            display: flex;
+            gap: 20px;
+            color: #64748b;
+            font-size: 0.9rem;
+            margin-top: 15px;
+        }
+
+        .tag {
+            background: rgba(168, 85, 247, 0.1);
+            color: var(--primary);
+            padding: 2px 10px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        /* Cards */
+        .card {
+            background: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            color: var(--dark);
+            border-bottom: 2px solid #f1f5f9;
+            padding-bottom: 10px;
+            margin-top: 0;
+            font-size: 1.5rem;
+        }
+
+        h3 {
+            color: var(--dark);
+            font-size: 1.2rem;
+            margin-top: 25px;
+        }
+
+        /* Formula Box */
+        .formula-box {
+            background: #1e293b;
+            color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 1.2rem;
+            text-align: center;
+            margin: 20px 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .formula-desc {
+            font-size: 0.9rem;
+            color: #94a3b8;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        /* Analysis Grid */
+        .analysis-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .analysis-item {
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .risk-alert {
+            background: #fef2f2;
+            border-left: 4px solid var(--danger);
+            padding: 15px;
+            margin: 20px 0;
+            color: #991b1b;
+        }
+
+        /* GSA Table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            text-align: left;
+            padding: 12px 15px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        th {
+            background: #f8fafc;
+            color: #475569;
+            font-weight: 600;
+        }
+
+        /* Resource Optimization */
+        .resource-box {
+            background: linear-gradient(to right, #f8fafc, #fff);
+            border: 1px dashed #cbd5e1;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            color: #64748b;
+        }
+
+        .breadcrumb a {
+            color: #64748b;
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--primary);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="index.html">首页</a> &gt; <a href="BSC.html">BSC 战略看板</a> &gt; AI Agent 实际上岗率
+        </div>
+
+        <header>
+            <h1>AI Agent 实际上岗率 (Onboarding Rate)</h1>
+            <div class="meta-info">
+                <span><strong>责任人：</strong> @王俊 / @姚涣</span>
+                <span><strong>BSC 权重：</strong> 10% (学习与成长)</span>
+                <span class="tag">KPI 标准 ≥ 30%</span>
+            </div>
+            <p style="margin-top: 20px; color: #475569;">
+                <strong>核心定义：</strong> 考核 AI Agent 是否真正进入业务生产流程并产生价值，坚决杜绝“为了做 AI 而做 AI”的虚荣指标。
+            </p>
+        </header>
+
+        <!-- 1. 指标评审与深度分析 -->
+        <section class="card">
+            <h2>01. 指标评审：为什么提这个指标？(Review)</h2>
+            <div class="risk-alert">
+                <strong>⚠️ 当前痛点 (Problems)：</strong>
+                <p>1. <strong>“尸体”Agent 泛滥：</strong> 比如开发了10个写作助手，只有1个被高频使用，其余9个因为效果差或交互繁琐被员工弃用。</p>
+                <p>2. <strong>伪需求开发：</strong> 技术团队为了“秀肌肉”开发并没有解决实际业务痛点的 Agent。</p>
+                <p>3. <strong>维护成本隐形：</strong> 每一个上线的 Agent 都有 API 成本和维护成本，不上岗就是纯亏损。</p>
+            </div>
+
+            <h3>执行模式选择：OKR 还是 GSA？</h3>
+            <p><strong>结论：采用 GSA (Goal - Strategy - Action) 模式。</strong></p>
+            <p>
+                原因：AI 落地在现阶段（2026年）对于喜播不仅仅是一个“探索性目标”（Objective），更是一个必须拿结果的“生存战役”。
+                我们需要清晰的<strong>策略路径 (Strategy)</strong> 和可执行的<strong>动作 (Action)</strong>，而不仅仅是设定一个雄心勃勃的 KR。
+                OKR 容易导致“为了凑 KR 数字而开发凑数的 Agent”，而 GSA 更强调路径的有效性。
+            </p>
+        </section>
+
+        <!-- 2. 公式定义 -->
+        <section class="card">
+            <h2>02. 公式拆解 (Formula)</h2>
+            <p>为了科学量化“上岗”，我们定义以下公式：</p>
+
+            <div class="formula-box">
+                AI Agent 实际上岗率 = ( <span style="color:#a855f7">活跃 Agent 数</span> / <span style="color:#94a3b8">已部署 Agent
+                    总数</span> ) × 100%
+            </div>
+
+            <div class="analysis-grid">
+                <div class="analysis-item">
+                    <h4>分子：什么是“活跃 Agent”？</h4>
+                    <p style="font-size:0.9rem; color:#64748b;">必须同时满足以下条件：</p>
+                    <ul style="font-size:0.9rem;">
+                        <li><strong>高频调用：</strong> 周调用次数 > 50 次（或处理工单 > 20个）。</li>
+                        <li><strong>好评达标：</strong> 内部员工反馈 NPS > 8 分（如果不准，员工会投诉）。</li>
+                        <li><strong>闭环价值：</strong> 能够独立完成一个工作流节点（如：生成大纲、回复客诉），而非仅聊闲天。</li>
+                    </ul>
+                </div>
+                <div class="analysis-item">
+                    <h4>分母：什么是“已部署 Agent”？</h4>
+                    <p style="font-size:0.9rem; color:#64748b;">所有在生产环境发布、消耗计算资源、并向业务部门宣发过的 Agent。</p>
+                    <p style="font-size:0.9rem; color:#ef4444; margin-top:10px;">* 注：实验性质的 Demo 不计入分母，但一旦推给业务用，必须计入。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. 基于现状的 GSA 拆解 -->
+        <section class="card">
+            <h2>03. GSA 落地拆解 (Execution)</h2>
+            <p>基于现有 <strong>40人技术团队</strong> (兼顾前端增长与后端服务) 的资源现状，最优的拆解方案如下：</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 20%;">层级</th>
+                        <th style="width: 30%;">内容</th>
+                        <th style="width: 50%;">具体执行 (Action)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Goal (目标)</strong></td>
+                        <td>上岗率 ≥ 30%<br><span style="font-size:0.8rem; color:#64748b;">(即每开发3个，必有1个成为主力)</span></td>
+                        <td>
+                            1. 季度末盘点：Active Agents ≥ 10个。<br>
+                            2. 核心场景（客诉、SKU生产）AI 渗透率达到 50%。
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Strategy (策略)</strong></td>
+                        <td><strong>“MVP + 嵌入式”策略</strong><br>不造大轮子，只做业务嵌入</td>
+                        <td>
+                            1. <strong>拒绝“新造平台”：</strong> 利用 Dify/Coze 等成熟编排工具，减少后端开发量。<br>
+                            2. <strong>嵌入工作流：</strong> 不让员工去新网页对话，而是把 AI 按钮直接加在 CMS/CRM 系统里。<br>
+                            3. <strong>“产品经理负责制”：</strong> 每一个 Agent 必须有一个业务侧的产品经理背书，否则不开发。
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Action (关键动作)</strong></td>
+                        <td><strong>资源聚焦 Top 3 场景</strong></td>
+                        <td>
+                            <ul style="margin:0; padding-left:15px; font-size:0.9rem;">
+                                <li style="margin-bottom:5px;"><strong>A1 (客服):</strong> 接入 <a
+                                        href="ComplaintRate.html">客诉拦截系统</a>，训练“安抚专家”Agent，目标拦截 90% 情绪咨询。</li>
+                                <li style="margin-bottom:5px;"><strong>A2 (教研):</strong> 开发 SKU 生产流水线 Agent (大纲->初稿)，提升
+                                    <a href="sku.html">SKU密度</a>。</li>
+                                <li style="margin-bottom:5px;"><strong>A3 (销售):</strong> 销售SOP话术实时助手，提升转化率。</li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="resource-box">
+                <h4>🛠 资源配置建议 (Resource Optimization)</h4>
+                <p><strong>40人团队如何分配？</strong></p>
+                <ul style="margin:0; padding-left:20px; font-size:0.9rem;">
+                    <li><strong>AI 核心组 (3人):</strong> 1名架构师 + 2名 Prompt/微调工程师。负责选型、基座模型调优、Prompt 库维护。</li>
+                    <li><strong>业务嵌入组 (Embedded):</strong> 不设立独立 AI 研发，而是让各业务线后端 (Backend) 直接调用 AI 核心组的 API。</li>
+                    <li><strong>前端 (Frontend):</strong> 重点在于改造现有后台 (Admin Portal)，增加 AI 交互入口，而不是重写界面。</li>
+                    <li><strong>机制：</strong> 设立“AI 赏金猎人”机制，谁开发的 Agent 上岗率高，绩效系数 x 1.2。</li>
+                </ul>
+            </div>
+        </section>
+
+        <footer style="text-align: center; margin-top: 40px; color: #94a3b8; font-size: 0.8rem;">
+            &copy; 2026 Xibo Technology. Internal Use Only.
+        </footer>
+    </div>
+
+</body>
+
+</html>

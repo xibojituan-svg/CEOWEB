@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>净利润率：公司健康度的终极体检 | 喜播 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #f97316;
+            --secondary: #1e3a8a;
+            --success: #10b981;
+            --danger: #ef4444;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text-main);
+            margin: 0;
+            padding: 40px 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #64748b;
+            font-size: 1.2rem;
+        }
+
+        .metric-card {
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .formula-container {
+            font-family: 'Courier New', monospace;
+            background: #1e293b;
+            color: #fbbf24;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+            text-align: center;
+            font-size: 1.1em;
+            line-height: 2;
+        }
+
+        .formula-link {
+            color: #60a5fa;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        .alert-box {
+            background: #fff1f2;
+            border-left: 5px solid var(--danger);
+            padding: 20px;
+            border-radius: 8px;
+            color: #be123c;
+            margin: 20px 0;
+        }
+
+        .strategy-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .strategy-item {
+            background: #f1f5f9;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .fab {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            font-size: 1.2em;
+            z-index: 100;
+        }
+
+        /* Mobile Optimization */
+        @media (max-width: 768px) {
+            body {
+                padding: 20px 15px;
+            }
+
+            .container {
+                padding: 0;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .metric-card {
+                padding: 25px 20px;
+                border-radius: 12px;
+            }
+
+            .strategy-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .formula-container {
+                font-size: 0.9em;
+                padding: 15px;
+            }
+
+            /* Responsive Table for Variable Breakdown */
+            table,
+            thead,
+            tbody,
+            th,
+            td,
+            tr {
+                display: block;
+            }
+
+            thead tr {
+                position: absolute;
+                top: -9999px;
+                left: -9999px;
+            }
+
+            tr {
+                border: 1px solid #ccc;
+                margin-bottom: 15px;
+                border-radius: 8px;
+                overflow: hidden;
+            }
+
+            td {
+                border: none;
+                border-bottom: 1px solid #eee;
+                position: relative;
+                padding-left: 50%;
+                text-align: right;
+            }
+
+            td:before {
+                position: absolute;
+                top: 15px;
+                left: 15px;
+                width: 45%;
+                padding-right: 10px;
+                white-space: nowrap;
+                text-align: left;
+                font-weight: bold;
+                color: #64748b;
+            }
+
+            /* Add labels for table cells */
+            td:nth-of-type(1):before {
+                content: "变量";
+            }
+
+            td:nth-of-type(2):before {
+                content: "权重";
+            }
+
+            td:nth-of-type(3):before {
+                content: "问题";
+            }
+
+            td:nth-of-type(4):before {
+                content: "对策";
+            }
+
+            td:nth-of-type(5):before {
+                content: "责任人";
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <header>
+            <h1>净利润率 (Net Profit Margin)</h1>
+            <div class="subtitle">不再关注规模虚胖，只关注健康肌肉 | 2026 核心财务指标</div>
+        </header>
+
+        <!-- 1. 定义与公式 -->
+        <div class="metric-card">
+            <h2>一、指标定义与公式</h2>
+            <p>净利润率是衡量公司每一块钱收入中，最终真正落到口袋里的钱。它是公司健康度的终极体检报告。</p>
+
+            <div class="formula-container">
+                <span style="font-size: 1.5em; font-weight: bold;">净利润率 = </span><br>
+                ( <a target="_blank" href="CleanRevenue.html" class="formula-link">净营收</a> - <a
+                    href="PartTimeEfficiency.html" class="formula-link">核心销货成本(COGS)</a> - <a href="MarketingROI.html"
+                    class="formula-link">营销费用</a> - <a href="CTO_OKR_Analysis_2026.html"
+                    class="formula-link">研发/管理费用</a> )<br>
+                ------------------------------------------------<br>
+                <a class="formula-link" href="CleanRevenue.html" target="_blank">净营收 (Clean Revenue)</a>
+            </div>
+
+            <div class="alert-box">
+                <strong>🚨 红色预警：</strong> 2025 年我们的净利润率仅为 <strong>-2%</strong>（亏损），主要原因是营销ROI低（0.8）和兼职人效低。2026 年的目标是必须做到
+                <strong>≥ 10%</strong>。
+            </div>
+        </div>
+
+        <!-- 2. 四大变量拆解 -->
+        <div class="metric-card">
+            <h2>二、四大变量拆解与对策</h2>
+            <table style="width: 100%; border-collapse: collapse;">
+                <thead>
+                    <tr style="background: #f8fafc; text-align: left;">
+                        <th style="padding: 15px;">变量 (Variable)</th>
+                        <th style="padding: 15px;">影响权重</th>
+                        <th style="padding: 15px;">核心问题</th>
+                        <th style="padding: 15px;">对策链接</th>
+                        <th style="padding: 15px;">责任人</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="padding: 15px; border-bottom: 1px solid #e2e8f0;"><strong>1. 净营收</strong> (分母)</td>
+                        <td style="padding: 15px; border-bottom: 1px solid #e2e8f0; color: var(--success);">100% (基石)
+                        </td>
+                        <td style="padding: 15px; border-bottom: 1px solid #e2e8f0;">退费率高，收入不单纯</td>
+                        <td style="padding: 15px; border-bottom: 1px solid #e2e8f0;"><a
+                                href="CleanRevenue.html">去毒行动</a></td>
+                        <td style="padding: 15px; border-bottom: 1px solid #e2e8f0;">马长久</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 15px; border-bottom: 1px solid #e2e8f0;"><strong>2. 营销费用</strong> (最大减项)
+                        </td>
+                        <td style="padding: 15px; border-bottom: 1px solid #e2e8f0; color: var(--danger);">-65% (出血点)
+                        </td>
+                        <td style="padding: 15px; border-bottom: 1px solid #e2e8f0;">ROI < 1，烧钱买流量</td>
+                        <td style="padding: 15px; border-bottom: 1px solid #e2e8f0;"><a href="MarketingROI.html">ROI 提升至
+                                1.5</a></td>
+                        <td style="padding: 15px; border-bottom: 1px solid #e2e8f0;">投放团队</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 15px; border-bottom: 1px solid #e2e8f0;"><strong>3. 销货成本</strong> (刚性成本)
+                        </td>
+                        <td style="padding: 15px; border-bottom: 1px solid #e2e8f0; color: #f59e0b;">-20% (可优)</td>
+                        <td style="padding: 15px; border-bottom: 1px solid #e2e8f0;">兼职人海战术，效率低</td>
+                        <td style="padding: 15px; border-bottom: 1px solid #e2e8f0;"><a
+                                href="PartTimeEfficiency.html">兼职人效 ↑15%</a></td>
+                        <td style="padding: 15px; border-bottom: 1px solid #e2e8f0;">姚涣</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 15px; border-bottom: 1px solid #e2e8f0;"><strong>4. 研发/管理</strong> (固定费用)
+                        </td>
+                        <td style="padding: 15px; border-bottom: 1px solid #e2e8f0; color: #64748b;">-15% (摊薄)</td>
+                        <td style="padding: 15px; border-bottom: 1px solid #e2e8f0;">人效红利未释放</td>
+                        <td style="padding: 15px; border-bottom: 1px solid #e2e8f0;"><a
+                                href="CTO_OKR_Analysis_2026.html">技术降本</a></td>
+                        <td style="padding: 15px; border-bottom: 1px solid #e2e8f0;">王俊</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 3. 核心策略 -->
+        <div class="metric-card">
+            <h2>三、核心战役部署 (GSA Analysis)</h2>
+            <div style="margin-bottom: 20px; font-weight: bold; font-size: 1.1em; color: var(--primary);">
+                战役代号：挺进大别山 (Profitability Battle)
+            </div>
+            <div class="strategy-grid">
+                <div class="strategy-item">
+                    <h3 style="margin-top: 0; color: #1e3a8a;">S1. 结构性降本 (AI Cost Down)</h3>
+                    <p style="font-size: 0.9em; color: #475569;">
+                        不要试图通过“少发纸笔”来省钱。真正的降本在 <strong>AI 替代人力</strong>。
+                        <br>
+                        <strong>Action:</strong> 兼职团队缩编 30%，引入 AI Agent (见 <a href="PartTimeEfficiency.html">兼职人效</a>)。
+                    </p>
+                </div>
+                <div class="strategy-item">
+                    <h3 style="margin-top: 0; color: #ea580c;">S2. 营销模型重构 (ROI Up)</h3>
+                    <p style="font-size: 0.9em; color: #475569;">
+                        停止投放 ROI < 1 的低价引流课。 <br>
+                            <strong>Action:</strong> 转战“中高客单价直投”，牺牲规模换利润 (见 <a href="MarketingROI.html">营销 ROI</a>)。
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <footer style="margin-top: 60px; text-align: center; color: #cbd5e1; font-size: 0.9em;">
+            <p>Xibo Education Group &copy; 2026 Strategy Department</p>
+        </footer>
+
+    </div>
+
+    <a href="BSC.html" class="fab" title="返回 BSC">📊</a>
+
+</body>
+
+</html>

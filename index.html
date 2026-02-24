@@ -352,6 +352,92 @@
         }
     </style>
 
+    <style>
+        /* Mobile Optimization / 手机端适配 */
+        @media screen and (max-width: 768px) {
+
+            /* 头部优化 */
+            header {
+                padding: 60px 0;
+            }
+
+            header h1 {
+                font-size: 2.0rem;
+                padding: 0 15px;
+            }
+
+            header p {
+                font-size: 1rem;
+                padding: 0 15px;
+            }
+
+            /* 容器边距 */
+            .container {
+                padding: 0 20px;
+            }
+
+            /* 战略背景文字适配 */
+            .strategy-section::before {
+                font-size: 4rem;
+                top: 20px;
+                width: 100%;
+                text-align: center;
+                opacity: 0.5;
+            }
+
+            /* 战略卡片单列显示 */
+            .strategy-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+                margin-top: 40px;
+            }
+
+            /* 口号框 */
+            .slogan-box {
+                margin: 30px 15px;
+            }
+
+            /* CEO板块堆叠 */
+            .ceo-container {
+                flex-direction: column;
+                gap: 30px;
+            }
+
+            /* 统计数据堆叠 */
+            .stats {
+                flex-direction: column;
+                gap: 30px;
+            }
+
+            /* 名师列表堆叠 nowrap -> wrap is already there, but justify-content needs care */
+            .master-list {
+                gap: 20px;
+            }
+
+            /* 强制覆盖 inline styles 的 padding */
+            .ceo-message,
+            .matrix,
+            .masters,
+            .social,
+            .team-building,
+            .strategy-section,
+            .bsc-core-section,
+            .weekly-reports {
+                padding: 40px 0 !important;
+            }
+
+            /* BSC 核心指标图表提示 */
+            .bsc-core-section .container::before {
+                content: "← 左右滑动查看完整因果链 →";
+                display: block;
+                text-align: center;
+                font-size: 0.8rem;
+                color: rgba(255, 255, 255, 0.5);
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+
     <section class="strategy-section">
         <div class="container">
             <h2 style="text-align: center; position: relative; z-index: 1;">2026 战略全景：双轮驱动</h2>
@@ -374,7 +460,9 @@
                 <!-- Curve 1 -->
                 <div class="strategy-card">
                     <h3>第一曲线：教育培训 <span>现金牛</span></h3>
-                    <p><strong>现状（2025复盘）：</strong> 全年营收 <strong>2.6亿</strong>，但投诉量激增180%，退费率攀升至20%。必须正视“高增长下的虚胖”。</p>
+                    <p><strong>现状（2025复盘）：</strong> 全年营收 <strong>2.6亿</strong>，但投诉量激增180%，<a href="RefundAnalysis.html"
+                            target="_blank"
+                            style="color: inherit; text-decoration: underline;">退费率</a>攀升至20%。必须正视“高增长下的虚胖”。</p>
                     <div class="curve-diagram">
                         <div class="curve-box">
                             <span class="curve-title">去肥</span>
@@ -387,7 +475,8 @@
                         </div>
                     </div>
                     <ul class="strategy-list">
-                        <li><strong>目标：</strong> 将退费率控制在 15% 以内，哪怕牺牲 30% 的营收。</li>
+                        <li><strong>目标：</strong> 将<a href="RefundAnalysis.html" target="_blank"
+                                style="color: inherit; text-decoration: underline;">退费率</a>控制在 15% 以内，哪怕牺牲 30% 的营收。</li>
                         <li><strong>定位：</strong> 做干净的利润，为公司提供生存现金流，并作为“人才蓄水池”。</li>
                     </ul>
                 </div>
@@ -417,7 +506,7 @@
     </section>
 
     <!-- BSC Core Info Module -->
-    <section
+    <section class="bsc-core-section"
         style="padding: 70px 0; background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); color: #fff; border-top: 3px solid #FF4500;">
         <div class="container">
             <h2 style="text-align: center; color: #fff; margin-bottom: 10px; font-size: 2rem;">2026 第一曲线 BSC 核心指标</h2>
@@ -435,7 +524,8 @@
                         style="flex: 1; text-align: center; padding: 15px; background: rgba(139,92,246,0.15); border-radius: 8px; border: 1px solid rgba(139,92,246,0.3);">
                         <div style="font-size: 0.7rem; color: #a78bfa; font-weight: 600; margin-bottom: 4px;">学习与成长 10%
                         </div>
-                        <div style="font-size: 0.95rem; font-weight: bold;">AI Agent 上岗率</div>
+                        <div style="font-size: 0.95rem; font-weight: bold;"><a href="AI_Org_Reconstruction.html"
+                                style="color: inherit; text-decoration: underline;">关键岗位 AI 重构率</a></div>
                         <div style="font-size: 0.8rem; color: #c4b5fd;">≥ 30%</div>
                     </div>
                     <div style="color: #475569; font-size: 1.5rem; padding: 0 8px;">→</div>
@@ -443,7 +533,9 @@
                         style="flex: 1.5; text-align: center; padding: 15px; background: rgba(59,130,246,0.15); border-radius: 8px; border: 1px solid rgba(59,130,246,0.3);">
                         <div style="font-size: 0.7rem; color: #93c5fd; font-weight: 600; margin-bottom: 4px;">内部运营 30%
                         </div>
-                        <div style="font-size: 0.95rem; font-weight: bold;">人效提升15% + SKU密度</div>
+                        <div style="font-size: 0.95rem; font-weight: bold;"><a href="PartTimeEfficiency.html"
+                                style="color: inherit; text-decoration: underline;">人效提升15%</a> + <a href="sku.html"
+                                style="color: inherit; text-decoration: underline;">SKU密度</a></div>
                         <div style="font-size: 0.8rem; color: #93c5fd;">≥ 4个达标SKU</div>
                     </div>
                     <div style="color: #475569; font-size: 1.5rem; padding: 0 8px;">→</div>
@@ -451,7 +543,11 @@
                         style="flex: 1.5; text-align: center; padding: 15px; background: rgba(34,197,94,0.15); border-radius: 8px; border: 1px solid rgba(34,197,94,0.3);">
                         <div style="font-size: 0.7rem; color: #86efac; font-weight: 600; margin-bottom: 4px;">客户 30%
                         </div>
-                        <div style="font-size: 0.95rem; font-weight: bold;">投诉降 + 拦截 + NPS</div>
+                        <div style="font-size: 0.95rem; font-weight: bold;"><a href="ComplaintRate.html"
+                                style="color: inherit; text-decoration: underline;">投诉降</a> + <a
+                                href="BlackUserInterception.html"
+                                style="color: inherit; text-decoration: underline;">拦截</a> + <a href="NPS.html"
+                                style="color: inherit; text-decoration: underline;">NPS</a></div>
                         <div style="font-size: 0.8rem; color: #86efac;">拦截≥90% / NPS≥85</div>
                     </div>
                     <div style="color: #475569; font-size: 1.5rem; padding: 0 8px;">→</div>
@@ -459,8 +555,10 @@
                         style="flex: 1; text-align: center; padding: 15px; background: rgba(255,69,0,0.2); border-radius: 8px; border: 1px solid rgba(255,69,0,0.4);">
                         <div style="font-size: 0.7rem; color: #fca5a5; font-weight: 600; margin-bottom: 4px;">财务 30%
                         </div>
-                        <div style="font-size: 0.95rem; font-weight: bold;">干净收入 6亿</div>
-                        <div style="font-size: 0.8rem; color: #fca5a5;">净利润率 ≥10%</div>
+                        <div style="font-size: 0.95rem; font-weight: bold;"><a href="NetProfitMargin.html"
+                                style="color: inherit; text-decoration: underline;">净利润率</a> ≥10%</div>
+                        <div style="font-size: 0.8rem; color: #fca5a5;"><a href="CleanRevenue.html"
+                                style="color: inherit; text-decoration: underline;">干净收入 6亿</a></div>
                     </div>
                 </div>
             </div>
@@ -477,10 +575,11 @@
                             15%</span>
                         <span style="font-size: 0.75rem; color: #64748b;">@马长久</span>
                     </div>
-                    <h4 style="margin: 0 0 6px; font-size: 1.1rem; color: #fff;">净营收 (Clean Revenue)</h4>
-                    <p style="margin: 0; font-size: 0.85rem; color: #94a3b8; line-height: 1.5;">营收扣除退款 + <strong
-                            style="color: #fdba74;">180天退费预提</strong>，消灰Q4冲量延迟爆雷</p>
-                    <div style="margin-top: 10px; font-size: 1.3rem; font-weight: 800; color: #f97316;">目标 6亿</div>
+                    <h4 style="margin: 0 0 6px; font-size: 1.1rem; color: #fff;"><a href="NetProfitMargin.html"
+                            style="color: #fff; text-decoration: underline;">净利润率</a></h4>
+                    <p style="margin: 0; font-size: 0.85rem; color: #94a3b8; line-height: 1.5;">从绝对值改为<strong
+                            style="color: #fdba74;">利润率</strong>，防止冲量稀释利润</p>
+                    <div style="margin-top: 10px; font-size: 1.3rem; font-weight: 800; color: #f97316;">≥ 10%</div>
                 </div>
                 <!-- Financial 2 -->
                 <div
@@ -492,10 +591,14 @@
                             15%</span>
                         <span style="font-size: 0.75rem; color: #64748b;">@马长久</span>
                     </div>
-                    <h4 style="margin: 0 0 6px; font-size: 1.1rem; color: #fff;">净利润率</h4>
-                    <p style="margin: 0; font-size: 0.85rem; color: #94a3b8; line-height: 1.5;">从绝对值改为<strong
-                            style="color: #fdba74;">利润率</strong>，防止冲量稀释利润</p>
-                    <div style="margin-top: 10px; font-size: 1.3rem; font-weight: 800; color: #f97316;">≥ 10%</div>
+                    <h4 style="margin: 0 0 6px; font-size: 1.1rem; color: #fff;"><a href="CleanRevenue.html"
+                            style="color: inherit; text-decoration: underline;">净营收 (Clean Revenue)</a></h4>
+                    <p style="margin: 0; font-size: 0.85rem; color: #94a3b8; line-height: 1.5;">营收扣除<a
+                            href="RefundAnalysis.html" target="_blank"
+                            style="color: inherit; text-decoration: underline;">退款</a> + <strong
+                            style="color: #fdba74;">180天<a href="RefundAnalysis.html" target="_blank"
+                                style="color: inherit; text-decoration: underline;">退费</a>预提</strong>，消灰Q4冲量延迟爆雷</p>
+                    <div style="margin-top: 10px; font-size: 1.3rem; font-weight: 800; color: #f97316;">目标 6亿</div>
                 </div>
                 <!-- Customer 1 -->
                 <div
@@ -507,7 +610,8 @@
                             10%</span>
                         <span style="font-size: 0.75rem; color: #64748b;">@杜康杰</span>
                     </div>
-                    <h4 style="margin: 0 0 6px; font-size: 1.1rem; color: #fff;"><a href="GSA_2_1.html" style="color: #fff; text-decoration: underline;">百万元投诉率</a></h4>
+                    <h4 style="margin: 0 0 6px; font-size: 1.1rem; color: #fff;"><a href="ComplaintRate.html"
+                            style="color: #fff; text-decoration: underline;">百万元投诉率</a></h4>
                     <p style="margin: 0; font-size: 0.85rem; color: #94a3b8; line-height: 1.5;">每百万元现金流中投诉订单金额占比</p>
                     <div style="margin-top: 10px; font-size: 1.3rem; font-weight: 800; color: #22c55e;">降 15%</div>
                 </div>
@@ -524,7 +628,8 @@
                             10%</span>
                         <span style="font-size: 0.75rem; color: #64748b;">@杜康杰</span>
                     </div>
-                    <h4 style="margin: 0 0 6px; font-size: 1.1rem; color: #fff;">大黑用户拦截率</h4>
+                    <h4 style="margin: 0 0 6px; font-size: 1.1rem; color: #fff;"><a href="BlackUserInterception.html"
+                            style="color: inherit; text-decoration: none;">大黑用户拦截率</a></h4>
                     <p style="margin: 0; font-size: 0.85rem; color: #94a3b8; line-height: 1.5;">“不赚带血的钱”的量化体现，<strong
                             style="color: #fca5a5;">射拦率 < 80% 则收入归零</strong>
                     </p>
@@ -543,7 +648,8 @@
                             10%</span>
                         <span style="font-size: 0.75rem; color: #64748b;">@马长久</span>
                     </div>
-                    <h4 style="margin: 0 0 6px; font-size: 1.1rem; color: #fff;">服务满意度 NPS</h4>
+                    <h4 style="margin: 0 0 6px; font-size: 1.1rem; color: #fff;"><a href="NPS.html"
+                            style="color: inherit; text-decoration: none;">服务满意度 NPS</a></h4>
                     <p style="margin: 0; font-size: 0.85rem; color: #94a3b8; line-height: 1.5;">AI替代人工的<strong
                             style="color: #86efac;">安全网</strong>，防止降本降出风险</p>
                     <div style="margin-top: 10px; font-size: 1.3rem; font-weight: 800; color: #22c55e;">≥ 85分</div>
@@ -558,9 +664,16 @@
                             15%+15%</span>
                         <span style="font-size: 0.75rem; color: #64748b;">@苏秦 / @姚涣</span>
                     </div>
-                    <h4 style="margin: 0 0 6px; font-size: 1.1rem; color: #fff;">单SKU产能密度 + 兼职人效</h4>
-                    <p style="margin: 0; font-size: 0.85rem; color: #94a3b8; line-height: 1.5;">做精而非做多，月均GMV≥15p万的SKU数 +
-                        人效提升15%</p>
+                    <h4 style="margin: 0 0 6px; font-size: 1.1rem; color: #fff;"><a href="sku.html"
+                            style="color: #fff; text-decoration: underline;">单SKU产能密度</a> + <a
+                            href="PartTimeEfficiency.html" style="color: #fff; text-decoration: underline;">兼职人效</a>
+                    </h4>
+                    <p style="margin: 0; font-size: 0.85rem; color: #94a3b8; line-height: 1.5;">做精而非做多，月均<a
+                            href="SKU_Revenue_Analysis_2026.html" target="_blank"
+                            style="color: inherit; text-decoration: underline;">GMV</a>≥150万的SKU数 +
+                        <a href="PartTimeEfficiency.html"
+                            style="color: inherit; text-decoration: underline;">人效提升15%</a>
+                    </p>
                     <div style="margin-top: 10px; font-size: 1.3rem; font-weight: 800; color: #3b82f6;">≥ 4个 SKU</div>
                 </div>
                 <!-- Learning -->
@@ -571,10 +684,11 @@
                         <span
                             style="font-size: 0.75rem; background: rgba(168,85,247,0.2); color: #d8b4fe; padding: 3px 10px; border-radius: 20px;">成长
                             10%</span>
-                        <span style="font-size: 0.75rem; color: #64748b;">@王俊 / @姚涣</span>
+                        <span style="font-size: 0.75rem; color: #64748b;">@王俊</span>
                     </div>
-                    <h4 style="margin: 0 0 6px; font-size: 1.1rem; color: #fff;">AI Agent 实际上岗率</h4>
-                    <p style="margin: 0; font-size: 0.85rem; color: #94a3b8; line-height: 1.5;">考核AI是否真的在干活，而非文档是否写完</p>
+                    <h4 style="margin: 0 0 6px; font-size: 1.1rem; color: #fff;"><a href="AI_Org_Reconstruction.html"
+                            style="color: #fff; text-decoration: underline;">关键岗位 AI 重构率</a></h4>
+                    <p style="margin: 0; font-size: 0.85rem; color: #94a3b8; line-height: 1.5;">考核组织是否变了，而非工具是否装了</p>
                     <div style="margin-top: 10px; font-size: 1.3rem; font-weight: 800; color: #a855f7;">≥ 30%</div>
                 </div>
             </div>
@@ -604,6 +718,30 @@
                         <strong>利益博弈</strong>(销售保KPI)
                     </p>
                 </div>
+                <!-- New Report Card -->
+                <div
+                    style="background: white; padding: 25px; border-radius: 8px; border-left: 4px solid #10b981; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+                    <div style="font-size: 0.85rem; color: #999; margin-bottom: 5px;">2026-02-02 | Week 5 深度透视</div>
+                    <h3 style="font-size: 1.2rem; margin: 0 0 10px 0;"><a href="weekly_meeting_analysis_2026.html"
+                            target="_blank" style="text-decoration: none; color: var(--dark);">战略拆解与组织执行力体检</a></h3>
+                    <p style="font-size: 0.9rem; color: #666; margin-bottom: 0;">
+                        <span style="color: #2e7d32; font-weight: bold;">[一致]</span> 防风险外溢、合规底线确立<br>
+                        <span style="color: #d32f2f; font-weight: bold;">[风险]</span> 转化率骤降，营销与合规成伪对立<br>
+                        <span style="color: #3b82f6; font-weight: bold;">[推演]</span> 迫切需用AI建立全套标准转化SOP
+                    </p>
+                </div>
+                <!-- CEO Weekly Task Card -->
+                <div
+                    style="background: white; padding: 25px; border-radius: 8px; border-left: 4px solid #8b5cf6; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+                    <div style="font-size: 0.85rem; color: #999; margin-bottom: 5px;">实时动态 (Dynamic)</div>
+                    <h3 style="font-size: 1.2rem; margin: 0 0 10px 0;"><a href="WeeklyCEOTasks.html" target="_blank"
+                            style="text-decoration: none; color: var(--dark);">CEO 每周动态工作清单</a></h3>
+                    <p style="font-size: 0.9rem; color: #666; margin-bottom: 0;">
+                        <span style="color: #8b5cf6; font-weight: bold;">[思考]</span> 50% 深度思考与战略复盘<br>
+                        <span style="color: #3b82f6; font-weight: bold;">[会议]</span> 30% 周会及专题会议<br>
+                        <span style="color: #22c55e; font-weight: bold;">[沟通]</span> 20% 核心 1v1 交流
+                    </p>
+                </div>
             </div>
         </div>
     </section>
@@ -624,7 +762,10 @@
                 </div>
                 <div class="card">
                     <h3>03. AI 生产力工具</h3>
-                    <p><strong>效率革命：</strong> AI写作线退费率仅 3%-6%，验证了高满意度的交付模型。</p>
+                    <p><strong>效率革命：</strong> <a href="SKU/AI写作L1.html" target="_blank"
+                            style="color: inherit; text-decoration: underline;">AI写作线</a><a href="RefundAnalysis.html"
+                            target="_blank" style="color: inherit; text-decoration: underline;">退费率</a>仅
+                        3%-6%，验证了高满意度的交付模型。</p>
                     <p><strong>核心价值：</strong> 让普通人通过AI杠杆，实现个人能力的十倍放大。</p>
                 </div>
             </div>
@@ -643,7 +784,7 @@
                     <div class="master-title">有声演播艺术大师</div>
                 </div>
                 <div class="master-item">
-                    <img src="pic/wang_mingjun.png" alt="王明军"
+                    <img src="pic/wang_mingjun.jpeg" alt="王明军"
                         style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; margin: 0 auto 10px auto; border: 2px solid #ddd;">
                     <div class="master-name">王明军</div>
                     <div class="master-title">中国演播艺术大师</div>
@@ -662,83 +803,85 @@
     <!-- Team Building Section -->
     <section class="team-building" style="padding: 80px 0; background-color: #f9f9f9; border-top: 1px solid #eee;">
         <div class="container">
-            <h2 style="text-align: center; margin-bottom: 50px;">核心团队建设 (Team Building)</h2>
+            <h2 style="text-align: center; margin-bottom: 20px;">核心团队建设 (Team Building)</h2>
+            <div style="text-align: center; margin-bottom: 50px;">
+                <a href="CoreTeam.html" target="_blank"
+                    style="color: #FF4500; text-decoration: none; font-weight: bold; border-bottom: 2px solid #FF4500;">
+                    查看完整组织架构与岗位职责 →
+                </a>
+            </div>
             <div style="display: flex; flex-wrap: wrap; gap: 40px; align-items: center;">
                 <!-- Video Column -->
 
 
                 <!-- Profile Column -->
-                <div style="flex: 1; min-width: 300px;">
+                <!-- Team Grid -->
+                <div
+                    style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; width: 100%;">
+
+                    <!-- Ma Changjiu -->
                     <div
-                        style="background: white; padding: 40px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border-left: 5px solid var(--primary); margin-bottom: 20px;">
-                        <img src="pic/ma_changjiu.png" alt="马长久"
-                            style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin-bottom: 20px; border: 3px solid var(--primary);">
-                        <h3 style="margin-top: 0; color: var(--dark); font-size: 1.8rem;">马长久</h3>
-                        <p style="color: var(--primary); font-weight: bold; margin-bottom: 20px;">副总经理级别 | 市场经营负责人</p>
-
-                        <p style="color: #666; line-height: 1.8;">
-                            作为市场部的核心领军人物，马长久先生负责统筹第一曲线业务的市场经营工作。
-                        </p>
-
-                        <ul style="list-style: none; padding: 0; margin-top: 20px;">
-                            <li style="margin-bottom: 10px; display: flex; align-items: center;">
-                                <span
-                                    style="width: 8px; height: 8px; background: var(--primary); border-radius: 50%; display: inline-block; margin-right: 10px;"></span>
-                                <span><strong>部门：</strong> 市场部</span>
-                            </li>
-
-                            <li style="margin-bottom: 10px; display: flex; align-items: center;">
-                                <span
-                                    style="width: 8px; height: 8px; background: var(--primary); border-radius: 50%; display: inline-block; margin-right: 10px;"></span>
-                                <span><strong>职责：</strong> 驱动市场增长，优化经营效率</span>
-                            </li>
-                        </ul>
+                        style="background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); text-align: center; border-top: 4px solid var(--primary);">
+                        <img src="pic/ma_changjiu.jpeg" alt="马长久"
+                            style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; margin-bottom: 20px; border: 3px solid #eee;">
+                        <h4 style="margin: 0 0 5px 0; font-size: 1.2rem; color: var(--dark);">马长久</h4>
+                        <div style="font-size: 0.85rem; color: #999; margin-bottom: 15px;">市场经营负责人</div>
+                        <div style="font-size: 0.9rem; color: #666; text-align: left;">
+                            <strong>部门：</strong> 市场部<br>
+                            <strong>职责：</strong> 驱动市场增长，优化经营效率
+                        </div>
                     </div>
 
-                    <!-- Additional Members Grid -->
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-                        <!-- Wang Jun -->
-                        <div
-                            style="background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
-                            <h4 style="margin: 0 0 5px 0; font-size: 1.2rem;">王俊</h4>
-                            <div style="font-size: 0.85rem; color: #999; margin-bottom: 10px;">组织及后台负责人</div>
-                            <div style="font-size: 0.9rem; color: #666;">
-
-                                <strong>部门：</strong> 人力资源组
-                            </div>
+                    <!-- Wang Jun -->
+                    <div
+                        style="background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); text-align: center; border-top: 4px solid var(--primary);">
+                        <img src="pic/wang_jun.jpg" alt="王俊"
+                            style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; margin-bottom: 20px; border: 3px solid #eee;">
+                        <h4 style="margin: 0 0 5px 0; font-size: 1.2rem; color: var(--dark);">王俊</h4>
+                        <div style="font-size: 0.85rem; color: #999; margin-bottom: 15px;">组织及后台负责人</div>
+                        <div style="font-size: 0.9rem; color: #666; text-align: left;">
+                            <strong>部门：</strong> 人力资源组<br>
+                            <strong>职责：</strong> 组织效能与人才密度
                         </div>
+                    </div>
 
-                        <!-- Su Qin -->
-                        <div
-                            style="background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
-                            <h4 style="margin: 0 0 5px 0; font-size: 1.2rem;">苏秦</h4>
-                            <div style="font-size: 0.85rem; color: #999; margin-bottom: 10px;">课程训练营及内容产品负责人</div>
-                            <div style="font-size: 0.9rem; color: #666;">
-
-                                <strong>部门：</strong> 教研部
-                            </div>
+                    <!-- Su Qin -->
+                    <div
+                        style="background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); text-align: center; border-top: 4px solid var(--primary);">
+                        <img src="pic/su_qin.jpg" alt="苏秦"
+                            style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; margin-bottom: 20px; border: 3px solid #eee;">
+                        <h4 style="margin: 0 0 5px 0; font-size: 1.2rem; color: var(--dark);">苏秦</h4>
+                        <div style="font-size: 0.85rem; color: #999; margin-bottom: 15px;">课程训练营及内容产品负责人</div>
+                        <div style="font-size: 0.9rem; color: #666; text-align: left;">
+                            <strong>部门：</strong> 教研部<br>
+                            <strong>职责：</strong> 课程研发与教学交付
                         </div>
+                    </div>
 
-                        <!-- Yao Huan -->
-                        <div
-                            style="background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
-                            <h4 style="margin: 0 0 5px 0; font-size: 1.2rem;">姚涣</h4>
-                            <div style="font-size: 0.85rem; color: #999; margin-bottom: 10px;">产品及研发部门负责人</div>
-                            <div style="font-size: 0.9rem; color: #666;">
-
-                                <strong>部门：</strong> 产品研发部
-                            </div>
+                    <!-- Yao Huan -->
+                    <div
+                        style="background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); text-align: center; border-top: 4px solid var(--primary);">
+                        <img src="pic/yao_huan.png" alt="姚涣"
+                            style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; margin-bottom: 20px; border: 3px solid #eee;">
+                        <h4 style="margin: 0 0 5px 0; font-size: 1.2rem; color: var(--dark);">姚涣</h4>
+                        <div style="font-size: 0.85rem; color: #999; margin-bottom: 15px;">产品及研发部门负责人</div>
+                        <div style="font-size: 0.9rem; color: #666; text-align: left;">
+                            <strong>部门：</strong> 产品研发部<br>
+                            <strong>职责：</strong> 技术基建与AI应用
                         </div>
+                    </div>
 
-                        <!-- Du Kangjie -->
+                    <!-- Du Kangjie -->
+                    <div
+                        style="background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); text-align: center; border-top: 4px solid var(--primary);">
                         <div
-                            style="background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
-                            <h4 style="margin: 0 0 5px 0; font-size: 1.2rem;">杜康杰</h4>
-                            <div style="font-size: 0.85rem; color: #999; margin-bottom: 10px;">用户体验及客服服务质检负责人</div>
-                            <div style="font-size: 0.9rem; color: #666;">
-
-                                <strong>部门：</strong> 客户体验部
-                            </div>
+                            style="width: 100px; height: 100px; background: #eee; border-radius: 50%; margin: 0 auto 20px auto; display: flex; align-items: center; justify-content: center; color: #999; font-size: 2rem;">
+                            杜</div>
+                        <h4 style="margin: 0 0 5px 0; font-size: 1.2rem; color: var(--dark);">杜康杰</h4>
+                        <div style="font-size: 0.85rem; color: #999; margin-bottom: 15px;">用户体验及客服服务质检负责人</div>
+                        <div style="font-size: 0.9rem; color: #666; text-align: left;">
+                            <strong>部门：</strong> 客户体验部<br>
+                            <strong>职责：</strong> 体验兜底与风控拦截
                         </div>
                     </div>
                 </div>

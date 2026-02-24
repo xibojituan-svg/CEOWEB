@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>净营收 (Clean Revenue) 专题 | 喜播 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #f97316;
+            --primary-glow: rgba(249, 115, 22, 0.4);
+            --bg: #0f172a;
+            --card-bg: rgba(30, 41, 59, 0.7);
+            --text-main: #f8fafc;
+            --text-dim: #94a3b8;
+            --border: rgba(255, 255, 255, 0.1);
+            --success: #22c55e;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text-main);
+            margin: 0;
+            padding: 40px 20px;
+            line-height: 1.6;
+            background-image:
+                radial-gradient(circle at 20% 20%, rgba(249, 115, 22, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 80% 80%, rgba(30, 64, 175, 0.15) 0%, transparent 40%);
+            background-attachment: fixed;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #fff 30%, var(--primary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            color: var(--text-dim);
+            font-size: 1.1rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-glow);
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+        }
+
+        h2::before {
+            content: '';
+            width: 4px;
+            height: 24px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .info-item {
+            margin-bottom: 20px;
+        }
+
+        .label {
+            display: block;
+            color: var(--text-dim);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .value {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .highlight-value {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .tag {
+            background: rgba(249, 115, 22, 0.1);
+            color: var(--primary);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .reasoning {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 20px;
+            border-left: 3px solid var(--primary);
+        }
+
+        .comparison {
+            display: flex;
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .comp-box {
+            flex: 1;
+            padding: 20px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .comp-title {
+            font-weight: 800;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        ul {
+            padding-left: 20px;
+            color: var(--text-dim);
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        .badge-gsa {
+            color: #f97316;
+            background: rgba(249, 115, 22, 0.1);
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
+        .badge-okr {
+            color: #3b82f6;
+            background: rgba(59, 130, 246, 0.1);
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 60px;
+            color: var(--text-dim);
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb {
+            display: flex;
+            gap: 8px;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            margin-bottom: 30px;
+        }
+
+        .breadcrumb a {
+            color: var(--text-dim);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--primary);
+        }
+
+        .breadcrumb span {
+            opacity: 0.5;
+        }
+
+        /* Table Styles for GSA */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0 30px;
+            font-size: 0.95rem;
+        }
+
+        th,
+        td {
+            border: 1px solid var(--border);
+            padding: 14px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        th {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--primary);
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        td {
+            color: var(--text-main);
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        tr:hover td {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        /* Mobile Optimization */
+        @media screen and (max-width: 768px) {
+            body {
+                padding: 0 !important;
+            }
+
+            .container {
+                padding: 0 20px !important;
+                width: 100% !important;
+                max-width: 100% !important;
+                box-sizing: border-box !important;
+            }
+
+            .card {
+                padding: 24px 20px !important;
+            }
+
+            h1 {
+                font-size: 1.8rem !important;
+                line-height: 1.3 !important;
+            }
+
+            h2 {
+                font-size: 1.5rem !important;
+            }
+
+            .grid {
+                grid-template-columns: 1fr !important;
+                gap: 20px !important;
+            }
+
+            table {
+                display: block !important;
+                width: 100% !important;
+                overflow-x: auto !important;
+                white-space: nowrap !important;
+            }
+
+            /* Fix Formula Visualization */
+            div[style*="flex-wrap: wrap"] {
+                flex-direction: column;
+                gap: 10px !important;
+            }
+
+            /* Flex containers in general */
+            .comparison {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <nav class="breadcrumb">
+            <a href="index.html">首页</a>
+            <span>/</span>
+            <a href="BSC.html">BSC 总览</a>
+            <span>/</span>
+            <span style="color: var(--text-main);">净营收专题</span>
+        </nav>
+        <header>
+            <h1>净营收 (Clean Revenue)</h1>
+            <div class="subtitle">2026 第一曲线财务核心指标深度拆解</div>
+        </header>
+
+        <!-- 模块一：口径定义与责任主体 -->
+        <div class="card">
+            <h2>口径展示与责任主体</h2>
+            <div class="grid">
+                <div class="info-item">
+                    <span class="label">指标名称</span>
+                    <span class="value">净营收 (Clean Revenue) <span class="tag">BSC 财务维度</span></span>
+                </div>
+                <div class="info-item">
+                    <span class="label">权重</span>
+                    <span class="value">15%</span>
+                </div>
+                <div class="info-item">
+                    <span class="label">年度总目标</span>
+                    <div class="highlight-value">6.0 亿</div>
+                </div>
+                <div class="info-item">
+                    <span class="label">责任人</span>
+                    <span class="value">@马长久</span>
+                </div>
+            </div>
+
+            <div style="margin-top: 20px;">
+                <div class="info-item">
+                    <span class="label">官方定义</span>
+                    <p class="value" style="font-weight: normal; color: var(--text-main);">训练营+硬件收入，不含税，<a
+                            href="RefundAnalysis.html" target="_blank"
+                            style="color: inherit; text-decoration: underline;">扣除退款</a>，并<b>扣除 180
+                            天内退费预提</b>。</p>
+                </div>
+
+                <div class="info-item"
+                    style="grid-column: 1 / -1; background: rgba(255,255,255,0.03); padding: 20px; border-radius: 12px; margin-top: 10px;">
+                    <span class="label" style="margin-bottom: 15px; display: block;">🧮 计算公式可视化</span>
+                    <div
+                        style="display: flex; align-items: center; justify-content: center; gap: 15px; flex-wrap: wrap; font-family: 'Courier New', monospace; font-size: 1.1rem;">
+                        <div style="text-align: center;">
+                            <div style="font-weight: bold; color: var(--success); font-size: 1.3rem;">净营收</div>
+                            <div style="font-size: 0.8rem; color: var(--text-dim);">(Clean Revenue)</div>
+                        </div>
+                        <div style="font-size: 1.5rem; color: var(--text-dim);">=</div>
+                        <div
+                            style="text-align: center; background: rgba(59, 130, 246, 0.1); padding: 8px 12px; border-radius: 8px; border: 1px solid rgba(59, 130, 246, 0.3);">
+                            <div><a href="SKU_Revenue_Analysis_2026.html" target="_blank"
+                                    style="color: inherit; text-decoration: underline;">总流水</a></div>
+                            <div style="font-size: 0.7rem; opacity: 0.7;">(<a href="SKU_Revenue_Analysis_2026.html"
+                                    style="color: inherit; text-decoration: underline;" title="点击查看 SKU 销量拆解">GMV</a>)
+                            </div>
+                        </div>
+                        <div style="font-size: 1.5rem; color: var(--text-dim);">-</div>
+                        <div
+                            style="text-align: center; background: rgba(239, 68, 68, 0.1); padding: 8px 12px; border-radius: 8px; border: 1px solid rgba(239, 68, 68, 0.3);">
+                            <div>增值税</div>
+                            <div style="font-size: 0.7rem; opacity: 0.7;">(Tax)</div>
+                        </div>
+                        <div style="font-size: 1.5rem; color: var(--text-dim);">-</div>
+                        <div
+                            style="text-align: center; background: rgba(239, 68, 68, 0.1); padding: 8px 12px; border-radius: 8px; border: 1px solid rgba(239, 68, 68, 0.3);">
+                            <div><a href="RefundAnalysis.html" target="_blank"
+                                    style="color: inherit; text-decoration: underline;">实际退款</a></div>
+                            <div style="font-size: 0.7rem; opacity: 0.7;">(Refunds)</div>
+                        </div>
+                        <div style="font-size: 1.5rem; color: var(--text-dim);">-</div>
+                        <div
+                            style="text-align: center; background: rgba(249, 115, 22, 0.15); padding: 8px 12px; border-radius: 8px; border: 1px solid var(--primary); box-shadow: 0 0 10px rgba(249, 115, 22, 0.2);">
+                            <div style="color: var(--primary); font-weight: bold;">180天预提</div>
+                            <div style="font-size: 0.7rem; opacity: 0.7; color: var(--primary);">(Risk Provision)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="reasoning">
+                <strong>💡 为什么要“去毒”？ (修正理由)</strong>
+                <p style="margin: 10px 0 0; font-size: 0.95rem; color: var(--text-dim);">
+                    原“收入”指标不含退费预提，导致 Q4 冲量带来的退费会延迟到次年第一季度爆雷，造成业绩假象。
+                    引入 180 天预提后，收入更加“干净”，倒逼业务团队从源头拦截“<a href="BlackUserInterception.html"
+                        style="color: inherit; text-decoration: underline;">大黑用户</a>”，追求健康、可持续的增长。
+                </p>
+            </div>
+        </div>
+
+        <!-- 模块二：GSA 落地拆解 (Goal-Strategy-Action) -->
+        <div class="card">
+            <h2>GSA 落地拆解 (Goal-Strategy-Action)</h2>
+            <div class="reasoning" style="margin-top: 0; margin-bottom: 25px; border-left-color: var(--success);">
+                <strong>🎯 核心逻辑：</strong> 只有通过 <strong>“源头去毒 + 过程真实 + 财务兜底”</strong> 的组合拳，才能确保 6
+                亿营收是“干净”的，实现从“流量收割”到“价值创造”的转型。
+            </div>
+
+            <!-- G Goal -->
+            <h3
+                style="color: var(--text-main); border-left: 4px solid var(--primary); padding-left: 10px; margin-bottom: 15px;">
+                1. G (Goal) — 必胜目标</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th width="25%">指标名称</th>
+                        <th width="25%">目标值</th>
+                        <th>定义锁定</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>净营收 (Clean Revenue)</strong></td>
+                        <td><span class="highlight-value" style="font-size: 1.2rem;">6.0 亿</span></td>
+                        <td>扣除退款及 <strong>180天退费预提</strong> (Risk Provision)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>净利润率</strong></td>
+                        <td><span class="highlight-value" style="font-size: 1.2rem; color: var(--success);">≥ 10%</span>
+                        </td>
+                        <td>(净营收 - 总成本) / 净营收</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- S Strategy -->
+            <h3
+                style="color: var(--text-main); border-left: 4px solid var(--primary); padding-left: 10px; margin-bottom: 15px; margin-top: 40px;">
+                2. S (Strategy) — 关键策略</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th width="15%">策略编号</th>
+                        <th width="20%">策略名称</th>
+                        <th>策略内容（做什么 / 不做什么）</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>S1</strong></td>
+                        <td><strong>源头去毒</strong></td>
+                        <td><strong>只做高潜用户：</strong> 放弃“低价引流+强转”模式，改用“高客单价直投+筛选”模式。在投放端坚决排除“羊毛党”与“非目标用户”。</td>
+                    </tr>
+                    <tr>
+                        <td><strong>S2</strong></td>
+                        <td><strong>真实交付</strong></td>
+                        <td><strong>拒绝过度承诺：</strong> 销售话术与交付内容 1:1 对齐。禁止使用“极速致富”、“躺赚”等诱导性词汇，防止“货不对板”导致的退费。</td>
+                    </tr>
+                    <tr>
+                        <td><strong>S3</strong></td>
+                        <td><strong>机制锁定</strong></td>
+                        <td><strong>180天预提兜底：</strong> 财务系统自动对所有订单提取风险准备金，180天内无理由退费期结束后，方可确认为营收。</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- A Action -->
+            <h3
+                style="color: var(--text-main); border-left: 4px solid var(--primary); padding-left: 10px; margin-bottom: 15px; margin-top: 40px;">
+                3. A (Action) — 关键行动</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th width="15%">对应策略</th>
+                        <th width="35%">行动内容 (Action)</th>
+                        <th width="30%">交付物 (Deliverable)</th>
+                        <th>责任人</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td rowspan="2"><strong>S1 源头</strong></td>
+                        <td>建立“高净值用户”投放模型</td>
+                        <td>ROI ≥ 1.5 的新模型测试报告</td>
+                        <td>@马长久</td>
+                    </tr>
+                    <tr>
+                        <td>全渠道“负面标签”排除</td>
+                        <td>黑名单库上线，广告系统拦截率 100%</td>
+                        <td>@姚涣</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2"><strong>S2 过程</strong></td>
+                        <td>销售素材/话术“去毒”审查</td>
+                        <td>审查通过的白名单话术库 (V1.0)</td>
+                        <td>@杜康杰</td>
+                    </tr>
+                    <tr>
+                        <td>实施“冷静期确认”流程</td>
+                        <td>支付前双向确认录音/截图存档率 100%</td>
+                        <td>@马长久</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="1"><strong>S3 机制</strong></td>
+                        <td>上线“退费预提”自动核算系统</td>
+                        <td>财务系统自动计提功能上线，首月报表产出</td>
+                        <td>@CFO</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <footer>
+        Generated by Antigravity Agent • 喜播战略咨询部 2026
+    </footer>
+
+</body>
+
+</html>

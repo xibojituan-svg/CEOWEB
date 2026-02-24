@@ -1,83 +1,284 @@
-<html>
+<!DOCTYPE html>
+<html lang="zh-CN">
 
 <head>
-
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>喜播集团 2026 战略白皮书</title>
     <style>
+        :root {
+            --primary: #FF4500;
+            --primary-light: #fff5f0;
+            --secondary: #2c3e50;
+            --accent: #3498db;
+            --text: #333;
+            --text-light: #666;
+            --bg: #f9f9f9;
+            --card-bg: #fff;
+            --border: #eaeaea;
+        }
+
         body {
-            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             line-height: 1.6;
-            margin: 40px;
-            color: #333;
-            max-width: 900px;
-            margin: 40px auto;
+            margin: 0;
+            padding: 20px;
+            color: var(--text);
+            background: var(--bg);
+            max-width: 800px;
+            margin: 0 auto;
         }
 
         h1 {
+            font-size: 1.8rem;
             text-align: center;
-            color: #2c3e50;
-            border-bottom: 2px solid #2c3e50;
-            padding-bottom: 10px;
+            color: var(--secondary);
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid var(--primary);
         }
 
         h2 {
-            color: #2980b9;
-            border-bottom: 1px solid #eee;
-            margin-top: 30px;
-            padding-bottom: 5px;
+            font-size: 1.4rem;
+            color: var(--secondary);
+            margin-top: 40px;
+            margin-bottom: 20px;
+            padding-left: 15px;
+            border-left: 5px solid var(--primary);
+            display: flex;
+            align-items: center;
         }
 
         h3 {
-            color: #2c3e50;
+            font-size: 1.1rem;
+            color: var(--secondary);
             margin-top: 20px;
-        }
-
-        ul {
             margin-bottom: 10px;
-        }
-
-        li {
-            margin-bottom: 5px;
         }
 
         p {
-            margin-bottom: 10px;
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        ul {
+            padding-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        li {
+            margin-bottom: 8px;
         }
 
         strong {
-            color: #000;
-            font-weight: bold;
+            color: var(--secondary);
+            font-weight: 700;
         }
 
-        a {
-            color: #2980b9;
-            text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
-        hr {
-            border: 0;
-            border-top: 1px solid #eee;
+        .highlight-box {
+            background: var(--primary-light);
+            border: 1px solid var(--primary);
+            border-radius: 8px;
+            padding: 20px;
             margin: 20px 0;
         }
 
-        .breadcrumb {
-            font-size: 0.9em;
-            color: #7f8c8d;
+        .highlight-box h3 {
+            color: var(--primary);
+            margin-top: 0;
+        }
+
+        /* Card Style for Sections */
+        section {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Responsive Tables */
+        .table-responsive {
+            overflow-x: auto;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+            min-width: 500px;
+            /* Ensure table doesn't get squashed */
+        }
+
+        th,
+        td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            background-color: #f8f9fa;
+            color: var(--secondary);
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Timeline / Steps */
+        .timeline-item {
+            position: relative;
+            padding-left: 30px;
             margin-bottom: 20px;
         }
 
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--primary);
+            border: 3px solid #fff;
+            box-shadow: 0 0 0 2px var(--primary);
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: 6px;
+            top: 20px;
+            bottom: -25px;
+            width: 2px;
+            background: #e0e0e0;
+        }
+
+        .timeline-item:last-child::after {
+            display: none;
+        }
+
+        .timeline-year {
+            font-size: 0.85rem;
+            color: var(--accent);
+            font-weight: bold;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .timeline-title {
+            font-weight: bold;
+            font-size: 1.05rem;
+            margin-bottom: 5px;
+            color: var(--secondary);
+        }
+
+        /* Tags */
+        .tag {
+            display: inline-block;
+            background: #eee;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            color: #666;
+            margin-right: 5px;
+            margin-bottom: 5px;
+        }
+
+        .tag-red {
+            background: #fee2e2;
+            color: #b91c1c;
+        }
+
+        .tag-green {
+            background: #dcfce7;
+            color: #15803d;
+        }
+
+        .tag-blue {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            font-size: 0.9em;
+            color: var(--text-light);
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+        }
+
         .breadcrumb a {
-            color: #2980b9;
+            color: var(--accent);
             text-decoration: none;
         }
 
         .breadcrumb .separator {
-            margin: 0 5px;
-            color: #bdc3c7;
+            margin: 0 8px;
+            color: #ccc;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--text-light);
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 600px) {
+            body {
+                padding: 15px;
+                background: #f4f5f7;
+            }
+
+            section {
+                padding: 20px 15px;
+                border-radius: 8px;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+                margin-top: 10px;
+            }
+
+            h2 {
+                font-size: 1.25rem;
+                margin-top: 30px;
+            }
+
+            table {
+                font-size: 0.85rem;
+            }
+        }
+
+        .fab {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            width: 50px;
+            height: 50px;
+            background: var(--secondary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            font-size: 1.2em;
+            z-index: 100;
         }
     </style>
 </head>
@@ -88,126 +289,165 @@
         <span class="separator">/</span>
         <span>2026战略白皮书</span>
     </nav>
-    <h1><strong>喜播集团2026战略总结</strong></h1>
-    <p>喜播集团的战略核心是从当前“高利润、高风险”的“狩猎式”商业模式，转型为“<strong>长期健康</strong>”的“个人健康与幸福服务平台”。</p>
-    <p><strong>一、残酷真相与战略根因</strong></p>
-    <ul>
-        <li>本质问题：商业模式的“原罪”——“卖承诺”而非“卖价值交付”。 </li>
-        <li>症状与数据： </li>
-    </ul>
-    <p>* 退费率高达 24%（健康阈值低于10%）。</p>
-    <p>* 存在“收割救命钱”的现象。</p>
-    <p>* 部分利润依赖过度承诺的销售行为。</p>
-    <ul>
-        <li>结论：“不暴雷专项”只能延缓问题，真正的出路是商业模式的根本重构。</li>
-    </ul>
-    <p><strong>二、战略愿景与转型路径</strong></p>
-    <ul>
-        <li><strong>2028年愿景：转型成为中国最值得信赖的“个人健康与幸福服务平台”，目标是帮助10万名女性成为家庭健康掌门人。</strong> </li>
-        <li>转型三阶段： </li>
-    </ul>
-    <p>1. 2026年：“软着陆”：不暴雷、解毒第一曲线、验证第二曲线。</p>
-    <p>2. 2027年：“双轮驱动”：第一曲线无毒、健康业务占比20%、顾问网络成型。</p>
-    <p>3. 2028年：“新模式确立”：健康业务主导（收入占比\>30%）、教育业务稳定、平台化运营。</p>
-    <ul>
-        <li>关键取舍（战略红线）： </li>
-    </ul>
-    <p>* 取：用户真实价值 \> 短期利润；长期信任 \> 快速规模。</p>
-    <p>* 舍：高风险利润（主动压缩 20-40%）；承诺式销售；单一 SKU 超规模（控制在 1-2 亿/年）。</p>
-    <p><strong>三、核心业务与飞轮设计</strong></p>
-    <ul>
-        <li>第一曲线（教育培训）：当前是“毒飞轮”（夸大承诺 → 高收入 → 更高目标 → 交付缺口 → 掩盖问题）。需要“解毒”，改造为“无毒现金牛”。 </li>
-        <li>第二曲线（健康业务）：规划中的“健康飞轮”（用户健康改善 → 真实见证 → 口碑传播 → 更多用户）。以 TLC 生活方式医学为基础。 </li>
-        <li>双曲线联动： </li>
-    </ul>
-    <p>* 第一曲线的 10 万学员池提供人才输送（顾问网络）和现金流。</p>
-    <p>* 双曲线共享数据中台，提升 AI 能力。</p>
-    <p>* 关键约束：第一曲线必须先“解毒”，否则会污染第二曲线。</p>
-    <p><strong>四、战略控制点与投资重点</strong></p>
-    <table border='1' style='border-collapse: collapse; width: 100%; margin-bottom: 20px;'>
-        <thead>
-            <tr>
-                <th style='padding: 8px; background-color: #f2f2f2; text-align: left;'>维度</th>
-                <th style='padding: 8px; background-color: #f2f2f2; text-align: left;'>2026年</th>
-                <th style='padding: 8px; background-color: #f2f2f2; text-align: left;'>2027年</th>
-                <th style='padding: 8px; background-color: #f2f2f2; text-align: left;'>2028年+</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td style='padding: 8px; border: 1px solid #ddd;'>控制点</td>
-                <td style='padding: 8px; border: 1px solid #ddd;'>合规能力</td>
-                <td style='padding: 8px; border: 1px solid #ddd;'>顾问网络</td>
-                <td style='padding: 8px; border: 1px solid #ddd;'>数据资产+AI</td>
-            </tr>
-            <tr>
-                <td style='padding: 8px; border: 1px solid #ddd;'>战略意义</td>
-                <td style='padding: 8px; border: 1px solid #ddd;'>活下来</td>
-                <td style='padding: 8px; border: 1px solid #ddd;'>长出来</td>
-                <td style='padding: 8px; border: 1px solid #ddd;'>强起来</td>
-            </tr>
-            <tr>
-                <td style='padding: 8px; border: 1px solid #ddd;'>具体内涵</td>
-                <td style='padding: 8px; border: 1px solid #ddd;'>退费率\<15%< /td>
-                <td style='padding: 8px; border: 1px solid #ddd;'>3000名认证顾问</td>
-                <td style='padding: 8px; border: 1px solid #ddd;'>100万结构化档案</td>
-            </tr>
-            <tr>
-                <td style='padding: 8px; border: 1px solid #ddd;'>投资重点</td>
-                <td style='padding: 8px; border: 1px solid #ddd;'>风控系统</td>
-                <td style='padding: 8px; border: 1px solid #ddd;'>顾问培训体系</td>
-                <td style='padding: 8px; border: 1px solid #ddd;'>数据中台/AI</td>
-            </tr>
-            <tr>
-                <td style='padding: 8px; border: 1px solid #ddd;'>预算</td>
-                <td style='padding: 8px; border: 1px solid #ddd;'>1.5 亿（总）</td>
-                <td style='padding: 8px; border: 1px solid #ddd;'>从第一曲线挣来</td>
-                <td style='padding: 8px; border: 1px solid #ddd;'>长期持续投入</td>
-            </tr>
-        </tbody>
-    </table>
-    <ul>
-        <li>非共识洞见：真正的护城河是“让用户改变的能力”（依从性管理）和“分布式信任网络”（顾问认证体系），而非课程内容或获客效率。</li>
-    </ul>
-    <p><strong>五、两难困境破解方案</strong></p>
-    <table border='1' style='border-collapse: collapse; width: 100%; margin-bottom: 20px;'>
-        <thead>
-            <tr>
-                <th style='padding: 8px; background-color: #f2f2f2; text-align: left;'>困境</th>
-                <th style='padding: 8px; background-color: #f2f2f2; text-align: left;'>破解方案</th>
-                <th style='padding: 8px; background-color: #f2f2f2; text-align: left;'>2026年主要行动</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td style='padding: 8px; border: 1px solid #ddd;'>利润 vs 合规</td>
-                <td style='padding: 8px; border: 1px solid #ddd;'>利润来源重构：从高风险利润转向健康业务和配套产品。</td>
-                <td style='padding: 8px; border: 1px solid #ddd;'>Phase 1：大黑用户 90% 拦截。Phase 2：销售话术重塑（承诺服务而非结果）。</td>
-            </tr>
-            <tr>
-                <td style='padding: 8px; border: 1px solid #ddd;'>规模 vs 风险</td>
-                <td style='padding: 8px; border: 1px solid #ddd;'>多 SKU 分散 \+ 平台化复用：限制单 SKU 规模，通过共享中台复用 AI、风控、顾问网络。</td>
-                <td style='padding: 8px; border: 1px solid #ddd;'>单 SKU 规模上限设定为 1-2 亿/年。建设共享中台。</td>
-            </tr>
-            <tr>
-                <td style='padding: 8px; border: 1px solid #ddd;'>第一曲线解毒 vs 第二曲线启动</td>
-                <td style='padding: 8px; border: 1px solid #ddd;'>双曲线共生，共享能力建设：将 1.5 亿预算的 60% 投入到共享能力（AI
-                    基建、数据中台、风控系统、顾问认证体系）。</td>
-                <td style='padding: 8px; border: 1px solid #ddd;'>共享能力建设 (9000 万)，第一曲线解毒 (3000 万)，第二曲线专项启动 (3000 万)。
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <p>六、最可能失败的死因（事前验尸报告）</p>
-    <p>1. 第一曲线暴雷：“不暴雷专项”执行不彻底，大黑用户仍被转化，导致监管介入或媒体爆料。</p>
-    <p>2. 第二曲线无法跑通：用户依从性问题未解决，效果不达预期，口碑裂变不起效。</p>
-    <p>3. 组织基因无法突变：组织惯性太强，销售团队仍追求高承诺，“狩猎者”基因污染新业务。</p>
-    <p>4. AI/技术投入未产生预期效果：技术整合慢，人效提升不达预期，转型无法支撑。</p>
-    <p>来源：</p>
-    <ul>
-        <li><a href="https://docs.google.com/document/d/1dUzGnKY7D5D7qjN6atuacamybpHAky79m2UXr8aXHN8/edit">喜播2026战略</a>
-        </li>
-    </ul>
+
+    <h1>喜播集团 2026 战略总结</h1>
+
+    <div class="highlight-box">
+        <h3>🚀 核心转型</h3>
+        <p>从<strong>“高利润、高风险”的“狩猎式”</strong>商业模式，转型为<strong>“长期健康”的“个人健康与幸福服务平台”</strong>。</p>
+    </div>
+
+    <section>
+        <h2>01 残酷真相与战略根因</h2>
+        <div style="margin-bottom: 15px;">
+            <span class="tag tag-red">原罪：卖承诺 vs 卖交付</span>
+            <span class="tag tag-red">风险：退费率 24%</span>
+        </div>
+        <p><strong>本质问题：</strong> 我们的商业模式存在“原罪”——过分依赖“卖承诺”而非扎实的“卖价值交付”。</p>
+        <p><strong>症状数据：</strong></p>
+        <ul>
+            <li>退费率高达 <strong>24%</strong>（健康阈值应低于10%）。</li>
+            <li>存在“收割救命钱”的道德风险。</li>
+            <li>部分高利润是建立在过度承诺的销售行为之上。</li>
+        </ul>
+        <p style="border-top: 1px dashed #ccc; padding-top: 10px; color: var(--text-light); font-size: 0.9em;">
+            <strong>结论：</strong> “不暴雷专项”只能治标，真正的出路是商业模式的<strong>根本重构</strong>。
+        </p>
+    </section>
+
+    <section>
+        <h2>02 战略愿景与转型路径</h2>
+        <p><strong>2028年愿景：</strong> 转型成为中国最值得信赖的“个人健康与幸福服务平台”，帮助 10 万名女性成为家庭健康掌门人。</p>
+
+        <div style="margin-top: 25px;">
+            <div class="timeline-item">
+                <span class="timeline-year">2026年</span>
+                <div class="timeline-title">软着陆 (Soft Landing)</div>
+                <div style="font-size: 0.9rem; color: var(--text-light);">不暴雷、解毒第一曲线、验证第二曲线。</div>
+            </div>
+            <div class="timeline-item">
+                <span class="timeline-year">2027年</span>
+                <div class="timeline-title">双轮驱动 (Dual Drive)</div>
+                <div style="font-size: 0.9rem; color: var(--text-light);">第一曲线无毒、健康业务占比20%、顾问网络成型。</div>
+            </div>
+            <div class="timeline-item">
+                <span class="timeline-year">2028年</span>
+                <div class="timeline-title">新模式确立 (New Paradigm)</div>
+                <div style="font-size: 0.9rem; color: var(--text-light);">健康业务主导（>30%）、教育业务稳定、平台化运营。</div>
+            </div>
+        </div>
+
+        <div
+            style="background: #f0fdf4; padding: 15px; border-radius: 8px; margin-top: 20px; border-left: 4px solid #16a34a;">
+            <strong>⚖️ 关键取舍（战略红线）：</strong>
+            <ul style="margin-bottom: 0;">
+                <li><strong>取：</strong> 用户真实价值 > 短期利润；长期信任 > 快速规模。</li>
+                <li><strong>舍：</strong> 主动压缩 20-40% 的高风险利润；严禁承诺式销售；控制单一 SKU 规模 (1-2亿/年)。</li>
+            </ul>
+        </div>
+    </section>
+
+    <section>
+        <h2>03 核心业务与飞轮设计</h2>
+
+        <div style="display: grid; grid-template-columns: 1fr; gap: 15px;">
+            <div style="border: 1px solid #e2e8f0; padding: 15px; border-radius: 8px;">
+                <h3 style="margin-top: 0; color: #b91c1c;">💊 第一曲线：教育培训 (解毒)</h3>
+                <p style="font-size: 0.9rem; margin-bottom: 0;"><strong>现状：</strong> 毒飞轮（夸大承诺 → 高收入 →
+                    交付缺口）。<br><strong>目标：</strong> 改造为“无毒现金牛”。</p>
+            </div>
+
+            <div style="border: 1px solid #e2e8f0; padding: 15px; border-radius: 8px;">
+                <h3 style="margin-top: 0; color: #15803d;">🌱 第二曲线：健康生活 (生长)</h3>
+                <p style="font-size: 0.9rem; margin-bottom: 0;"><strong>规划：</strong> 健康飞轮（改善 → 见证 →
+                    口碑）。<br><strong>基石：</strong> TLC 生活方式医学。</p>
+            </div>
+        </div>
+
+        <p style="margin-top: 20px;"><strong>🔗 双曲线联动：</strong></p>
+        <ul>
+            <li>第一曲线输送人才（顾问网络）和现金流。</li>
+            <li>共享数据中台与 AI 能力。</li>
+            <li><strong>约束：</strong> 第一曲线必须先“解毒”，防止污染新业务。</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>04 战略控制点与投资</h2>
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>维度</th>
+                        <th>2026年 (活下来)</th>
+                        <th>2027-28年 (强起来)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>控制点</strong></td>
+                        <td>合规能力 (退费率 < 15%)</td>
+                        <td>顾问网络 + 数据资产</td>
+                    </tr>
+                    <tr>
+                        <td><strong>投资重点</strong></td>
+                        <td>风控系统</td>
+                        <td>顾问体系 + AI中台</td>
+                    </tr>
+                    <tr>
+                        <td><strong>预算</strong></td>
+                        <td>1.5 亿</td>
+                        <td>持续投入</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <p style="font-size: 0.9rem; color: var(--text-light); font-style: italic;">
+            💡 <strong>非共识洞见：</strong> 真正的护城河是“让用户改变的能力”（依从性管理）和“分布式信任网络”，而非课程内容。
+        </p>
+    </section>
+
+    <section>
+        <h2>05 两难困境破解方案</h2>
+        <div style="margin-bottom: 20px;">
+            <h3 style="border-bottom: 1px solid #eee; padding-bottom: 8px;">1. 利润 vs 合规</h3>
+            <p><strong>方案：</strong> 利润来源重构。从高风险利润转向健康业务。</p>
+            <p><strong>行动：</strong> <span class="tag tag-blue">大黑用户90%拦截</span> <span class="tag tag-blue">销售话术重塑</span>
+            </p>
+        </div>
+
+        <div style="margin-bottom: 20px;">
+            <h3 style="border-bottom: 1px solid #eee; padding-bottom: 8px;">2. 规模 vs 风险</h3>
+            <p><strong>方案：</strong> 多 SKU 分散 + 平台化复用。</p>
+            <p><strong>行动：</strong> <span class="tag tag-blue">单SKU上限2亿</span> <span class="tag tag-blue">建设共享中台</span>
+            </p>
+        </div>
+
+        <div>
+            <h3 style="border-bottom: 1px solid #eee; padding-bottom: 8px;">3. 解毒 vs 启动</h3>
+            <p><strong>方案：</strong> 双曲线共生，共享能力建设。</p>
+            <p><strong>行动：</strong> <span class="tag tag-blue">9000万投共享基建</span> <span class="tag tag-blue">双线并进</span>
+            </p>
+        </div>
+    </section>
+
+    <section>
+        <h2 style="color: #b91c1c; border-left-color: #b91c1c;">☠️ 事前验尸：可能的死因</h2>
+        <ol>
+            <li><strong>第一曲线暴雷：</strong> “不暴雷专项”执行不彻底，大黑用户仍被转化，引爆舆情。</li>
+            <li><strong>第二曲线跑不通：</strong> 用户依从性未解决，口碑裂变失效。</li>
+            <li><strong>组织基因排异：</strong> “狩猎者”基因污染新业务，惯性太强。</li>
+            <li><strong>技术不落地：</strong> AI 投入未带来实际人效提升，拖累转型。</li>
+        </ol>
+    </section>
+
+    <footer>
+        <p>来源：喜播 2026 战略研讨会纪要</p>
+        <p>&copy; 2026 Xibo Education Group</p>
+    </footer>
+
+    <a href="index.html" class="fab" title="返回首页">🏠</a>
+
 </body>
 
 </html>

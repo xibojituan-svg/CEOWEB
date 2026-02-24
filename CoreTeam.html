@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>核心团队与职责 - Xibo 2026</title>
+    <style>
+        :root {
+            --primary: #1a2a6c;
+            --secondary: #b21f1f;
+            --accent: #fdbb2d;
+            --text: #333;
+            --light-bg: #f5f7fa;
+            --card-bg: #ffffff;
+            --border: #e1e4e8;
+        }
+
+        body {
+            font-family: "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
+            background-color: var(--light-bg);
+            color: var(--text);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            margin-bottom: 60px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            color: #666;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Navigation / Breadcrumb */
+        .breadcrumb {
+            margin-bottom: 30px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .breadcrumb a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        /* Department Sections */
+        .department-section {
+            margin-bottom: 80px;
+        }
+
+        .department-title {
+            font-size: 1.8rem;
+            color: var(--primary);
+            border-left: 5px solid var(--secondary);
+            padding-left: 15px;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+        }
+
+        .department-title span {
+            font-size: 0.9rem;
+            background: #eef;
+            color: #66c;
+            padding: 2px 10px;
+            border-radius: 20px;
+            margin-left: 15px;
+            font-weight: normal;
+        }
+
+        /* Member Grid */
+        .member-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        /* Member Card */
+        .member-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            padding: 30px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border-top: 4px solid transparent;
+        }
+
+        .member-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Role specific styling */
+        .role-executive {
+            border-top-color: var(--primary);
+        }
+
+        .role-cx {
+            border-top-color: #2e7d32;
+        }
+
+        .role-success {
+            border-top-color: #ef6c00;
+        }
+
+        .role-marketing {
+            border-top-color: #c62828;
+        }
+
+        .member-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 15px;
+        }
+
+        .member-name {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin: 0;
+        }
+
+        .member-nickname {
+            font-size: 0.9rem;
+            color: #999;
+            font-weight: normal;
+            margin-left: 5px;
+        }
+
+        .member-role {
+            font-size: 0.95rem;
+            color: var(--primary);
+            font-weight: 600;
+            margin-top: 5px;
+        }
+
+        .tag-role {
+            font-size: 0.75rem;
+            padding: 3px 8px;
+            border-radius: 4px;
+            background: #f0f4f8;
+            color: #555;
+            display: inline-block;
+            margin-top: 5px;
+        }
+
+        /* Metrics Box */
+        .metrics-box {
+            background: #fdf6f6;
+            border: 1px dashed #f5c6cb;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .metrics-title {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            color: #c62828;
+            font-weight: 700;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        /* Responsibility List */
+        .responsibility-title {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #444;
+        }
+
+        .responsibility-text {
+            font-size: 0.9rem;
+            color: #555;
+            line-height: 1.6;
+            margin: 0;
+            text-align: justify;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            header h1 {
+                font-size: 1.8rem;
+            }
+
+            .member-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="index.html">首页</a> &gt; 核心团队与职责
+        </div>
+
+        <header>
+            <h1>核心团队组织架构与关键指标</h1>
+            <p>基于 BSC (平衡计分卡) 与 GSA (目标策略行动) 体系的岗位职责与考核定义</p>
+            <div style="margin-top: 20px;">
+                <a href="ExecutivePerformance.html"
+                    style="background: var(--primary); color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none; font-weight: bold;">
+                    📖 进入高管绩效评价日志
+                </a>
+            </div>
+        </header>
+
+        <!-- 1. 高管层 -->
+        <section class="department-section">
+            <div class="department-title">
+                高管层 (Executive Management)
+                <span>Strategic Level</span>
+            </div>
+            <div class="member-grid">
+
+                <!-- 蒋德铭 -->
+                <div class="member-card role-executive">
+                    <div class="member-header">
+                        <div>
+                            <h3 class="member-name">蒋德铭 <span class="member-nickname">(David)</span></h3>
+                            <div class="member-role">喜播CEO / 315专项作战组组长</div>
+                        </div>
+                    </div>
+                    <div class="metrics-box">
+                        <span class="metrics-title">🎯 核心指标 (BSC/GSA)</span>
+                        <strong>全盘管理：</strong> 整个公司全盘运作健康度、中长期高质量可持续发展。
+                    </div>
+                    <div>
+                        <div class="responsibility-title">岗位职责：</div>
+                        <p class="responsibility-text">对整个公司全盘运作和健康负责，拟订战略，构建外部战略合作机会，推动整个公司中长期高质量、可持续发展。</p>
+                    </div>
+                </div>
+
+                <!-- 马长久 -->
+                <div class="member-card role-executive">
+                    <div class="member-header">
+                        <div>
+                            <h3 class="member-name">马长久</h3>
+                            <div class="member-role">第一曲线第一责任人</div>
+                        </div>
+                    </div>
+                    <div class="metrics-box">
+                        <span class="metrics-title">🎯 核心指标 (BSC/GSA)</span>
+                        <strong>财务/运营：</strong> 收入（训练营+硬件）、话术合规改造、净利润率。
+                    </div>
+                    <div>
+                        <div class="responsibility-title">岗位职责：</div>
+                        <p class="responsibility-text">第一曲线的总负责人，对第一曲线获客、营收、利润、运营、客户满意、就业交付等负全责，定策略、带团队、促协同，确保达成目标。</p>
+                    </div>
+                </div>
+
+                <!-- 苏秦 -->
+                <div class="member-card role-executive">
+                    <div class="member-header">
+                        <div>
+                            <h3 class="member-name">苏秦</h3>
+                            <div class="member-role">教研第一责任人</div>
+                        </div>
+                    </div>
+                    <div class="metrics-box">
+                        <span class="metrics-title">🎯 核心指标 (BSC/GSA)</span>
+                        <strong>产品/运营：</strong> 学员合格率、新课程成功上线、<a href="sku.html">SKU产能密度</a>。
+                    </div>
+                    <div>
+                        <div class="responsibility-title">岗位职责：</div>
+                        <p class="responsibility-text">带领团队对第一曲线课程产品设计、开发、迭代，以及学员对教学产品的满意度负责。</p>
+                    </div>
+                </div>
+
+                <!-- 姚涣 -->
+                <div class="member-card role-executive">
+                    <div class="member-header">
+                        <div>
+                            <h3 class="member-name">姚涣</h3>
+                            <div class="member-role">产研 / 第二曲线第一责任人</div>
+                        </div>
+                    </div>
+                    <div class="metrics-box">
+                        <span class="metrics-title">🎯 核心指标 (BSC/GSA)</span>
+                        <strong>AI效率/创新：</strong> <a href="PartTimeEfficiency.html">兼职人效</a>、AI质检、第二曲线从0到1突破。
+                    </div>
+                    <div>
+                        <div class="responsibility-title">岗位职责：</div>
+                        <p class="responsibility-text">1. 负责公司产研战略规划与执行，推动AI在各业务线应用创新，领导产研团队，跟踪技术趋势、指导技术迭代；<br>2.
+                            负责第二曲线大健康新业务落地。</p>
+                    </div>
+                </div>
+
+                <!-- 杜康杰 -->
+                <div class="member-card role-executive">
+                    <div class="member-header">
+                        <div>
+                            <h3 class="member-name">杜康杰</h3>
+                            <div class="member-role">客户满意 / 政府关系第一责任人</div>
+                            <div class="tag-role">315专项副组长</div>
+                        </div>
+                    </div>
+                    <div class="metrics-box">
+                        <span class="metrics-title">🎯 核心指标 (BSC/GSA)</span>
+                        <strong>风控/体验：</strong> <a href="ComplaintRate.html">百万元投诉率</a>、<a
+                            href="BlackUserInterception.html">特殊关怀（大黑）用户拦截</a>。
+                    </div>
+                    <div>
+                        <div class="responsibility-title">岗位职责：</div>
+                        <p class="responsibility-text">
+                            统筹客户体验工作落地，牵头四道防线跨部门推进；负责政府监管层长期关系维护，推动监管合作；防控极端事件与重大舆情，平衡风险防控与业务利润增长。</p>
+                    </div>
+                </div>
+
+                <!-- 王俊 -->
+                <div class="member-card role-executive">
+                    <div class="member-header">
+                        <div>
+                            <h3 class="member-name">王俊</h3>
+                            <div class="member-role">后台职能第一责任人</div>
+                        </div>
+                    </div>
+                    <div class="metrics-box">
+                        <span class="metrics-title">🎯 核心指标 (BSC/GSA)</span>
+                        <strong>组织效能：</strong> <a href="AI_Org_Reconstruction.html">关键岗位 AI 重构率</a>。
+                    </div>
+                    <div>
+                        <div class="responsibility-title">岗位职责：</div>
+                        <p class="responsibility-text">对组织后台职能部门进行管理（人力、采购、行政、IT、信息化、战略管理），对组织整体 AI-Native 化落地负责。</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 2. 客户体验部 -->
+        <section class="department-section">
+            <div class="department-title">
+                客户体验部 (Customer Experience / CX)
+                <span>Risk & Satisfaction</span>
+            </div>
+            <div class="member-grid">
+
+                <!-- 王伊 -->
+                <div class="member-card role-cx">
+                    <div class="member-header">
+                        <div>
+                            <h3 class="member-name">王伊</h3>
+                            <div class="member-role">智能客服负责人 / 315专项对接人</div>
+                        </div>
+                    </div>
+                    <div class="metrics-box">
+                        <span class="metrics-title">🎯 关键指标 (KPI)</span>
+                        智能客服解决率、客服人效、风险拦截能力。
+                    </div>
+                    <div>
+                        <div class="responsibility-title">岗位职责：</div>
+                        <p class="responsibility-text">负责315专项客诉对接及PMO协调工作，调研行业合规动态；持续推动智能客服项目，提升客服智能解决率与人效。</p>
+                    </div>
+                </div>
+
+                <!-- 张凯 -->
+                <div class="member-card role-cx">
+                    <div class="member-header">
+                        <div>
+                            <h3 class="member-name">张凯</h3>
+                            <div class="member-role">大黑用户项目负责人 / 数据分析</div>
+                        </div>
+                    </div>
+                    <div class="metrics-box">
+                        <span class="metrics-title">🎯 关键指标 (KPI)</span>
+                        <a href="ComplaintRate.html">百万元投诉率监测</a>、<a href="BlackUserInterception.html">大黑用户识别模型准确率</a>。
+                    </div>
+                    <div>
+                        <div class="responsibility-title">岗位职责：</div>
+                        <p class="responsibility-text">优化特殊关怀（大黑）用户识别模型，搭建投诉率自动化监测看板与预警；负责风险/客诉数据分析，联动产研推进 ITR 流程闭环。</p>
+                    </div>
+                </div>
+
+                <!-- 张义鹏 -->
+                <div class="member-card role-cx">
+                    <div class="member-header">
+                        <div>
+                            <h3 class="member-name">张义鹏</h3>
+                            <div class="member-role">质检管控 / 外部投诉处置</div>
+                        </div>
+                    </div>
+                    <div class="metrics-box">
+                        <span class="metrics-title">🎯 关键指标 (KPI)</span>
+                        AI 质检准确率、外部投诉处置效率。
+                    </div>
+                    <div>
+                        <div class="responsibility-title">岗位职责：</div>
+                        <p class="responsibility-text">负责全流程质检管控，迭代 AI 质检规则；负责市场监管/黑猫等外部投诉处置，联动舆情部门维护口碑。</p>
+                    </div>
+                </div>
+
+                <!-- 张靖恺 -->
+                <div class="member-card role-cx">
+                    <div class="member-header">
+                        <div>
+                            <h3 class="member-name">张靖恺</h3>
+                            <div class="member-role">客服组长</div>
+                        </div>
+                    </div>
+                    <div class="metrics-box">
+                        <span class="metrics-title">🎯 关键指标 (KPI)</span>
+                        接起率、<a href="RefundAnalysis.html">退费时效</a>、客服人效。
+                    </div>
+                    <div>
+                        <div class="responsibility-title">岗位职责：</div>
+                        <p class="responsibility-text">负责客服团队管理，保障接起率；做好退费时效管控，推进退款流程智能化升级；负责315期间客服人力调配。</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 3. 学员成功部 -->
+        <section class="department-section">
+            <div class="department-title">
+                学员成功部 (Student Success)
+                <span>Revenue & Growth</span>
+            </div>
+            <div class="member-grid">
+
+                <!-- 杨蓉蓉 -->
+                <div class="member-card role-success">
+                    <div class="member-header">
+                        <div>
+                            <h3 class="member-name">杨蓉蓉</h3>
+                            <div class="member-role">投放负责人</div>
+                        </div>
+                    </div>
+                    <div class="metrics-box">
+                        <span class="metrics-title">🎯 关键指标 (KPI)</span>
+                        <a href="MarketingROI.html">投放 ROI</a>、增长率。
+                    </div>
+                    <div>
+                        <div class="responsibility-title">岗位职责：</div>
+                        <p class="responsibility-text">对投放ROI和增长负责，主导 AI 在投放全流程应用，定策略、控效果，助力低成本获取高质量流量。</p>
+                    </div>
+                </div>
+
+                <!-- 李萍 -->
+                <div class="member-card role-success">
+                    <div class="member-header">
+                        <div>
+                            <h3 class="member-name">李萍</h3>
+                            <div class="member-role">前端负责人</div>
+                        </div>
+                    </div>
+                    <div class="metrics-box">
+                        <span class="metrics-title">🎯 关键指标 (KPI)</span>
+                        <a href="LeadsConversion.html">前端销售业绩</a>、转化率。
+                    </div>
+                    <div>
+                        <div class="responsibility-title">岗位职责：</div>
+                        <p class="responsibility-text">对教育前端销售业绩负全责，带团队拓客转化，深耕客户需求，助力公司营收增长。</p>
+                    </div>
+                </div>
+
+                <!-- 谢媛 -->
+                <div class="member-card role-success">
+                    <div class="member-header">
+                        <div>
+                            <h3 class="member-name">谢媛</h3>
+                            <div class="member-role">后端负责人</div>
+                        </div>
+                    </div>
+                    <div class="metrics-box">
+                        <span class="metrics-title">🎯 关键指标 (KPI)</span>
+                        学员留存、续报、口碑。
+                    </div>
+                    <div>
+                        <div class="responsibility-title">岗位职责：</div>
+                        <p class="responsibility-text">对后端学员留存、续报及口碑负全责，统筹学员服务与管理，提升体验，助力营收复购。</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 4. 市场品牌部 -->
+        <section class="department-section">
+            <div class="department-title">
+                市场品牌部 (Marketing & Brand)
+                <span>Brand Asset</span>
+            </div>
+            <div class="member-grid">
+
+                <!-- 胡云悠 -->
+                <div class="member-card role-marketing">
+                    <div class="member-header">
+                        <div>
+                            <h3 class="member-name">胡云悠</h3>
+                            <div class="member-role">品牌/PR负责人</div>
+                        </div>
+                    </div>
+                    <div class="metrics-box">
+                        <span class="metrics-title">🎯 关键指标 (KPI)</span>
+                        品牌战略、品牌资产、口碑、线下大师课营收。
+                    </div>
+                    <div>
+                        <div class="responsibility-title">岗位职责：</div>
+                        <p class="responsibility-text">1. 对品牌战略落地、品牌资产及口碑塑造负全责，统筹全域推广与舆情管控；<br>2. 管理线下大师课业务及“有声之夜”。</p>
+                    </div>
+                </div>
+
+                <!-- 张雪利 -->
+                <div class="member-card role-marketing">
+                    <div class="member-header">
+                        <div>
+                            <h3 class="member-name">张雪利 <span class="member-nickname">(菲姐)</span></h3>
+                            <div class="member-role">品牌</div>
+                        </div>
+                    </div>
+                    <div class="metrics-box">
+                        <span class="metrics-title">🎯 关键指标 (KPI)</span>
+                        品牌建设、推广、口碑、舆情管控。
+                    </div>
+                    <div>
+                        <div class="responsibility-title">岗位职责：</div>
+                        <p class="responsibility-text">统筹品牌建设与推广，管控品牌口碑及舆情，打造品牌影响力，为业务引流赋能。</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <footer
+            style="text-align: center; margin-top: 60px; color: #999; font-size: 0.8rem; border-top: 1px solid #eee; padding-top: 30px;">
+            &copy; 2026 Xibo Technology. 核心人才信息内部绝密 (Confidential).
+        </footer>
+
+    </div>
+
+</body>
+
+</html>
