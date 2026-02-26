@@ -79,20 +79,27 @@
         .level-content {
             display: flex;
             justify-content: center;
+            align-items: stretch;
             flex-wrap: wrap;
-            gap: 20px;
+            gap: 25px;
         }
 
         /* Cards */
         .card {
             background: white;
             border-radius: 8px;
-            padding: 20px;
-            width: 300px;
+            padding: 24px;
+            flex: 1;
+            /* Allow cards to grow and shrink */
+            min-width: 250px;
+            max-width: 320px;
+            box-sizing: border-box;
             box-shadow: var(--card-shadow);
             transition: transform 0.2s;
             position: relative;
             border-top: 4px solid var(--info-color);
+            display: flex;
+            flex-direction: column;
         }
 
         .card:hover {
@@ -101,24 +108,27 @@
         }
 
         .card h3 {
-            margin-top: 0;
-            font-size: 1.1em;
+            margin-top: 5px;
+            font-size: 1.15em;
             color: var(--primary-color);
         }
 
         .card p {
             font-size: 0.9em;
-            color: #666;
-            line-height: 1.5;
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: auto;
+            /* Push content down if card implies flex */
         }
 
         .card-tag {
             display: inline-block;
+            align-self: flex-start;
             padding: 2px 8px;
             border-radius: 4px;
             font-size: 0.8em;
             color: white;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
 
         /* Specific Colors */
@@ -156,9 +166,9 @@
 
         /* Connections (Visual Lines) */
         .connection-line {
-            height: 30px;
+            height: 40px;
             width: 2px;
-            background: #bdc3c7;
+            background: #cbd5e1;
             margin: 0 auto;
         }
 
