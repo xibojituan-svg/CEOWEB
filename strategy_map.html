@@ -89,10 +89,10 @@
             background: white;
             border-radius: 8px;
             padding: 24px;
-            flex: 1;
-            /* Allow cards to grow and shrink */
-            min-width: 250px;
-            max-width: 320px;
+            flex: 1 1 250px;
+            /* Allow cards to grow and shrink, with a base width */
+            /* Ensure cards have a reasonable maximum size on PC */
+            max-width: 100%;
             box-sizing: border-box;
             box-shadow: var(--card-shadow);
             transition: transform 0.2s;
@@ -265,11 +265,7 @@
                 /* Force width override */
                 min-width: unset !important;
                 max-width: 100% !important;
-            }
-
-            /* Specific card width overrides for inline styles */
-            div[style*="width: 400px"],
-            div[style*="width: 300px"] {
+                flex: none !important;
                 width: 100% !important;
             }
 
@@ -289,6 +285,17 @@
                 border-top: 2px solid #eee !important;
                 padding-left: 0 !important;
                 padding-top: 20px !important;
+            }
+
+            /* Grid Overrides for mobile */
+            div[style*="display: grid"] {
+                grid-template-columns: 1fr !important;
+            }
+
+            .cascade-step>div[style*="display: flex"] {
+                flex-direction: column !important;
+                align-items: flex-start !important;
+                gap: 10px !important;
             }
         }
     </style>
@@ -314,14 +321,14 @@
             <div class="level-divider"></div>
             <div style="text-align: center;"><span class="level-title">Level 1: 战略规划 (SP)</span></div>
             <div class="level-content">
-                <div class="card border-red" style="width: 400px;">
+                <div class="card border-red" style="flex: 1 1 300px; max-width: 400px;">
                     <span class="card-tag bg-red">残酷真相</span>
                     <h3>商业模式原罪</h3>
                     <p>问题不是"业务风险"，而是"卖承诺"模式。<a href="RefundAnalysis.html" target="_blank"
                             style="color: inherit; text-decoration: underline;">退费率</a>24%意味着信任负债累积。</p>
                 </div>
 
-                <div class="card border-green" style="width: 400px;">
+                <div class="card border-green" style="flex: 1 1 300px; max-width: 400px;">
                     <span class="card-tag bg-green">2026 战略目标</span>
                     <h3>软着陆 (Soft Landing)</h3>
                     <ul>
@@ -335,7 +342,7 @@
                     </div>
                 </div>
 
-                <div class="card border-blue" style="width: 400px;">
+                <div class="card border-blue" style="flex: 1 1 300px; max-width: 400px;">
                     <span class="card-tag bg-blue">2028 愿景</span>
                     <h3>个人健康与幸福服务平台</h3>
                     <p>从"培训公司"转型为"服务平台"。10万学员转化为分布式顾问网络。</p>
@@ -451,7 +458,7 @@
             <div class="level-content">
 
                 <!-- Battle 1 -->
-                <div class="card border-red" style="width: 300px; background-color: #fff5f5;">
+                <div class="card border-red" style="flex: 1 1 250px; max-width: 320px; background-color: #fff5f5;">
                     <span class="card-tag bg-red">战役一：第一曲线生存之战</span>
                     <h3>🛡️ 服务：保卫延安</h3>
                     <p><strong>指挥官：</strong> 杜康杰</p>
@@ -469,7 +476,7 @@
                 </div>
 
                 <!-- Battle 2 -->
-                <div class="card border-yellow" style="width: 300px; background-color: #fffff0;">
+                <div class="card border-yellow" style="flex: 1 1 250px; max-width: 320px; background-color: #fffff0;">
                     <span class="card-tag bg-yellow">战役二：健康利润之战</span>
                     <h3>⛰️ 挺进大别山</h3>
                     <p><strong>指挥官：</strong> 马长久</p>
@@ -486,7 +493,7 @@
                 </div>
 
                 <!-- Battle 3 -->
-                <div class="card border-blue" style="width: 300px; background-color: #f0f8ff;">
+                <div class="card border-blue" style="flex: 1 1 250px; max-width: 320px; background-color: #f0f8ff;">
                     <span class="card-tag bg-blue">战役三：硅基员工登陆日</span>
                     <h3>🤖 Silicon Employee D-Day</h3>
                     <p><strong>指挥官：</strong> 姚涣</p>
@@ -503,7 +510,7 @@
                 </div>
 
                 <!-- Battle 4 -->
-                <div class="card border-green" style="width: 300px; background-color: #f0fff4;">
+                <div class="card border-green" style="flex: 1 1 250px; max-width: 320px; background-color: #f0fff4;">
                     <span class="card-tag bg-green">战役四：换芯行动</span>
                     <h3>🧠 AI Native 组织重构</h3>
                     <p><strong>指挥官：</strong> 王俊</p>
