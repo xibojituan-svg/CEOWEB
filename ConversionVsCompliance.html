@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 8 核心复盘：合规与商业化的灰度平衡 | 喜播 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #f59e0b;
+            --primary-glow: rgba(245, 158, 11, 0.4);
+            --bg: #111827;
+            --card-bg: rgba(31, 41, 55, 0.8);
+            --text-main: #f3f4f6;
+            --text-dim: #9ca3af;
+            --border: rgba(255, 255, 255, 0.1);
+            --danger: #ef4444;
+            --success: #10b981;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text-main);
+            margin: 0;
+            padding: 40px 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+
+        .subtitle {
+            color: var(--text-dim);
+            font-size: 1.1rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            margin-top: 0;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .highlight-box {
+            background: rgba(255, 255, 255, 0.03);
+            border-left: 4px solid var(--danger);
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .success-box {
+            background: rgba(16, 185, 129, 0.05);
+            border-left: 4px solid var(--success);
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .metric {
+            font-size: 1.8rem;
+            font-weight: 800;
+        }
+
+        .metric.danger {
+            color: var(--danger);
+        }
+
+        .metric.success {
+            color: var(--success);
+        }
+
+        .metric.primary {
+            color: var(--primary);
+        }
+
+        .breadcrumb {
+            display: flex;
+            gap: 8px;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            margin-bottom: 30px;
+        }
+
+        .breadcrumb a {
+            color: var(--text-dim);
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--primary);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            font-size: 0.95rem;
+        }
+
+        th,
+        td {
+            border: 1px solid var(--border);
+            padding: 14px;
+            text-align: left;
+        }
+
+        th {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--primary);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <nav class="breadcrumb">
+            <a href="index.html">首页</a>
+            <span>/</span>
+            <span style="color: var(--text-main);">Week 8 战略复盘报告</span>
+        </nav>
+
+        <header>
+            <h1>核心复盘：合规与商业化的灰度平衡</h1>
+            <div class="subtitle">致 CEO：如何在“风控理想主义”与“商业存活”间建立护城河</div>
+        </header>
+
+        <!-- 背景冲突 -->
+        <div class="card">
+            <h2>📉 1. 现象复盘与根因分析</h2>
+            <div class="grid-2">
+                <div class="highlight-box" style="margin-top: 0; border-left-color: #6366f1;">
+                    <div style="font-size: 0.9rem; color: var(--text-dim);">2025年 宽松周期</div>
+                    <div class="metric" style="color: #6366f1;">2.4亿 净利润</div>
+                    <p style="font-size: 0.9rem; margin-top: 10px;">野蛮生长，利润丰厚，但退费率居高不下(20%)，长线运营面临监管爆雷风险的“虚假繁荣”。</p>
+                </div>
+                <div class="highlight-box" style="margin-top: 0;">
+                    <div style="font-size: 0.9rem; color: var(--text-dim);">2026年 Q1 矫枉过正</div>
+                    <div class="metric danger">↓ 0.3% 转化率</div>
+                    <p style="font-size: 0.9rem; margin-top: 10px;">风控部门强力推行<strong>“禁造梦”与绝对纯净话术</strong>。转化率从 4%+ 瞬间跌破
+                        0.8%，业务线全面告急，面临亏损甚至破产危机。</p>
+                </div>
+            </div>
+
+            <div style="margin-top: 25px;">
+                <strong>核心矛盾：</strong>
+                <p>马长久（市场经营）指出：“兼职副业”类目的底层逻辑就是<strong>情绪价值与愿景驱动</strong>。如果完全剥离“造梦”，在目前大众的认知下，单靠“干巴巴的技能交付”无法引发生理冲动（付费意愿）。过度理想化的风控导致公司即将饿死在“正确的路上”。
+                </p>
+            </div>
+        </div>
+
+        <!-- 战略重新对齐 -->
+        <div class="card">
+            <h2>🎯 2. 战略重新对齐：1亿健康净利润底线</h2>
+            <p>CEO的核心诉求非常清晰：我们要的是长久生存。我们不追求 2025 年那带血的 2.4 亿，但绝不能接受 Q1 流血亏损。<strong style="color: var(--primary);">“健康的
+                    1 亿净利润”</strong> 才是破局点。</p>
+
+            <div class="success-box">
+                <div style="font-size: 1.1rem; font-weight: bold; margin-bottom: 15px; color: var(--success);">新的灰度平衡原则
+                    (Grey-Zone Balance)</div>
+                <ul style="padding-left: 20px; line-height: 1.8;">
+                    <li><strong>重构“合规的边界”：</strong>
+                        我们不赚“带血的钱”，并不代表我们不能提供“情绪价值”。销售话术允许<strong>“适度的前景包装与赋能承诺（造梦）”</strong>，找回能打动用户的销售力，重新将转化率拉回
+                        <strong>≥2.5%</strong>。</li>
+                    <li><strong>精准剥离“高危人群”：</strong> 既然话术带上了“梦想”，就绝不能把梦想卖给“输不起的人”。坚决执行<a
+                            href="BlackUserInterception.html" style="color: var(--primary);">大黑用户 100%
+                            拦截</a>。不向贫困、无认知能力、职业维权群体销售，这是底线。</li>
+                    <li><strong>后端承接做实：</strong> 前端适度造梦，后端必须用高人效的“真人+AI”交付来兑现，将单纯的“卖课”变成真实的“副业技能陪跑”。</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- BSC 更新 -->
+        <div class="card">
+            <h2>📈 3. BSC 体系相关指标升级</h2>
+            <p>为保障“1亿利润”和“风险可控”的平衡落地，在本次复盘后，对 <a href="BSC.html"
+                    style="color: var(--text-main); text-decoration: underline;">2026 BSC 核心指标</a> 进行了迭代确认：</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th width="20%">考核点</th>
+                        <th width="35%">原策略 (Q1初)</th>
+                        <th width="45%">修正后新策略 (Week 8)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>转化率 <br><span
+                                    style="font-size: 0.8rem; color:var(--text-dim);">(财务/业务)</span></strong></td>
+                        <td>由于话术“极端纯净化”，无考核硬性指标，任由其跌至 <0.8%。< /td>
+                        <td><strong>底线修复至 ≥ 2.5%</strong>。赋予营销团队合理的话语权，恢复情感驱动型营销模型，确保现金流血止。</td>
+                    </tr>
+                    <tr>
+                        <td><strong>大黑用户拦截率 <br><span
+                                    style="font-size: 0.8rem; color:var(--text-dim);">(客户/风控)</span></strong></td>
+                        <td>模糊的“降低客诉”口号。</td>
+                        <td><strong>BSC强考核 (≥90%)</strong>。前端放宽话术，这道闸门就必须关死。拦截率低于80%，相关管理层收入维度得分为0。这是平衡灰度的基石。</td>
+                    </tr>
+                    <tr>
+                        <td><strong>净利润目标 <br><span
+                                    style="font-size: 0.8rem; color:var(--text-dim);">(财务)</span></strong></td>
+                        <td>仅强调“去肥解毒，牺牲30%营收也可以”。</td>
+                        <td><strong>锁定 1 亿人民币(净利润率≥10%)</strong>。这是公司第一曲线赖以生存的底线数字，一切风控动作均应为该底线保驾护航，而非阻碍。</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <footer style="text-align: center; margin: 40px 0; color: var(--text-dim); font-size: 0.85rem;">
+        Generated by Antigravity Agent • Week 8 Strategy Alignment 2026
+    </footer>
+</body>
+
+</html>
