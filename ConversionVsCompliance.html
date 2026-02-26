@@ -145,6 +145,43 @@
             background: rgba(255, 255, 255, 0.05);
             color: var(--primary);
         }
+
+        /* Mobile Optimization */
+        @media screen and (max-width: 768px) {
+            body {
+                padding: 15px 10px;
+            }
+
+            .container {
+                width: 100%;
+                padding: 0;
+            }
+
+            h1 {
+                font-size: 1.6rem;
+            }
+
+            .card {
+                padding: 20px 15px;
+            }
+
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+
+            table {
+                display: block;
+                width: 100%;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+
+            th,
+            td {
+                padding: 10px;
+                font-size: 0.9rem;
+            }
+        }
     </style>
 </head>
 
@@ -197,7 +234,8 @@
                 <ul style="padding-left: 20px; line-height: 1.8;">
                     <li><strong>重构“合规的边界”：</strong>
                         我们不赚“带血的钱”，并不代表我们不能提供“情绪价值”。销售话术允许<strong>“适度的前景包装与赋能承诺（造梦）”</strong>，找回能打动用户的销售力，重新将转化率拉回
-                        <strong>≥2.5%</strong>。</li>
+                        <strong>≥2.5%</strong>。
+                    </li>
                     <li><strong>精准剥离“高危人群”：</strong> 既然话术带上了“梦想”，就绝不能把梦想卖给“输不起的人”。坚决执行<a
                             href="BlackUserInterception.html" style="color: var(--primary);">大黑用户 100%
                             拦截</a>。不向贫困、无认知能力、职业维权群体销售，这是底线。</li>
