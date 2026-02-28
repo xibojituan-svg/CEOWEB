@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>喜播健康 | 第二曲线 - 0-1 健康管理探索</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Outfit:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0d1117;
+            --card-bg: rgba(22, 27, 34, 0.7);
+            --accent-green: #37eb94;
+            --accent-cyan: #00e5ff;
+            --text-primary: #f0f6fc;
+            --text-secondary: #8b949e;
+            --border-color: rgba(48, 54, 61, 0.5);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --premium-gradient: linear-gradient(135deg, #37eb94 0%, #00e5ff 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: 'Inter', 'PingFang SC', sans-serif;
+            background-image:
+                radial-gradient(circle at 10% 20%, rgba(55, 235, 148, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(0, 229, 255, 0.05) 0%, transparent 40%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        header {
+            padding: 2rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            background: rgba(13, 17, 23, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+        }
+
+        .logo {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--premium-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .tagline {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        main {
+            padding: 4rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .hero {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-bottom: 4rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 3.5rem;
+            line-height: 1.1;
+            font-weight: 700;
+        }
+
+        .hero h1 span {
+            background: var(--premium-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .glass-card {
+            background: var(--card-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 2rem;
+            backdrop-filter: blur(16px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            transition: transform 0.3s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .card-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        /* Chart Placeholder */
+        .chart-container {
+            height: 300px;
+            width: 100%;
+            position: relative;
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-around;
+            padding-top: 2rem;
+        }
+
+        .bar {
+            width: 8px;
+            background: var(--accent-green);
+            border-radius: 4px 4px 0 0;
+            opacity: 0.3;
+            transition: height 1s ease-out, opacity 0.3s;
+        }
+
+        .bar.active {
+            opacity: 1;
+            background: var(--premium-gradient);
+            box-shadow: 0 0 15px rgba(55, 235, 148, 0.4);
+        }
+
+        .trend-line {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .metrics-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .metric-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .metric-label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .metric-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .metric-unit {
+            font-size: 0.9rem;
+            font-weight: 400;
+            color: var(--text-secondary);
+        }
+
+        .status-badge {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .status-stable {
+            background: rgba(55, 235, 148, 0.1);
+            color: var(--accent-green);
+            border: 1px solid var(--accent-green);
+        }
+
+        .status-optimal {
+            background: rgba(0, 229, 255, 0.1);
+            color: var(--accent-cyan);
+            border: 1px solid var(--accent-cyan);
+        }
+
+        /* The "Third Way" Section */
+        .strategy-section {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .strategy-card {
+            padding: 2.5rem;
+            text-align: center;
+        }
+
+        .icon-box {
+            width: 64px;
+            height: 64px;
+            background: rgba(55, 235, 148, 0.1);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            color: var(--accent-green);
+        }
+
+        .strategy-card h3 {
+            margin-bottom: 1rem;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .strategy-card p {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Comparison Tool */
+        .comparison-tool {
+            background: linear-gradient(rgba(13, 17, 23, 0.1), rgba(13, 17, 23, 0.1)), url('https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&q=80&w=2070');
+            background-size: cover;
+            background-position: center;
+            border-radius: 32px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .tool-overlay {
+            background: rgba(13, 17, 23, 0.9);
+            padding: 4rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .tool-info h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .tool-form {
+            background: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: 24px;
+            border: 1px solid var(--glass-border);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        input,
+        select {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border-color);
+            padding: 0.8rem 1rem;
+            border-radius: 8px;
+            color: white;
+            font-family: inherit;
+        }
+
+        .cta-button {
+            background: var(--premium-gradient);
+            border: none;
+            color: #0d1117;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 20px rgba(55, 235, 148, 0.4);
+        }
+
+        footer {
+            padding: 4rem 5%;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .pulse {
+            animation: pulse-animation 2s infinite;
+        }
+
+        @keyframes pulse-animation {
+            0% {
+                box-shadow: 0 0 0 0px rgba(55, 235, 148, 0.4);
+            }
+
+            100% {
+                box-shadow: 0 0 0 20px rgba(55, 235, 148, 0);
+            }
+        }
+
+        @media (max-width: 968px) {
+
+            .dashboard-grid,
+            .tool-overlay {
+                grid-template-columns: 1fr;
+            }
+
+            .strategy-section {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <span>SECOND CURVE</span>
+        </div>
+        <div class="tagline">个人健康·快乐服务平台</div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div
+                style="background: rgba(55, 235, 148, 0.1); padding: 5px 15px; border-radius: 20px; color: var(--accent-green); font-size: 0.8rem; font-weight: 700; width: fit-content; margin: 0 auto;">
+                第二曲线 0-1 探索</div>
+            <h1>从监测到牵引：<br>定义您的<span>健康私人标准</span></h1>
+            <p>基于“训练营+服务+社群”的三位一体模式，关注持续测量趋势而非单一数值偏差。不仅是管理指标，更是重新发现生命的活力。</p>
+        </section>
+
+        <section class="dashboard-grid">
+            <div class="glass-card">
+                <div class="card-header">
+                    <div class="card-title">生物特征动态监测 (Biometric Snapshot)</div>
+                    <span class="status-badge status-stable">持续追踪中</span>
+                </div>
+                <div class="chart-container" id="trendChart">
+                    <!-- Bars will be generated by JS -->
+                </div>
+                <div class="metrics-row">
+                    <div class="metric-item">
+                        <span class="metric-label">低密度脂蛋白 (LDL)</span>
+                        <div class="metric-value">1.82 <span class="metric-unit">mmol/L</span></div>
+                        <div style="color: var(--accent-cyan); font-size: 0.8rem;">↓ 趋势降低中 (优化建议：保持)</div>
+                    </div>
+                    <div class="metric-item">
+                        <span class="metric-label">空腹血糖 (FBG)</span>
+                        <div class="metric-value">5.2 <span class="metric-unit">mmol/L</span></div>
+                        <div style="color: var(--text-secondary); font-size: 0.8rem;">○ 状态平稳</div>
+                    </div>
+                    <div class="metric-item">
+                        <span class="metric-label">静息心率</span>
+                        <div class="metric-value">64 <span class="metric-unit">bpm</span></div>
+                        <div style="color: var(--accent-green); font-size: 0.8rem;">↑ 心肺适能提升</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-card"
+                style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
+                <div class="card-title" style="margin-bottom: 1.5rem;">个人健康评分</div>
+                <div style="position: relative; width: 180px; height: 180px;">
+                    <svg viewBox="0 0 100 100" style="transform: rotate(-90deg); width: 100%; height: 100%;">
+                        <circle cx="50" cy="50" r="45" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="8">
+                        </circle>
+                        <circle cx="50" cy="50" r="45" fill="none" stroke="url(#scoreGradient)" stroke-width="8"
+                            stroke-dasharray="282.7" stroke-dashoffset="20" stroke-linecap="round"></circle>
+                        <defs>
+                            <linearGradient id="scoreGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" style="stop-color:#37eb94;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#00e5ff;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+                        <div style="font-size: 3rem; font-weight: 800; font-family: 'Outfit';">92</div>
+                        <div style="font-size: 0.7rem; color: var(--text-secondary); text-transform: uppercase;">Score
+                        </div>
+                    </div>
+                </div>
+                <p style="margin-top: 2rem; font-size: 0.9rem; color: var(--text-secondary);">相比上月提升了 <strong>+3
+                        pts</strong><br>行为改变开始生效</p>
+            </div>
+        </section>
+
+        <section class="strategy-section">
+            <div class="glass-card strategy-card">
+                <div class="icon-box">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="9" cy="7" r="4"></circle>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                    </svg>
+                </div>
+                <h3>第三条路：社群牵引</h3>
+                <p>摆脱单纯卖硬件或平台的孤岛模式。通过高粘性社群，将医疗建议转化为日常动力。</p>
+            </div>
+            <div class="glass-card strategy-card">
+                <div class="icon-box">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                    </svg>
+                </div>
+                <h3>动态反馈：关注趋势</h3>
+                <p>重要的不是单一变量的“正常值”，而是随行为改变的趋势。我们提供基于算法的连续反馈。</p>
+            </div>
+            <div class="glass-card strategy-card">
+                <div class="icon-box">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                        <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                    </svg>
+                </div>
+                <h3>训练营切入：服务重塑</h3>
+                <p>以训练营为服务载体，将复杂的健康干预简化为可执行的打卡与互动。让健康管理变“轻”。</p>
+            </div>
+        </section>
+
+        <section class="comparison-tool" id="tool">
+            <div class="tool-overlay">
+                <div class="tool-info">
+                    <h2>打破通用标准<br>定制您的<span>私域目标</span></h2>
+                    <p style="color: var(--text-secondary); margin-bottom: 2rem; font-size: 1.1rem; line-height: 1.6;">
+                        为什么 LDL 达到 3.4 对于某些人来说并不安全？<br>
+                        因为您的遗传背景、历史病史（如腔梗经历）决定了您需要更严格的标准。<br><br>
+                        在这里，我们将通用体检报告转化为您的生命说明书。
+                    </p>
+                    <div style="display: flex; gap: 2rem;">
+                        <div>
+                            <div style="font-size: 0.8rem; color: var(--text-secondary);">医院参考范围</div>
+                            <div style="font-size: 1.5rem; font-weight: 600;">0 - 3.4</div>
+                        </div>
+                        <div style="color: var(--accent-green);">
+                            <div style="font-size: 0.8rem; color: var(--text-secondary);">您的推荐目标</div>
+                            <div style="font-size: 1.5rem; font-weight: 600; font-family: 'Outfit';">1.4*</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tool-form">
+                    <div class="form-group">
+                        <label>关注风险点</label>
+                        <select>
+                            <option>低密度脂蛋白 / 血管斑块</option>
+                            <option>糖代谢管理 (血糖/胰岛素)</option>
+                            <option>心肺耐力探索</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>家族遗传病史</label>
+                        <select>
+                            <option>存在 (糖尿病/高血压/脑梗等)</option>
+                            <option>健康</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>历史健康记录</label>
+                        <input type="text" placeholder="例如：曾有腔隙性脑梗史">
+                    </div>
+                    <button class="cta-button pulse">立即导出您的个人健康标准</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 喜播集团 第二曲线探索小组. 内部测试版 [Ver 0.1 Beta]</p>
+    </footer>
+
+    <script>
+        // Simulate data bar chart animation
+        const container = document.getElementById('trendChart');
+        const barCount = 20;
+
+        for (let i = 0; i < barCount; i++) {
+            const bar = document.createElement('div');
+            bar.className = 'bar';
+            // Random heights between 20% and 100%
+            const height = Math.floor(Math.random() * 80) + 20;
+            bar.style.height = '0px';
+            container.appendChild(bar);
+
+            setTimeout(() => {
+                bar.style.height = height + '%';
+                if (i > 15) bar.classList.add('active');
+            }, i * 50);
+        }
+    </script>
+</body>
+
+</html>
