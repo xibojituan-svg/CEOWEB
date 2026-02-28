@@ -226,11 +226,11 @@
                 </div>
                 <div class="info-item">
                     <span class="label">权重</span>
-                    <span class="value">熔断项 (若<80% 收入归零)</span>
+                    <span class="value">10% · 熔断项 (若 &lt;98% 客户维度归零)</span>
                 </div>
                 <div class="info-item">
                     <span class="label">年度总目标</span>
-                    <div class="highlight-value">≥ 90%</div>
+                    <div class="highlight-value">≥ 98%</div>
                 </div>
                 <div class="info-item">
                     <span class="label">责任人</span>
@@ -242,7 +242,9 @@
                 <div class="info-item">
                     <span class="label">官方定义</span>
                     <p class="value" style="font-weight: normal; color: var(--text-main);">
-                        系统识别的高风险用户（大黑/特殊关怀用户）在转化环节被拦截未成交的比例。</p>
+                        系统识别的<a href="HighRiskUserDefinition.html"
+                            style="color: #f87171; text-decoration: underline; font-weight: 600;">高风险用户（大黑/特殊关怀用户）</a>在转化环节被拦截未成交的比例。
+                    </p>
                 </div>
 
                 <div class="info-item"
@@ -273,8 +275,9 @@
             <div class="reasoning">
                 <strong>💡 为什么要拦截？ (战略意图)</strong>
                 <p style="margin: 10px 0 0; font-size: 0.95rem; color: var(--text-dim);">
-                    “大黑用户”是指有明确高风险特征（如职业打假、极度贫困、认知障碍）的群体。转化这类用户不仅会导致后续投诉和退费（负向净营收），更可能引发舆情和监管风险。
-                    <strong>“不赚带血的钱”</strong> 是第一曲线解毒战役的核心价值观。
+                    <a href="HighRiskUserDefinition.html"
+                        style="color: #f87171; text-decoration: underline; font-weight: 600;">"大黑用户"</a>是指有明确高风险特征（如职业打假、极度贫困、认知障碍）的群体。转化这类用户不仅会导致后续投诉和退费（负向净营收），更可能引发舆情和监管风险。
+                    <strong>"不赚带血的钱"</strong> 是第一曲线解毒战役的核心价值观。
                 </p>
             </div>
         </div>
@@ -297,9 +300,10 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td><strong>大黑用户拦截率</strong></td>
-                        <td><span class="highlight-value" style="font-size: 1.2rem;">≥ 90%</span></td>
-                        <td>系统命中数 / 系统识别总数</td>
+                        <td><strong><a href="HighRiskUserDefinition.html"
+                                    style="color: var(--danger); text-decoration: underline;">大黑用户拦截率</a></strong></td>
+                        <td><span class="highlight-value" style="font-size: 1.2rem;">≥ 98%</span></td>
+                        <td>成功拦截数 / 系统识别总数</td>
                     </tr>
                     <tr>
                         <td><strong>拦截外溢数</strong></td>

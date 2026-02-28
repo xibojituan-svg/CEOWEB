@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>大黑用户完整定义 | 喜播 2026 风控体系</title>
+    <meta name="description" content="喜播教育2026年高风险用户（大黑用户）完整判定定义，包含经济贫困类、身体受限类、竞品负面经历类三大类型及打标总则。">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #dc2626;
+            --primary-soft: rgba(220, 38, 38, 0.12);
+            --primary-border: rgba(220, 38, 38, 0.3);
+            --amber: #f59e0b;
+            --amber-soft: rgba(245, 158, 11, 0.1);
+            --green: #16a34a;
+            --green-soft: rgba(22, 163, 74, 0.1);
+            --green-border: rgba(22, 163, 74, 0.25);
+            --blue: #2563eb;
+            --blue-soft: rgba(37, 99, 235, 0.1);
+            --purple: #7c3aed;
+            --purple-soft: rgba(124, 58, 237, 0.1);
+            --bg: #0b1120;
+            --surface: #111827;
+            --surface2: #1a2436;
+            --border: rgba(255, 255, 255, 0.08);
+            --border2: rgba(255, 255, 255, 0.05);
+            --text: #f1f5f9;
+            --text-muted: #94a3b8;
+            --text-faint: #64748b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            min-height: 100vh;
+            background-image:
+                radial-gradient(ellipse at 10% 10%, rgba(220, 38, 38, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 90% 90%, rgba(37, 99, 235, 0.08) 0%, transparent 50%);
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 0 24px 80px;
+        }
+
+        /* ── Hero ── */
+        .hero {
+            padding: 60px 0 50px;
+            position: relative;
+        }
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.82rem;
+            color: var(--text-faint);
+            margin-bottom: 28px;
+        }
+
+        .breadcrumb a {
+            color: var(--text-faint);
+            text-decoration: none;
+            transition: color .2s;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--text-muted);
+        }
+
+        .breadcrumb span {
+            opacity: .5;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--primary-soft);
+            border: 1px solid var(--primary-border);
+            color: #f87171;
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: .05em;
+            text-transform: uppercase;
+            padding: 5px 14px;
+            border-radius: 99px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 800;
+            line-height: 1.2;
+            background: linear-gradient(135deg, #fff 20%, #f87171 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 16px;
+        }
+
+        .hero-desc {
+            color: var(--text-muted);
+            font-size: 1rem;
+            max-width: 640px;
+        }
+
+        .hero-meta {
+            display: flex;
+            gap: 24px;
+            margin-top: 24px;
+            flex-wrap: wrap;
+        }
+
+        .meta-chip {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .meta-chip .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--primary);
+            flex-shrink: 0;
+        }
+
+        /* ── 总则卡片 ── */
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section-label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: var(--text-faint);
+            margin-bottom: 16px;
+        }
+
+        .principle-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 32px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .principle-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--amber), var(--primary));
+        }
+
+        .principle-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--amber);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .principle-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
+        }
+
+        @media (max-width: 600px) {
+            .principle-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .principle-item {
+            background: var(--surface2);
+            border: 1px solid var(--border2);
+            border-radius: 12px;
+            padding: 16px 18px;
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+
+        .principle-num {
+            flex-shrink: 0;
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            background: rgba(245, 158, 11, 0.15);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            color: var(--amber);
+            font-size: 0.8rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .principle-text strong {
+            color: var(--text);
+            font-size: 0.9rem;
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        .principle-text span {
+            color: var(--text-muted);
+            font-size: 0.83rem;
+        }
+
+        .principle-warn {
+            margin-top: 18px;
+            background: rgba(245, 158, 11, 0.08);
+            border: 1px solid rgba(245, 158, 11, 0.2);
+            border-radius: 10px;
+            padding: 14px 18px;
+            font-size: 0.85rem;
+            color: #fcd34d;
+        }
+
+        .principle-warn strong {
+            color: var(--amber);
+        }
+
+        /* ── 类型卡片 ── */
+        .type-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            overflow: hidden;
+            margin-bottom: 24px;
+        }
+
+        .type-header {
+            padding: 24px 32px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .type-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            flex-shrink: 0;
+        }
+
+        .type-icon.red {
+            background: var(--primary-soft);
+            border: 1px solid var(--primary-border);
+        }
+
+        .type-icon.blue {
+            background: var(--blue-soft);
+            border: 1px solid rgba(37, 99, 235, .25);
+        }
+
+        .type-icon.purple {
+            background: var(--purple-soft);
+            border: 1px solid rgba(124, 58, 237, .25);
+        }
+
+        .type-header-text h2 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 4px;
+        }
+
+        .type-num {
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 6px;
+            letter-spacing: .04em;
+        }
+
+        .num-red {
+            background: var(--primary-soft);
+            color: #f87171;
+        }
+
+        .num-blue {
+            background: var(--blue-soft);
+            color: #60a5fa;
+        }
+
+        .num-purple {
+            background: var(--purple-soft);
+            color: #a78bfa;
+        }
+
+        .type-header-text p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .type-body {
+            padding: 28px 32px;
+        }
+
+        .def-block {
+            background: var(--surface2);
+            border: 1px solid var(--border2);
+            border-radius: 12px;
+            padding: 20px 22px;
+            margin-bottom: 22px;
+        }
+
+        .def-block-label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: var(--text-faint);
+            margin-bottom: 14px;
+        }
+
+        .condition-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .condition-list li {
+            display: flex;
+            gap: 10px;
+            font-size: 0.88rem;
+            color: var(--text-muted);
+        }
+
+        .condition-list li::before {
+            content: '◆';
+            color: var(--primary);
+            font-size: 0.6rem;
+            margin-top: 5px;
+            flex-shrink: 0;
+        }
+
+        .condition-list li strong {
+            color: var(--text);
+        }
+
+        /* Examples grid */
+        .examples-section {
+            margin-bottom: 22px;
+        }
+
+        .examples-label {
+            font-size: 0.78rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .examples-label.yes {
+            color: var(--green);
+        }
+
+        .examples-label.no {
+            color: #f87171;
+        }
+
+        .example-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .chip {
+            font-size: 0.82rem;
+            padding: 7px 14px;
+            border-radius: 8px;
+            line-height: 1.4;
+        }
+
+        .chip.yes {
+            background: var(--green-soft);
+            border: 1px solid var(--green-border);
+            color: #86efac;
+        }
+
+        .chip.no {
+            background: var(--primary-soft);
+            border: 1px solid var(--primary-border);
+            color: #fca5a5;
+        }
+
+        /* 除外条款 */
+        .exclusion-block {
+            background: rgba(100, 116, 139, .07);
+            border: 1px solid rgba(100, 116, 139, .2);
+            border-radius: 12px;
+            padding: 20px 22px;
+        }
+
+        .exclusion-block h4 {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--text-faint);
+            text-transform: uppercase;
+            letter-spacing: .08em;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .exclusion-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .exclusion-list li {
+            font-size: 0.84rem;
+            color: var(--text-muted);
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+        }
+
+        .exclusion-list li::before {
+            content: '🚫';
+            font-size: 0.75rem;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        /* ── 三大类概览 ── */
+        .overview-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-bottom: 40px;
+        }
+
+        @media (max-width: 680px) {
+            .overview-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .overview-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 24px;
+            text-align: center;
+            transition: border-color .25s, transform .25s;
+        }
+
+        .overview-card:hover {
+            border-color: rgba(220, 38, 38, .35);
+            transform: translateY(-4px);
+        }
+
+        .overview-num {
+            font-size: 2.5rem;
+            margin-bottom: 8px;
+        }
+
+        .overview-card h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .overview-card p {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+        }
+
+        /* ── 流程图 ── */
+        .flow-section {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 32px;
+            margin-bottom: 40px;
+        }
+
+        .flow-title {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 24px;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .flow-steps {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0;
+            align-items: stretch;
+        }
+
+        .flow-step {
+            flex: 1;
+            min-width: 130px;
+            background: var(--surface2);
+            border: 1px solid var(--border2);
+            border-radius: 12px;
+            padding: 18px 16px;
+            text-align: center;
+            position: relative;
+        }
+
+        .flow-step-num {
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: var(--text-faint);
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .flow-step-label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 4px;
+        }
+
+        .flow-step-desc {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+        }
+
+        .flow-arrow {
+            display: flex;
+            align-items: center;
+            padding: 0 8px;
+            color: var(--primary);
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+
+        @media (max-width: 600px) {
+            .flow-steps {
+                flex-direction: column;
+            }
+
+            .flow-arrow {
+                transform: rotate(90deg);
+                justify-content: center;
+                padding: 4px 0;
+            }
+        }
+
+        /* ── 返回链接 ── */
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.88rem;
+            font-weight: 500;
+            padding: 10px 18px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            transition: all .2s;
+            margin-top: 8px;
+        }
+
+        .back-link:hover {
+            border-color: rgba(220, 38, 38, .4);
+            color: var(--text);
+            background: var(--primary-soft);
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 0 20px;
+            color: var(--text-faint);
+            font-size: 0.82rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+        <!-- Breadcrumb -->
+        <nav class="breadcrumb" style="padding-top:36px;">
+            <a href="index.html">首页</a>
+            <span>/</span>
+            <a href="BSC.html">BSC 总览</a>
+            <span>/</span>
+            <a href="BlackUserInterception.html">大黑用户拦截率</a>
+            <span>/</span>
+            <span style="color: var(--text-muted);">大黑用户完整定义</span>
+        </nav>
+
+        <!-- Hero -->
+        <div class="hero">
+            <div class="hero-badge">⚠️ 风控核心文档 · 2026年2月28日更新</div>
+            <h1>大黑用户完整定义</h1>
+            <p class="hero-desc">高风险用户（"大黑用户"）的三大类型判定标准、典型示例与除外条款。用于指导 AI 自动打标系统和人工复核。</p>
+            <div class="hero-meta">
+                <div class="meta-chip">
+                    <div class="dot"></div> 覆盖：经济贫困 · 身体受限 · 竞品负面经历
+                </div>
+                <div class="meta-chip">
+                    <div class="dot" style="background:#3b82f6;"></div> 维护：@杜康杰 (CX VP)
+                </div>
+                <div class="meta-chip">
+                    <div class="dot" style="background:#10b981;"></div> 策略：模糊地带默认非高风险
+                </div>
+            </div>
+        </div>
+
+        <!-- 三类概览 -->
+        <div class="section">
+            <div class="section-label">三大高风险类型</div>
+            <div class="overview-grid">
+                <div class="overview-card">
+                    <div class="overview-num">💸</div>
+                    <h3 style="color:#f87171;">经济贫困类</h3>
+                    <p>具有债务偿还困难、大额欠款、严重支付困难等经济窘境特征</p>
+                </div>
+                <div class="overview-card">
+                    <div class="overview-num">🏥</div>
+                    <h3 style="color:#60a5fa;">身体受限类</h3>
+                    <p>存在妨碍课程学习的基础疾病、绝症、肢体障碍或严重精神疾病</p>
+                </div>
+                <div class="overview-card">
+                    <div class="overview-num">⚡</div>
+                    <h3 style="color:#a78bfa;">竞品负面经历类</h3>
+                    <p>曾在竞品平台（梨花/十方等）学习后无收益，且以赚钱为目的再次报课</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 打标总则 -->
+        <div class="section">
+            <div class="section-label">打标前置总则（必须同时满足）</div>
+            <div class="principle-card">
+                <div class="principle-title">⚠️ 四大必要前提 — 缺一不可</div>
+                <div class="principle-grid">
+                    <div class="principle-item">
+                        <div class="principle-num">1</div>
+                        <div class="principle-text">
+                            <strong>主语为用户本人</strong>
+                            <span>排除助教或他人转述的话语。对话中提到风险情况的必须是学员自己。</span>
+                        </div>
+                    </div>
+                    <div class="principle-item">
+                        <div class="principle-num">2</div>
+                        <div class="principle-text">
+                            <strong>表述为事实</strong>
+                            <span>排除疑问句、假设性描述或传闻。需为明确陈述，而非猜测或询问。</span>
+                        </div>
+                    </div>
+                    <div class="principle-item">
+                        <div class="principle-num">3</div>
+                        <div class="principle-text">
+                            <strong>与当前学习内容强相关</strong>
+                            <span>例如：学配音课，听力/语言障碍是风险；但腿部残疾通常不构成风险。</span>
+                        </div>
+                    </div>
+                    <div class="principle-item">
+                        <div class="principle-num">4</div>
+                        <div class="principle-text">
+                            <strong>以用户原话为依据</strong>
+                            <span>必须能在对话原文中找到明确依据，不能仅凭推测或联想。</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="principle-warn">
+                    🛡️ <strong>容错原则：</strong>模糊地带默认判定为「非高风险用户」。只有在完全匹配定义时才标记。若用户同时满足多个类型，全部标记。
+                </div>
+            </div>
+        </div>
+
+        <!-- AI 判断流程 -->
+        <div class="flow-section">
+            <div class="flow-title">🤖 AI 自动打标工作流程</div>
+            <div class="flow-steps">
+                <div class="flow-step">
+                    <div class="flow-step-num">Step 1</div>
+                    <div class="flow-step-label">接收对话</div>
+                    <div class="flow-step-desc">扫描助教与学员聊天内容</div>
+                </div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-step">
+                    <div class="flow-step-num">Step 2</div>
+                    <div class="flow-step-label">前置校验</div>
+                    <div class="flow-step-desc">验证四大总则是否满足</div>
+                </div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-step">
+                    <div class="flow-step-num">Step 3</div>
+                    <div class="flow-step-label">逐类比对</div>
+                    <div class="flow-step-desc">按三大类型逐一匹配定义</div>
+                </div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-step">
+                    <div class="flow-step-num">Step 4</div>
+                    <div class="flow-step-label">输出 JSON</div>
+                    <div class="flow-step-desc">标准化结果 + 规则依据</div>
+                </div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-step">
+                    <div class="flow-step-num">Step 5</div>
+                    <div class="flow-step-label">系统熔断</div>
+                    <div class="flow-step-desc">CRM 自动阻断支付链接</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 类型一：经济贫困类 -->
+        <div class="section">
+            <div class="section-label">类型详情</div>
+
+            <div class="type-card">
+                <div class="type-header">
+                    <div class="type-icon red">💸</div>
+                    <div class="type-header-text">
+                        <h2><span class="type-num num-red">类型一</span> 经济贫困类</h2>
+                        <p>主语明确指向用户本人，符合以下任一经济困境情形的用户</p>
+                    </div>
+                </div>
+                <div class="type-body">
+
+                    <!-- 判定条件 -->
+                    <div class="def-block">
+                        <div class="def-block-label">📋 判定条件（满足任意一条即可）</div>
+                        <ul class="condition-list">
+                            <li>
+                                <div>
+                                    <strong>债务偿还困难：</strong>明确表达"难以偿还/还不上"，关键表现包括：还不上信用卡/贷款、套信用卡/以卡养卡、变卖家产、被催债/征信受影响、逾期、借款上课还债。
+                                </div>
+                            </li>
+                            <li>
+                                <div><strong>过度收入预期：</strong>学习核心目的为赚钱，且明确用于偿还债务或支付紧急费用（如医药费、在校学费等）。</div>
+                            </li>
+                            <li>
+                                <div><strong>大额欠款事实：</strong>多次提及欠款金额 ≥ 1 万元，且伴有"焦虑/一屁股债/没希望了"等明确负面情绪（无需同时出现"还不上"表述）。
+                                </div>
+                            </li>
+                            <li>
+                                <div>
+                                    <strong>严重支付困难：</strong>所有支付工具额度均不足，无法通过短期自身资金周转解决，甚至需借钱才能交学费，或表示若交费则无法保障正常生活，或必须每月分批付款才能交清。
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- 典型示例 -->
+                    <div class="examples-section">
+                        <div class="examples-label yes">✅ 典型高风险对话（应打标）</div>
+                        <div class="example-chips">
+                            <span class="chip yes">"信用卡要逾期了，我真的还不上"</span>
+                            <span class="chip yes">"最近被催收催得很紧，已经上征信了"</span>
+                            <span class="chip yes">"为了还钱把车卖了也不够"</span>
+                            <span class="chip yes">"我借钱来报课，后面想靠接单还债"</span>
+                            <span class="chip yes">"欠款100万，每天都在想怎么快点还钱"</span>
+                            <span class="chip yes">"做生意亏了二十多万，一屁股债，一想到钱我就焦虑"</span>
+                            <span class="chip yes">"我必须靠这个副业把债务补上，不然还不上了"</span>
+                            <span class="chip yes">"手上只有300块，只够这几周吃饭了，我去借钱报"</span>
+                            <span class="chip yes">"我没那么多钱，可以先进去学习每个月分批转学费吗，失业很久真的没有钱"</span>
+                        </div>
+                    </div>
+
+                    <!-- 除外条款 -->
+                    <div class="exclusion-block">
+                        <h4>❌ 除外条款 — 不打标的情形</h4>
+                        <ul class="exclusion-list">
+                            <li>一般性生活期望：仅表达"赚点生活费""想多一份收入"等宽泛目的，未提及具体债务或紧急费用</li>
+                            <li>有常规负债但无困难：提及房贷、车贷等常规负债，但无偿还困难或负面情绪表现</li>
+                            <li>正常信贷支付：仅咨询用花呗/信用卡/分期付款，未明确表达"无力偿还""逾期"等实质困难</li>
+                            <li>短时资金周转：等待工资到账、账户转账、单笔限额等短期原因导致的临时支付问题</li>
+                            <li>仅表达价格敏感："学费太贵了" "这个价格负担不起" "能便宜点吗" — 无实质债务困难</li>
+                            <li>极度简单表达："我很穷" "我没钱" — 太宽泛，无实质性债务困难</li>
+                            <li>助教或他人所述：非用户自述的情况不构成依据</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 类型二：身体受限类 -->
+            <div class="type-card">
+                <div class="type-header">
+                    <div class="type-icon blue">🏥</div>
+                    <div class="type-header-text">
+                        <h2><span class="type-num num-blue">类型二</span> 身体受限类</h2>
+                        <p>主语明确指向用户本人，存在妨碍课程学习的身体或精神状况</p>
+                    </div>
+                </div>
+                <div class="type-body">
+
+                    <div class="def-block">
+                        <div class="def-block-label">📋 判定条件（满足任意一条即可）</div>
+                        <ul class="condition-list">
+                            <li>
+                                <div><strong>不能学习配音的基础疾病：</strong>包括但不限于语言障碍、听力障碍、癫痫、瘫痪等，且与当前学习课程直接相关。</div>
+                            </li>
+                            <li>
+                                <div><strong>危及生命的"绝症"：</strong>如癌症、白血病、尿毒症等，无论是否影响学习能力均作为高风险处理。</div>
+                            </li>
+                            <li>
+                                <div><strong>因身体残疾无法正常操作手机：</strong>明确因手部残疾或其他身体残疾导致"无法操作/无法使用手机/无法打字/无法点按"等。</div>
+                            </li>
+                            <li>
+                                <div>
+                                    <strong>严重精神疾病：</strong>自述患有中度或严重精神障碍，包括重度/中度抑郁、躁狂抑郁、双相情感障碍、精神分裂症、智力发育障碍等，且需有明确的医学诊断背景。
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="examples-section">
+                        <div class="examples-label yes">✅ 典型高风险对话（应打标）</div>
+                        <div class="example-chips">
+                            <span class="chip yes">"我有癫痫，可以学配音吗"</span>
+                            <span class="chip yes">"我听力有障碍，很多内容听不清"</span>
+                            <span class="chip yes">"我有癌症，现在正在接受化疗"</span>
+                            <span class="chip yes">"我手部残疾，手机没法正常操作"</span>
+                            <span class="chip yes">"我现在重度抑郁症在家休养"</span>
+                            <span class="chip yes">"我是严重精神障碍，住了两次院了"</span>
+                        </div>
+                    </div>
+
+                    <div class="exclusion-block">
+                        <h4>❌ 除外条款 — 不打标的情形</h4>
+                        <ul class="exclusion-list">
+                            <li>临时性/可恢复状况：拔牙、感冒、急性咽炎、暂时性失声等短期可恢复情况</li>
+                            <li>常见非妨碍性慢性病：慢性咽炎、鼻炎等，除非医生明确说明已导致完全不能学习</li>
+                            <li>主观能力自评：天生口齿不清、声音不好听、普通话不标准 — 技能问题而非医学障碍</li>
+                            <li>操作困难但非无法：手酸/眼累/打字慢/看不清 — 未达到"无法操作"程度</li>
+                            <li>非本人患病：提及家人、朋友患病，不构成用户自身风险</li>
+                            <li>情绪表达非疾病："我最近有点抑郁" "太伤了搞得我快抑郁了" — 短暂情绪波动，非疾病</li>
+                            <li>作业或虚构内容：发送的长段落结合上下文属于写作作业，非阐述本人情况</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 类型三：竞品负面经历类 -->
+            <div class="type-card">
+                <div class="type-header">
+                    <div class="type-icon purple">⚡</div>
+                    <div class="type-header-text">
+                        <h2><span class="type-num num-purple">类型三</span> 竞品负面经历类</h2>
+                        <p>曾在梨花、十方等竞品平台有负面学习经历，且以赚钱为目的转投喜播的用户</p>
+                    </div>
+                </div>
+                <div class="type-body">
+
+                    <div class="def-block">
+                        <div class="def-block-label">📋 判定条件（满足任意一条即可，需同时以赚钱为目的）</div>
+                        <ul class="condition-list">
+                            <li>
+                                <div>
+                                    <strong>梨花经历退休/老年人员：</strong>曾参与过梨花、十方等竞品课程学习，且符合"60岁以上"或"已退休"特征，且报课目的是为了"赚钱/回本/养家/还债"而非纯粹兴趣。
+                                </div>
+                            </li>
+                            <li>
+                                <div><strong>梨花学员无收益/被骗：</strong>报课目的为赚钱，明确表示在竞品平台学习后"没赚到钱"、"觉得被骗"，或已发生竞品平台退款行为，随即转来喜播。
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="examples-section">
+                        <div class="examples-label yes">✅ 典型高风险对话（应打标）</div>
+                        <div class="example-chips">
+                            <span class="chip yes">"我今年62岁了，以前在梨花学过，但没赚到钱，想换你们家试试能不能赚回来"</span>
+                            <span class="chip yes">"我是十方的老学员，已经退休了，想通过配音多赚点钱"</span>
+                            <span class="chip yes">"我在梨花学过，贷款交了好多学费，结果一分钱没赚到"</span>
+                            <span class="chip yes">"梨花就是骗人的，你们喜播的资源好像更多一点"</span>
+                            <span class="chip yes">"之前在梨花啥都没学到，我现在已经把梨花的钱退了来报你们的课程"</span>
+                        </div>
+                    </div>
+
+                    <div class="exclusion-block">
+                        <h4>❌ 除外条款 — 不打标的情形</h4>
+                        <ul class="exclusion-list">
+                            <li>未提及任何竞品：仅对本课程表达投入顾虑、无收益担忧，无竞品相关经历</li>
+                            <li>竞品经历但个人原因未坚持："之前报过电商的课，因工作太忙就没坚持" — 无负面经历，属个人原因</li>
+                            <li>明确非赚钱目的："我去年退休了，做这个就是充实一下生活，赚不赚钱无所谓" — 目的不符合</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 返回链接 -->
+        <div style="display:flex; gap:12px; flex-wrap:wrap;">
+            <a href="BlackUserInterception.html" class="back-link">← 大黑用户拦截率（BSC 指标）</a>
+            <a href="BSC.html" class="back-link">← 返回 BSC 总览</a>
+        </div>
+
+    </div>
+
+    <footer>
+        喜播集团风控体系 · 0228 大黑用户标签说明 · 由 Antigravity Agent 结构化生成
+    </footer>
+
+</body>
+
+</html>
