@@ -191,6 +191,25 @@
             color: #991b1b;
         }
     </style>
+
+        <style>
+        /* Mobile Responsive adjustments */
+        @media (max-width: 768px) {
+            div[style*="column"] {
+                grid-template-columns: 1fr !important;
+            }
+            .hero {
+                padding: 30px 15px !important;
+            }
+            .hero h1 {
+                font-size: 1.8rem !important;
+            }
+            table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+        </style>
 </head>
 
 <body>
@@ -420,7 +439,7 @@
                 <strong>教研赋能转型：</strong> 从“纯技能授课”转向“用户体验历程(UX)”主导，AI助教作为核心枢纽，开展新用户基础能力测评 -> 靶向学习目标制定 ->
                 个人陪伴型成长的全生命周期服务闭环。
             </div>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
                 <div
                     style="background: #f8fafc; padding: 15px; border-radius: 8px; border-top: 3px solid var(--accent);">
                     <h4 style="margin-top:0;">合规安全底线与真实洞察</h4>
