@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>高管周会标准流程 (Weekly Meeting SOP)</title>
+    <style>
+        :root {
+            --primary: #FF4500;
+            --dark: #1a1a1a;
+            --light: #f4f4f4;
+            --gray: #888;
+            --green: #10b981;
+            --blue: #3b82f6;
+            --red: #ef4444;
+            --purple: #8b5cf6;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 30px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        h1 {
+            color: var(--dark);
+            text-align: center;
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            color: var(--primary);
+            margin-top: 40px;
+            display: flex;
+            align-items: center;
+        }
+
+        h2::before {
+            content: "■";
+            margin-right: 10px;
+            font-size: 0.8em;
+        }
+
+        .sop-card {
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            position: relative;
+            border-left: 5px solid var(--blue);
+        }
+
+        .sop-card h3 {
+            margin-top: 0;
+            color: var(--dark);
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .sop-card h3 span {
+            font-size: 0.9rem;
+            color: var(--gray);
+            font-weight: normal;
+        }
+
+        .bad-practice {
+            background: #fef2f2;
+            padding: 10px 15px;
+            border-radius: 6px;
+            color: #991b1b;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            border-left: 3px solid var(--red);
+        }
+
+        .good-practice {
+            background: #f0fdf4;
+            padding: 10px 15px;
+            border-radius: 6px;
+            color: #166534;
+            font-size: 0.9rem;
+            border-left: 3px solid var(--green);
+        }
+
+        .agenda-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .agenda-list li {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .agenda-list li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+        }
+
+        .topic-board {
+            background: linear-gradient(to right, #1e293b, #0f172a);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-top: 40px;
+            border-bottom: 4px solid var(--primary);
+        }
+
+        .topic-board h2 {
+            color: #fff;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 15px;
+            margin-top: 0;
+        }
+
+        .topic-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .topic-card h4 {
+            margin: 0 0 10px 0;
+            color: #fb923c;
+            font-size: 1.1rem;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .tag.urgent {
+            background: #ef4444;
+            color: white;
+        }
+
+        .tag.strategic {
+            background: #8b5cf6;
+            color: white;
+        }
+
+        .tag.operational {
+            background: #3b82f6;
+            color: white;
+        }
+
+        .btn-print {
+            display: block;
+            width: 200px;
+            margin: 30px auto 0;
+            text-align: center;
+            padding: 12px;
+            background: var(--dark);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+        }
+
+        @media print {
+            .btn-print {
+                display: none;
+            }
+
+            body {
+                background: white;
+            }
+
+            .container {
+                box-shadow: none;
+                margin: 0;
+                padding: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>高管周会标准模型 (L10 Meeting SOP)</h1>
+        <p style="text-align: center; color: var(--gray); margin-top: -20px;">“停止低效的汇报，把时间留给解决真正的难题”</p>
+
+        <div
+            style="background: #fff3cd; padding: 15px; border-radius: 8px; border-left: 4px solid #ffc107; margin-bottom: 30px; font-size: 0.95rem;">
+            <strong>当前痛点：</strong> 以前的周式是“流水账汇报”——每个人花15分钟讲自己做了什么，然后大家互相问句细节，接着按指标讲一圈就结束了。这种会议缺乏跨部门的深度碰撞，无法解决深层战略阻力。
+        </div>
+
+        <h2>一、 优秀的周会流程 (90分钟标准版)</h2>
+
+        <div class="sop-card" style="border-left-color: var(--purple);">
+            <h3>第 0 步：会前一天 (异步完成) <span>时间消耗：0分钟</span></h3>
+            <div class="bad-practice">❌ 错误：会上才打开表格，现场算数据，或者口头汇报“我这周干了啥”。</div>
+            <div class="good-practice">✅ 正确：所有高管必须在周日晚前，将战略思考、BSC指标数据及本周简报录入 AI 知识库。大家提前阅读，建立共识。</div>
+        </div>
+
+        <div class="sop-card" style="border-left-color: var(--green);">
+            <h3>第 1 步：破冰与对齐 (Check-in) <span>时间分配：5-10分钟</span></h3>
+            <p>每人 1-2 分钟，仅说两句话：</p>
+            <ul class="agenda-list">
+                <li>一句话分享本周个人感觉最好/最差的事。</li>
+                <li>是否有需要被加入到“核心议题池”的紧急痛点？</li>
+            </ul>
+        </div>
+
+        <div class="sop-card" style="border-left-color: var(--blue);">
+            <h3>第 2 步：BSC 核心指标扫视 (Scorecard) <span>时间分配：15分钟</span></h3>
+            <div class="bad-practice">❌ 错误：逐一念出每一个正常的指标（“我们转化率是5%，正常”）。</div>
+            <div class="good-practice">✅
+                正确：只关注<strong>异常指标（爆红/爆绿）</strong>。如果没达标，简述原因；如果是连续两周不达标，直接将该问题“抛入”核心议题池，不再纠缠细节。</div>
+        </div>
+
+        <div class="sop-card" style="border-left-color: var(--primary);">
+            <h3>第 3 步：核心难题攻坚 (IDS: Identify, Discuss, Solve) <span>时间分配：50-60分钟</span></h3>
+            <p>这是周会<strong>最有价值</strong>的部分。不要试图解决所有问题，挑选优先级最高的 1-2 个跨部门难题进行深度讨论。</p>
+            <ul class="agenda-list">
+                <li><strong>Identify (识别)：</strong> 挖掘问题的根本原因（例如：转化率低不是销售不努力，而是风控过严）。</li>
+                <li><strong>Discuss (讨论)：</strong> 所有人畅所欲言，基于事实和数据给出观点。</li>
+                <li><strong>Solve (解决)：</strong> 确定解决方案。必须达成共识，或者由最终决策者拍板。</li>
+            </ul>
+        </div>
+
+        <div class="sop-card" style="border-left-color: var(--red);">
+            <h3>第 4 步：决议结案 (Action Items) <span>时间分配：5-10分钟</span></h3>
+            <p>梳理本次会议产生的所有任务。必须严格遵循 <strong>WWW 原则</strong>：</p>
+            <ul class="agenda-list">
+                <li>Who (谁) </li>
+                <li>What (做什么，验收标准是什么) </li>
+                <li>When (在本周五下午6点前，必须具体)</li>
+            </ul>
+        </div>
+
+        <!-- Tommorow's Meeting Agenda -->
+        <div class="topic-board">
+            <h2>📅 3月2日 (周一) 核心议题草案 (建议)</h2>
+            <p style="color: #94a3b8; font-size: 0.9rem; margin-top: -10px;">基于上周五（2.28）内部闭门会分歧，建议重点讨论以下三个难题：</p>
+
+            <div class="topic-card">
+                <h4><span class="tag urgent">核心攻坚</span>议题一：“三方公审机制”的落地与转化率恢复</h4>
+                <p style="font-size: 0.9rem; color: #cbd5e1; margin-bottom: 10px;">
+                    <strong>背景：</strong> 2.28会议共识，在拦截大黑的前提下，要适当放宽话术造梦空间以恢复前端转化率（目前跌至0.3%左右）。<br>
+                    <strong>需要讨论：</strong>
+                    销售（马长久）与合规（杜康杰）的边界到底在哪？本周是否能拿出<strong>第一批被三方（包括蒋德铭）签字认可的“标准白名单话术”</strong>？线上该如何配置拦截策略来配合？
+                </p>
+            </div>
+
+            <div class="topic-card">
+                <h4><span class="tag strategic">核心攻坚</span>议题二：如何定义1亿利润保卫战下的“动作变形”？</h4>
+                <p style="font-size: 0.9rem; color: #cbd5e1; margin-bottom: 10px;">
+                    <strong>背景：</strong> 为了活着的1亿净利润，大家可能为了短期业绩而妥协部分服务质量，导致退费延迟爆雷。<br>
+                    <strong>需要讨论：</strong> 在“净营收”指标下，如何将退费预提规则落到前端团队绩效考核？本周的百万元投诉率是否超过警戒线？
+                </p>
+            </div>
+
+            <div class="topic-card">
+                <h4><span class="tag operational">专项过堂</span>议题三：第二曲线（健康TLC）打样进度追踪</h4>
+                <p style="font-size: 0.9rem; color: #cbd5e1; margin-bottom: 10px;">
+                    <strong>背景：</strong> AI 替代带来的研发效率提升，需要转移到第二曲线的验证上。<br>
+                    <strong>需要讨论：</strong> 研发（姚涣）本周能否跑通健康管理问卷与大模型匹配的原型原型链路？教研端内容进度如何（苏秦）？如果要做，业务上的最小可行性资源（MVP）卡在哪？
+                </p>
+            </div>
+
+            <p style="text-align: right; margin-bottom: 0;"><a href="index.html"
+                    style="color: #60a5fa; text-decoration: none;">← 返回集团大盘</a></p>
+        </div>
+
+        <a href="javascript:window.print()" class="btn-print">🖨️ 打印会议流程单</a>
+    </div>
+
+</body>
+
+</html>
