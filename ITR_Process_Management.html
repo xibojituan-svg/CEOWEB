@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ITR (Issue to Resolution) 从问题到解决 | 客户体验与风控大盘</title>
+    <style>
+        :root {
+            --primary: #c2410c;
+            /* 华为红偏深桔 */
+            --primary-light: #ffedd5;
+            --accent: #b91c1c;
+            --dark: #1f2937;
+            --gray: #6b7280;
+            --light: #f3f4f6;
+            --white: #ffffff;
+
+            --itr-id: #eab308;
+            --itr-triage: #f97316;
+            --itr-resolve: #ef4444;
+            --itr-close: #22c55e;
+            --itr-prevention: #3b82f6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+            background: #f8fafc;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        header {
+            background: var(--primary);
+            color: var(--white);
+            padding: 24px 0;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+        }
+
+        header p {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .section-title {
+            margin: 40px 0 20px;
+            position: relative;
+            padding-left: 16px;
+            font-size: 1.5rem;
+            color: var(--dark);
+        }
+
+        .section-title::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 5px;
+            bottom: 5px;
+            width: 6px;
+            background: var(--primary);
+            border-radius: 4px;
+        }
+
+        /* Card Setup */
+        .card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            margin-bottom: 24px;
+        }
+
+        /* 华为 ITR 流程图 */
+        .itr-stages {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .stage {
+            flex: 1;
+            min-width: 180px;
+            padding: 16px;
+            background: var(--light);
+            border-radius: 8px;
+            text-align: center;
+            border-top: 4px solid var(--gray);
+            position: relative;
+        }
+
+        /* 阶段颜色 */
+        .stage:nth-child(1) {
+            border-color: var(--itr-id);
+        }
+
+        .stage:nth-child(2) {
+            border-color: var(--itr-triage);
+        }
+
+        .stage:nth-child(3) {
+            border-color: var(--itr-resolve);
+        }
+
+        .stage:nth-child(4) {
+            border-color: var(--itr-close);
+        }
+
+        .stage:nth-child(5) {
+            border-color: var(--itr-prevention);
+        }
+
+        .stage h3 {
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+
+        .stage p {
+            font-size: 0.85rem;
+            color: var(--gray);
+            margin-bottom: 12px;
+        }
+
+        /* 看板 Board */
+        .board {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            align-items: start;
+        }
+
+        .board-column {
+            background: #f1f5f9;
+            border-radius: 8px;
+            padding: 16px;
+            min-height: 400px;
+        }
+
+        .column-header {
+            font-weight: 600;
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #cbd5e1;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .task-card {
+            background: var(--white);
+            padding: 16px;
+            border-radius: 6px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            margin-bottom: 12px;
+            border-left: 3px solid var(--gray);
+            position: relative;
+        }
+
+        .task-card h4 {
+            margin-bottom: 8px;
+            font-size: 1rem;
+            color: var(--dark);
+        }
+
+        .task-card .meta {
+            font-size: 0.8rem;
+            color: var(--gray);
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .task-card .tags span {
+            background: var(--primary-light);
+            color: var(--primary);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            margin-right: 4px;
+            display: inline-block;
+            margin-bottom: 4px;
+        }
+
+        .tag-risk {
+            background: #fee2e2 !important;
+            color: #dc2626 !important;
+        }
+
+        .tag-okr {
+            background: #e0e7ff !important;
+            color: #4338ca !important;
+        }
+
+        .owner-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: var(--dark);
+            color: white;
+            font-size: 0.75rem;
+            font-weight: bold;
+            position: absolute;
+            bottom: 12px;
+            right: 12px;
+            border: 2px solid white;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .board {
+                grid-template-columns: 1fr;
+            }
+
+            .itr-stages {
+                flex-direction: column;
+            }
+
+            .stage::after {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <h1>ITR (Issue to Resolution) 投诉与风控闭环管理大盘</h1>
+            <p>主控官：杜康杰（客户体验部） | 核心标尺：百万元投诉率降低 15% | 基于华为 ITR 方法论</p>
+        </div>
+    </header>
+
+    <div class="container" style="padding-top: 20px; padding-bottom: 40px;">
+
+        <!-- ITR 解读 -->
+        <h2 class="section-title">一、什么是 ITR？杜康杰面临的痛点是什么？</h2>
+        <div class="card"
+            style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+            <div>
+                <h3 style="color: var(--primary); margin-bottom: 12px;">华为 ITR 的核心哲学</h3>
+                <ol style="margin-left: 20px; color: #4b5563; display: flex; flex-direction: column; gap: 8px;">
+                    <li><strong>将隐患消灭在前端 (Issue Identification)：</strong> 把事后救火，变为事前主动拦截高危黑客户。</li>
+                    <li><strong>定级排单制 (Triage)：</strong> 按问题严重度分流，红线违规立即亮红灯，一般客诉走标品SOP。</li>
+                    <li><strong>一发多头与端到端闭环 (Resolution)：</strong> 不互相踢皮球。客服发现问题、联动销售退费机制、联动有关部门定责。</li>
+                    <li><strong>经验沉淀 (Root Cause & Prevention)：</strong> 每一单大额客诉必须做“单案根因分析”，并以规则/白皮书的形式固化（防外溢），杜绝二次踩坑。
+                    </li>
+                </ol>
+            </div>
+            <div style="background: #fff0f2; padding: 20px; border-radius: 8px; border-left: 4px solid var(--accent);">
+                <h3 style="color: #9f1239; margin-bottom: 12px;">【第一战役】百万投诉率降 15% 攻坚战</h3>
+                <p style="color: #9f1239; font-size: 0.95rem; margin-bottom: 10px;">
+                    随着合规风控收紧，一旦夸大宣传（如：100%分单、保底收入）就会引来大量黑猫投诉、12315 介入。杜康杰的 KPI 绝对不能只是被动做“删帖”和“赔钱”。
+                </p>
+                <p style="color: #9f1239; font-size: 0.95rem;">
+                    <strong>破局 (GSA 动作映射)：</strong>
+                    用 <strong>减源</strong> (大黑用户前置过滤系统)、<strong>控过程</strong> (质检四大高危红线严格监控) 与 <strong>防外溢</strong>
+                    (内外部退款/风控拉齐会制) 代替一切拍脑袋的数字游戏。
+                </p>
+            </div>
+        </div>
+
+        <!-- 当前杜康杰负责的 ITR 执行面板 -->
+        <h2 class="section-title">二、基于 ITR 模型的业务底盘 (杜康杰 2026 GSA 行动点)</h2>
+        <p style="margin-bottom: 24px; color: var(--gray);">所有战略举措实时映射到华为的“发现-定级-恢复-预防”四步流程中，进行全生命周期跟踪。</p>
+
+        <div class="board">
+
+            <!-- Step 1: 预警识别 -->
+            <div class="board-column">
+                <div class="column-header">
+                    <span style="color: var(--itr-id)">1. 识别与隔离 (Issue ID)</span>
+                </div>
+                <!-- 任务 1 -->
+                <div class="task-card" style="border-left-color: var(--itr-id);">
+                    <h4>大黑用户(高威群体) 识别拦截名单系统</h4>
+                    <div class="meta"><span>动作 A1-1 [减源]</span> <span>研发中 (Q1/Q2)</span></div>
+                    <div class="tags"><span class="tag-okr">联动研发部</span> <span class="tag-risk">核心拦截率 ≥ 90%</span></div>
+                    <p style="font-size: 0.8rem; color: #666; margin: 8px 0 0;">与产研对接完成风险规则埋点并在销售接微时拦截，不带“病”转化。</p>
+                    <span class="owner-badge" title="杜康杰">杜</span>
+                </div>
+                <!-- 任务 2 -->
+                <div class="task-card" style="border-left-color: var(--itr-id);">
+                    <h4>合规确认前置：用户知情权证据链 </h4>
+                    <div class="meta"><span>动作 A1-2 [控过程]</span> <span>覆盖率 100%</span></div>
+                    <div class="tags"><span class="tag-okr">防篡改抽审</span></div>
+                    <p style="font-size: 0.8rem; color: #666; margin: 8px 0 0;">用户支付前强制加入不可跳过的风险提示并存证备查。</p>
+                    <span class="owner-badge" title="杜康杰">杜</span>
+                </div>
+            </div>
+
+            <!-- Step 2: 定级定责 -->
+            <div class="board-column">
+                <div class="column-header">
+                    <span style="color: var(--itr-triage)">2. 质检分层定级 (Triage)</span>
+                </div>
+                <!-- 任务 3 -->
+                <div class="task-card" style="border-left-color: var(--itr-triage);">
+                    <h4>质检分层管理引擎（红/黄/绿线）</h4>
+                    <div class="meta"><span>动作 A2-2 [系统级]</span> <span>预发布</span></div>
+                    <div class="tags"><span class="tag-okr">AI 辅助巡场</span> <span class="tag-risk">动态调整</span></div>
+                    <p style="font-size: 0.8rem; color: #666; margin: 8px 0 0;">通过系统建立规则，避免销售一刀切。红线报警则主管直接冻结订单。</p>
+                    <span class="owner-badge" title="杜康杰">杜</span>
+                </div>
+                <!-- 任务 4 -->
+                <div class="task-card" style="border-left-color: var(--itr-triage);">
+                    <h4>前端投放与承诺强制对齐机制</h4>
+                    <div class="meta"><span>动作 A2-3 [控过程]</span> <span>月度复盘</span></div>
+                    <div class="tags"><span class="tag-okr">联动市场与管线</span></div>
+                    <p style="font-size: 0.8rem; color: #666; margin: 8px 0 0;">找出哪条投放链路产出的客诉最高，并通知销售团队断链或整改。</p>
+                    <span class="owner-badge" title="杜康杰">杜</span>
+                </div>
+            </div>
+
+            <!-- Step 3: 处置防外溢 -->
+            <div class="board-column">
+                <div class="column-header">
+                    <span style="color: var(--itr-resolve)">3. 处置兜底 (Resolution)</span>
+                </div>
+                <!-- 任务 5 -->
+                <div class="task-card" style="border-left-color: var(--itr-resolve);">
+                    <h4>重大客诉及内部、监管规则大拉齐</h4>
+                    <div class="meta"><span>动作 A3-2 [防外溢]</span> <span>Q2 决战点</span></div>
+                    <div class="tags"><span class="tag-risk">跨部门利益博弈</span></div>
+                    <p style="font-size: 0.8rem; color: #666; margin: 8px 0 0;">拉齐内部客服、大客户投诉经理及 315 外部处理的口径。内部能全款退的绝不上报
+                        12315。</p>
+                    <span class="owner-badge" title="杜康杰">杜</span>
+                </div>
+                <!-- 任务 6 -->
+                <div class="task-card" style="border-left-color: var(--itr-resolve);">
+                    <h4>质检四大红线严格开单违规率下降</h4>
+                    <div class="meta"><span>动作 A2-1 [目标项]</span> <span>红线违规降80%</span></div>
+                    <div class="tags"><span class="tag-okr">业绩否决权</span></div>
+                    <p style="font-size: 0.8rem; color: #666; margin: 8px 0 0;">以铁腕手段针对销售培训、处罚及考核管理，绝不宽贷绝对性承诺。</p>
+                    <span class="owner-badge" title="杜康杰">杜</span>
+                </div>
+            </div>
+
+            <!-- Step 4: 预防闭环 -->
+            <div class="board-column">
+                <div class="column-header">
+                    <span style="color: var(--itr-close)">4. 根因长效预防 (Prevention)</span>
+                </div>
+                <!-- 任务 7 -->
+                <div class="task-card" style="border-left-color: var(--itr-close);">
+                    <h4>异常客诉单案“根因分析”归档系统</h4>
+                    <div class="meta"><span>动作 A3-1 [防外溢]</span> <span>常规运行</span></div>
+                    <div class="tags"><span class="tag-okr">防扯皮机制</span></div>
+                    <p style="font-size: 0.8rem; color: #666; margin: 8px 0 0;">针对每一笔退赔的工单，追溯到底是师资夸大、课程过时还是销售话术问题，100%
+                        必须有改进单输出。</p>
+                    <span class="owner-badge" title="杜康杰">杜</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div
+        style="text-align: center; color: #888; font-size: 0.9em; margin-top: 40px; padding: 20px 0; border-top: 1px solid #eee;">
+        [华为 ITR 风控中台机制] 最新重塑大盘追踪：2026年03月01日
+    </div>
+</body>
+
+</html>
