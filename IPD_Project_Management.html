@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IPD (集成产品开发) 项目管理大盘 | Xibo Group</title>
+    <style>
+        :root {
+            --primary: #00458b;
+            /* 华为蓝类似色 */
+            --primary-light: #e6f0fa;
+            --accent: #d32f2f;
+            --dark: #1f2937;
+            --gray: #6b7280;
+            --light: #f3f4f6;
+            --white: #ffffff;
+
+            --ipd-concept: #8b5cf6;
+            --ipd-plan: #3b82f6;
+            --ipd-develop: #f59e0b;
+            --ipd-qualify: #10b981;
+            --ipd-launch: #059669;
+            --ipd-life: #64748b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+            background: #f8fafc;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        header {
+            background: var(--primary);
+            color: var(--white);
+            padding: 24px 0;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+        }
+
+        header p {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .section-title {
+            margin: 40px 0 20px;
+            position: relative;
+            padding-left: 16px;
+            font-size: 1.5rem;
+            color: var(--dark);
+        }
+
+        .section-title::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 5px;
+            bottom: 5px;
+            width: 6px;
+            background: var(--primary);
+            border-radius: 4px;
+        }
+
+        /* Card Setup */
+        .card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            margin-bottom: 24px;
+        }
+
+        /* 华为 IPD 阶段图 */
+        .ipd-stages {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .stage {
+            flex: 1;
+            min-width: 150px;
+            padding: 16px;
+            background: var(--light);
+            border-radius: 8px;
+            text-align: center;
+            border-top: 4px solid var(--gray);
+            position: relative;
+        }
+
+        /* 阶段颜色 */
+        .stage:nth-child(1) {
+            border-color: var(--ipd-concept);
+        }
+
+        .stage:nth-child(2) {
+            border-color: var(--ipd-plan);
+        }
+
+        .stage:nth-child(3) {
+            border-color: var(--ipd-develop);
+        }
+
+        .stage:nth-child(4) {
+            border-color: var(--ipd-qualify);
+        }
+
+        .stage:nth-child(5) {
+            border-color: var(--ipd-launch);
+        }
+
+        .stage h3 {
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+
+        .stage p {
+            font-size: 0.85rem;
+            color: var(--gray);
+            margin-bottom: 12px;
+        }
+
+        .dcp-gate {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
+
+        /* 看板 Board */
+        .board {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            align-items: start;
+        }
+
+        .board-column {
+            background: #f1f5f9;
+            border-radius: 8px;
+            padding: 16px;
+            min-height: 400px;
+        }
+
+        .column-header {
+            font-weight: 600;
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #cbd5e1;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .task-card {
+            background: var(--white);
+            padding: 16px;
+            border-radius: 6px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            margin-bottom: 12px;
+            border-left: 3px solid var(--gray);
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .task-card:hover {
+            text-decoration: none;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .task-card h4 {
+            margin-bottom: 8px;
+            font-size: 1rem;
+            color: var(--dark);
+        }
+
+        .task-card .meta {
+            font-size: 0.8rem;
+            color: var(--gray);
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .task-card .tags span {
+            background: var(--primary-light);
+            color: var(--primary);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            margin-right: 4px;
+        }
+
+        .tag-risk {
+            background: #fee2e2 !important;
+            color: #dc2626 !important;
+        }
+
+        .tag-ai {
+            background: #e0e7ff !important;
+            color: #4338ca !important;
+        }
+
+        .pdt-member {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #cbd5e1;
+            color: white;
+            font-size: 0.7rem;
+            font-weight: bold;
+            margin-right: -8px;
+            border: 2px solid white;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .board {
+                grid-template-columns: 1fr;
+            }
+
+            .ipd-stages {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <h1>IPD (集成产品开发) 项目管理大盘</h1>
+            <p>基于华为 IPD (Integrated Product Development) 最佳实践，以投资视角管理商业成功。</p>
+        </div>
+    </header>
+
+    <div class="container" style="padding-top: 20px; padding-bottom: 40px;">
+
+        <!-- IPD 解读 -->
+        <h2 class="section-title">一、什么是 IPD？为什么引入 IPD？</h2>
+        <div class="card"
+            style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+            <div>
+                <h3 style="color: var(--primary); margin-bottom: 12px;">核心理念 (Core Philosophy)</h3>
+                <ol style="margin-left: 20px; color: #4b5563; display: flex; flex-direction: column; gap: 8px;">
+                    <li><strong>产品开发是投资行为：</strong> 每一分研发和教研资源的投入，都必须算清产出 (ROI)。设置 DCP(决策评审点) 就是为了控制投资风险，随时止损。</li>
+                    <li><strong>基于市场的创新：</strong> 产品/课程开发不是从“点子”或“技术”出发，而是从“客户需求与市场痛点”出发。</li>
+                    <li><strong>跨部门协同的 PDT：</strong> 打破部门墙（教研、市场、产研、体验），建立重量级的跨部门产品开发团队 (Product Development Team)。</li>
+                    <li><strong>异步开发与重用：</strong> 把共用的技术底座（如 AI Agent 平台、通用的投放漏斗）提取出来，避免重复造轮子。</li>
+                </ol>
+            </div>
+            <div style="background: #fffbeb; padding: 20px; border-radius: 8px; border-left: 4px solid var(--warning);">
+                <h3 style="color: #92400e; margin-bottom: 12px;">喜播引入 IPD 的战略意义</h3>
+                <p style="color: #92400e; font-size: 0.95rem; margin-bottom: 10px;">
+                    当前喜播面临第一曲线转化率暴跌（转化率从 1.5% 跌至 0.3%~0.8%）与第二曲线（健康项目）跨界探索的双重挑战。用拍脑袋的方式开发新项目，极易导致“闭门造车”且大量耗损利润。
+                </p>
+                <p style="color: #92400e; font-size: 0.95rem;">
+                    <strong>解决方案：</strong> 引入 IPMT（集成产品管理团队，由蒋德铭、姚涣、马长久等高管组成）进行“投资决策”，并将具体项目的生杀大权交给跨部门的 PDT，保证每一款新 SKU
+                    推出前都经过了商业化与合规的双重论证。
+                </p>
+            </div>
+        </div>
+
+        <!-- 阶段与DCP (Decision Check Point) -->
+        <h2 class="section-title">二、IPD 关键阶段与 DCP (决策评审点) 流水线</h2>
+        <div class="ipd-stages">
+            <div class="stage">
+                <h3 style="color: var(--ipd-concept)">1. 概念阶段 (Concept)</h3>
+                <p>听取市场声音，明确要不要做？目标客户是谁？初步的商业愿景是什么？</p>
+                <span class="dcp-gate">▶ CDCP (概念决策)</span>
+            </div>
+            <div class="stage">
+                <h3 style="color: var(--ipd-plan)">2. 计划阶段 (Plan)</h3>
+                <p>定人、定钱、定计划。输出明确的业务计划书（规格、成本、价格、开发计划）。</p>
+                <span class="dcp-gate">▶ PDCP (计划决策)</span>
+            </div>
+            <div class="stage">
+                <h3 style="color: var(--ipd-develop)">3. 开发阶段 (Develop)</h3>
+                <p>PDT 执行开发。设计、编码/教研、内部自测（含 AI 模拟演练）。</p>
+            </div>
+            <div class="stage">
+                <h3 style="color: var(--ipd-qualify)">4. 验证阶段 (Qualify)</h3>
+                <p>体验部/质检部介入，进行合规性、用户满意度评估、Beta 小范围试跑。</p>
+                <span class="dcp-gate">▶ ADCP (可获得性决策)</span>
+            </div>
+            <div class="stage">
+                <h3 style="color: var(--ipd-launch)">5. 发布阶段 (Launch)</h3>
+                <p>全渠道切入，正式上市。移交给市场与产品生命周期管理团队。</p>
+            </div>
+        </div>
+
+        <!-- 当前项目看板 -->
+        <h2 class="section-title">三、喜播战略级项目看板 (PDT Board)</h2>
+        <p style="margin-bottom: 24px; color: var(--gray);">各项目负责人须对所负责的项目跨部门推进落地负责，直到达到 ADCP 发布阈值。</p>
+
+        <div class="board">
+
+            <!-- Column 1: Concept & Plan -->
+            <div class="board-column">
+                <div class="column-header">
+                    <span style="color: var(--ipd-concept)">储备池 (Concept & Plan)</span>
+                    <span
+                        style="background: #e2e8f0; padding: 2px 8px; border-radius: 12px; font-size: 0.8rem;">2</span>
+                </div>
+
+                <div class="task-card" style="border-left-color: var(--ipd-concept);">
+                    <h4>情绪与家庭动力工作坊 (第二曲线)</h4>
+                    <div class="meta">
+                        <span>负责人: 姚涣 (产研)</span>
+                        <span>等待 CDCP</span>
+                    </div>
+                    <div class="tags">
+                        <span>大健康</span>
+                        <span class="tag-risk">缺心理教研</span>
+                    </div>
+                    <div style="margin-top: 12px; display: flex;">
+                        <span class="pdt-member" title="姚" style="background: #f59e0b; z-index: 3;">姚</span>
+                        <span class="pdt-member" title="秦" style="background: #3b82f6; z-index: 2;">秦</span>
+                    </div>
+                </div>
+
+                <div class="task-card" style="border-left-color: var(--ipd-plan);">
+                    <h4>合规风控模型引擎 2.0</h4>
+                    <div class="meta">
+                        <span>负责人: 杜康杰 (风控)</span>
+                        <span>撰写计划书</span>
+                    </div>
+                    <div class="tags">
+                        <span class="tag-ai">AI 预测引擎</span>
+                        <span>减少 L1 类客诉</span>
+                    </div>
+                    <div style="margin-top: 12px; display: flex;">
+                        <span class="pdt-member" title="杜" style="background: #ef4444; z-index: 3;">杜</span>
+                        <span class="pdt-member" title="长" style="background: #10b981; z-index: 2;">长</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Column 2: Develop -->
+            <div class="board-column">
+                <div class="column-header">
+                    <span style="color: var(--ipd-develop)">在研阶段 (Develop)</span>
+                    <span
+                        style="background: #e2e8f0; padding: 2px 8px; border-radius: 12px; font-size: 0.8rem;">2</span>
+                </div>
+
+                <div class="task-card" style="border-left-color: var(--ipd-develop);">
+                    <h4>AI 写作旗舰版体验升级</h4>
+                    <div class="meta">
+                        <span>负责人: 苏秦 (教研)</span>
+                        <span>开发中 (Week 2/4)</span>
+                    </div>
+                    <div class="tags">
+                        <span>第一曲线重构</span>
+                        <span class="tag-ai">内嵌 AITDA</span>
+                    </div>
+                    <p style="font-size: 0.8rem; color: #666; margin: 8px 0 0;">目标：降低对讲师的过度依赖，使用AI引导分层教学。</p>
+                    <div style="margin-top: 12px; display: flex;">
+                        <span class="pdt-member" title="秦" style="background: #3b82f6; z-index: 4;">秦</span>
+                        <span class="pdt-member" title="姚" style="background: #f59e0b; z-index: 3;">姚</span>
+                        <span class="pdt-member" title="俊" style="background: #8b5cf6; z-index: 2;">俊</span>
+                    </div>
+                </div>
+
+                <div class="task-card" style="border-left-color: var(--ipd-develop);">
+                    <h4>组织内 AI Agent 工作流搭建</h4>
+                    <div class="meta">
+                        <span>负责人: 王俊 (HRD)</span>
+                        <span>开发中 (进度 65%)</span>
+                    </div>
+                    <div class="tags">
+                        <span class="tag-ai">降本增效工具</span>
+                    </div>
+                    <p style="font-size: 0.8rem; color: #666; margin: 8px 0 0;">目标：完成关键岗位 50% 动作的 AI 自动化替代。</p>
+                </div>
+            </div>
+
+            <!-- Column 3: Qualify & Launch -->
+            <div class="board-column">
+                <div class="column-header">
+                    <span style="color: var(--ipd-qualify)">测试与长线运营 (Qualify/LifeCycle)</span>
+                    <span
+                        style="background: #e2e8f0; padding: 2px 8px; border-radius: 12px; font-size: 0.8rem;">1</span>
+                </div>
+
+                <div class="task-card" style="border-left-color: var(--ipd-qualify);">
+                    <h4>女性健康数字疗法 MVP</h4>
+                    <div class="meta">
+                        <span>负责人: 姚涣 / 蒋德铭</span>
+                        <span>Beta 内测跑通</span>
+                    </div>
+                    <div class="tags">
+                        <span>第二曲线</span>
+                        <span class="tag-risk">打磨交付SOP</span>
+                    </div>
+                    <p style="font-size: 0.8rem; color: #666; margin: 8px 0 0;">已完成 0-1 探索，当前正在跑数据模型，准备申请 ADCP 全面发售。</p>
+                    <div style="margin-top: 12px; display: flex;">
+                        <span class="pdt-member" title="蒋" style="background: #00458b; z-index: 4;">蒋</span>
+                        <span class="pdt-member" title="姚" style="background: #f59e0b; z-index: 3;">姚</span>
+                        <span class="pdt-member" title="长" style="background: #10b981; z-index: 2;">长</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div
+        style="text-align: center; color: #888; font-size: 0.9em; margin-top: 40px; padding: 20px 0; border-top: 1px solid #eee;">
+        [集成产品开发基座] 最新重塑大盘时间：2026年03月01日
+    </div>
+</body>
+
+</html>
