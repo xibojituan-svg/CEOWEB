@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>王俊(HRD) 指标最新战略评审 | 基于 02-28 内部会议</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --surface: #151b2b;
+            --surface-light: #1e2538;
+            --primary: #8B5CF6;
+            --primary-glow: rgba(139, 92, 246, 0.4);
+            --secondary: #10B981;
+            --text-main: #F8FAFC;
+            --text-muted: #94A3B8;
+            --alert-red: #EF4444;
+            --alert-amber: #F59E0B;
+            --border: #2a3449;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 40px 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* Nav */
+        nav {
+            margin-bottom: 40px;
+            font-size: 0.9rem;
+        }
+
+        nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.3s;
+            cursor: pointer;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        /* Header */
+        header {
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(139, 92, 246, 0.15);
+            color: var(--primary);
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            margin-bottom: 15px;
+            letter-spacing: 0.5px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin: 0 0 10px 0;
+            font-weight: 800;
+            line-height: 1.2;
+            background: linear-gradient(135deg, #fff 0%, #cbd5e1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+        }
+
+        /* Overview box */
+        .overview-box {
+            background: linear-gradient(145deg, var(--surface), #111522);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .overview-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--primary);
+            box-shadow: 0 0 15px var(--primary-glow);
+        }
+
+        .metric-highlight {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--secondary);
+            line-height: 1;
+            margin-bottom: 5px;
+        }
+
+        .metric-label {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Content Sections */
+        h2 {
+            font-size: 1.5rem;
+            border-bottom: 1px dashed var(--border);
+            padding-bottom: 10px;
+            margin-top: 40px;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .content-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 20px;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .content-card:hover {
+            border-color: rgba(139, 92, 246, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .status-chip {
+            display: inline-block;
+            font-size: 0.75rem;
+            padding: 3px 10px;
+            border-radius: 4px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .status-update {
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--secondary);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .status-focus {
+            background: rgba(245, 158, 11, 0.15);
+            color: var(--alert-amber);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+
+        h3 {
+            margin: 0 0 12px 0;
+            font-size: 1.15rem;
+            color: #E2E8F0;
+        }
+
+        p {
+            margin: 0 0 15px 0;
+            color: #cbd5e1;
+        }
+
+        ul {
+            padding-left: 20px;
+            margin: 0;
+            color: #cbd5e1;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        .theory-tag {
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            background: var(--surface-light);
+            color: var(--primary);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+        }
+
+        .vs-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .vs-card {
+            background: var(--surface-light);
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+
+        .vs-card strong {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 1.05rem;
+        }
+
+        @media (max-width: 650px) {
+            .vs-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <nav>
+            <a href="index.html">← 返回首页 (Home)</a>
+        </nav>
+
+        <header>
+            <div class="badge">🧠 最新评审：2026-02-28 内部会议解析</div>
+            <h1>王俊(HRD) 战略更新评审报告</h1>
+            <div class="subtitle">组织重构焦点：从“物理清洗”到“化学重塑 (AI Skill 知识库沉淀)”</div>
+        </header>
+
+        <div class="overview-box">
+            <div style="display: flex; flex-wrap: wrap; gap: 40px; align-items: center;">
+                <div>
+                    <div class="metric-highlight">80%</div>
+                    <div class="metric-label">关键岗位 AI 重构率底线指标</div>
+                </div>
+                <div style="flex: 1;">
+                    <strong style="font-size: 1.1rem; color: #fff;">💡 当前核心评估结论：</strong>
+                    <p style="margin-top: 10px; font-size: 0.95rem;">
+                        此前的组织战略更多聚焦于第一曲线的**“强制瘦身”和“去伪存真”**。但在 02-28 关于 AI
+                        深水区应用（如无代码网站全自动发布、大龙虾自动化RPA、模拟伪原创生成）展示后，**HR的考核维度必须发生根本性升维**。<br>
+                        王俊的责任不仅是要**淘汰不用AI的人**，更要负责构建一家**AI化企业的“神经元”体系**——即全公司的 AI Skill (Prompt/任务框架) 沉淀库与战略认知同频系统。
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <h2>一、 02-28 会议后的新增核心任务 (TODO 指派解析)</h2>
+
+        <div class="content-card">
+            <span class="status-focus status-chip">⚡ 关键行动点 1</span>
+            <h3>知识管理闭环：建立战略管理知识库</h3>
+            <p><strong>会议纪要出处：</strong>“王俊负责建立战略管理知识库文件夹并要求大家上传会前思考文档。要求个体需构建可迁移的方法论库，将经验转化为标准化prompt模板。”</p>
+            <p><strong>战略评审：</strong>
+                以前的知识共享是“资料归档”，现在的知识库本质是 **《公司数字员工训练手册》**。员工不是在交周报，而是在上交其探索成功的 <span class="theory-tag">Agent 工作流</span>
+                和 <span class="theory-tag">Prompt 模板</span>。这是重构率达到 80% 的实操抓手。
+            </p>
+        </div>
+
+        <div class="content-card">
+            <span class="status-focus status-chip">⚡ 关键行动点 2</span>
+            <h3>“战略防线”对齐与 BSC 更新</h3>
+            <p><strong>会议纪要出处：</strong>“王俊负责将 BSC 表格更新后艾特相关人员确保信息同步。利用AI自动分析战略一致性。”</p>
+            <p><strong>战略评审：</strong>
+                HRD 的角色已经变为战略同频的枢纽。公司目前面临“软着陆”、“不暴雷”、“第二曲线 0-1”等复杂的概念共识困境。王俊需要结合 AI
+                工具，持续把高层语言结构化地输送给一线执行人员，消除认识盲区（例如销售与合规打架的问题）。
+            </p>
+        </div>
+
+        <h2>二、 关键岗位重构标准：进化对比 (Evolution)</h2>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">基于 02-28 会议上高阶 AI
+            实操工具（如网页全自动生成、自动化运维）的落地，新员工和存量员工的能力模型需要彻底洗牌。</p>
+
+        <div class="vs-grid">
+            <div class="vs-card">
+                <strong style="color: var(--alert-red);">❌ 旧标准 (2025及以前视角)</strong>
+                <ul>
+                    <li>衡量工作产出的“绝对时长”和“人工质量”。</li>
+                    <li>对工具的使用停留在“辅助”（如用 ChatGPT 写写邮件、润色文案）。</li>
+                    <li>核心竞争力：业务熟练度、人脉、传统管理经验。</li>
+                    <li>组织裁剪：裁撤低能人员。</li>
+                </ul>
+            </div>
+            <div class="vs-card">
+                <strong style="color: var(--secondary);">✅ 新标准 (02-28 最新模型构建)</strong>
+                <ul>
+                    <li>衡量工作能否被**封装为 AI 可执行的任务**。</li>
+                    <li>对工具的使用必须达到**主导与自动化串联**（如调用浏览器Agent控制、RPA、API 联通）。</li>
+                    <li>核心竞争力：<span class="theory-tag">方法论抽象能力</span>、<span class="theory-tag">Prompt
+                            结构化能力</span>、流程重构胆识。</li>
+                    <li>组织重构：沉淀数字资产，让 AI 接手 50%+ 工作流。</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2>三、 给王俊 (HRD) 团队的落地建议</h2>
+        <div class="content-card" style="border-left: 4px solid var(--primary);">
+            <ul style="margin: 0; display: flex; flex-direction: column; gap: 12px;">
+                <li><strong>推动 “全员考驾照” 升级：</strong> 除了之前的“红绿灯”和“驾照试题”机制，还应加入实操考核标准：每个主管在一个季度内，必须向公司的“战略知识库”中，提交**至少 2
+                    个**真实有效且能复用的自动化 AI 模板或 Agent flow。</li>
+                <li><strong>组织架构柔性化 (Swarm Teams)：</strong> 既然会议中提到，AI 工具能大幅降低技术门槛（一人成军建网站），HR 应该打破以往严密的“职能部门制”，鼓励建立跨界的
+                    <strong>项目制突击队</strong>，负责第二曲线的试错。</li>
+                <li><strong>识别假装拥抱变革的人：</strong> 将“是否主动共享成功 Prompt /
+                    Workflow”作为高管转正与绩效考核（B/A评级）的硬性条件。只有愿意把经验变现为系统资产的人，才是真正的 AI Native 同路人。</li>
+            </ul>
+        </div>
+    </div>
+</body>
+
+</html>
