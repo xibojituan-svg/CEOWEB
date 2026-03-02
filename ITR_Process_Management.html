@@ -263,7 +263,8 @@
                     <li><strong>将隐患消灭在前端 (Issue Identification)：</strong> 把事后救火，变为事前主动拦截高危黑客户。</li>
                     <li><strong>定级排单制 (Triage)：</strong> 按问题严重度分流，红线违规立即亮红灯，一般客诉走标品SOP。</li>
                     <li><strong>一发多头与端到端闭环 (Resolution)：</strong> 不互相踢皮球。客服发现问题、联动销售退费机制、联动有关部门定责。</li>
-                    <li><strong>经验沉淀 (Root Cause & Prevention)：</strong> 每一单大额客诉必须做“单案根因分析”，并以规则/白皮书的形式固化（防外溢），杜绝二次踩坑。
+                    <li><strong>分层经验沉淀 (Tiered Prevention)：</strong> 平衡效益与成本，基于触发阈值对客诉进行 L1(AI 普扫) -> L2(人工预警) ->
+                        L3(系统性根因拆解) 的分级处理，杜绝二次踩坑。
                     </li>
                 </ol>
             </div>
@@ -280,8 +281,57 @@
             </div>
         </div>
 
+        <!-- VOC 分层分析成本模型 -->
+        <h2 class="section-title">二、用户原声 (VOC) 分层分析机制：算好风控成本账</h2>
+        <p style="margin-bottom: 24px; color: var(--gray);">我们听取每一次用户的发声（咨询、投诉、退费），但为了保障运营效率，坚决废除“凡退费必开跨部门复盘会”的无效内耗，采用基于
+            ROI 的三级分层风控。</p>
+
+        <div class="card" style="display: flex; flex-direction: column; gap: 15px;">
+            <div style="display: flex; border: 1px solid #e5e7eb; border-radius: 8px; overflow: hidden;">
+                <div
+                    style="background: #10b981; color: white; padding: 20px; width: 140px; display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0; flex-direction: column;">
+                    <span style="font-size: 1.2rem;">L1 防线</span>
+                    <span style="font-size: 0.8rem; opacity: 0.9;">全量低成本监控</span>
+                </div>
+                <div style="padding: 20px; flex: 1; background: #fff;">
+                    <h4 style="color: #374151; margin-bottom: 8px;">AI 自动化打标与语义聚类 (覆盖 100% 咨询与常规退费)</h4>
+                    <p style="font-size: 0.9rem; color: #6b7280; margin: 0;">
+                        <strong>动作：</strong>依靠系统对用户的聊天记录、客诉工单、服务评价进行 AI
+                        关键字抓取（如“学不懂”、“太贵”、“班主任不理人”）。<br><strong>目的：</strong>低成本生成“热点词云”和趋势图，不需要人工介入，只看大盘异动。</p>
+                </div>
+            </div>
+
+            <div style="display: flex; border: 1px solid #e5e7eb; border-radius: 8px; overflow: hidden;">
+                <div
+                    style="background: #f59e0b; color: white; padding: 20px; width: 140px; display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0; flex-direction: column;">
+                    <span style="font-size: 1.2rem;">L2 防线</span>
+                    <span style="font-size: 0.8rem; opacity: 0.9;">阈值人工预警</span>
+                </div>
+                <div style="padding: 20px; flex: 1; background: #fff;">
+                    <h4 style="color: #374151; margin-bottom: 8px;">标准 SOP 对单拦截与纠偏 (覆盖触发规则的中危异常)</h4>
+                    <p style="font-size: 0.9rem; color: #6b7280; margin: 0;"><strong>动作：</strong>当工单金额处于中高位，或 AI
+                        提取到“投诉”、“12315”、“黑猫”、“欺诈”等强敏词汇时，直接掉落至质检岗 /
+                        客服专员。<br><strong>目的：</strong>专人依据既定《高危退稳SOP》进行定损与隔离操作，安抚情绪，防止向公域外溢。每天日清即可，不拉产研开会。</p>
+                </div>
+            </div>
+
+            <div style="display: flex; border: 1px solid #e5e7eb; border-radius: 8px; overflow: hidden;">
+                <div
+                    style="background: #ef4444; color: white; padding: 20px; width: 140px; display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0; flex-direction: column;">
+                    <span style="font-size: 1.2rem;">L3 防线</span>
+                    <span style="font-size: 0.8rem; opacity: 0.9;">根因深度诊断</span>
+                </div>
+                <div style="padding: 20px; flex: 1; background: #fff;">
+                    <h4 style="color: #374151; margin-bottom: 8px;">跨部门 ITR 专案根因拆解（5 Whys）(仅针对黑天鹅或结构性危机)</h4>
+                    <p style="font-size: 0.9rem; color: #6b7280; margin: 0;">
+                        <strong>动作：</strong>遇到大范围客诉（如：某期教研交付事故）、高危涉诉、或某一指标连续三天击穿红线时，强制拉起产、研、销、服跨部门专项会议。<br><strong>目的：</strong>追溯源头，进行
+                        5 Whys 拆解，输出《规则变更单》或《系统整改单》，从根源上消灭系统Bug或深层业务漏洞。</p>
+                </div>
+            </div>
+        </div>
+
         <!-- 当前杜康杰负责的 ITR 执行面板 -->
-        <h2 class="section-title">二、基于 ITR 模型的业务底盘 (杜康杰 2026 GSA 行动点)</h2>
+        <h2 class="section-title">三、基于 ITR 模型的业务底盘 (杜康杰 2026 GSA 行动点)</h2>
         <p style="margin-bottom: 24px; color: var(--gray);">所有战略举措实时映射到华为的“发现-定级-恢复-预防”四步流程中，进行全生命周期跟踪。</p>
 
         <div class="board">
@@ -363,11 +413,11 @@
                 </div>
                 <!-- 任务 7 -->
                 <div class="task-card" style="border-left-color: var(--itr-close);">
-                    <h4>异常客诉单案“根因分析”归档系统</h4>
-                    <div class="meta"><span>动作 A3-1 [防外溢]</span> <span>常规运行</span></div>
-                    <div class="tags"><span class="tag-okr">防扯皮机制</span></div>
-                    <p style="font-size: 0.8rem; color: #666; margin: 8px 0 0;">针对每一笔退赔的工单，追溯到底是师资夸大、课程过时还是销售话术问题，100%
-                        必须有改进单输出。</p>
+                    <h4>L3 级客诉专案“根因拆解”与归档</h4>
+                    <div class="meta"><span>动作 A3-1 [防外溢]</span> <span>触发制运行</span></div>
+                    <div class="tags"><span class="tag-okr">防扯皮机制</span> <span class="tag-risk">L3 专项</span></div>
+                    <p style="font-size: 0.8rem; color: #666; margin: 8px 0 0;">针对触发 L3 级的高赔或群体性工单，严禁互相推诿。以专案形式进行 5 Whys
+                        分析并强制输出结构性改进单。</p>
                     <span class="owner-badge" title="杜康杰">杜</span>
                 </div>
             </div>
