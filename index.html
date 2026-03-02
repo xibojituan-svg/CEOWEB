@@ -43,10 +43,19 @@
 
         /* Hero Section */
         header {
-            background: var(--dark);
+            background: linear-gradient(rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.85)), url('pic/hero_bg.jpg');
+            background-size: cover;
+            background-position: center center;
             color: white;
-            padding: 100px 0;
+            padding: 120px 0;
             text-align: center;
+            position: relative;
+        }
+
+        header .hero-content {
+            position: relative;
+            z-index: 2;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
         }
 
         header h1 {
@@ -54,11 +63,12 @@
             font-size: 3.5rem;
             margin-bottom: 20px;
             letter-spacing: -1px;
+            text-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
         }
 
         header p {
             font-size: 1.5rem;
-            opacity: 0.8;
+            opacity: 0.9;
             max-width: 800px;
             margin: 0 auto;
         }
@@ -237,10 +247,14 @@
 
     <header>
         <div class="container">
-            <h1>帮助1000万名女性成为家庭财富和健康掌门人</h1>
-            <p style="font-size: 0.8rem; opacity: 0.6; margin-top: -10px; margin-bottom: 20px;">最近更新：2026-03-01 10:33:44
-            </p>
-            <p>我们不仅仅是在教人说话，我们是通过“职业技能 + AI赋能 + 商业交付”，让每一个普通人都能拥有数字化时代的生存能力。</p>
+            <div class="hero-content">
+                <h1>帮助1000万名女性成为家庭财富和健康掌门人</h1>
+                <p
+                    style="font-size: 0.85rem; color: #cbd5e1; margin-top: -10px; margin-bottom: 25px; text-shadow: none;">
+                    最近更新：2026-03-02 12:00
+                </p>
+                <p>我们不仅仅是在教人说话，我们是通过“职业技能 + AI赋能 + 商业交付”，让每一个普通人都能拥有数字化时代的生存能力。</p>
+            </div>
         </div>
     </header>
 
@@ -816,7 +830,8 @@
                     <p style="font-size: 0.9rem; color: #666; margin-bottom: 0;">
                         <span style="color: #2e7d32; font-weight: bold;">[核心]</span> 坚守健康的 <strong>1亿净利润</strong> 底线<br>
                         <span style="color: #d32f2f; font-weight: bold;">[教训]</span> 绝对纯净导致转化率骤降(0.3%-0.8%)，业务流血<br>
-                        <span style="color: #f59e0b; font-weight: bold;">[修正]</span> 放弃理想化风控，<strong>严格拦截需特殊关怀用户</strong> +
+                        <span style="color: #f59e0b; font-weight: bold;">[修正]</span>
+                        放弃理想化风控，<strong>严格拦截需特殊关怀用户</strong> +
                         允许<strong>适度造梦</strong>(情绪价值)以恢复转化率。
                     </p>
                 </div>
