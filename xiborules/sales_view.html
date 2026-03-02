@@ -133,11 +133,21 @@
         }
 
         .do-say {
-            color: #1e8449;
-            background-color: #f0fff4;
-            padding: 8px;
-            border-left: 3px solid #27ae60;
+            color: #0f5132;
+            background-color: #d1e7dd;
+            padding: 10px;
+            border-left: 4px solid #198754;
             font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+
+        .logic-box {
+            color: #055160;
+            background-color: #cff4fc;
+            padding: 8px;
+            border-radius: 4px;
+            font-size: 0.85em;
+            border: 1px solid #b6effb;
         }
 
         .breadcrumb {
@@ -179,132 +189,113 @@
 
         <div id="rules-container">
             <!-- 业务规范类 -->
-            <div class="category-title">第一部分：核心业务规范红线</div>
+            <div class="category-title">第一部分：业务规范与引流界限</div>
             <table>
                 <thead>
                     <tr>
-                        <th width="10%">违规级别</th>
-                        <th width="15%">违规事项</th>
-                        <th width="35%">质检细则 (禁止行为)</th>
-                        <th width="40%">话术指南 (怎么说)</th>
+                        <th width="8%">级别</th>
+                        <th width="15%">审核项</th>
+                        <th width="25%">🚫 红线雷区 (禁止说/做)</th>
+                        <th width="32%">✅ 3.02版：业务安全区 (推荐这么做)</th>
+                        <th width="20%">⚖️ 质检判定底线</th>
                     </tr>
                 </thead>
-                <tbody id="business-rules">
-                    <!-- 通过JS或后端渲染 -->
-                </tbody>
+                <tbody id="business-rules"></tbody>
             </table>
 
             <!-- 监管风险类：收益承诺相关 -->
-            <div class="category-title">第二部分：监管风险 - 收益与变现承诺限制</div>
+            <div class="category-title">第二部分：承诺与变现案例展示限制</div>
             <table>
                 <thead>
                     <tr>
-                        <th width="10%">违规级别</th>
-                        <th width="15%">违规事项</th>
-                        <th width="35%">质检细则 (禁止行为)</th>
-                        <th width="40%">话术指南 (怎么说)</th>
+                        <th width="8%">级别</th>
+                        <th width="15%">审核项</th>
+                        <th width="25%">🚫 红线雷区 (禁止说/做)</th>
+                        <th width="32%">✅ 3.02版：业务安全区 (推荐这么做)</th>
+                        <th width="20%">⚖️ 质检判定底线</th>
                     </tr>
                 </thead>
-                <tbody id="income-rules">
-                    <!-- 通过JS或后端渲染 -->
-                </tbody>
+                <tbody id="income-rules"></tbody>
             </table>
 
             <!-- 监管风险类：设备与特殊赛道 -->
-            <div class="category-title">第三部分：监管风险 - 设备与特殊赛道包装限制</div>
+            <div class="category-title">第三部分：设备引导与时薪指导</div>
             <table>
                 <thead>
                     <tr>
-                        <th width="10%">违规级别</th>
-                        <th width="15%">违规事项</th>
-                        <th width="35%">质检细则 (禁止行为)</th>
-                        <th width="40%">话术指南 (怎么说)</th>
+                        <th width="8%">级别</th>
+                        <th width="15%">审核项</th>
+                        <th width="25%">🚫 红线雷区 (禁止说/做)</th>
+                        <th width="32%">✅ 3.02版：业务安全区 (推荐这么做)</th>
+                        <th width="20%">⚖️ 质检判定底线</th>
                     </tr>
                 </thead>
-                <tbody id="equipment-rules">
-                    <!-- 通过JS或后端渲染 -->
-                </tbody>
+                <tbody id="equipment-rules"></tbody>
             </table>
         </div>
     </div>
 
-    <!-- 脚本动态加载模拟数据 (后续可接入总监系统的后端API) -->
+    <!-- 脚本动态加载最新3.02质检数据 -->
     <script>
         const rulesData = [
-            // 业务规范
+            // 第一部分：业务规范
+            {
+                category: "business",
+                level: "B类",
+                title: "个人资源承诺与分配",
+                doNotSay: "绝对禁止说：“只要你报名，我私人给你安排时薪单”、“无需试音我工作室直接给你发单”。",
+                doSay: "允许表达：“我的工作室有很多真实资源，带你一起录”、“我会给你提供真实的试音机会”。",
+                logic: "只要提供的资源是真实的，有助于提升学员交付和体验，被视为增加收益的好事，不再一刀切限制；但若无法兑现引发投诉，需个人承担退款追责。"
+            },
             {
                 category: "business",
                 level: "A类",
-                title: "个人资源引流与售卖",
-                desc: "利用官方资源引导加私人微信/QQ，推荐私人群，售卖非喜播官方授权产品。",
-                doNotSay: "“加我私人微信发你资料”、“我在自己群里给你推单”",
-                doSay: "“请在企业微信/官方群内联系我，我会为您提供官方指定的学习资料。”"
+                title: "私加好友/非官方引流",
+                doNotSay: "绝对禁止为了把用户卖给第三方或诋毁品牌而引导私加。禁止隐藏真实意图的“加我私人微信”。",
+                doSay: "如果在合法合规前提下：“为了方便下发试音资源，我们可以加个联络方式（需明确是为了跑单录书）”。",
+                logic: "只要后续沟通的真实目的是提供录书机会、提高喜播的实战大盘交付率都可以接受；但若涉及截流、售卖竞品，直接解除合作。"
             },
             {
                 category: "business",
                 level: "B类",
-                title: "违规私发退费引导",
-                desc: "教唆学员伪造退费材料，或利用“退费”字眼作为逼单手段，恶意压单拖延。",
-                doNotSay: "“不行你就先买，学完不满意再去申请退费”、“退费要扣一笔高额手续费”",
-                doSay: "“我们的课程均享有正规售后保障，您可以根据实际体验决定，详情请参阅购买协议。”"
+                title: "喜马相关生态表达",
+                doNotSay: "严禁自封头衔：“我是喜马员工”、“咱们这是喜马拉雅总部的直属讲师”。",
+                doSay: "允许拉近关系使用Logo：“我们是喜马拉雅的深度生态企业，喜马是我们重要的交付渠道之一”。",
+                logic: "严打“冒充官方身份诈骗”，但鼓励合理引用生态合作伙伴身份（展示Logo）为业务增信。"
             },
-            {
-                category: "business",
-                level: "B类",
-                title: "喜马相关表述",
-                desc: "使用喜马官方Logo、热线，自称为“喜马拉雅直属/总部/员工/官方讲师”。",
-                doNotSay: "“我们是喜马拉雅总部的直属讲师”、“我和喜马是一个公司的”",
-                doSay: "“我们是喜播的官方讲师，喜播是喜马拉雅旗下的优质教育生态公司。”"
-            },
-            // 收益承诺
+            // 第二部分：承诺与变现
             {
                 category: "income",
                 level: "B类",
-                title: "绝对化变现承诺",
-                desc: "使用“肯定、绝对、100%”等词汇绑定收益；直接给出具体的月入金额；声称“坚持就一定能赚钱”。",
-                doNotSay: "“保证你100%能赚钱”、“听我的保底一个月赚5000没问题”",
-                doSay: "“有声演播的收入取决于个人的练习投入和实战接单能力，这是一个多劳多得的技能，我们提供系统的教学帮助您提升。”"
+                title: "绝对承诺与变现场景",
+                doNotSay: "禁止绝对词：“保证你100%赚钱”、“只要学完马上月入五千”、“包分配”。",
+                doSay: "允许基于实际成果展示：“有很多学长通过努力成功接到单子了，这是大家努力的结果”。可以合理强调“坚持大概率能中书”。",
+                logic: "从禁止说“能挣钱”，放宽到“只要不打保票（包分配包赚钱）即可”。只要给出客观行业可能性、展现真实案例就不算违规。"
             },
             {
                 category: "income",
                 level: "B类",
-                title: "保证包分配上岗",
-                desc: "“包就业、毕业即上岗、签包分配协议”等绝对化承诺，声称100%排进剧组。",
-                doNotSay: "“报了这个班毕业直接给你包分配上岗”、“肯定能进官方优质剧组”",
-                doSay: "“完成学业后，大家100%有资格参加实战剧组的选拔考核，凭实力获取演播机会。”"
+                title: "收益案例展示限制",
+                doNotSay: "禁止造假图、伪造流水；禁止直接暗示大IP（如紫襟）也是喜播原班出身并号称“你也可以”。",
+                doSay: "允许引用自身或公司别人产生的“真实学员高薪/时薪截图”。金额超过1万元的需提前标注是“工作室/团队集体收入”。",
+                logic: "对素材卡得没那么严了（拿别人的真实案例也行），底线是：一旦被客诉，能拿出真实结算凭证即可豁免。假图0容忍。"
             },
-            {
-                category: "income",
-                level: "B类",
-                title: "低估中书与回本难度",
-                desc: "混淆试音和中书的概念，使用“很容易、快速回血、躺赚、不用试音”等虚假描述。",
-                doNotSay: "“不用试音我直接给你派单”、“报名两三个月轻松回本赚学费”",
-                doSay: "“商单需要经过甲方的试音筛选，掌握好专业技巧能大大提升您的试音通过率，需要扎实的练习积累。”"
-            },
-            // 设备与包装
+            // 第三部分：设备与时薪
             {
                 category: "equipment",
                 level: "B类",
-                title: "虚假跨界时薪承诺",
-                desc: "提到“底薪、保底收入”；在有声业务中盲目承诺超过50元起薪，混淆兼职时薪与演播干音时薪。",
-                doNotSay: "“平台签约每个月固定保底4000”、“新手入行就是150一小时”",
-                doSay: "“有声时薪参考通常为50-500元/小时，视制片方要求及您的干音试音质量而定。”"
+                title: "时薪承诺与行情同步",
+                doNotSay: "隐瞒“干音时薪”和实际物理耗时的区别；乱开海口说“新手底薪150/小时”。",
+                doSay: "可以向用户展示真实的学员成交时薪切图（起薪表达可放宽至最高90元/小时）；“可以讲实际上学员在市场上拿到过的价格”。",
+                logic: "摒弃了过去的死板最高50元的限制卡口，只要是实际真实发生的业务接单价，业务即可大胆展示。"
             },
             {
                 category: "equipment",
                 level: "B类",
-                title: "夸大设备关联作用",
-                desc: "称“不买官方设备就无法接单变现”或者宣称“喜马拉雅官方特供设备”。",
-                doNotSay: "“你没有这个喜马官方设备是不能接单的”、“买了这个设备大概率就能中书”",
-                doSay: "“优质的演播设备(如喜播官方款)有助于提升录音质量和降噪，从而更好地满足甲方的审音干音标准。”"
-            },
-            {
-                category: "equipment",
-                level: "B类",
-                title: "极端虚拟案例包装",
-                desc: "利用行业大IP的头部收入当做普通学员标准，或伪造超过1万元未标明来源于“团队收入”的账单。",
-                doNotSay: "“紫襟也是我们这出去的，你学了也一样可以”、“这是我上个月刚拿的2万块个人录书收入”",
-                doSay: "“咱们平台有很多学长学姐经过努力接到了第一本自己的书，这是大家脚踏实地努力的成果证明(仅展示真实小额度商单结算截图)。”"
+                title: "录音设备绑定销售",
+                doNotSay: "禁止强行绑定：“你没有官方设备肯定是没法接单变现的”、“手机一定不行”。",
+                doSay: "允许高转化表达：“买了这个好的设备，【大概率】就能中书”、“优质设备有助于大幅提升录音质量和降噪效能，更容易过审”。",
+                logic: "不强买强卖即可。允许使用“大概率能成”这种带有强暗示效果但又不绝对违规的促单词汇。"
             }
         ];
 
@@ -320,10 +311,12 @@
                     tr.innerHTML = `
                         <td align="center"><span class="${getLevelClass(r.level)}">${r.level}红线</span></td>
                         <td><strong>${r.title}</strong></td>
-                        <td>${r.desc}</td>
+                        <td><div class="do-not-say">${r.doNotSay}</div></td>
                         <td>
-                            <div class="do-not-say"><strong>🚫 禁说：</strong><br>${r.doNotSay}</div>
-                            <div class="do-say"><strong>✅ 建议：</strong><br>${r.doSay}</div>
+                            <div class="do-say">${r.doSay}</div>
+                        </td>
+                        <td>
+                            <div class="logic-box">💡 <strong>松绑底线逻辑：</strong><br>${r.logic}</div>
                         </td>
                     `;
                     tbody.appendChild(tr);
