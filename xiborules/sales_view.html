@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>销售话术与质检合规规范库 - 喜播集团</title>
+    <style>
+        :root {
+            --primary-color: #e74c3c;
+            --primary-light: #fadbd8;
+            --secondary-color: #f39c12;
+            --secondary-light: #fdebd0;
+            --success-color: #27ae60;
+            --text-color: #333;
+            --border-color: #ddd;
+            --bg-color: #f9f9f9;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 20px;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            margin: 0 0 10px 0;
+        }
+
+        .subtitle {
+            color: #7f8c8d;
+            font-size: 1.1em;
+            margin-bottom: 20px;
+        }
+
+        .alert-box {
+            background-color: #fff3cd;
+            color: #856404;
+            padding: 15px 20px;
+            border-left: 5px solid #ffeeba;
+            border-radius: 4px;
+            margin-bottom: 30px;
+            font-size: 0.95em;
+        }
+
+        .category-title {
+            background-color: var(--bg-color);
+            padding: 10px 15px;
+            border-left: 4px solid var(--primary-color);
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.25em;
+            font-weight: 600;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+            background-color: white;
+            font-size: 0.95em;
+        }
+
+        th,
+        td {
+            border: 1px solid var(--border-color);
+            padding: 12px 15px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        th {
+            background-color: #f1f3f5;
+            color: #495057;
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) {
+            background-color: #fafbfc;
+        }
+
+        tr:hover {
+            background-color: #f0f7ff;
+        }
+
+        .level-A {
+            color: white;
+            background-color: #e74c3c;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 0.85em;
+            display: inline-block;
+        }
+
+        .level-B {
+            color: white;
+            background-color: #f39c12;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 0.85em;
+            display: inline-block;
+        }
+
+        .do-not-say {
+            color: #c0392b;
+            background-color: #fff5f5;
+            padding: 8px;
+            border-left: 3px solid #e74c3c;
+            margin-bottom: 10px;
+            font-size: 0.9em;
+        }
+
+        .do-say {
+            color: #1e8449;
+            background-color: #f0fff4;
+            padding: 8px;
+            border-left: 3px solid #27ae60;
+            font-size: 0.9em;
+        }
+
+        .breadcrumb {
+            margin-bottom: 20px;
+            font-size: 0.9em;
+        }
+
+        .breadcrumb a {
+            color: #3498db;
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="../index.html">&larr; 返回首页 (Home)</a>
+        </div>
+
+        <header>
+            <h1>高危质检与销售合规话术库 (前线版)</h1>
+            <div class="subtitle">一线销售严守红线指南 · 确保合规与信任的基石</div>
+        </header>
+
+        <div class="alert-box">
+            <strong>⚠️ 质检强提醒：</strong>
+            A类红线一旦触碰即<strong>永久解除合作</strong>；B类红线触发将导致<strong>扣除代偿金500元</strong>（季度超过三次解除合作）。请严格遵守“允许话术”与“禁止话术”的边界，禁止以任何形式误导学员。
+        </div>
+
+        <div id="rules-container">
+            <!-- 业务规范类 -->
+            <div class="category-title">第一部分：核心业务规范红线</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th width="10%">违规级别</th>
+                        <th width="15%">违规事项</th>
+                        <th width="35%">质检细则 (禁止行为)</th>
+                        <th width="40%">话术指南 (怎么说)</th>
+                    </tr>
+                </thead>
+                <tbody id="business-rules">
+                    <!-- 通过JS或后端渲染 -->
+                </tbody>
+            </table>
+
+            <!-- 监管风险类：收益承诺相关 -->
+            <div class="category-title">第二部分：监管风险 - 收益与变现承诺限制</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th width="10%">违规级别</th>
+                        <th width="15%">违规事项</th>
+                        <th width="35%">质检细则 (禁止行为)</th>
+                        <th width="40%">话术指南 (怎么说)</th>
+                    </tr>
+                </thead>
+                <tbody id="income-rules">
+                    <!-- 通过JS或后端渲染 -->
+                </tbody>
+            </table>
+
+            <!-- 监管风险类：设备与特殊赛道 -->
+            <div class="category-title">第三部分：监管风险 - 设备与特殊赛道包装限制</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th width="10%">违规级别</th>
+                        <th width="15%">违规事项</th>
+                        <th width="35%">质检细则 (禁止行为)</th>
+                        <th width="40%">话术指南 (怎么说)</th>
+                    </tr>
+                </thead>
+                <tbody id="equipment-rules">
+                    <!-- 通过JS或后端渲染 -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- 脚本动态加载模拟数据 (后续可接入总监系统的后端API) -->
+    <script>
+        const rulesData = [
+            // 业务规范
+            {
+                category: "business",
+                level: "A类",
+                title: "个人资源引流与售卖",
+                desc: "利用官方资源引导加私人微信/QQ，推荐私人群，售卖非喜播官方授权产品。",
+                doNotSay: "“加我私人微信发你资料”、“我在自己群里给你推单”",
+                doSay: "“请在企业微信/官方群内联系我，我会为您提供官方指定的学习资料。”"
+            },
+            {
+                category: "business",
+                level: "B类",
+                title: "违规私发退费引导",
+                desc: "教唆学员伪造退费材料，或利用“退费”字眼作为逼单手段，恶意压单拖延。",
+                doNotSay: "“不行你就先买，学完不满意再去申请退费”、“退费要扣一笔高额手续费”",
+                doSay: "“我们的课程均享有正规售后保障，您可以根据实际体验决定，详情请参阅购买协议。”"
+            },
+            {
+                category: "business",
+                level: "B类",
+                title: "喜马相关表述",
+                desc: "使用喜马官方Logo、热线，自称为“喜马拉雅直属/总部/员工/官方讲师”。",
+                doNotSay: "“我们是喜马拉雅总部的直属讲师”、“我和喜马是一个公司的”",
+                doSay: "“我们是喜播的官方讲师，喜播是喜马拉雅旗下的优质教育生态公司。”"
+            },
+            // 收益承诺
+            {
+                category: "income",
+                level: "B类",
+                title: "绝对化变现承诺",
+                desc: "使用“肯定、绝对、100%”等词汇绑定收益；直接给出具体的月入金额；声称“坚持就一定能赚钱”。",
+                doNotSay: "“保证你100%能赚钱”、“听我的保底一个月赚5000没问题”",
+                doSay: "“有声演播的收入取决于个人的练习投入和实战接单能力，这是一个多劳多得的技能，我们提供系统的教学帮助您提升。”"
+            },
+            {
+                category: "income",
+                level: "B类",
+                title: "保证包分配上岗",
+                desc: "“包就业、毕业即上岗、签包分配协议”等绝对化承诺，声称100%排进剧组。",
+                doNotSay: "“报了这个班毕业直接给你包分配上岗”、“肯定能进官方优质剧组”",
+                doSay: "“完成学业后，大家100%有资格参加实战剧组的选拔考核，凭实力获取演播机会。”"
+            },
+            {
+                category: "income",
+                level: "B类",
+                title: "低估中书与回本难度",
+                desc: "混淆试音和中书的概念，使用“很容易、快速回血、躺赚、不用试音”等虚假描述。",
+                doNotSay: "“不用试音我直接给你派单”、“报名两三个月轻松回本赚学费”",
+                doSay: "“商单需要经过甲方的试音筛选，掌握好专业技巧能大大提升您的试音通过率，需要扎实的练习积累。”"
+            },
+            // 设备与包装
+            {
+                category: "equipment",
+                level: "B类",
+                title: "虚假跨界时薪承诺",
+                desc: "提到“底薪、保底收入”；在有声业务中盲目承诺超过50元起薪，混淆兼职时薪与演播干音时薪。",
+                doNotSay: "“平台签约每个月固定保底4000”、“新手入行就是150一小时”",
+                doSay: "“有声时薪参考通常为50-500元/小时，视制片方要求及您的干音试音质量而定。”"
+            },
+            {
+                category: "equipment",
+                level: "B类",
+                title: "夸大设备关联作用",
+                desc: "称“不买官方设备就无法接单变现”或者宣称“喜马拉雅官方特供设备”。",
+                doNotSay: "“你没有这个喜马官方设备是不能接单的”、“买了这个设备大概率就能中书”",
+                doSay: "“优质的演播设备(如喜播官方款)有助于提升录音质量和降噪，从而更好地满足甲方的审音干音标准。”"
+            },
+            {
+                category: "equipment",
+                level: "B类",
+                title: "极端虚拟案例包装",
+                desc: "利用行业大IP的头部收入当做普通学员标准，或伪造超过1万元未标明来源于“团队收入”的账单。",
+                doNotSay: "“紫襟也是我们这出去的，你学了也一样可以”、“这是我上个月刚拿的2万块个人录书收入”",
+                doSay: "“咱们平台有很多学长学姐经过努力接到了第一本自己的书，这是大家脚踏实地努力的成果证明(仅展示真实小额度商单结算截图)。”"
+            }
+        ];
+
+        function renderRules() {
+            const getLevelClass = (level) => level.includes('A') ? 'level-A' : 'level-B';
+
+            const renderRows = (filterCategory, targetId) => {
+                const tbody = document.getElementById(targetId);
+                const filtered = rulesData.filter(r => r.category === filterCategory);
+
+                filtered.forEach(r => {
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td align="center"><span class="${getLevelClass(r.level)}">${r.level}红线</span></td>
+                        <td><strong>${r.title}</strong></td>
+                        <td>${r.desc}</td>
+                        <td>
+                            <div class="do-not-say"><strong>🚫 禁说：</strong><br>${r.doNotSay}</div>
+                            <div class="do-say"><strong>✅ 建议：</strong><br>${r.doSay}</div>
+                        </td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            };
+
+            renderRows('business', 'business-rules');
+            renderRows('income', 'income-rules');
+            renderRows('equipment', 'equipment-rules');
+        }
+
+        window.onload = renderRules;
+    </script>
+</body>
+
+</html>
