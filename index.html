@@ -590,6 +590,107 @@
         </div>
     </header>
 
+    <!-- ─── 核心战情大屏 (CEO Dashboard) ─── -->
+    <section class="ceo-dashboard" style="background:#0a0f1e; padding: 40px 0; color:#e2e8f0;">
+        <div class="container">
+            <div
+                style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 20px; flex-wrap:wrap; gap:15px;">
+                <h2 style="color:#fff; margin:0; display:flex; align-items:center; gap:10px;">
+                    <span style="font-size:1.5rem;">🔥</span> 核心战情看板 (CEO Dashboard)
+                </h2>
+                <a href="SKU_Revenue_Analysis_2026.html" target="_blank"
+                    style="background:#ef4444; color:#fff; padding:8px 16px; border-radius:6px; text-decoration:none; font-weight:bold; font-size:0.9rem; transition: background 0.3s;">
+                    查看完整预算及 UE 模型大屏 →
+                </a>
+            </div>
+
+            <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px;">
+                <!-- 预警 1：退费率 -->
+                <div class="dash-card alert-blink"
+                    style="background:rgba(239, 68, 68, 0.15); border: 2px solid #ef4444; border-radius:12px; padding:20px; position:relative; overflow:hidden;">
+                    <div style="position:absolute; top:0; left:0; right:0; height:4px; background:#ef4444;"></div>
+                    <div style="font-size:0.85rem; color:#fca5a5; font-weight:bold; text-transform:uppercase;">🚨
+                        华为方法论红线预警</div>
+                    <div style="font-size:2.8rem; font-weight:800; color:#ef4444; margin:10px 0; line-height:1;">22.5%
+                    </div>
+                    <div style="font-size:0.95rem; color:#fff; font-weight:600;">综合退费率 (Refund Rate)</div>
+                    <div style="font-size:0.8rem; color:#fca5a5; margin-top:10px; line-height:1.4;">
+                        ⚠️ <strong>已突破20%红线</strong>。按当前模型，每超1pp将损耗625万净利润！请业务线发起专项复盘。
+                    </div>
+                </div>
+
+                <!-- 大盘目标 -->
+                <div class="dash-card"
+                    style="background:#1e293b; border: 1px solid #334155; border-radius:12px; padding:20px; position:relative; overflow:hidden;">
+                    <div style="position:absolute; top:0; left:0; right:0; height:4px; background:#10b981;"></div>
+                    <div style="font-size:0.85rem; color:#94a3b8; font-weight:bold; text-transform:uppercase;">年度预算进度
+                    </div>
+                    <div style="font-size:2.8rem; font-weight:800; color:#10b981; margin:10px 0; line-height:1;">
+                        5.0<span style="font-size:1.2rem; margin-left:2px;">亿</span></div>
+                    <div style="font-size:0.95rem; color:#fff; font-weight:600;">2026 净营收目标</div>
+                    <div style="font-size:0.8rem; color:#94a3b8; margin-top:10px; line-height:1.4;">
+                        ✅ 利润目标：5,000万<br>💡 所需前端GMV：7.14亿
+                    </div>
+                </div>
+
+                <!-- 第二曲线预警 -->
+                <div class="dash-card"
+                    style="background:#1e293b; border: 1px solid #334155; border-radius:12px; padding:20px; position:relative; overflow:hidden;">
+                    <div style="position:absolute; top:0; left:0; right:0; height:4px; background:#f59e0b;"></div>
+                    <div style="font-size:0.85rem; color:#94a3b8; font-weight:bold; text-transform:uppercase;">第二曲线转型追踪
+                    </div>
+                    <div style="font-size:2.8rem; font-weight:800; color:#f59e0b; margin:10px 0; line-height:1;">4.2%
+                    </div>
+                    <div style="font-size:0.95rem; color:#fff; font-weight:600;">短视频 L1 转化率</div>
+                    <div style="font-size:0.8rem; color:#fcd34d; margin-top:10px; line-height:1.4;">
+                        📉 <strong>低于 5% 基准值</strong>。AI短视频+写作线合计占比不足11%，需提升选修课转正比例。
+                    </div>
+                </div>
+
+                <!-- 结构观察 -->
+                <div class="dash-card"
+                    style="background:#1e293b; border: 1px solid #334155; border-radius:12px; padding:20px; position:relative; overflow:hidden;">
+                    <div style="position:absolute; top:0; left:0; right:0; height:4px; background:#3b82f6;"></div>
+                    <div style="font-size:0.85rem; color:#94a3b8; font-weight:bold; text-transform:uppercase;">产品线结构观测
+                    </div>
+                    <div style="font-size:2.8rem; font-weight:800; color:#3b82f6; margin:10px 0; line-height:1;">22%
+                    </div>
+                    <div style="font-size:0.95rem; color:#fff; font-weight:600;">后端硬件复购占比</div>
+                    <div style="font-size:0.8rem; color:#94a3b8; margin-top:10px; line-height:1.4;">
+                        ℹ️ 攀登硬件包为核心后路利润源。高度依赖第一曲线，业务集中度较高。
+                    </div>
+                </div>
+            </div>
+            <style>
+                @keyframes blink-border {
+                    0% {
+                        box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4);
+                    }
+
+                    50% {
+                        box-shadow: 0 0 20px 8px rgba(239, 68, 68, 0.7);
+                    }
+
+                    100% {
+                        box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4);
+                    }
+                }
+
+                .alert-blink {
+                    animation: blink-border 2s infinite;
+                }
+
+                .dash-card {
+                    transition: transform 0.3s;
+                }
+
+                .dash-card:hover {
+                    transform: translateY(-5px);
+                }
+            </style>
+        </div>
+    </section>
+
     <section class="ceo-message">
         <div class="container ceo-container">
             <div class="ceo-text">
