@@ -4,684 +4,1253 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2026 SKU 销售目标分析 (6.0亿净营收)</title>
+    <title>2026 预算规划 · UE 模型 · SKU 贡献分析</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         :root {
-            --bg-color: #0f172a;
-            --text-main: #e2e8f0;
-            --text-dim: #94a3b8;
-            --accent-color: #3b82f6;
-            --accent-hover: #2563eb;
-            --card-bg: #1e293b;
-            --border-color: #334155;
-            --success-color: #10b981;
-            --warning-color: #f59e0b;
-            --danger-color: #ef4444;
+            --bg: #0a0f1e;
+            --panel: #111827;
+            --card: #1a2236;
+            --border: #1e2d45;
+            --blue: #3b82f6;
+            --green: #10b981;
+            --yellow: #f59e0b;
+            --red: #ef4444;
+            --purple: #8b5cf6;
+            --text: #e2e8f0;
+            --dim: #64748b;
+            --muted: #94a3b8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            margin: 0;
-            padding: 20px;
-            line-height: 1.6;
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            padding: 24px 16px;
+            line-height: 1.6
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
+        .wrap {
+            max-width: 1320px;
+            margin: 0 auto
         }
 
-        header {
-            margin-bottom: 40px;
+        /* ── HEADER ── */
+        .page-header {
             text-align: center;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 20px;
+            padding: 40px 0 32px;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 36px
         }
 
-        h1 {
-            font-size: 2.5rem;
-            margin: 0;
-            background: linear-gradient(90deg, #60a5fa, #a78bfa);
+        .page-header h1 {
+            font-size: clamp(1.6rem, 4vw, 2.6rem);
+            font-weight: 800;
+            background: linear-gradient(120deg, #60a5fa, #a78bfa, #34d399);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            margin-bottom: 10px
         }
 
-        .subtitle {
-            color: var(--text-dim);
-            font-size: 1.1rem;
-            margin-top: 10px;
-        }
-
-        .dashboard-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin-bottom: 40px;
-        }
-
-        .stat-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 20px;
+        .page-header .meta {
+            color: var(--muted);
+            font-size: 0.88rem;
             display: flex;
-            flex-direction: column;
+            gap: 20px;
             justify-content: center;
-            align-items: center;
+            flex-wrap: wrap;
+            margin-top: 8px
+        }
+
+        .meta span {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            padding: 4px 12px;
+            border-radius: 20px
+        }
+
+        /* ── TABS ── */
+        .tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 28px;
+            flex-wrap: wrap
+        }
+
+        .tab {
+            padding: 9px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.88rem;
+            font-weight: 600;
+            border: 1px solid var(--border);
+            color: var(--muted);
+            transition: all .2s
+        }
+
+        .tab.active {
+            background: var(--blue);
+            border-color: var(--blue);
+            color: #fff
+        }
+
+        .tab-pane {
+            display: none
+        }
+
+        .tab-pane.active {
+            display: block
+        }
+
+        /* ── KPI BAR ── */
+        .kpi-bar {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+            gap: 16px;
+            margin-bottom: 28px
+        }
+
+        .kpi {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 20px;
             text-align: center;
+            position: relative;
+            overflow: hidden
         }
 
-        .stat-value {
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: var(--text-main);
-            margin: 10px 0;
+        .kpi::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px
         }
 
-        .stat-label {
-            color: var(--text-dim);
-            font-size: 0.9rem;
+        .kpi.blue::before {
+            background: var(--blue)
+        }
+
+        .kpi.green::before {
+            background: var(--green)
+        }
+
+        .kpi.yellow::before {
+            background: var(--yellow)
+        }
+
+        .kpi.red::before {
+            background: var(--red)
+        }
+
+        .kpi.purple::before {
+            background: var(--purple)
+        }
+
+        .kpi .val {
+            font-size: 1.9rem;
+            font-weight: 800;
+            margin: 6px 0
+        }
+
+        .kpi .lbl {
+            font-size: 0.75rem;
+            color: var(--dim);
             text-transform: uppercase;
-            letter-spacing: 0.05em;
+            letter-spacing: .05em
         }
 
+        .kpi .sub {
+            font-size: 0.78rem;
+            color: var(--muted);
+            margin-top: 4px
+        }
+
+        /* ── CARDS ── */
         .card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 30px;
-            margin-bottom: 30px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 24px;
+            margin-bottom: 22px
         }
 
-        table {
+        .card h2 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px
+        }
+
+        .card h2 .tag {
+            font-size: 0.7rem;
+            background: rgba(59, 130, 246, .15);
+            color: var(--blue);
+            border: 1px solid rgba(59, 130, 246, .3);
+            padding: 2px 8px;
+            border-radius: 8px;
+            font-weight: 600
+        }
+
+        /* ── HUAWEI FRAMEWORK ── */
+        .framework-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 14px
+        }
+
+        .fw-item {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 16px
+        }
+
+        .fw-item .fw-icon {
+            font-size: 1.5rem;
+            margin-bottom: 8px
+        }
+
+        .fw-item .fw-title {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--blue);
+            margin-bottom: 6px
+        }
+
+        .fw-item .fw-desc {
+            font-size: 0.78rem;
+            color: var(--muted);
+            line-height: 1.6
+        }
+
+        /* ── SCENARIO SWITCHER ── */
+        .scenario-bar {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap
+        }
+
+        .sc-btn {
+            padding: 7px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.82rem;
+            font-weight: 700;
+            border: 1px solid var(--border);
+            background: var(--panel);
+            color: var(--muted);
+            transition: all .2s
+        }
+
+        .sc-btn.active.base {
+            background: rgba(16, 185, 129, .15);
+            border-color: var(--green);
+            color: var(--green)
+        }
+
+        .sc-btn.active.bear {
+            background: rgba(239, 68, 68, .15);
+            border-color: var(--red);
+            color: var(--red)
+        }
+
+        .sc-btn.active.bull {
+            background: rgba(139, 92, 246, .15);
+            border-color: var(--purple);
+            color: var(--purple)
+        }
+
+        /* ── WATERFALL ── */
+        .waterfall-row {
+            display: grid;
+            grid-template-columns: 180px 1fr 100px;
+            gap: 12px;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border)
+        }
+
+        .waterfall-row:last-child {
+            border-bottom: none;
+            font-weight: 700
+        }
+
+        .wf-label {
+            font-size: 0.85rem;
+            color: var(--muted)
+        }
+
+        .wf-bar-wrap {
+            background: var(--panel);
+            border-radius: 4px;
+            height: 24px;
+            overflow: hidden;
+            position: relative
+        }
+
+        .wf-bar {
+            height: 100%;
+            border-radius: 4px;
+            transition: width .6s ease
+        }
+
+        .wf-val {
+            font-size: 0.88rem;
+            font-weight: 600;
+            text-align: right
+        }
+
+        /* ── UE TABLE ── */
+        .ue-table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 20px;
+            font-size: 0.82rem
         }
 
-        th,
-        td {
-            padding: 15px;
-            text-align: left;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        th {
-            color: var(--text-dim);
+        .ue-table th {
+            padding: 10px 12px;
+            color: var(--dim);
             font-weight: 600;
-            font-size: 0.9rem;
+            border-bottom: 2px solid var(--border);
+            background: var(--panel);
+            white-space: nowrap
         }
 
-        td {
-            font-size: 1rem;
+        .ue-table td {
+            padding: 10px 12px;
+            border-bottom: 1px solid var(--border);
+            vertical-align: middle
         }
 
-        .highlight-row {
-            background-color: rgba(59, 130, 246, 0.1);
+        .ue-table tr:hover td {
+            background: rgba(255, 255, 255, .02)
         }
 
-        .progress-bar-container {
-            width: 100%;
+        .ue-table tr.total-row td {
+            background: rgba(16, 185, 129, .08);
+            font-weight: 700;
+            color: var(--green)
+        }
+
+        .pill {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 6px;
+            font-size: 0.7rem;
+            font-weight: 700
+        }
+
+        .pill.m {
+            background: rgba(16, 185, 129, .15);
+            color: var(--green)
+        }
+
+        .pill.e {
+            background: rgba(59, 130, 246, .15);
+            color: var(--blue)
+        }
+
+        .pill.n {
+            background: rgba(139, 92, 246, .15);
+            color: var(--purple)
+        }
+
+        .pill.r {
+            background: rgba(239, 68, 68, .15);
+            color: var(--red)
+        }
+
+        .pill.h {
+            background: rgba(245, 158, 11, .15);
+            color: var(--yellow)
+        }
+
+        .health-dot {
+            width: 8px;
             height: 8px;
-            background-color: #334155;
-            border-radius: 4px;
-            overflow: hidden;
-            margin-top: 5px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 5px
         }
 
-        .progress-bar {
-            height: 100%;
-            background-color: var(--accent-color);
+        .health-dot.g {
+            background: var(--green)
         }
 
-        .chart-container {
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            gap: 40px;
-            margin-top: 20px;
+        .health-dot.y {
+            background: var(--yellow)
+        }
+
+        .health-dot.r {
+            background: var(--red)
+        }
+
+        /* ── BUDGET INPUTS ── */
+        .input-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 14px;
+            margin-bottom: 18px
+        }
+
+        .field label {
+            font-size: 0.78rem;
+            color: var(--dim);
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 600
+        }
+
+        .field input {
+            width: 100%;
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 9px 12px;
+            color: var(--text);
+            font-size: 0.92rem;
+            outline: none;
+            transition: border .2s
+        }
+
+        .field input:focus {
+            border-color: var(--blue)
+        }
+
+        .btn-calc {
+            background: linear-gradient(90deg, var(--blue), #6366f1);
+            color: #fff;
+            border: none;
+            padding: 11px 28px;
+            border-radius: 9px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 700;
+            transition: opacity .2s;
+            margin-top: 4px
+        }
+
+        .btn-calc:hover {
+            opacity: .85
+        }
+
+        /* ── CHARTS ── */
+        .chart-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px
+        }
+
+        @media(max-width:700px) {
+            .chart-row {
+                grid-template-columns: 1fr
+            }
         }
 
         .chart-box {
-            flex: 1;
-            min-width: 400px;
-            height: 300px;
+            background: var(--panel);
+            border-radius: 12px;
+            padding: 18px;
+            height: 280px;
+            position: relative
         }
 
-        .badge {
-            display: inline-block;
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 0.8rem;
-            font-weight: bold;
+        .chart-box canvas {
+            width: 100% !important;
+            height: 100% !important
         }
 
-        .badge-education {
-            background-color: rgba(16, 185, 129, 0.2);
-            color: #34d399;
+        /* ── ALERT BOXES ── */
+        .alert {
+            border-radius: 10px;
+            padding: 14px 16px;
+            font-size: 0.84rem;
+            margin-bottom: 14px;
+            border-left: 3px solid
         }
 
-        .badge-ai {
-            background-color: rgba(139, 92, 246, 0.2);
-            color: #c4b5fd;
+        .alert.warn {
+            background: rgba(245, 158, 11, .1);
+            border-color: var(--yellow);
+            color: #fcd34d
         }
 
-        .form-group {
-            margin-bottom: 20px;
+        .alert.info {
+            background: rgba(59, 130, 246, .1);
+            border-color: var(--blue);
+            color: #93c5fd
         }
 
-        label {
-            display: block;
-            margin-bottom: 8px;
-            color: var(--text-dim);
+        .alert.success {
+            background: rgba(16, 185, 129, .1);
+            border-color: var(--green);
+            color: #6ee7b7
         }
 
-        select,
-        input {
-            width: 100%;
-            padding: 10px;
-            background: #0f172a;
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
-            color: var(--text-main);
-            font-size: 1rem;
+        .alert.danger {
+            background: rgba(239, 68, 68, .1);
+            border-color: var(--red);
+            color: #fca5a5
         }
 
-        .info-box {
-            background-color: rgba(59, 130, 246, 0.1);
-            border-left: 4px solid var(--accent-color);
-            padding: 15px;
-            margin-top: 20px;
-            font-size: 0.9rem;
-            color: #cbd5e1;
+        /* ── MISC ── */
+        .section-label {
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .1em;
+            color: var(--dim);
+            margin-bottom: 12px
         }
 
-        .btn-update {
-            background-color: var(--accent-color);
-            color: white;
+        .divider {
             border: none;
-            padding: 10px 20px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 1rem;
-            transition: background 0.3s;
+            border-top: 1px solid var(--border);
+            margin: 20px 0
         }
 
-        .btn-update:hover {
-            background-color: var(--accent-hover);
+        .footnote {
+            font-size: 0.76rem;
+            color: var(--dim);
+            margin-top: 14px;
+            line-height: 1.7
+        }
+
+        a {
+            color: var(--blue);
+            text-decoration: none
+        }
+
+        a:hover {
+            text-decoration: underline
+        }
+
+        .back-link {
+            color: var(--muted);
+            font-size: 0.82rem;
+            margin-bottom: 20px;
+            display: inline-block
+        }
+
+        @media(max-width:600px) {
+            .ue-table {
+                display: block;
+                overflow-x: auto
+            }
+
+            .waterfall-row {
+                grid-template-columns: 140px 1fr 80px
+            }
         }
     </style>
-    <!-- Chart.js CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
+    <div class="wrap">
 
-    <div class="container">
-        <header>
-            <div style="margin-bottom: 15px; color: var(--text-dim); font-size: 0.9rem;">
-                <!-- Breadcrumbs -->
-                <a href="index.html" style="color: var(--text-dim); text-decoration: none; opacity: 0.8;">首页</a>
-                <span style="margin: 0 5px; opacity: 0.5;">&gt;</span>
-                <a href="CleanRevenue.html" style="color: var(--text-dim); text-decoration: none; opacity: 0.8;">净营收
-                    (Clean Revenue)</a>
-                <span style="margin: 0 5px; opacity: 0.5;">&gt;</span>
-                <span style="color: var(--accent-color); font-weight: 500;">SKU 营收拆解</span>
-            </div>
-            <h1>2026 SKU 战略拆解分析 (Based on 2025 Actuals)</h1>
-            <div class="subtitle">Based on Target Net Revenue: ¥600,000,000 (Clean Revenue) | Data Source: 2025 YTD GMV
-            </div>
-        </header>
-        <div class="card"
-            style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(6, 95, 70, 0.1)); border: 1px solid rgba(16, 185, 129, 0.3);">
-            <div class="dashboard-grid" style="margin-bottom: 0;">
-                <div class="stat-card" style="background: transparent; border: none; box-shadow: none;">
-                    <div class="stat-label">模拟净利润 (Net Profit)</div>
-                    <div class="stat-value" id="netProfit" style="color: #10b981;">¥1.50亿</div>
-                    <div style="font-size: 0.8rem; color: var(--text-dim);">目标: ≥1.5亿</div>
-                </div>
-                <div class="stat-card" style="background: transparent; border: none; box-shadow: none;">
-                    <div class="stat-label">净利润率 (Net Margin)</div>
-                    <div class="stat-value" id="netMargin" style="color: #10b981;">25.0%</div>
-                    <div style="font-size: 0.8rem; color: var(--text-dim);">目标: ≥10%</div>
-                </div>
-                <div class="stat-card" style="background: transparent; border: none; box-shadow: none;">
-                    <div class="stat-label">盈亏平衡点 (Break-even Revenue)</div>
-                    <div class="stat-value" id="breakEven">¥2.85亿</div>
-                    <div style="font-size: 0.8rem; color: var(--text-dim);">固定成本 / 边际贡献率</div>
-                </div>
-            </div>
-        </div>
-        <div class="dashboard-grid">
-            <div class="stat-card">
-                <div class="stat-label">所需总销量 (Total Units)</div>
-                <div class="stat-value" id="totalUnits" style="color: var(--accent-color);">164,474</div>
-                <div style="font-size: 0.8rem; color: var(--text-dim);">基于当前SKU组合</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-label">所需总流水 (Gross Revenue)</div>
-                <div class="stat-value" id="totalGross">¥7.50亿</div>
-                <div style="font-size: 0.8rem; color: var(--text-dim);">含退费与预提</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-label">平均客单价 (WAP)</div>
-                <div class="stat-value" id="avgPrice">¥4,560</div>
-                <div style="font-size: 0.8rem; color: var(--text-dim);">加权平均售价</div>
-            </div>
+        <a href="index.html" class="back-link">← 返回首页</a>
 
-            <!-- Profit KPI Cards -->
-
-        </div>
-        <!-- Assumptions Control Panel -->
-        <div class="card">
-            <h3 style="margin-top: 0; color: var(--accent-color);">⚙️ 核心假设模型 (Assumptions)</h3>
-            <div class="dashboard-grid" style="margin-bottom: 0;">
-                <div class="form-group">
-                    <label>净营收目标 (Clean Revenue Target)</label>
-                    <input type="text" id="targetRevenue" value="600,000,000"
-                        style="color: #10b981; font-weight: bold;">
-                </div>
-                <div class="form-group">
-                    <label>综合<a href="RefundAnalysis.html" target="_blank"
-                            style="color: inherit; text-decoration: underline;">退费率</a> (Refund Rate)</label>
-                    <div style="display: flex; gap: 10px; align-items: center;">
-                        <input type="number" id="refundRate" value="15" style="width: 80px;">
-                        <span>% (战略目标)</span>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>风险预提 (Provision)</label>
-                    <div style="display: flex; gap: 10px; align-items: center;">
-                        <input type="number" id="riskRate" value="5" style="width: 80px;">
-                        <span>% (180天预留)</span>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>总去毒因子 (Total Reduction)</label>
-                    <div id="totalReductionDisplay"
-                        style="font-size: 1.2rem; font-weight: bold; padding: 10px; color: #ef4444;">20%</div>
-                </div>
-            </div>
-
-            <h3
-                style="margin-top: 20px; color: var(--accent-color); border-top: 1px solid var(--border-color); padding-top: 20px;">
-                💰 成本与利润模拟 (Profit Simulation)</h3>
-            <div class="dashboard-grid" style="margin-bottom: 0;">
-                <div class="form-group">
-                    <label>投放/销售费用率 (Marketing Cost %)</label>
-                    <div style="display: flex; gap: 10px; align-items: center;">
-                        <input type="number" id="marketingRate" value="45" style="width: 80px;">
-                        <span>%</span>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>交付/服务成本率 (Service/COGS %)</label>
-                    <div style="display: flex; gap: 10px; align-items: center;">
-                        <input type="number" id="serviceRate" value="20" style="width: 80px;">
-                        <span>%</span>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>固定人力/分摊 (Fixed Costs)</label>
-                    <div style="display: flex; gap: 10px; align-items: center;">
-                        <input type="text" id="fixedCost" value="100000000" style="width: 120px;">
-                        <span>¥</span>
-                    </div>
-                </div>
-            </div>
-
-            <button class="btn-update" onclick="calculate()">🔁 重新计算 (Recalculate)</button>
-        </div>
-
-        <!-- KPI Cards -->
-
-
-        <!-- Charts -->
-        <div class="card">
-            <h3 style="margin-top: 0;">📊 可视化分布 (Distribution)</h3>
-            <div class="chart-container">
-                <div class="chart-box">
-                    <canvas id="revenueChart"></canvas>
-                </div>
-                <div class="chart-box">
-                    <canvas id="unitsChart"></canvas>
-                </div>
+        <div class="page-header">
+            <h1>2026 预算规划 · UE 模型 · SKU 贡献分析</h1>
+            <div class="meta">
+                <span>🎯 净营收目标：¥5.00亿</span>
+                <span>💰 净利润目标：≥¥5,000万</span>
+                <span>📊 方法论：华为 IBP 滚动预算</span>
+                <span>📅 更新：2026-03-03</span>
             </div>
         </div>
 
-        <!-- Product Line Strategy Links -->
-        <div class="card">
-            <h3 style="margin-top: 0; color: var(--accent-color);">🚀 产品线战略规划 (Product Line Strategy)</h3>
-            <p style="color: var(--text-dim); margin-bottom: 20px;">点击下方卡片查看各产品线的详细阵列、销售漏斗及生命周期管理。</p>
-            <div class="dashboard-grid" style="margin-bottom: 0;">
-                <a href="SKU/ProductLine_Voice.html" target="_blank" style="text-decoration: none;">
-                    <div class="stat-card"
-                        style="border: 1px solid #3b82f6; background: rgba(59, 130, 246, 0.1); transition: transform 0.2s;">
-                        <div class="stat-label" style="color: #60a5fa;">Voice Line</div>
-                        <div class="stat-value" style="color: #3b82f6; font-size: 1.5rem;">有声攀登</div>
-                        <div style="font-size: 0.8rem; color: var(--text-dim); margin-top: 5px;">L1流量 -> L2利润 -> 硬件复购
+        <!-- ── TABS ── -->
+        <div class="tabs">
+            <div class="tab active" onclick="switchTab('overview')">📊 预算总览</div>
+            <div class="tab" onclick="switchTab('ue')">🔬 UE 单元模型</div>
+            <div class="tab" onclick="switchTab('scenario')">🎲 情景模拟</div>
+            <div class="tab" onclick="switchTab('framework')">📐 华为方法论</div>
+        </div>
+
+        <!-- ═══════════════════════════════════════
+       TAB 1: 预算总览
+  ═══════════════════════════════════════ -->
+        <div id="tab-overview" class="tab-pane active">
+
+            <!-- KPI Bar -->
+            <div class="kpi-bar">
+                <div class="kpi green">
+                    <div class="lbl">净营收目标</div>
+                    <div class="val" style="color:var(--green)">¥5.00亿</div>
+                    <div class="sub">同比 2025 增长 ~40%</div>
+                </div>
+                <div class="kpi yellow">
+                    <div class="lbl">净利润目标</div>
+                    <div class="val" style="color:var(--yellow)">¥5,000万</div>
+                    <div class="sub">净利率 ≥10%</div>
+                </div>
+                <div class="kpi blue">
+                    <div class="lbl">所需总流水 GMV</div>
+                    <div class="val" id="kpi-gmv" style="color:var(--blue)">¥7.14亿</div>
+                    <div class="sub">退费率15% + 预提5%消化</div>
+                </div>
+                <div class="kpi purple">
+                    <div class="lbl">加权平均客单价</div>
+                    <div class="val" id="kpi-wap" style="color:var(--purple)">¥3,650</div>
+                    <div class="sub">含前后端 SKU 组合</div>
+                </div>
+                <div class="kpi red">
+                    <div class="lbl">盈亏平衡点</div>
+                    <div class="val" id="kpi-bep" style="color:var(--red)">¥3.03亿</div>
+                    <div class="sub">固定成本/边际贡献率</div>
+                </div>
+            </div>
+
+            <!-- 利润瀑布图 -->
+            <div class="card">
+                <h2>💧 利润瀑布：从 GMV 到净利润 <span class="tag">华为 P&L 逻辑</span></h2>
+                <div id="waterfall-container"></div>
+                <div class="footnote">
+                    * 华为 IBP 预算原则：每一层减项须在资源包计划中对应收益，不允许"隐性通道"；退费率、坏账预提需在 GMV 阶段即锁定，而非在净利润阶段补救。
+                </div>
+            </div>
+
+            <!-- 营收结构分布 -->
+            <div class="card">
+                <h2>📦 SKU 营收结构（基于2025实际GMV拆解）</h2>
+                <div class="chart-row" style="margin-bottom:16px">
+                    <div class="chart-box">
+                        <canvas id="chartRevShare"></canvas>
+                    </div>
+                    <div class="chart-box">
+                        <canvas id="chartTargetRev"></canvas>
+                    </div>
+                </div>
+                <div class="alert info">
+                    💡 <strong>结构性风险：</strong>有声线贡献约 72% 营收（含硬件复购），第一曲线高度集中。AI 短视频+写作线合计仅 11%，距离 第二曲线 30%
+                    占比战略目标差距较大。2026 预算中需强制锁定新兴 SKU 的资源包上限，防止被第一曲线无限挤占。
+                </div>
+            </div>
+
+            <!-- 季度分解 -->
+            <div class="card">
+                <h2>📅 季度滚动收入计划（基础情景）</h2>
+                <div class="chart-box" style="height:240px">
+                    <canvas id="chartQuarter"></canvas>
+                </div>
+                <div class="footnote">
+                    Q1 受 315 合规期影响，以守底线为主（收入目标 ¥0.95亿）；Q2 进入业务恢复期（¥1.25亿）；Q3 规模冲刺（¥1.55亿）；Q4 年末压强（¥1.25亿）。
+                </div>
+            </div>
+
+        </div><!-- /tab-overview -->
+
+        <!-- ═══════════════════════════════════════
+       TAB 2: UE 单元经济模型
+  ═══════════════════════════════════════ -->
+        <div id="tab-ue" class="tab-pane">
+
+            <div class="alert info">
+                📐 <strong>华为 UE 模型原则：</strong>每个 SKU 须独立核算"单元贡献率（Unit Contribution Rate）"，成熟业务 UCR ≥ 35%，创新业务首轮允许 UCR ≥
+                0%（不亏损），不达标 SKU 进入 Kill/Pivot 门控评审。
+            </div>
+
+            <div class="card">
+                <h2>🔬 SKU 单元经济模型（UE Model）<span class="tag">可编辑参数</span></h2>
+                <p style="font-size:0.82rem;color:var(--muted);margin-bottom:16px">
+                    关键指标说明：<strong>转化率</strong>（线索→付费）· <strong>退费率</strong>（确认退款/已交付）· <strong>复购率</strong>（L1→L2 升课）·
+                    <strong>税负率</strong>（增值税+附加≈5.6%）· <strong>交付成本率</strong>（含师资/班主任/系统）·
+                    <strong>获客成本率</strong>（投放/转介绍）
+                </p>
+                <div style="overflow-x:auto">
+                    <table class="ue-table" id="ueTable">
+                        <thead>
+                            <tr>
+                                <th>SKU 名称</th>
+                                <th>类型</th>
+                                <th>当前售价</th>
+                                <th>2025 GMV占比</th>
+                                <th>转化率%</th>
+                                <th>退费率%</th>
+                                <th>复购率%</th>
+                                <th>税负率%</th>
+                                <th>交付成本率%</th>
+                                <th>获客成本率%</th>
+                                <th>单元贡献率</th>
+                                <th>2026目标净收</th>
+                                <th>健康度</th>
+                            </tr>
+                        </thead>
+                        <tbody id="ueTbody"></tbody>
+                    </table>
+                </div>
+                <div class="footnote" style="margin-top:16px">
+                    * 单元贡献率 = 1 − 退费率 − 税负率 − 交付成本率 − 获客成本率（净营收视角）。复购率影响的是 LTV，纳入后端 SKU 的收入规划。<br>
+                    * <span style="color:var(--green)">●绿</span> UCR≥35%（健康） / <span
+                        style="color:var(--yellow)">●黄</span> UCR 15-35%（关注） / <span style="color:var(--red)">●红</span>
+                    UCR&lt;15%（告警，需 Kill/Pivot 评审）
+                </div>
+            </div>
+
+            <!-- UCR 排名图 -->
+            <div class="card">
+                <h2>📊 SKU 单元贡献率排名</h2>
+                <div class="chart-box" style="height:300px">
+                    <canvas id="chartUCR"></canvas>
+                </div>
+            </div>
+
+            <!-- 改善建议 -->
+            <div class="card">
+                <h2>🎯 利润提升三大杠杆</h2>
+                <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px">
+                    <div
+                        style="background:var(--panel);border-radius:10px;padding:16px;border-left:3px solid var(--green)">
+                        <div style="font-weight:700;color:var(--green);margin-bottom:8px">杠杆1：退费率 -5pp</div>
+                        <div style="font-size:0.82rem;color:var(--muted);line-height:1.7">
+                            退费率从当前 ~18% 降至 13%，在 5亿净营收基础上相当于额外增加 <strong style="color:var(--green)">+¥3,125万</strong>
+                            净利润（无需增加一分钱获客成本）。主要抓手：L2进阶课内容迭代提升满意度、课前期望值管理。
                         </div>
                     </div>
-                </a>
-                <a href="SKU/ProductLine_Writing.html" target="_blank" style="text-decoration: none;">
-                    <div class="stat-card"
-                        style="border: 1px solid #8b5cf6; background: rgba(139, 92, 246, 0.1); transition: transform 0.2s;">
-                        <div class="stat-label" style="color: #a78bfa;">Writing Line</div>
-                        <div class="stat-value" style="color: #8b5cf6; font-size: 1.5rem;">AI 写作</div>
-                        <div style="font-size: 0.8rem; color: var(--text-dim); margin-top: 5px;">L1体验 -> L2实战 -> L3私教
+                    <div
+                        style="background:var(--panel);border-radius:10px;padding:16px;border-left:3px solid var(--blue)">
+                        <div style="font-weight:700;color:var(--blue);margin-bottom:8px">杠杆2：后端复购率 +10pp</div>
+                        <div style="font-size:0.82rem;color:var(--muted);line-height:1.7">
+                            L1→L2 转化率从 35% 提升至 45%，以 2025 约 4.4 万人的 L1 交付量计，可拉动后端收入约 <strong
+                                style="color:var(--blue)">+¥1.46亿</strong> GMV（零额外投放）。关键：L1 结营前提前构建进阶紧迫感。
                         </div>
                     </div>
-                </a>
-                <a href="SKU/ProductLine_Shorts.html" target="_blank" style="text-decoration: none;">
-                    <div class="stat-card"
-                        style="border: 1px solid #f59e0b; background: rgba(245, 158, 11, 0.1); transition: transform 0.2s;">
-                        <div class="stat-label" style="color: #fcd34d;">Video Line</div>
-                        <div class="stat-value" style="color: #f59e0b; font-size: 1.5rem;">AI 短视频</div>
-                        <div style="font-size: 0.8rem; color: var(--text-dim); margin-top: 5px;">L1入门 -> L2进阶 -> IP孵化
+                    <div
+                        style="background:var(--panel);border-radius:10px;padding:16px;border-left:3px solid var(--yellow)">
+                        <div style="font-weight:700;color:var(--yellow);margin-bottom:8px">杠杆3：AI 线 SKU 占比提升</div>
+                        <div style="font-size:0.82rem;color:var(--muted);line-height:1.7">
+                            AI 短视频+写作线 UCR 高于有声线（交付成本低、无硬件），若占比从11% 提升至 20%，在总营收不变的前提下净利润率可提升约 <strong
+                                style="color:var(--yellow)">+3pp</strong>（即额外增加 ~¥1,500万净利润）。
                         </div>
                     </div>
-                </a>
+                </div>
             </div>
-        </div>
 
-        <!-- Detailed Table -->
-        <div class="card">
-            <h3 style="margin-top: 0;">📝 SKU 详细拆解 (Details)</h3>
-            <table id="skuTable">
-                <thead>
-                    <tr>
-                        <th style="width: 25%;">产品名称 (SKU)</th>
-                        <th>售价 (Price)</th>
-                        <th>销售占比 (Share)</th>
-                        <th>目标销量 (Units)</th>
-                        <th>贡献净营收 (Clean Rev)</th>
-                        <th>类别</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- JS will populate this -->
-                </tbody>
-            </table>
-            <div class="info-box">
-                <strong>💡 2025 数据洞察与 2026 战略调整：</strong>
-                <ul style="margin: 5px 0 0 20px;">
-                    <li><strong>硬件不仅是工具 (Hardware as Revenue):</strong> "攀登硬件包"等硬件复购贡献了约 <strong>22%</strong>
-                        的销售额。这表明我们的用户有极强的支付能力和专业进阶意愿，但也意味着我们的 SKU 过度依赖后端复购。</li>
-                    <li><strong>中台产品崛起 (Mid-tier):</strong> "有声精英课"和"音频剪辑"合计占 23%，说明除了顶层的"大师班"和底层的"攀登计划"，腰部产品线已经跑通。</li>
-                    <li><strong>AI 仍在早期 (AI Nascent):</strong> AI 系列目前总占比约 16%，距离成为真正的"第二曲线"还有很大增长空间 (目标 30%+)。</li>
-                    <li><strong>风险提示:</strong> 如果<a href="RefundAnalysis.html" target="_blank"
-                            style="color: inherit; text-decoration: underline;">退费率</a>从 15% 上升到 25%，我们需要多卖出
-                        <strong>14.2%</strong> 的课程才能达成同样的净营收目标。
-                    </li>
-                </ul>
+        </div><!-- /tab-ue -->
+
+        <!-- ═══════════════════════════════════════
+       TAB 3: 情景模拟
+  ═══════════════════════════════════════ -->
+        <div id="tab-scenario" class="tab-pane">
+
+            <div class="scenario-bar">
+                <div class="sc-btn active base" onclick="applyScenario('base',this)">📊 基础情景（Base）</div>
+                <div class="sc-btn bear" onclick="applyScenario('bear',this)">🐻 悲观情景（Bear）</div>
+                <div class="sc-btn bull" onclick="applyScenario('bull',this)">🐂 乐观情景（Bull）</div>
             </div>
-        </div>
-    </div>
 
-    <script>
-        // Data Source from CSV
-        // Data Source: 2025 YTD GMV Analysis (Total ~1.2B)
-        // Re-aligned to reflect actual sales mix: High reliance on basic L1+L2 and Hardware repurchases.
-        const skuData = [
-            { name: "攀登计划 (L1+L2)", price: 3980, share: 0.36, category: "Education", link: "SKU/L1_Plus_L2.html" },
-            { name: "攀登硬件包 (复购)", price: 2980, share: 0.19, category: "Hardware", link: "SKU/攀登复购硬件硬件复购.html" },
-            { name: "有声精英课 (L1)", price: 2980, share: 0.15, category: "Education", link: "SKU/精英L1.html" },
-            { name: "音频剪辑课", price: 1980, share: 0.08, category: "Skills", link: "SKU/音频剪辑.html" },
-            { name: "AI 写作 (L1+L2+L3)", price: 2580, share: 0.09, category: "AI", link: "SKU/AI写作L1.html" },
-            { name: "剪辑硬件包", price: 1980, share: 0.03, category: "Hardware", link: "SKU/剪辑复购硬件实物硬件.html" },
-            { name: "攀登大师班", price: 6880, share: 0.03, category: "Premium", link: "SKU/攀登大师班.html" },
-            { name: "AI 短视频系列", price: 2980, share: 0.07, category: "AI", link: "SKU/AI短视频L1.html" }
-        ];
+            <div class="card">
+                <h2>⚙️ 情景参数设置 <span class="tag" id="scenario-name">Base Case</span></h2>
+                <div class="input-grid">
+                    <div class="field"><label>净营收目标（元）</label><input id="p-revenue" type="number" value="500000000">
+                    </div>
+                    <div class="field"><label>综合退费率 %</label><input id="p-refund" type="number" value="15" step="0.5">
+                    </div>
+                    <div class="field"><label>风险预提 %</label><input id="p-provision" type="number" value="5" step="0.5">
+                    </div>
+                    <div class="field"><label>增值税+附加税率 %</label><input id="p-tax" type="number" value="5.6" step="0.1">
+                    </div>
+                    <div class="field"><label>投放/销售费用率 %</label><input id="p-marketing" type="number" value="42"
+                            step="0.5"></div>
+                    <div class="field"><label>交付/服务成本率 %</label><input id="p-cogs" type="number" value="20" step="0.5">
+                    </div>
+                    <div class="field"><label>固定人力/管理费用（元）</label><input id="p-fixed" type="number" value="85000000">
+                    </div>
+                    <div class="field"><label>AI线SKU占比目标 %</label><input id="p-ai-share" type="number" value="15"
+                            step="1"></div>
+                </div>
+                <button class="btn-calc" onclick="recalcScenario()">🔁 重新计算</button>
+            </div>
 
-        let revenueChart = null;
-        let unitsChart = null;
+            <!-- 情景结果 -->
+            <div class="kpi-bar" id="scenario-kpis">
+                <!-- JS rendered -->
+            </div>
 
-        function formatCurrency(num) {
-            return new Intl.NumberFormat('zh-CN', { style: 'currency', currency: 'CNY', maximumFractionDigits: 0 }).format(num);
-        }
+            <div class="card">
+                <h2>🗂 三情景对比</h2>
+                <div class="chart-box" style="height:300px">
+                    <canvas id="chartScenario"></canvas>
+                </div>
+            </div>
 
-        function formatNumber(num) {
-            return new Intl.NumberFormat('zh-CN').format(Math.round(num));
-        }
+            <!-- 敏感性分析 -->
+            <div class="card">
+                <h2>📉 敏感性分析：退费率对净利润的影响</h2>
+                <div class="chart-box" style="height:260px">
+                    <canvas id="chartSensitivity"></canvas>
+                </div>
+                <div class="alert warn" style="margin-top:14px">
+                    ⚠️ <strong>关键结论：</strong>在当前成本结构下，退费率每上升 1pp，净利润约减少 <strong>¥625万</strong>。若退费率恶化至
+                    25%，净利润将为负（亏损区间）。需在 BSC 指标体系中将退费率列为"一票否决"级红线指标。
+                </div>
+            </div>
 
-        function calculate() {
-            // Get inputs
-            const targetRevInput = document.getElementById('targetRevenue').value;
-            const targetCleanRevenue = parseFloat(targetRevInput.replace(/,/g, ''));
-            const refundRate = parseFloat(document.getElementById('refundRate').value) / 100;
-            const riskRate = parseFloat(document.getElementById('riskRate').value) / 100;
+        </div><!-- /tab-scenario -->
 
-            const marketingRate = parseFloat(document.getElementById('marketingRate').value) / 100;
-            const serviceRate = parseFloat(document.getElementById('serviceRate').value) / 100;
-            const fixedCostInput = document.getElementById('fixedCost').value;
-            const fixedCost = parseFloat(fixedCostInput.replace(/,/g, ''));
+        <!-- ═══════════════════════════════════════
+       TAB 4: 华为方法论
+  ═══════════════════════════════════════ -->
+        <div id="tab-framework" class="tab-pane">
 
-            // Assumptions
-            const totalReduction = refundRate + riskRate;
-            const cleanFactor = 1 - totalReduction;
+            <div class="card">
+                <h2>📐 华为 IBP 预算方法论适配 <span class="tag">First Principles</span></h2>
+                <div class="framework-grid">
+                    <div class="fw-item">
+                        <div class="fw-icon">🗓</div>
+                        <div class="fw-title">滚动预算（Rolling Forecast）</div>
+                        <div class="fw-desc">不做年度固化预算，每季度基于实际数据滚动调整后三个季度计划。喜播适配：每月周会更新 SKU GMV 进展，每季度 IBP 会议重新分配资源包。
+                        </div>
+                    </div>
+                    <div class="fw-item">
+                        <div class="fw-icon">📦</div>
+                        <div class="fw-title">资源包承包制（Budget Contracting）</div>
+                        <div class="fw-desc">每个 BU 负责人对资源包（投放预算+人力）承担"可交付营收+利润"的刚性承诺。不允许超编超投，超出须向 CFO 提申请，附带 ROI 测算。
+                        </div>
+                    </div>
+                    <div class="fw-item">
+                        <div class="fw-icon">🔴🟡🟢</div>
+                        <div class="fw-title">红黄绿灯门控（Gate Review）</div>
+                        <div class="fw-desc">新 SKU / 创新业务按 CDCP 门控：概念→立项→开发→上市每阶段评审。退费率 >25%、UCR <0%
+                                两个指标触发红灯=立即冻结预算。</div>
+                        </div>
+                        <div class="fw-item">
+                            <div class="fw-icon">⚖️</div>
+                            <div class="fw-title">成熟/创新双轨预算</div>
+                            <div class="fw-desc">成熟业务（第一曲线有声线）：严格按 ROI 分配投放，目标边际贡献
+                                ≥35%。创新业务（AI短视频/写作/第二曲线）：给定固定探索预算包，UCR ≥0% 即可，但需每季度汇报 PMF 进展里程碑。</div>
+                        </div>
+                        <div class="fw-item">
+                            <div class="fw-icon">📊</div>
+                            <div class="fw-title">财务三张表联动</div>
+                            <div class="fw-desc">P&L（GMV→净营收→毛利→净利）+ 现金流（需特别关注退费备付金池）+
+                                资产负债表（负债端递延收入科目）。预提比例需与退费周期（180天）匹配，防止流动性风险。</div>
+                        </div>
+                        <div class="fw-item">
+                            <div class="fw-icon">🎯</div>
+                            <div class="fw-title">BSC 利润解码</div>
+                            <div class="fw-desc">5000万净利润 = 5亿净营收 × 10% 净利率。拆解路径：毛利率目标 ≥38%（扣除交付成本20%+税负5.6%）→ 销售费用率上限
+                                42% → 管理费用率上限 8%（固定成本≤¥8500万）。</div>
+                        </div>
+                    </div>
+                </div>
 
-            // Display Factor
-            document.getElementById('totalReductionDisplay').innerText = (totalReduction * 100).toFixed(1) + "%";
+                <div class="card">
+                    <h2>🗺 成熟业务 vs 创新业务：不同预算逻辑</h2>
+                    <div style="overflow-x:auto">
+                        <table class="ue-table">
+                            <thead>
+                                <tr>
+                                    <th>维度</th>
+                                    <th>成熟业务（有声线 L1/L2/L3）</th>
+                                    <th>创新业务（短视频/写作/第二曲线）</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>预算逻辑</strong></td>
+                                    <td>历史数据外推 × ROI 倍增</td>
+                                    <td>从零探索，固定预算包上限</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>UCR 要求</strong></td>
+                                    <td>≥ 35%（否则砍量）</td>
+                                    <td>≥ 0%（不允许燃烧净利润）</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>投放策略</strong></td>
+                                    <td>精准规模化，ROAS ≥ 3.0</td>
+                                    <td>小规模测款，ROAS 验证后再放量</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>门控机制</strong></td>
+                                    <td>月度 GMV 完成率红绿灯</td>
+                                    <td>季度 PMF 里程碑 CDCP 门控</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>退费管控</strong></td>
+                                    <td>退费率 ≤ 15%（红线）</td>
+                                    <td>退费率 ≤ 20%（初期容忍）</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>迭代节奏</strong></td>
+                                    <td>季度迭代（IPD Maintain）</td>
+                                    <td>月度迭代（Agile Sprint）</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>资源来源</strong></td>
+                                    <td>自我造血，不依赖额外融资</td>
+                                    <td>由成熟业务利润补贴，上限 ¥500万/季</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
 
-            // 1. Calculate Weighted Average Price (Gross)
-            // First time or update based on DOM inputs?
-            // Strategy: Always read from data structure. If DOM exists, read DOM into data struct first.
+                <div class="card">
+                    <h2>📋 2026 预算关键假设与底线</h2>
+                    <div class="alert success">✅ <strong>生存底线（Survival Bottom Line）：</strong>净营收 ≥ ¥5亿 · 净利润 ≥ ¥5,000万 ·
+                        不触发现金流危机（退费备付金池 ≥ ¥3,000万）</div>
+                    <div class="alert warn">⚠️ <strong>预算红线：</strong>综合退费率 > 20% → 立即启动紧急应对 SOP；固定成本超支 > ¥15% →
+                        启动冻结招聘；AI 线 UCR 连续两季 < 0% → 进入 Kill 门控</div>
+                            <div class="alert danger">🚨 <strong>不可触碰底线：</strong>销售合规红线（防止百万投诉率 > 基准值）导致工商/市监处罚，将直接摧毁
+                                UCR 模型全部假设</div>
+                    </div>
 
-            // Try to read inputs from table if they exist
-            const tableRows = document.querySelectorAll("#skuTable tbody tr");
-            if (tableRows.length > 0) {
-                // Read values from inputs
-                skuData.forEach((sku, index) => {
-                    if (tableRows[index]) {
-                        const priceInput = tableRows[index].querySelector('input.price-input');
-                        const shareInput = tableRows[index].querySelector('input.share-input');
-                        if (priceInput && shareInput) {
-                            sku.price = parseFloat(priceInput.value);
-                            sku.share = parseFloat(shareInput.value) / 100;
+                </div><!-- /tab-framework -->
+
+                <div
+                    style="text-align:center;color:var(--dim);font-size:0.78rem;padding:30px 0;border-top:1px solid var(--border);margin-top:20px">
+                    喜播集团 · 2026 预算规划 · 数据基础：2025年实际 GMV · 版本：2026-03-03
+                </div>
+
+            </div><!-- /wrap -->
+
+            <script>
+                // ════════════════════════════════════
+                // DATA
+                // ════════════════════════════════════
+                const SKU_DATA = [
+                    // name, type, price, gmvShare2025, cvr, refund, repurchase, tax, cogs, cac, target2026
+                    // type: M=成熟, E=成长, N=新兴, H=硬件
+                    { name: '有声L1+L2攀登计划', type: 'M', price: 3980, gmvShare: 0.359, cvr: 8, refund: 15, repurchase: 42, tax: 5.6, cogs: 18, cac: 38, target: 1.35e8 },
+                    { name: '攀登硬件复购包', type: 'H', price: 2980, gmvShare: 0.192, cvr: 42, refund: 5, repurchase: 0, tax: 5.6, cogs: 8, cac: 10, target: 0.90e8 },
+                    { name: '有声精英L1', type: 'M', price: 2980, gmvShare: 0.145, cvr: 6, refund: 12, repurchase: 35, tax: 5.6, cogs: 20, cac: 40, target: 0.60e8 },
+                    { name: '音频剪辑课', type: 'M', price: 1980, gmvShare: 0.078, cvr: 18, refund: 10, repurchase: 20, tax: 5.6, cogs: 16, cac: 30, target: 0.30e8 },
+                    { name: '有声L3运营课 V3', type: 'E', price: 2899, gmvShare: 0.005, cvr: 35, refund: 18, repurchase: 25, tax: 5.6, cogs: 22, cac: 20, target: 0.20e8 },
+                    { name: 'AI写作L1+L2+L3', type: 'E', price: 2580, gmvShare: 0.088, cvr: 5, refund: 6, repurchase: 28, tax: 5.6, cogs: 14, cac: 35, target: 0.30e8 },
+                    { name: 'AI短视频L1', type: 'E', price: 1980, gmvShare: 0.008, cvr: 4, refund: 12, repurchase: 45, tax: 5.6, cogs: 15, cac: 38, target: 0.18e8 },
+                    { name: 'AI短视频L2', type: 'E', price: 2980, gmvShare: 0.018, cvr: 40, refund: 12, repurchase: 20, tax: 5.6, cogs: 16, cac: 22, target: 0.22e8 },
+                    { name: 'AI短剧写作L2', type: 'N', price: 3280, gmvShare: 0.004, cvr: 3, refund: 15, repurchase: 10, tax: 5.6, cogs: 18, cac: 40, target: 0.10e8 },
+                    { name: '攀登大师班', type: 'M', price: 6880, gmvShare: 0.030, cvr: 15, refund: 8, repurchase: 10, tax: 5.6, cogs: 25, cac: 28, target: 0.25e8 },
+                    { name: '张震IP产品', type: 'N', price: 3980, gmvShare: 0.006, cvr: 12, refund: 10, repurchase: 15, tax: 5.6, cogs: 30, cac: 25, target: 0.10e8 },
+                ];
+
+                function ucr(s) { return Math.round(100 - s.refund - s.tax - s.cogs - s.cac); }
+
+                // ════════════════════════════════════
+                // TAB SWITCH
+                // ════════════════════════════════════
+                function switchTab(id) {
+                    document.querySelectorAll('.tab').forEach((t, i) => {
+                        const ids = ['overview', 'ue', 'scenario', 'framework'];
+                        t.classList.toggle('active', ids[i] === id);
+                    });
+                    document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+                    document.getElementById('tab-' + id).classList.add('active');
+                }
+
+                // ════════════════════════════════════
+                // WATERFALL
+                // ════════════════════════════════════
+                function buildWaterfall() {
+                    const gmv = 714e6;
+                    const rows = [
+                        { label: '总流水 GMV', val: gmv, pct: 100, color: '#3b82f6' },
+                        { label: '减：退款（15%）', val: -107e6, pct: -15, color: '#ef4444' },
+                        { label: '减：风险预提（5%）', val: -35.7e6, pct: -5, color: '#ef4444' },
+                        { label: '= 净营收', val: 500e6, pct: 70, color: '#10b981' },
+                        { label: '减：增值税附加（5.6%）', val: -28e6, pct: -3.9, color: '#f59e0b' },
+                        { label: '减：投放/销售（42%）', val: -210e6, pct: -29.4, color: '#f59e0b' },
+                        { label: '减：交付成本（20%）', val: -100e6, pct: -14, color: '#f59e0b' },
+                        { label: '= 毛利润', val: 162e6, pct: 22.7, color: '#10b981' },
+                        { label: '减：固定人力管理费', val: -112e6, pct: -15.7, color: '#f59e0b' },
+                        { label: '= 净利润', val: 50e6, pct: 7, color: '#a78bfa' },
+                    ];
+                    const container = document.getElementById('waterfall-container');
+                    container.innerHTML = rows.map(r => `
+    <div class="waterfall-row">
+      <div class="wf-label">${r.label}</div>
+      <div class="wf-bar-wrap">
+        <div class="wf-bar" style="width:${Math.abs(r.pct)}%;background:${r.color};margin-left:${r.val < 0 ? 100 - Math.abs(r.pct) : 0}%"></div>
+      </div>
+      <div class="wf-val" style="color:${r.color}">${r.val > 0 ? '+' : ''}¥${(r.val / 1e8).toFixed(2)}亿</div>
+    </div>`).join('');
+                }
+
+                // ════════════════════════════════════
+                // UE TABLE
+                // ════════════════════════════════════
+                function buildUETable() {
+                    const tbody = document.getElementById('ueTbody');
+                    const typeLabel = { M: '<span class="pill m">成熟</span>', E: '<span class="pill e">成长</span>', N: '<span class="pill n">新兴</span>', H: '<span class="pill h">硬件</span>' };
+                    let totalTarget = 0;
+                    tbody.innerHTML = SKU_DATA.map(s => {
+                        const u = ucr(s);
+                        totalTarget += s.target;
+                        const dot = u >= 35 ? 'g' : u >= 15 ? 'y' : 'r';
+                        return `<tr>
+      <td style="font-weight:600;white-space:nowrap">${s.name}</td>
+      <td>${typeLabel[s.type]}</td>
+      <td>¥${s.price.toLocaleString()}</td>
+      <td>${(s.gmvShare * 100).toFixed(1)}%</td>
+      <td>${s.cvr}%</td>
+      <td>${s.refund}%</td>
+      <td>${s.repurchase}%</td>
+      <td>${s.tax}%</td>
+      <td>${s.cogs}%</td>
+      <td>${s.cac}%</td>
+      <td style="font-weight:700;color:${u >= 35 ? 'var(--green)' : u >= 15 ? 'var(--yellow)' : 'var(--red)'}">${u}%</td>
+      <td>¥${(s.target / 1e8).toFixed(2)}亿</td>
+      <td><span class="health-dot ${dot}"></span>${u >= 35 ? '健康' : u >= 15 ? '关注' : '告警'}</td>
+    </tr>`;
+                    }).join('') + `<tr class="total-row">
+    <td colspan="11">合计 / 加权均值</td>
+    <td>¥${(totalTarget / 1e8).toFixed(2)}亿</td><td></td>
+  </tr>`;
+                }
+
+                // ════════════════════════════════════
+                // CHARTS
+                // ════════════════════════════════════
+                let charts = {};
+                function destroyChart(id) { if (charts[id]) { charts[id].destroy(); delete charts[id]; } }
+
+                const PALETTE = ['#3b82f6', '#10b981', '#f59e0b', '#8b5cf6', '#ef4444', '#06b6d4', '#ec4899', '#84cc16', '#f97316', '#a78bfa', '#34d399'];
+
+                function buildRevShareChart() {
+                    destroyChart('revShare');
+                    const ctx = document.getElementById('chartRevShare').getContext('2d');
+                    charts.revShare = new Chart(ctx, {
+                        type: 'doughnut',
+                        data: {
+                            labels: SKU_DATA.map(s => s.name),
+                            datasets: [{ data: SKU_DATA.map(s => +(s.gmvShare * 100).toFixed(1)), backgroundColor: PALETTE, borderWidth: 0 }]
+                        },
+                        options: { plugins: { legend: { display: false }, title: { display: true, text: '2025 GMV 占比分布', color: '#e2e8f0' } }, maintainAspectRatio: false }
+                    });
+                }
+
+                function buildTargetRevChart() {
+                    destroyChart('targetRev');
+                    const ctx = document.getElementById('chartTargetRev').getContext('2d');
+                    charts.targetRev = new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: SKU_DATA.map(s => s.name.length > 8 ? s.name.slice(0, 8) + '…' : s.name),
+                            datasets: [{ label: '2026净收目标（亿）', data: SKU_DATA.map(s => +(s.target / 1e8).toFixed(2)), backgroundColor: PALETTE, borderRadius: 6 }]
+                        },
+                        options: {
+                            plugins: { legend: { display: false }, title: { display: true, text: '2026 SKU 净收目标', color: '#e2e8f0' } },
+                            scales: { y: { ticks: { color: '#64748b' }, grid: { color: '#1e2d45' } }, x: { ticks: { color: '#64748b', maxRotation: 40, font: { size: 10 } }, grid: { display: false } } },
+                            maintainAspectRatio: false
                         }
-                    }
+                    });
+                }
+
+                function buildQuarterChart() {
+                    destroyChart('quarter');
+                    const ctx = document.getElementById('chartQuarter').getContext('2d');
+                    charts.quarter = new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: ['Q1（守守底线）', 'Q2（业务恢复）', 'Q3（规模冲刺）', 'Q4（年末压强）'],
+                            datasets: [
+                                { label: '净营收目标（亿）', data: [0.95, 1.25, 1.55, 1.25], backgroundColor: 'rgba(59,130,246,.7)', borderRadius: 6 },
+                                { label: '净利润目标（千万）', data: [0.2, 1.0, 2.2, 1.6], backgroundColor: 'rgba(16,185,129,.7)', borderRadius: 6 }
+                            ]
+                        },
+                        options: {
+                            plugins: { legend: { labels: { color: '#94a3b8' } }, title: { display: false } },
+                            scales: { y: { ticks: { color: '#64748b' }, grid: { color: '#1e2d45' } }, x: { ticks: { color: '#94a3b8' }, grid: { display: false } } },
+                            maintainAspectRatio: false
+                        }
+                    });
+                }
+
+                function buildUCRChart() {
+                    destroyChart('ucr');
+                    const sorted = [...SKU_DATA].sort((a, b) => ucr(b) - ucr(a));
+                    const ctx = document.getElementById('chartUCR').getContext('2d');
+                    charts.ucr = new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: sorted.map(s => s.name.length > 8 ? s.name.slice(0, 8) + '…' : s.name),
+                            datasets: [{
+                                label: '单元贡献率 UCR %',
+                                data: sorted.map(s => ucr(s)),
+                                backgroundColor: sorted.map(s => ucr(s) >= 35 ? 'rgba(16,185,129,.75)' : ucr(s) >= 15 ? 'rgba(245,158,11,.75)' : 'rgba(239,68,68,.75)'),
+                                borderRadius: 6
+                            }]
+                        },
+                        options: {
+                            plugins: { legend: { display: false } },
+                            scales: {
+                                y: { ticks: { color: '#64748b', callback: v => v + '%' }, grid: { color: '#1e2d45' } },
+                                x: { ticks: { color: '#94a3b8', maxRotation: 40, font: { size: 10 } }, grid: { display: false } }
+                            },
+                            maintainAspectRatio: false
+                        }
+                    });
+                }
+
+                // ════════════════════════════════════
+                // SCENARIO
+                // ════════════════════════════════════
+                const SCENARIOS = {
+                    base: { revenue: 500e6, refund: 15, provision: 5, tax: 5.6, marketing: 42, cogs: 20, fixed: 85e6, aiShare: 15 },
+                    bear: { revenue: 380e6, refund: 22, provision: 7, tax: 5.6, marketing: 48, cogs: 22, fixed: 85e6, aiShare: 10 },
+                    bull: { revenue: 620e6, refund: 12, provision: 4, tax: 5.6, marketing: 40, cogs: 18, fixed: 85e6, aiShare: 22 },
+                };
+
+                function applyScenario(key, btn) {
+                    document.querySelectorAll('.sc-btn').forEach(b => { b.classList.remove('active', 'base', 'bear', 'bull'); });
+                    btn.classList.add('active', key);
+                    const s = SCENARIOS[key];
+                    document.getElementById('p-revenue').value = s.revenue;
+                    document.getElementById('p-refund').value = s.refund;
+                    document.getElementById('p-provision').value = s.provision;
+                    document.getElementById('p-tax').value = s.tax;
+                    document.getElementById('p-marketing').value = s.marketing;
+                    document.getElementById('p-cogs').value = s.cogs;
+                    document.getElementById('p-fixed').value = s.fixed;
+                    document.getElementById('p-ai-share').value = s.aiShare;
+                    const names = { base: 'Base Case', bear: 'Bear Case - 悲观', bull: 'Bull Case - 乐观' };
+                    document.getElementById('scenario-name').textContent = names[key];
+                    recalcScenario();
+                }
+
+                function recalcScenario() {
+                    const rev = +document.getElementById('p-revenue').value;
+                    const refund = +document.getElementById('p-refund').value / 100;
+                    const prov = +document.getElementById('p-provision').value / 100;
+                    const tax = +document.getElementById('p-tax').value / 100;
+                    const mkt = +document.getElementById('p-marketing').value / 100;
+                    const cogs = +document.getElementById('p-cogs').value / 100;
+                    const fixed = +document.getElementById('p-fixed').value;
+
+                    const cleanFactor = 1 - refund - prov;
+                    const gmv = rev / cleanFactor;
+                    const taxAmt = rev * tax;
+                    const mktAmt = rev * mkt;
+                    const cogsAmt = rev * cogs;
+                    const gross = rev - taxAmt - mktAmt - cogsAmt;
+                    const net = gross - fixed;
+                    const margin = net / rev;
+                    const bep = fixed / (1 - tax - mkt - cogs);
+
+                    const kpis = document.getElementById('scenario-kpis');
+                    const color = n => n >= 0 ? 'var(--green)' : 'var(--red)';
+                    kpis.innerHTML = `
+  <div class="kpi ${net >= 5e7 ? 'green' : 'red'}">
+    <div class="lbl">模拟净利润</div>
+    <div class="val" style="color:${color(net)}">¥${(net / 1e8).toFixed(2)}亿</div>
+    <div class="sub">目标 ≥ ¥5000万</div>
+  </div>
+  <div class="kpi ${margin >= 0.1 ? 'green' : 'yellow'}">
+    <div class="lbl">净利率</div>
+    <div class="val" style="color:${margin >= 0.1 ? 'var(--green)' : 'var(--yellow)'}">${(margin * 100).toFixed(1)}%</div>
+    <div class="sub">目标 ≥ 10%</div>
+  </div>
+  <div class="kpi blue">
+    <div class="lbl">所需 GMV 流水</div>
+    <div class="val" style="color:var(--blue)">¥${(gmv / 1e8).toFixed(2)}亿</div>
+    <div class="sub">退+预提 =${((refund + prov) * 100).toFixed(0)}%</div>
+  </div>
+  <div class="kpi yellow">
+    <div class="lbl">盈亏平衡点</div>
+    <div class="val" style="color:var(--yellow)">¥${(bep / 1e8).toFixed(2)}亿</div>
+    <div class="sub">固定成本/边际贡献率</div>
+  </div>`;
+
+                    buildScenarioCompareChart();
+                    buildSensitivityChart(+document.getElementById('p-marketing').value, +document.getElementById('p-cogs').value, fixed);
+                }
+
+                let scenarioChart = null, sensitivityChart = null;
+                function buildScenarioCompareChart() {
+                    if (scenarioChart) { scenarioChart.destroy(); }
+                    const labels = ['净营收目标', '所需GMV', '净利润'];
+                    const calc = (key) => {
+                        const s = SCENARIOS[key], cf = 1 - s.refund / 100 - s.provision / 100;
+                        const n = s.revenue * (1 - s.tax / 100 - s.marketing / 100 - s.cogs / 100) - s.fixed;
+                        return [s.revenue / 1e8, (s.revenue / cf) / 1e8, n / 1e8];
+                    };
+                    const ctx = document.getElementById('chartScenario').getContext('2d');
+                    scenarioChart = new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels,
+                            datasets: [
+                                { label: 'Base', data: calc('base'), backgroundColor: 'rgba(16,185,129,.7)', borderRadius: 4 },
+                                { label: 'Bear', data: calc('bear'), backgroundColor: 'rgba(239,68,68,.7)', borderRadius: 4 },
+                                { label: 'Bull', data: calc('bull'), backgroundColor: 'rgba(139,92,246,.7)', borderRadius: 4 },
+                            ]
+                        },
+                        options: {
+                            plugins: { legend: { labels: { color: '#94a3b8' } } },
+                            scales: { y: { ticks: { color: '#64748b', callback: v => v + '亿' }, grid: { color: '#1e2d45' } }, x: { ticks: { color: '#94a3b8' }, grid: { display: false } } },
+                            maintainAspectRatio: false
+                        }
+                    });
+                }
+
+                function buildSensitivityChart(mkt, cogs, fixed) {
+                    if (sensitivityChart) { sensitivityChart.destroy(); }
+                    const refundRates = [5, 8, 10, 12, 15, 18, 20, 22, 25, 28, 30];
+                    const netProfits = refundRates.map(r => {
+                        const rev = 500e6, cf = 1 - (r / 100) - 0.05;
+                        const cleanRev = rev;
+                        const n = cleanRev * (1 - 0.056 - mkt / 100 - cogs / 100) - fixed;
+                        return +(n / 1e8).toFixed(2);
+                    });
+                    const ctx = document.getElementById('chartSensitivity').getContext('2d');
+                    sensitivityChart = new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: refundRates.map(r => r + '%'),
+                            datasets: [{
+                                label: '净利润（亿）',
+                                data: netProfits,
+                                borderColor: '#3b82f6',
+                                backgroundColor: 'rgba(59,130,246,.1)',
+                                fill: true, tension: 0.4, pointRadius: 4,
+                                pointBackgroundColor: netProfits.map(v => v >= 0 ? '#10b981' : '#ef4444')
+                            }, {
+                                label: '盈亏平衡线',
+                                data: refundRates.map(() => 0),
+                                borderColor: 'rgba(239,68,68,.5)',
+                                borderDash: [5, 5], pointRadius: 0
+                            }]
+                        },
+                        options: {
+                            plugins: { legend: { labels: { color: '#94a3b8' } } },
+                            scales: {
+                                y: { ticks: { color: '#64748b', callback: v => v + '亿' }, grid: { color: '#1e2d45' }, title: { display: true, text: '净利润（亿元）', color: '#64748b' } },
+                                x: { ticks: { color: '#94a3b8' }, grid: { display: false }, title: { display: true, text: '综合退费率', color: '#64748b' } }
+                            },
+                            maintainAspectRatio: false
+                        }
+                    });
+                }
+
+                // ════════════════════════════════════
+                // INIT
+                // ════════════════════════════════════
+                window.addEventListener('DOMContentLoaded', () => {
+                    buildWaterfall();
+                    buildRevShareChart();
+                    buildTargetRevChart();
+                    buildQuarterChart();
+                    buildUETable();
+                    buildUCRChart();
+                    recalcScenario();
                 });
-            }
-
-            let weightedAvgPrice = 0;
-            let totalShare = 0;
-            skuData.forEach(sku => {
-                weightedAvgPrice += sku.price * sku.share;
-                totalShare += sku.share;
-            });
-
-            // 2. Calculate Required Gross Revenue
-            // Required Gross = Target Clean / cleanFactor
-            const targetGrossRevenue = targetCleanRevenue / cleanFactor;
-
-            // 3. Calculate Total Units
-            // Correct for total share not being 100%? No, simplistic model assumes shares sum to 1 (or whatever user sets).
-            // Logic: Total Units = Revenue / WAP. 
-            // If shares sum to 0.8, WAP is weighted by 0.8... effectively meaning 20% sales have 0 price. 
-            // Better: Normalize WAP by total share? No, weighted average by definition handles sum(w*x).
-            // But if sum(share) != 1, then "Units * Share" won't sum to Total Units. 
-            // Let's enforce normalization for unit distribution calculation?
-            // Actually simpler: Total Gross = Sum(Unit_i * Price_i)
-            // Let Unit_i = Total_Units * Share_i.
-            // Then Total Gross = Total_Units * Sum(Share_i * Price_i).
-            // So Total_Units = Total Gross / Sum(Share_i * Price_i).
-            // This works even if sum(share) != 1. It just means Shares are relative weights.
-
-            const effectiveWAP = weightedAvgPrice;
-            const totalUnits = targetGrossRevenue / effectiveWAP;
-
-            // Update KPI Cards
-            document.getElementById('totalUnits').innerText = formatNumber(totalUnits);
-            document.getElementById('totalGross').innerText = "¥" + (targetGrossRevenue / 100000000).toFixed(2) + "亿";
-            document.getElementById('avgPrice').innerText = formatCurrency(weightedAvgPrice);
-
-            // 4. Calculate Net Profit
-            const variableCost = targetCleanRevenue * (marketingRate + serviceRate);
-            const contributionMargin = targetCleanRevenue - variableCost; // 边际贡献
-            const netProfit = contributionMargin - fixedCost;
-            const netMargin = netProfit / targetCleanRevenue;
-
-            // Break-even
-            const contributionMarginRatio = 1 - (marketingRate + serviceRate);
-            const breakEvenPoint = fixedCost / contributionMarginRatio;
-
-            // Update Profit KPIs
-            document.getElementById('netProfit').innerText = "¥" + (netProfit / 100000000).toFixed(2) + "亿";
-            document.getElementById('netMargin').innerText = (netMargin * 100).toFixed(1) + "%";
-            document.getElementById('breakEven').innerText = "¥" + (breakEvenPoint / 100000000).toFixed(2) + "亿";
-
-            // Color coding for profit
-            const profitEl = document.getElementById('netProfit');
-            const marginEl = document.getElementById('netMargin');
-            if (netProfit < 0) {
-                profitEl.style.color = '#ef4444';
-                marginEl.style.color = '#ef4444';
-            } else {
-                profitEl.style.color = '#10b981';
-                marginEl.style.color = '#10b981';
-            }
-
-            // Update Table & Charts Data
-            const tbody = document.querySelector("#skuTable tbody");
-            tbody.innerHTML = "";
-
-            const chartLabels = [];
-            const chartRevenueData = [];
-            const chartUnitsData = [];
-            const chartColors = [];
-
-            skuData.forEach(sku => {
-                const skuUnits = totalUnits * sku.share;
-                const skuGrossRev = skuUnits * sku.price;
-                const skuCleanRev = skuGrossRev * cleanFactor;
-
-                const row = document.createElement("tr");
-                if (sku.share >= 0.20) row.classList.add("highlight-row");
-
-                let categoryBadge = "";
-                if (sku.category === "Education" || sku.category === "Premium") {
-                    categoryBadge = '<span class="badge badge-education">Education</span>';
-                    chartColors.push('#3b82f6');
-                } else if (sku.category === "AI") {
-                    categoryBadge = '<span class="badge badge-ai">AI</span>';
-                    chartColors.push('#8b5cf6');
-                } else if (sku.category === "Hardware") {
-                    categoryBadge = '<span class="badge" style="background:rgba(245, 158, 11, 0.2); color:#f59e0b;">Hardware</span>';
-                    chartColors.push('#f59e0b');
-                } else {
-                    categoryBadge = '<span class="badge" style="background:rgba(100, 116, 139, 0.2); color:#94a3b8;">Skills</span>';
-                    chartColors.push('#64748b');
-                }
-
-                row.innerHTML = `
-                    <td style="font-weight:600; display:flex; align-items:center;">
-                        <a href="${sku.link}" target="_blank" style="color: inherit; text-decoration: underline; text-decoration-color: rgba(255,255,255,0.3); margin-right: 5px;">${sku.name}</a>
-                        <span style="font-weight:normal;">${categoryBadge}</span>
-                    </td>
-                    <td>
-                        <input type="number" class="price-input" value="${sku.price}" style="width: 80px; padding: 5px; background: rgba(0,0,0,0.2); border: 1px solid var(--border-color); color: white; border-radius: 4px;">
-                    </td>
-                    <td>
-                        <input type="number" class="share-input" value="${(sku.share * 100).toFixed(1)}" step="0.1" style="width: 60px; padding: 5px; background: rgba(0,0,0,0.2); border: 1px solid var(--border-color); color: white; border-radius: 4px;"> %
-                    </td>
-                    <td style="font-weight:bold; color:var(--text-main);">${formatNumber(skuUnits)}</td>
-                    <td>${"¥" + (skuCleanRev / 100000000).toFixed(2) + "亿"}</td>
-                `;
-                tbody.appendChild(row);
-
-                chartLabels.push(sku.name);
-                chartRevenueData.push(skuCleanRev);
-                chartUnitsData.push(skuUnits);
-            });
-
-            // Warn if total share != 100%
-            const shareSum = totalShare * 100;
-            if (Math.abs(shareSum - 100) > 1) {
-                const warningRow = document.createElement("tr");
-                warningRow.innerHTML = `<td colspan="5" style="color: #f59e0b; text-align: center; font-size: 0.9rem;">⚠️ 注意: 当前销售占比总和为 ${shareSum.toFixed(1)}%，非 100%。请调整占比。</td>`;
-                tbody.appendChild(warningRow);
-            }
-
-            updateCharts(chartLabels, chartRevenueData, chartUnitsData, chartColors);
-        }
-
-
-
-        function updateCharts(labels, revenueData, unitsData, colors) {
-            // Common Options
-            const commonOptions = {
-                plugins: {
-                    legend: {
-                        position: 'bottom',
-                        labels: { color: '#94a3b8' }
-                    }
-                }
-            };
-
-            // Revenue Pie Chart
-            const ctxRev = document.getElementById('revenueChart').getContext('2d');
-            if (revenueChart) revenueChart.destroy();
-            revenueChart = new Chart(ctxRev, {
-                type: 'doughnut',
-                data: {
-                    labels: labels,
-                    datasets: [{
-                        data: revenueData,
-                        backgroundColor: [
-                            '#3b82f6', '#2563eb', '#1d4ed8', // Blues
-                            '#60a5fa', '#93c5fd', // Lighter Blues
-                            '#8b5cf6', '#7c3aed', '#6d28d9'  // Purples
-                        ],
-                        borderWidth: 0
-                    }]
-                },
-                options: {
-                    ...commonOptions,
-                    plugins: {
-                        ...commonOptions.plugins,
-                        title: { display: true, text: '净营收贡献 (Revenue Contribution)', color: '#fff' }
-                    }
-                }
-            });
-
-            // Units Bar Chart
-            const ctxUnits = document.getElementById('unitsChart').getContext('2d');
-            if (unitsChart) unitsChart.destroy();
-            unitsChart = new Chart(ctxUnits, {
-                type: 'bar',
-                data: {
-                    labels: labels,
-                    datasets: [{
-                        label: '销量 (Units)',
-                        data: unitsData,
-                        backgroundColor: '#10b981',
-                        borderRadius: 4
-                    }]
-                },
-                options: {
-                    plugins: {
-                        legend: { display: false },
-                        title: { display: true, text: '目标销量分布 (Target Sales Volume)', color: '#fff' }
-                    },
-                    scales: {
-                        y: { ticks: { color: '#94a3b8' }, grid: { color: '#334155' } },
-                        x: { ticks: { color: '#94a3b8', maxRotation: 45, minRotation: 45 }, grid: { display: false } }
-                    }
-                }
-            });
-        }
-
-        // Initialize
-        calculate();
-
-    </script>
-
-    <div style="text-align: center; color: #888; font-size: 0.9em; margin-top: 40px; padding: 20px 0; border-top: 1px solid #eee;">
-        [版本控制] 最新评测及评估更新日期：2026年03月01日
-    </div>
+            </script>
 </body>
-
 
 </html>
