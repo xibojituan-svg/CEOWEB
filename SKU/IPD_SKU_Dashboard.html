@@ -4,366 +4,577 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>华为 IPD 课程 SKU 研发管理大盘 - 喜播集团</title>
+    <title>IPD课程SKU研发看板 - 喜播集团</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
         :root {
-            --bg-base: #0f172a;
-            --bg-card: #1e293b;
-            --bg-card-hover: #334155;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --border-color: rgba(255, 255, 255, 0.1);
-
-            /* IPD Stage Colors */
-            --stage-concept: #3b82f6;
-            /* 概念 */
-            --stage-plan: #8b5cf6;
-            /* 计划 */
-            --stage-develop: #f59e0b;
-            /* 开发 */
-            --stage-qualify: #ec4899;
-            /* 验证 */
-            --stage-launch: #10b981;
-            /* 发布 */
-            --stage-lifecycle: #64748b;
-            /* 生命周期/退市 */
-
-            /* Status Dots */
-            --status-green: #22c55e;
-            --status-yellow: #eab308;
-            --status-red: #ef4444;
+            --primary: #3b5bdb;
+            --primary-light: #edf2ff;
+            --success: #2f9e44;
+            --success-light: #ebfbee;
+            --warning: #e67700;
+            --warning-light: #fff9db;
+            --danger: #c92a2a;
+            --danger-light: #fff5f5;
+            --gray: #6c757d;
+            --gray-light: #f8f9fa;
+            --border: #dee2e6;
+            --text: #212529;
+            --text-muted: #868e96;
+            --white: #ffffff;
+            --shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            --radius: 10px;
+            --stage-concept: #3b5bdb;
+            --stage-plan: #7950f2;
+            --stage-develop: #e67700;
+            --stage-qualify: #c2255c;
+            --stage-launch: #2f9e44;
+            --stage-lifecycle: #868e96;
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background-color: var(--bg-base);
-            color: var(--text-main);
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
+            font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+            background: #f1f3f5;
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
         }
 
-        /* Header */
-        header {
-            background: rgba(30, 41, 59, 0.8);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--border-color);
-            padding: 20px 30px;
+        /* ===== HEADER ===== */
+        .top-bar {
+            background: var(--white);
+            border-bottom: 1px solid var(--border);
+            padding: 0 24px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+        }
+
+        .top-bar-inner {
+            max-width: 1200px;
+            margin: 0 auto;
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-            z-index: 10;
+            justify-content: space-between;
+            height: 60px;
+            gap: 12px;
         }
 
-        .header-title h1 {
-            margin: 0;
-            font-size: 1.5rem;
+        .top-bar h1 {
+            font-size: 1.1rem;
             font-weight: 700;
-            background: linear-gradient(135deg, #60a5fa 0%, #a855f7 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: var(--primary);
+            white-space: nowrap;
         }
 
-        .header-title p {
-            margin: 5px 0 0;
-            font-size: 0.85rem;
+        .top-bar h1 span {
             color: var(--text-muted);
+            font-weight: 400;
+            font-size: 0.85rem;
+            margin-left: 8px;
         }
 
-        .header-metrics {
+        .top-nav {
             display: flex;
-            gap: 20px;
+            gap: 8px;
+            align-items: center;
+            flex-shrink: 0;
         }
 
-        .metric-box {
-            background: rgba(0, 0, 0, 0.2);
-            border: 1px solid var(--border-color);
-            padding: 10px 20px;
-            border-radius: 8px;
-            text-align: center;
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 7px 14px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            text-decoration: none;
+            border: 1px solid var(--border);
+            color: var(--text);
+            background: var(--white);
+            cursor: pointer;
+            transition: all 0.15s;
         }
 
-        .metric-box .val {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: #fff;
+        .btn:hover {
+            background: var(--gray-light);
         }
 
-        .metric-box .lbl {
-            font-size: 0.75rem;
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .btn-primary:hover {
+            background: #3451c7;
+        }
+
+        /* ===== SUMMARY STATS ===== */
+        .page-wrap {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 24px 16px;
+        }
+
+        .stat-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 28px;
+        }
+
+        .stat-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 20px;
+            box-shadow: var(--shadow);
+            border-left: 4px solid transparent;
+        }
+
+        .stat-card.blue {
+            border-left-color: var(--primary);
+        }
+
+        .stat-card.green {
+            border-left-color: var(--success);
+        }
+
+        .stat-card.orange {
+            border-left-color: var(--warning);
+        }
+
+        .stat-card.purple {
+            border-left-color: #7950f2;
+        }
+
+        .stat-card .val {
+            font-size: 1.8rem;
+            font-weight: 800;
+        }
+
+        .stat-card .lbl {
+            font-size: 0.8rem;
             color: var(--text-muted);
             margin-top: 4px;
         }
 
-        /* Kanban Board Area */
-        .board-container {
-            flex: 1;
-            overflow-x: auto;
-            overflow-y: hidden;
-            padding: 20px 30px;
-            display: flex;
-            gap: 20px;
-            align-items: flex-start;
+        .stat-card.blue .val {
+            color: var(--primary);
         }
 
-        .lane {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            width: 320px;
-            min-width: 320px;
-            max-height: 100%;
+        .stat-card.green .val {
+            color: var(--success);
+        }
+
+        .stat-card.orange .val {
+            color: var(--warning);
+        }
+
+        .stat-card.purple .val {
+            color: #7950f2;
+        }
+
+        /* ===== STAGE PIPELINE ===== */
+        .pipeline {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 14px 24px;
+            margin-bottom: 28px;
+            box-shadow: var(--shadow);
+            gap: 4px;
+            overflow: hidden;
+        }
+
+        .pipe-stage {
             display: flex;
             flex-direction: column;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
-        }
-
-        .lane-header {
-            padding: 15px;
-            border-bottom: 2px solid;
-            display: flex;
-            justify-content: space-between;
             align-items: center;
+            gap: 4px;
+            flex: 1;
+            position: relative;
+            cursor: pointer;
         }
 
-        .lane-header h2 {
-            margin: 0;
+        .pipe-stage::after {
+            content: '›';
+            position: absolute;
+            right: -2px;
+            top: 50%;
+            transform: translateY(-60%);
+            color: var(--border);
+            font-size: 1.3rem;
+            z-index: 1;
+        }
+
+        .pipe-stage:last-child::after {
+            display: none;
+        }
+
+        .pipe-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+        }
+
+        .pipe-label {
+            font-size: 0.72rem;
+            font-weight: 600;
+        }
+
+        .pipe-count {
+            font-size: 0.68rem;
+            color: var(--text-muted);
+        }
+
+        /* ===== SKU TABLE / CARDS ===== */
+        .section-title {
             font-size: 1rem;
-            color: #fff;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 14px;
             display: flex;
             align-items: center;
             gap: 8px;
         }
 
-        .lane-badge {
-            background: rgba(255, 255, 255, 0.1);
+        .badge {
+            display: inline-flex;
+            align-items: center;
             padding: 2px 8px;
-            border-radius: 12px;
-            font-size: 0.75rem;
+            border-radius: 20px;
+            font-size: 0.72rem;
+            font-weight: 600;
         }
 
-        /* Specific Lane Colors */
-        .lane-concept .lane-header {
-            border-bottom-color: var(--stage-concept);
+        .badge-primary {
+            background: var(--primary-light);
+            color: var(--primary);
         }
 
-        .lane-plan .lane-header {
-            border-bottom-color: var(--stage-plan);
+        .badge-success {
+            background: var(--success-light);
+            color: var(--success);
         }
 
-        .lane-develop .lane-header {
-            border-bottom-color: var(--stage-develop);
+        .badge-warning {
+            background: var(--warning-light);
+            color: var(--warning);
         }
 
-        .lane-qualify .lane-header {
-            border-bottom-color: var(--stage-qualify);
+        .badge-danger {
+            background: var(--danger-light);
+            color: var(--danger);
         }
 
-        .lane-launch .lane-header {
-            border-bottom-color: var(--stage-launch);
+        .badge-gray {
+            background: var(--gray-light);
+            color: var(--gray);
         }
 
-        .lane-lifecycle .lane-header {
-            border-bottom-color: var(--stage-lifecycle);
+        .badge-purple {
+            background: #f3f0ff;
+            color: #7950f2;
         }
 
-        .cards-container {
-            padding: 15px;
-            overflow-y: auto;
-            flex: 1;
+        /* Stage segregated groups */
+        .stage-group {
+            margin-bottom: 32px;
+        }
+
+        .stage-heading {
             display: flex;
-            flex-direction: column;
+            align-items: center;
             gap: 12px;
+            padding: 10px 16px;
+            border-radius: 8px;
+            margin-bottom: 14px;
+            border-left: 4px solid transparent;
         }
 
-        /* Standard Card */
+        .stage-heading .icon {
+            font-size: 1.1rem;
+        }
+
+        .stage-heading h2 {
+            font-size: 0.95rem;
+            font-weight: 700;
+        }
+
+        .stage-heading .en {
+            font-size: 0.75rem;
+            font-weight: 400;
+            opacity: 0.7;
+        }
+
+        .stage-heading .count-badge {
+            margin-left: auto;
+            background: rgba(0, 0, 0, 0.1);
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        .sh-concept {
+            background: #eef2ff;
+            border-left-color: var(--stage-concept);
+            color: #3b5bdb;
+        }
+
+        .sh-plan {
+            background: #f3f0ff;
+            border-left-color: var(--stage-plan);
+            color: #7950f2;
+        }
+
+        .sh-develop {
+            background: #fff4e6;
+            border-left-color: var(--stage-develop);
+            color: #e67700;
+        }
+
+        .sh-qualify {
+            background: #fff0f6;
+            border-left-color: var(--stage-qualify);
+            color: #c2255c;
+        }
+
+        .sh-launch {
+            background: #ebfbee;
+            border-left-color: var(--stage-launch);
+            color: #2f9e44;
+        }
+
+        .sh-lifecycle {
+            background: #f8f9fa;
+            border-left-color: var(--stage-lifecycle);
+            color: #868e96;
+        }
+
+        .sku-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 14px;
+        }
+
         .sku-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 8px;
-            padding: 15px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            position: relative;
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 18px;
+            box-shadow: var(--shadow);
+            border: 1px solid transparent;
+            transition: all 0.18s;
+            text-decoration: none;
+            color: var(--text);
+            display: block;
         }
 
         .sku-card:hover {
-            background: var(--bg-card-hover);
             transform: translateY(-2px);
-            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
-            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+            border-color: var(--primary);
         }
 
-        .sku-header {
+        .sku-card-top {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            margin-bottom: 10px;
+            gap: 10px;
+            margin-bottom: 12px;
         }
 
-        .sku-title {
-            font-weight: 600;
+        .sku-name {
             font-size: 0.95rem;
-            color: #e2e8f0;
-            margin: 0;
-            padding-right: 15px;
-            line-height: 1.3;
-        }
-
-        .sku-title a {
-            color: inherit;
-            text-decoration: none;
-        }
-
-        .sku-title a:hover {
-            color: #38bdf8;
-            text-decoration: underline;
+            font-weight: 700;
+            line-height: 1.35;
         }
 
         .status-dot {
             width: 10px;
             height: 10px;
             border-radius: 50%;
-            display: inline-block;
-            box-shadow: 0 0 5px currentColor;
+            flex-shrink: 0;
+            margin-top: 4px;
         }
 
         .dot-g {
-            background-color: var(--status-green);
-            color: var(--status-green);
+            background: var(--success);
+            box-shadow: 0 0 0 3px rgba(47, 158, 68, 0.15);
         }
 
         .dot-y {
-            background-color: var(--status-yellow);
-            color: var(--status-yellow);
+            background: var(--warning);
+            box-shadow: 0 0 0 3px rgba(230, 119, 0, 0.15);
         }
 
         .dot-r {
-            background-color: var(--status-red);
-            color: var(--status-red);
+            background: var(--danger);
+            box-shadow: 0 0 0 3px rgba(201, 42, 42, 0.15);
         }
 
-        .owner-tag {
-            font-size: 0.7rem;
-            color: #cbd5e1;
-            background: rgba(0, 0, 0, 0.3);
-            padding: 2px 6px;
-            border-radius: 4px;
-            display: inline-block;
+        .sku-owner {
+            font-size: 0.75rem;
+            color: var(--text-muted);
             margin-bottom: 10px;
         }
 
-        .sku-metrics {
-            background: rgba(0, 0, 0, 0.2);
+        .sku-note {
+            font-size: 0.78rem;
+            padding: 8px 10px;
             border-radius: 6px;
-            padding: 8px;
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+
+        .note-danger {
+            background: var(--danger-light);
+            color: var(--danger);
+        }
+
+        .note-info {
+            background: var(--primary-light);
+            color: var(--primary);
+        }
+
+        .note-success {
+            background: var(--success-light);
+            color: var(--success);
+        }
+
+        .note-warning {
+            background: var(--warning-light);
+            color: var(--warning);
+        }
+
+        .sku-meta {
             display: flex;
             justify-content: space-between;
+            align-items: center;
             font-size: 0.75rem;
             color: var(--text-muted);
+            padding-top: 10px;
+            border-top: 1px solid var(--gray-light);
+            gap: 8px;
+            flex-wrap: wrap;
         }
 
-        .sku-metrics span strong {
-            color: #fff;
-            margin-left: 4px;
+        .sku-meta span strong {
+            color: var(--text);
         }
 
-        /* Checkpoint Divider inside lanes */
+        /* Progress bar */
+        .progress-bar {
+            height: 4px;
+            background: var(--gray-light);
+            border-radius: 2px;
+            margin-top: 8px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            border-radius: 2px;
+            transition: width 0.4s ease;
+        }
+
+        /* DCP Gate */
         .dcp-gate {
-            text-align: center;
-            padding: 8px 0;
-            margin: 5px 0;
-            font-size: 0.75rem;
-            font-weight: 700;
-            color: #fff;
-            border-radius: 4px;
-            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 16px;
+            border-radius: 6px;
+            margin-top: 8px;
+            font-size: 0.78rem;
+            font-weight: 600;
         }
 
         .dcp-gate::before,
         .dcp-gate::after {
             content: '';
-            position: absolute;
-            top: 50%;
-            width: 25%;
+            flex: 1;
             height: 1px;
             background: currentColor;
-            opacity: 0.3;
-        }
-
-        .dcp-gate::before {
-            left: 10px;
-        }
-
-        .dcp-gate::after {
-            right: 10px;
+            opacity: 0.2;
         }
 
         .gate-cdcp {
-            background: rgba(59, 130, 246, 0.2);
-            color: #60a5fa;
+            background: #eef2ff;
+            color: #3b5bdb;
         }
 
         .gate-pdcp {
-            background: rgba(139, 92, 246, 0.2);
-            color: #a855f7;
+            background: #f3f0ff;
+            color: #7950f2;
         }
 
         .gate-adcp {
-            background: rgba(236, 72, 153, 0.2);
-            color: #f472b6;
+            background: #fff0f6;
+            color: #c2255c;
         }
 
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 6px;
-            height: 6px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: rgba(0, 0, 0, 0.1);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        /* Mobile Responsive */
+        /* ===== RESPONSIVE ===== */
         @media (max-width: 768px) {
-            header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 15px;
-                padding: 15px;
-            }
-
-            .header-metrics {
+            .top-bar-inner {
+                height: auto;
+                padding: 12px 0;
                 flex-wrap: wrap;
-                width: 100%;
             }
 
-            .metric-box {
-                flex: 1;
-                min-width: 100px;
-                padding: 10px;
+            .top-bar h1 span {
+                display: none;
             }
 
-            .header-metrics a {
-                width: 100%;
-                margin-top: 5px;
+            .stat-row {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
             }
 
-            .board-container {
-                padding: 15px;
+            .pipeline {
+                flex-wrap: wrap;
+                gap: 12px;
+                justify-content: flex-start;
+                padding: 14px;
+            }
+
+            .pipe-stage {
+                min-width: calc(33% - 8px);
+                flex: none;
+            }
+
+            .pipe-stage::after {
+                display: none;
+            }
+
+            .sku-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .page-wrap {
+                padding: 16px 12px;
+            }
+
+            .stat-card {
+                padding: 14px;
+            }
+
+            .stat-card .val {
+                font-size: 1.5rem;
             }
         }
     </style>
@@ -371,252 +582,253 @@
 
 <body>
 
-    <header>
-        <div class="header-title">
-            <h1>🛡️ IPD 课程 SKU 开发看板 (LTC联动版)</h1>
-            <p>基于《3.15业务边界重塑决议》严格执行商业决策投资评审 (DCP)</p>
+    <!-- Header -->
+    <div class="top-bar">
+        <div class="top-bar-inner">
+            <h1>🎯 IPD 课程 SKU 看板 <span>喜播集团 · 2026年3月</span></h1>
+            <div class="top-nav">
+                <a href="../index.html" class="btn">🏠 总看板</a>
+            </div>
         </div>
-        <div class="header-metrics">
-            <div class="metric-box">
-                <div class="val" style="color: #38bdf8;">14</div>
-                <div class="lbl">在研/在架 SKU 总数</div>
-            </div>
-            <div class="metric-box">
-                <div class="val" style="color: #a855f7;">¥210W</div>
-                <div class="lbl">当前锁定开发预算</div>
-            </div>
-            <div class="metric-box">
-                <div class="val" style="color: #22c55e;">23.5%</div>
-                <div class="lbl">平均测算预测 ROI</div>
-            </div>
-            <a href="../index.html"
-                style="padding: 10px 20px; background: rgba(255,255,255,0.1); color: white; border-radius: 8px; text-decoration: none; border: 1px solid rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; font-size: 0.9rem; transition: background 0.2s;"
-                onmouseover="this.style.background='rgba(255,255,255,0.2)'"
-                onmouseout="this.style.background='rgba(255,255,255,0.1)'">
-                🏠 返回总看板
-            </a>
-        </div>
-    </header>
+    </div>
 
-    <div class="board-container">
-        <!-- 1. 概念阶段 Concept -->
-        <div class="lane lane-concept">
-            <div class="lane-header">
-                <h2>🔍 概念规划 (Concept)</h2>
-                <span class="lane-badge">2</span>
+    <div class="page-wrap">
+
+        <!-- Stats -->
+        <div class="stat-row">
+            <div class="stat-card blue">
+                <div class="val">6</div>
+                <div class="lbl">在研/在架 SKU</div>
             </div>
-            <div class="cards-container">
-                <div class="sku-card">
-                    <div class="sku-header">
-                        <h3 class="sku-title"><a href="AI写作L3.html">AI写作L3进阶大师班</a></h3>
-                        <span class="status-dot dot-g" title="进度正常"></span>
+            <div class="stat-card orange">
+                <div class="val">3</div>
+                <div class="lbl">本月开发中</div>
+            </div>
+            <div class="stat-card green">
+                <div class="val">2</div>
+                <div class="lbl">已发布运营</div>
+            </div>
+            <div class="stat-card purple">
+                <div class="val">4.27</div>
+                <div class="lbl">最近预计上线</div>
+            </div>
+        </div>
+
+        <!-- IPD Pipeline -->
+        <div class="pipeline">
+            <div class="pipe-stage">
+                <div class="pipe-icon" style="background:#eef2ff; color:#3b5bdb;">🔍</div>
+                <div class="pipe-label" style="color:#3b5bdb;">概念</div>
+                <div class="pipe-count">Concept · 1项</div>
+            </div>
+            <div class="pipe-stage">
+                <div class="pipe-icon" style="background:#f3f0ff; color:#7950f2;">📝</div>
+                <div class="pipe-label" style="color:#7950f2;">计划</div>
+                <div class="pipe-count">Plan · 2项</div>
+            </div>
+            <div class="pipe-stage">
+                <div class="pipe-icon" style="background:#fff4e6; color:#e67700;">⚙️</div>
+                <div class="pipe-label" style="color:#e67700;">研发</div>
+                <div class="pipe-count">Develop · 2项</div>
+            </div>
+            <div class="pipe-stage">
+                <div class="pipe-icon" style="background:#fff0f6; color:#c2255c;">🧪</div>
+                <div class="pipe-label" style="color:#c2255c;">验证</div>
+                <div class="pipe-count">Qualify · 1项</div>
+            </div>
+            <div class="pipe-stage">
+                <div class="pipe-icon" style="background:#ebfbee; color:#2f9e44;">🚀</div>
+                <div class="pipe-label" style="color:#2f9e44;">发布</div>
+                <div class="pipe-count">Launch · 2项</div>
+            </div>
+            <div class="pipe-stage">
+                <div class="pipe-icon" style="background:#f8f9fa; color:#868e96;">📦</div>
+                <div class="pipe-label" style="color:#868e96;">生命周期</div>
+                <div class="pipe-count">Lifecycle · 1项</div>
+            </div>
+        </div>
+
+        <!-- Stage: Concept -->
+        <div class="stage-group">
+            <div class="stage-heading sh-concept">
+                <span class="icon">🔍</span>
+                <h2>概念规划 <span class="en">Concept Phase</span></h2>
+                <span class="count-badge">1 项</span>
+            </div>
+            <div class="sku-grid">
+                <a class="sku-card" href="有声运营课.html">
+                    <div class="sku-card-top">
+                        <div class="sku-name">有声L3运营课（第三版迭代）</div>
+                        <div class="status-dot dot-r" title="优化中"></div>
                     </div>
-                    <span class="owner-tag">👤 PDT: 孙教研</span>
-                    <div class="sku-metrics">
-                        <span>调研完成度: <strong>90%</strong></span>
-                        <span>拟定 ROI: <strong style="color:#22c55e;">25%</strong></span>
+                    <div class="sku-owner">👤 教研负责人：苏婷</div>
+                    <div class="sku-note note-danger">⚠️ 迭代重点：缩短开营周期 8周→6周，直播改录播降低退费率</div>
+                    <div class="sku-meta">
+                        <span>预计上线：<strong>五一后</strong></span>
+                        <span>第一期结营：<strong>2026-06-30</strong></span>
                     </div>
-                </div>
+                </a>
+            </div>
+            <div class="dcp-gate gate-cdcp">CDCP 概念决策投资评审门禁</div>
+        </div>
 
-                <div class="sku-card" style="border-color: rgba(239, 68, 68, 0.4);">
-                    <div class="sku-header">
-                        <h3 class="sku-title"><a href="有声运营课.html">有声L3运营课(第三版)</a></h3>
-                        <span class="status-dot dot-r" title="正在优化周期中"></span>
+        <!-- Stage: Plan -->
+        <div class="stage-group">
+            <div class="stage-heading sh-plan">
+                <span class="icon">📝</span>
+                <h2>详细计划 <span class="en">Plan Phase</span></h2>
+                <span class="count-badge">2 项</span>
+            </div>
+            <div class="sku-grid">
+                <a class="sku-card" href="AI写作L2.html">
+                    <div class="sku-card-top">
+                        <div class="sku-name">写作L2进阶课（短剧接轨版）</div>
+                        <div class="status-dot dot-y" title="大纲设计中"></div>
                     </div>
-                    <span class="owner-tag">👤 PDT: 苏婷</span>
-                    <p style="font-size: 0.75rem; color: #fca5a5; margin: 0 0 10px 0;">⚠️
-                        迭代重点：缩短开营周期(8周->6周)，直播改录播降低退费率。</p>
-                    <div class="sku-metrics">
-                        <span>目前状态: <strong>准备五一上线</strong></span>
-                        <span>结营目标: <strong style="color:#eab308;">6月30日</strong></span>
+                    <div class="sku-owner">👤 教研负责人：刘秋韵</div>
+                    <div class="sku-note note-info">📋 核心变化：开辟短剧改编赛道，免费/付费写法分层教学，新增8节录播课</div>
+                    <div class="sku-meta">
+                        <span>发售预估：<strong>2026 Q2</strong></span>
+                        <span>迭代类型：<strong>内容优化</strong></span>
                     </div>
-                </div>
+                </a>
+                <a class="sku-card" href="AI短视频L2.html">
+                    <div class="sku-card-top">
+                        <div class="sku-name">短视频L2（2026年度大改版）</div>
+                        <div class="status-dot dot-g"></div>
+                    </div>
+                    <div class="sku-owner">👤 教研负责人：王敏婕 / 阿杜</div>
+                    <div class="sku-note note-info">📋 重制W9-W12约24节录播课+8节直播课，新增结营及陪跑辅导内容</div>
+                    <div class="sku-meta">
+                        <span>研发开始：<strong>3月13日</strong></span>
+                        <span>预计上线：<strong>4月30日</strong></span>
+                    </div>
+                </a>
+            </div>
+            <div class="dcp-gate gate-pdcp">PDCP 开工决策评审门禁</div>
+        </div>
 
-                <!-- 决策门 CDCP -->
-                <div class="dcp-gate gate-cdcp" title="概念决策评审点 (Concept Decision Checkpoint)">CDCP 投资决策门禁</div>
+        <!-- Stage: Develop -->
+        <div class="stage-group">
+            <div class="stage-heading sh-develop">
+                <span class="icon">⚙️</span>
+                <h2>研发录制 <span class="en">Develop Phase</span></h2>
+                <span class="count-badge">2 项</span>
+            </div>
+            <div class="sku-grid">
+                <a class="sku-card" href="进阶L2.html">
+                    <div class="sku-card-top">
+                        <div class="sku-name">有声L2进阶课（顶配双引擎版）</div>
+                        <div class="status-dot dot-g"></div>
+                    </div>
+                    <div class="sku-owner">👤 教研负责人：寇瑀恬</div>
+                    <div class="sku-note note-warning">🎙️ 张震、小连杀殿堂级国家梯队导师加盟；新增21+节小课包（赛道/短剧配音/AI制作）</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width:80%; background:var(--success);"></div>
+                    </div>
+                    <div class="sku-meta">
+                        <span>录播重制：<strong>80%</strong></span>
+                        <span>预计上线：<strong>4月27日</strong></span>
+                    </div>
+                </a>
+                <a class="sku-card" href="AI短视频L1.html">
+                    <div class="sku-card-top">
+                        <div class="sku-name">短视频L1（必修+选修双轨版）</div>
+                        <div class="status-dot dot-y"></div>
+                    </div>
+                    <div class="sku-owner">👤 教研负责人：王敏婕 / 阿杜</div>
+                    <div class="sku-note note-warning">🎬 全面解决老课件工具下架问题，新增商单课程及系统提示词专训模块</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width:60%; background:var(--warning);"></div>
+                    </div>
+                    <div class="sku-meta">
+                        <span>课制进度：<strong>冲刺3月20日</strong></span>
+                        <span>完成度：<strong>60%</strong></span>
+                    </div>
+                </a>
             </div>
         </div>
 
-        <!-- 2. 计划阶段 Plan -->
-        <div class="lane lane-plan">
-            <div class="lane-header">
-                <h2>📝 详细计划 (Plan)</h2>
-                <span class="lane-badge">1</span>
+        <!-- Stage: Qualify -->
+        <div class="stage-group">
+            <div class="stage-heading sh-qualify">
+                <span class="icon">🧪</span>
+                <h2>测试验证 <span class="en">Qualify Phase</span></h2>
+                <span class="count-badge">1 项</span>
             </div>
-            <div class="cards-container">
-                <div class="sku-header">
-                    <h3 class="sku-title"><a href="AI写作L2.html">写作L2进阶课 (短剧接轨)</a></h3>
-                    <span class="status-dot dot-y" title="大纲设计中"></span>
-                </div>
-                <span class="owner-tag">👤 PDT: 刘秋韵</span>
-                <p style="font-size: 0.75rem; color: #cbd5e1; margin: 0 0 10px 0;">核心变化：新增短剧改编，免费/付费写作思路分层。</p>
-                <div class="sku-metrics">
-                    <span>录播重制: <strong>8节</strong></span>
-                    <span>发售预估: <strong>2026 Q2</strong></span>
-                </div>
+            <div class="sku-grid">
+                <a class="sku-card" href="有声运营课.html">
+                    <div class="sku-card-top">
+                        <div class="sku-name">有声L3运营课（第二版）</div>
+                        <div class="status-dot dot-g"></div>
+                    </div>
+                    <div class="sku-owner">👤 教研负责人：苏婷</div>
+                    <div class="sku-note note-success">✅ 从5周升级8周，价格从1899涨至2899，首期结营预计3月26日</div>
+                    <div class="sku-meta">
+                        <span>上线时间：<strong>2026-01-20</strong></span>
+                        <span>结营预计：<strong>2026-03-26</strong></span>
+                    </div>
+                </a>
             </div>
-
-            <div class="sku-card">
-                <div class="sku-header">
-                    <h3 class="sku-title"><a href="AI短视频L2.html">短视频L2 (2026大改)</a></h3>
-                    <span class="status-dot dot-g"></span>
-                </div>
-                <span class="owner-tag">👤 PDT: 王敏婕/阿杜</span>
-                <div class="sku-metrics">
-                    <span>课研大纲: <strong>录播重制24节</strong></span>
-                    <span>上线时间: <strong>3.13 预计投入</strong></span>
-                </div>
-            </div>
-
-            <!-- 决策门 PDCP -->
-            <div class="dcp-gate gate-pdcp" title="计划决策评审点 (Plan Decision Checkpoint)">PDCP 开工决策门禁</div>
+            <div class="dcp-gate gate-adcp">ADCP 上市可获得性决策评审门禁</div>
         </div>
-    </div>
 
-    <!-- 3. 开发阶段 Develop -->
-    <div class="lane lane-develop">
-        <div class="lane-header">
-            <h2>⚙️ 研发录制 (Develop)</h2>
-            <span class="lane-badge">2</span>
-        </div>
-        <div class="cards-container">
-            <div class="sku-card">
-                <div class="sku-header">
-                    <h3 class="sku-title"><a href="进阶L2.html">有声L2进阶课 (顶配双引擎版)</a></h3>
-                    <span class="status-dot dot-g"></span>
-                </div>
-                <span class="owner-tag">👤 PDT: 寇瑀恬</span>
-                <p style="font-size: 0.75rem; color: #cbd5e1; margin: 0 0 10px 0;">重制逻辑：引入张震、小连杀殿堂级国家梯队导师录播。主打全能制作人概念。
-                </p>
-                <div class="sku-metrics" style="margin-bottom: 8px;">
-                    <span>教研进度 (预计4.27上线): <strong>录播重制80%</strong></span>
-                </div>
-                <div style="background: rgba(255,255,255,0.1); height: 4px; border-radius: 2px; overflow: hidden;">
-                    <div style="width: 80%; background: var(--status-green); height: 100%;"></div>
-                </div>
+        <!-- Stage: Launch -->
+        <div class="stage-group">
+            <div class="stage-heading sh-launch">
+                <span class="icon">🚀</span>
+                <h2>市场发布 <span class="en">Launch Phase — 实时销售中</span></h2>
+                <span class="count-badge">2 项</span>
             </div>
-
-            <div class="sku-card">
-                <div class="sku-header">
-                    <h3 class="sku-title"><a href="AI短视频L1.html">短视频L1 (必修+选修双轨)</a></h3>
-                    <span class="status-dot dot-g"></span>
-                </div>
-                <span class="owner-tag">👤 PDT: 王敏婕/阿杜</span>
-                <p style="font-size: 0.75rem; color: #cbd5e1; margin: 0 0 10px 0;">重制逻辑：彻底解决老课件工具下架及作业过重问题。新增商单及提示词专训。
-                </p>
-                <div class="sku-metrics" style="margin-bottom: 8px;">
-                    <span>课制进度: <strong>冲刺3.20上线</strong></span>
-                </div>
-                <div style="background: rgba(255,255,255,0.1); height: 4px; border-radius: 2px; overflow: hidden;">
-                    <div style="width: 60%; background: var(--stage-develop); height: 100%;"></div>
-                </div>
+            <div class="sku-grid">
+                <a class="sku-card" href="AI写作L1.html" style="border-left: 3px solid var(--success);">
+                    <div class="sku-card-top">
+                        <div class="sku-name">AI写作L1（爆款引流课）</div>
+                        <div class="status-dot dot-g"></div>
+                    </div>
+                    <div class="sku-owner">👤 PDT：市场部联动</div>
+                    <div class="sku-note note-success">🎉 LTC导流接通！销售部已同步3.15最新话术库，持续出单</div>
+                    <div class="sku-meta">
+                        <span>首周 GMV：<strong>120万</strong></span>
+                        <span>转化率：<strong>4.5%</strong></span>
+                    </div>
+                </a>
+                <a class="sku-card" href="体验课.html" style="border-left: 3px solid var(--success);">
+                    <div class="sku-card-top">
+                        <div class="sku-name">新手起步体验营</div>
+                        <div class="status-dot dot-g"></div>
+                    </div>
+                    <div class="sku-owner">👤 PDT：市场部联动</div>
+                    <div class="sku-note note-success">🎉 持续高频开课中，获客数据亮眼，退费率控制良好</div>
+                    <div class="sku-meta">
+                        <span>本月获客：<strong>1.5万+</strong></span>
+                        <span>退费率：<strong style="color:var(--success);">0.8%</strong></span>
+                    </div>
+                </a>
             </div>
         </div>
-    </div>
 
-    <!-- 4. 验证阶段 Qualify -->
-    <div class="lane lane-qualify">
-        <div class="lane-header">
-            <h2>🧪 测试验证 (Qualify)</h2>
-            <span class="lane-badge">2</span>
-        </div>
-        <div class="cards-container">
-            <div class="sku-card">
-                <div class="sku-header">
-                    <h3 class="sku-title"><a href="AI音剪工具.html">AI 音频剪辑黑科技课</a></h3>
-                    <span class="status-dot dot-y"></span>
-                </div>
-                <span class="owner-tag">👤 PDT: 王工具</span>
-                <div class="sku-metrics">
-                    <span>内部试听 NPS: <strong style="color:var(--status-yellow);">75分</strong></span>
-                    <span>Bug 数: <strong>3个</strong></span>
-                </div>
+        <!-- Stage: Lifecycle -->
+        <div class="stage-group">
+            <div class="stage-heading sh-lifecycle">
+                <span class="icon">📦</span>
+                <h2>生命周期维护 <span class="en">Lifecycle / EOL</span></h2>
+                <span class="count-badge">1 项</span>
             </div>
-
-            <div class="sku-card">
-                <div class="sku-header">
-                    <h3 class="sku-title"><a href="遇见声咖特训营.html">遇见声咖高阶班</a></h3>
-                    <span class="status-dot dot-g"></span>
-                </div>
-                <span class="owner-tag">👤 PDT: 刘运营</span>
-                <div class="sku-metrics">
-                    <span>内部试听 NPS: <strong style="color:var(--status-green);">92分</strong></span>
-                    <span>合规审核: <strong>通过</strong></span>
-                </div>
-            </div>
-
-            <!-- 决策门 ADCP -->
-            <div class="dcp-gate gate-adcp" title="可获得性决策评审点 (Availability Decision Checkpoint)">ADCP 上市决策门禁</div>
-        </div>
-    </div>
-
-    <!-- 5. 发布阶段 Launch -->
-    <div class="lane lane-launch">
-        <div class="lane-header">
-            <h2>🚀 市场发布 (Launch)</h2>
-            <span class="lane-badge">2</span>
-        </div>
-        <div class="cards-container">
-            <div class="sku-card" style="border-left: 3px solid var(--status-green);">
-                <div class="sku-header">
-                    <h3 class="sku-title"><a href="AI写作L1.html">AI 写作 L1 (爆款引流)</a></h3>
-                    <span class="status-dot dot-g"></span>
-                </div>
-                <span class="owner-tag">👤 PDT: 市场部联动</span>
-                <p style="font-size: 0.75rem; color: #a3e635; margin: 0 0 10px 0;">🎉 LTC 导流接通！销售部已更新对应 3.15 话术库。
-                </p>
-                <div class="sku-metrics">
-                    <span>首周 GMV: <strong>120万</strong></span>
-                    <span>转化率: <strong>4.5%</strong></span>
-                </div>
-            </div>
-
-            <div class="sku-card" style="border-left: 3px solid var(--status-green);">
-                <div class="sku-header">
-                    <h3 class="sku-title"><a href="体验课.html">新手起步体验营</a></h3>
-                    <span class="status-dot dot-g"></span>
-                </div>
-                <span class="owner-tag">👤 PDT: 市场部联动</span>
-                <div class="sku-metrics">
-                    <span>本月获客: <strong>1.5万+</strong></span>
-                    <span>退费率: <strong style="color:var(--status-green);">0.8%</strong></span>
-                </div>
+            <div class="sku-grid">
+                <a class="sku-card" href="ProductLine_Voice.html" style="opacity:0.75;">
+                    <div class="sku-card-top">
+                        <div class="sku-name" style="color:var(--text-muted);">早期有声演播老课（精华留档）</div>
+                        <div class="status-dot dot-y"></div>
+                    </div>
+                    <div class="sku-owner">👤 维护人：客服团队</div>
+                    <div class="sku-meta">
+                        <span>状态：<strong>长尾维护</strong></span>
+                        <span>退款压单：<span style="color:var(--danger);"><strong>中等风险</strong></span></span>
+                    </div>
+                </a>
             </div>
         </div>
-    </div>
-
-    <!-- 6. 生命周期 Lifecycle/EOL -->
-    <div class="lane lane-lifecycle">
-        <div class="lane-header">
-            <h2>📦 生命周期与退市 (Lifecycle)</h2>
-            <span class="lane-badge">2</span>
-        </div>
-        <div class="cards-container">
-            <div class="sku-card" style="opacity: 0.8;">
-                <div class="sku-header">
-                    <h3 class="sku-title"><a href="ProductLine_Voice.html">早期有声演播老课</a></h3>
-                    <span class="status-dot dot-y"></span>
-                </div>
-                <span class="owner-tag">👤 维护人: 客服团队</span>
-                <div class="sku-metrics">
-                    <span>状态: <strong>长尾维护</strong></span>
-                    <span>月退款压单: <strong style="color:var(--status-red);">中等风险</strong></span>
-                </div>
-            </div>
-
-            <div class="sku-card" style="opacity: 0.5; filter: grayscale(1);">
-                <div class="sku-header">
-                    <h3 class="sku-title" style="text-decoration: line-through;"><a href="L1_Plus_L2.html">旧版 L1+L2
-                            捆绑包</a></h3>
-                    <span class="status-dot dot-r"></span>
-                </div>
-                <span class="owner-tag">🔒 已下架 (EOL)</span>
-                <div class="sku-metrics">
-                    <span>下架原因: <strong>逻辑迭代</strong></span>
-                </div>
-            </div>
-        </div>
-    </div>
 
     </div>
 
