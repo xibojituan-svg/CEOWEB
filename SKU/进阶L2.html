@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>攀登计划 L2 进阶版 - 产品手册 | Xibo Education</title>
+    <title>有声L2进阶课 (顶配双引擎版) - 课程产品手册 | 喜播集团</title>
     <style>
         :root {
             --primary: #FF4500;
@@ -12,6 +13,7 @@
             --text: #1f2937;
             --card: #ffffff;
         }
+
         body {
             font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
             margin: 0;
@@ -20,111 +22,204 @@
             color: var(--text);
             line-height: 1.7;
         }
-        .container { max-width: 1000px; margin: 0 auto; padding: 0 24px; }
-        header { background: var(--dark); color: white; padding: 16px 0; border-bottom: 2px solid var(--primary); }
-        .breadcrumb { font-size: 0.9em; padding: 12px 0; color: #6b7280; }
-        .breadcrumb a { color: var(--primary); text-decoration: none; }
-        
-        .hero { background: white; padding: 48px 32px; border-radius: 12px; margin: 24px 0; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
-        .hero h1 { margin: 0; color: var(--dark); font-size: 2.2rem; }
-        .hero .tagline { color: var(--primary); font-weight: 600; margin-top: 8px; font-size: 1.1rem; }
-        
-        section { background: white; border-radius: 12px; padding: 32px; margin-bottom: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
-        h2 { border-left: 5px solid var(--primary); padding-left: 15px; font-size: 1.4rem; margin-bottom: 24px; }
-        
-        .grid { display: grid; grid-template-columns: 2fr 1fr; gap: 32px; }
-        .highlight-item { background: #fff8f5; border: 1px solid #ffe4db; padding: 16px; border-radius: 8px; margin-bottom: 12px; }
-        
-        .price-box { background: #fff1f0; border: 2px dashed var(--primary); padding: 24px; border-radius: 8px; text-align: center; }
-        .price-val { font-size: 1.8rem; font-weight: 800; color: var(--primary); }
-        
-        footer { text-align: center; padding: 40px 0; color: #9ca3af; font-size: 0.85em; }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        header {
+            background: var(--dark);
+            color: white;
+            padding: 16px 0;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .breadcrumb {
+            font-size: 0.9em;
+            padding: 12px 0;
+            color: #6b7280;
+        }
+
+        .breadcrumb a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .hero {
+            background: white;
+            padding: 48px 32px;
+            border-radius: 12px;
+            margin: 24px 0;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero h1 {
+            margin: 0;
+            color: var(--dark);
+            font-size: 2.2rem;
+        }
+
+        .hero .tagline {
+            color: var(--primary);
+            font-weight: 600;
+            margin-top: 8px;
+            font-size: 1.1rem;
+        }
+
+        section {
+            background: white;
+            border-radius: 12px;
+            padding: 32px;
+            margin-bottom: 24px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            border-left: 5px solid var(--primary);
+            padding-left: 15px;
+            font-size: 1.4rem;
+            margin-bottom: 24px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 32px;
+        }
+
+        .highlight-item {
+            background: #fff8f5;
+            border: 1px solid #ffe4db;
+            padding: 16px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+        }
+
+        .price-box {
+            background: #fff1f0;
+            border: 2px dashed var(--primary);
+            padding: 24px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .price-val {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            color: #9ca3af;
+            font-size: 0.85em;
+        }
     </style>
 
-        <style>
+    <style>
         /* Mobile Responsive adjustments */
         @media (max-width: 768px) {
-            .grid-2, .dashboard > div:nth-child(2) {
+
+            .grid-2,
+            .dashboard>div:nth-child(2) {
                 grid-template-columns: 1fr !important;
                 gap: 20px !important;
             }
+
             .hero {
                 padding: 40px 15px !important;
             }
+
             .hero h1 {
                 font-size: 2rem !important;
             }
+
             .curriculum-table {
                 display: block;
                 overflow-x: auto;
                 white-space: nowrap;
             }
         }
-        </style>
+    </style>
 </head>
+
 <body>
     <header>
         <div class="container">
-            <span style="font-weight: 800; font-size: 1.2rem;">XIBO 喜播教育产品手册</span>
+            <span style="font-weight: 800; font-size: 1.2rem;">XIBO 喜播集团核心课程产品手册</span>
         </div>
     </header>
 
     <div class="container">
         <div class="breadcrumb">
-            <a href="../index.html">首页</a> / <a href="../sku.html">SKU 产能密度</a> / <span>攀登计划 L2 进阶版</span>
+            <a href="../index.html">首页</a> / <a href="IPD_SKU_Dashboard.html">IPD SKU大盘</a> / <span>有声L2进阶课
+                (顶配双引擎版)</span>
         </div>
 
-        <div class="hero">
-            <h1>攀登计划 L2 进阶版</h1>
-            <div class="tagline">2026 核心交付 SKU · 官方认证课程</div>
-            <p style="margin-top: 20px; color: #4b5563;">培养具备生产市场化有声作品能力，从有声爱好者转变为【职业化有声演播人】。</p>
+        <div class="hero" style="background: linear-gradient(135deg, #FF4500 0%, #ff8c00 100%); color: white;">
+            <h1 style="color: white;">有声L2进阶课 (顶配双引擎版)</h1>
+            <div class="tagline" style="color: #fff8f5; font-size: 1.2rem;">从“兴趣演播”到“职业有声人”的跨越</div>
+            <p style="margin-top: 20px; color: #fff; font-size: 1.05rem;">培养具备高阶演播审美、多赛道角色塑造、AI赋能有声书制作、个人IP经营等能力的
+                <strong>职业级声音人才（全能制作人）</strong>。</p>
         </div>
 
         <div class="grid">
             <div class="main-content">
                 <section>
-                    <h2>课程核心优势</h2>
-                    <div class="highlight-item">🔥 100%职业入场券：保送实习剧社</div><div class="highlight-item">🔥 实战出道计划：明星导演1对1带练</div><div class="highlight-item">🔥 MCN直签通道：签约顶级机构</div><div class="highlight-item">🔥 平台权限飞跃：喜播LV3/LV4试音权限</div>
+                    <h2>四大硬核升级</h2>
+                    <div class="highlight-item"><strong>🔥 师资阵容全新升级：</strong>“国家级艺术高度+市场流量热度”双引擎，张震、小连杀等顶级配音殿堂导师亲授。
+                    </div>
+                    <div class="highlight-item"><strong>🔥
+                            技能图谱横向爆破：</strong>从“单科优秀”到“全能制作人”，一次性补齐：赛道突破、短剧漫剧配音、AI赋能制作、自媒体运营必备小课包。</div>
+                    <div class="highlight-item"><strong>🔥 内容风口直击红利：</strong>开辟大女主、玄幻修仙、重生穿越等蓝海爆款赛道，打通多元化副业变现可能。</div>
+                    <div class="highlight-item"><strong>🔥 实战进程提速40%：</strong>剧社实战指导从第5周硬核提前至第3周！入学半月即进“实习剧组”实战！</div>
                 </section>
 
                 <section>
-                    <h2>课程内容大纲</h2>
-                    <p style="white-space: pre-wrap;">演播精进，音频后期，演播实训，IP运营</p>
-                </section>
-
-                <section>
-                    <h2>培养目标</h2>
-                    <p>培养具备生产市场化有声作品能力，从有声爱好者转变为【职业化有声演播人】。</p>
+                    <h2>2个月系统课 + 剧组实战</h2>
+                    <p style="white-space: pre-wrap; line-height: 2;"><strong>1. 录播阵地：</strong>44节 精品录播课<br><strong>2.
+                            直播护航：</strong>7节 大咖直播 + 11次 点评官剧组直播课（共18节）<br><strong>3. 八周矩阵：</strong>演播精进 ➔ 实战入门 ➔ 赛道实战 ➔
+                        IP运营</p>
                 </section>
             </div>
 
             <aside>
                 <section>
-                    <h2>适合谁学</h2>
-                    <p style="font-size: 0.95em;">在L1学习基础上，想要深入学习演播，精进演播技能的学员</p>
-                </section>
-
-                <section>
-                    <h2>教学模式</h2>
-                    <p style="font-size: 0.95em;">剧社带练实战模式 + 线上大咖直播 + 小班制点评辅导</p>
+                    <h2>三师带练实战模式</h2>
+                    <p style="font-size: 0.95em; line-height: 1.8;">✅ <strong>大咖导师：</strong>传授天花板级艺术审美<br>✅
+                        <strong>专业点评官：</strong>1V1试音审听点评与剧组指导<br>✅ <strong>班主任：</strong>30-35人小班制全程陪跑督学</p>
                 </section>
 
                 <div class="price-box">
-                    <div style="font-size: 0.9rem; color: #666; margin-bottom: 8px;">2026 结营定价</div>
-                    <div class="price-val">指导价: 5380元 | 优惠价: 3400元</div>
+                    <div style="font-size: 0.9rem; color: #666; margin-bottom: 8px;">L1学员专享 优惠券: ¥ 1980</div>
+                    <div class="price-val" style="font-size: 1.3rem;">指导价: <del
+                            style="color:#999;font-size:1.1rem;font-weight:normal;">5380元</del></div>
+                    <div class="price-val" style="margin-top: 5px;">到手价: 3400元</div>
                 </div>
 
-                <section style="margin-top:24px; text-align: center;">
-                    <div style="width: 80px; height: 80px; background: #ddd; border-radius: 50%; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 800;">艾</div>
-                    <h3 style="margin: 0;">艾宝良</h3>
-                    <div style="color: var(--primary); font-size: 0.9em; font-weight: 600;">顶级有声演播家</div>
+                <section style="margin-top:24px; text-align: center; border: 1px solid #ff4500; border-radius: 8px;">
+                    <div
+                        style="background: #ff4500; color: white; padding: 10px; font-weight: bold; border-radius: 6px 6px 0 0;">
+                        核心大咖阵营</div>
+                    <div style="padding: 20px;">
+                        <div
+                            style="width: 70px; height: 70px; background: linear-gradient(135deg, #1e293b, #0f172a); color: white; border-radius: 50%; margin: 0 auto 10px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; font-weight: 800;">
+                            殿堂</div>
+                        <h3 style="margin: 0;">张震 / 小连杀</h3>
+                        <div style="color: var(--primary); font-size: 0.85em; font-weight: 600; margin-top: 5px;">
+                            国家级艺术高度 + 市场流量热度</div>
+                    </div>
                 </section>
             </aside>
         </div>
 
         <footer>
-            <p>&copy; 2026 喜播教育集团 Xibo Education Group. 基于最新产品手册重新生成。</p>
+            <p>&copy; 2026 喜播集团 Xibo Group. 基于《2026 内部版——L2课程产品手册（升级版）》重构渲染。</p>
         </footer>
     </div>
 </body>
+
 </html>
