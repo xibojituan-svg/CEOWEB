@@ -138,30 +138,234 @@
         /* Masters */
         .masters {
             padding: 80px 0;
+            background: linear-gradient(180deg, #ffffff 0%, #f8f9ff 100%);
         }
 
-        .master-list {
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
+        .masters h2 {
             text-align: center;
-            margin-top: 40px;
+            margin-bottom: 10px;
         }
 
-        .master-item {
-            flex: 0 0 200px;
-            margin-bottom: 30px;
+        .masters .section-sub {
+            text-align: center;
+            color: #888;
+            font-size: 0.95rem;
+            margin-bottom: 50px;
         }
 
-        .master-name {
+        /* ─── 顶级大咖 ─── */
+        .masters-tier-label {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 0 0 24px;
+        }
+
+        .masters-tier-label span {
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: #b45309;
+            background: #fef3c7;
+            padding: 3px 12px;
+            border-radius: 20px;
+            border: 1px solid #fde68a;
+            white-space: nowrap;
+        }
+
+        .masters-tier-label::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: #e5e7eb;
+        }
+
+        /* 大咖卡 */
+        .master-celeb-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 24px;
+            margin-bottom: 48px;
+        }
+
+        .master-celeb-card {
+            background: linear-gradient(145deg, #1e1b4b, #312e81);
+            border-radius: 16px;
+            padding: 28px 20px 24px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.25s, box-shadow 0.25s;
+        }
+
+        .master-celeb-card::before {
+            content: '';
+            position: absolute;
+            top: -30px;
+            right: -30px;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .master-celeb-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 40px rgba(49, 46, 129, 0.3);
+        }
+
+        .master-celeb-avatar {
+            width: 88px;
+            height: 88px;
+            border-radius: 50%;
+            margin: 0 auto 14px;
+            border: 3px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: rgba(255, 255, 255, 0.6);
+            overflow: hidden;
+        }
+
+        .master-celeb-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .master-celeb-name {
             font-size: 1.2rem;
-            font-weight: bold;
-            margin-top: 10px;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 6px;
         }
 
-        .master-title {
-            font-size: 0.9rem;
-            color: #666;
+        .master-celeb-title {
+            font-size: 0.79rem;
+            color: rgba(255, 255, 255, 0.55);
+            line-height: 1.5;
+            margin-bottom: 14px;
+        }
+
+        .master-celeb-badge {
+            display: inline-block;
+            background: rgba(251, 191, 36, 0.15);
+            border: 1px solid rgba(251, 191, 36, 0.3);
+            color: #fbbf24;
+            font-size: 0.72rem;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 10px;
+        }
+
+        /* ─── 教研师资 ─── */
+        .master-teacher-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 18px;
+            margin-bottom: 20px;
+        }
+
+        .master-teacher-card {
+            background: #fff;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 22px 18px;
+            text-align: center;
+            transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .master-teacher-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 6px 24px rgba(37, 99, 235, 0.1);
+            transform: translateY(-4px);
+        }
+
+        .master-teacher-avatar {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #dbeafe, #ede9fe);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 12px;
+            border: 2px solid #e5e7eb;
+            flex-shrink: 0;
+        }
+
+        .master-teacher-name {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 4px;
+        }
+
+        .master-teacher-role {
+            font-size: 0.78rem;
+            color: #9ca3af;
+            margin-bottom: 10px;
+        }
+
+        .master-tag-wrap {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            justify-content: center;
+        }
+
+        .master-tag {
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: 8px;
+        }
+
+        .master-tag.voice {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .master-tag.video {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        .master-tag.writing {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .master-tag.ai {
+            background: #ede9fe;
+            color: #5b21b6;
+        }
+
+        .master-tag.updated {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        @media (max-width: 768px) {
+            .master-celeb-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 14px;
+            }
+
+            .master-teacher-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
         }
 
         /* Social Responsibility */
@@ -1154,28 +1358,127 @@
 
     <section class="masters">
         <div class="container">
-            <h2 style="text-align: center;">名师领航</h2>
-            <div class="master-list">
-                <div class="master-item">
-                    <div
-                        style="width: 100px; height: 100px; background: #ddd; border-radius: 50%; margin: 0 auto; display: flex; align-items: center; justify-content: center; color: #999;">
-                        Photo</div>
-                    <div class="master-name">艾宝良</div>
-                    <div class="master-title">有声演播艺术大师</div>
+            <h2>名师领航</h2>
+            <p class="section-sub">殿堂级大咖坐镇 × 实战型教研团队主导 | 2026年Q1课程迭代全面升级</p>
+
+            <!-- 第一层：殿堂级大咖 -->
+            <div class="masters-tier-label"><span>🏆 签约大咖师资</span></div>
+            <div class="master-celeb-grid">
+
+                <div class="master-celeb-card">
+                    <div class="master-celeb-avatar">震</div>
+                    <div class="master-celeb-name">张震</div>
+                    <div class="master-celeb-title">中国有声书第一人<br>国家级配音演播艺术家</div>
+                    <span class="master-celeb-badge">🎙 有声L2核心主讲</span>
                 </div>
-                <div class="master-item">
-                    <img src="pic/wang_mingjun.jpeg" alt="王明军"
-                        style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; margin: 0 auto 10px auto; border: 2px solid #ddd;">
-                    <div class="master-name">王明军</div>
-                    <div class="master-title">中国演播艺术大师</div>
+
+                <div class="master-celeb-card">
+                    <div class="master-celeb-avatar">
+                        <img src="pic/wang_mingjun.jpeg" alt="王明军">
+                    </div>
+                    <div class="master-celeb-name">王明军</div>
+                    <div class="master-celeb-title">中国演播艺术大师<br>央视金牌主播</div>
+                    <span class="master-celeb-badge">🎙 演播艺术导师</span>
                 </div>
-                <div class="master-item">
-                    <div
-                        style="width: 100px; height: 100px; background: #ddd; border-radius: 50%; margin: 0 auto; display: flex; align-items: center; justify-content: center; color: #999;">
-                        Photo</div>
-                    <div class="master-name">李野墨</div>
-                    <div class="master-title">著名演播专家</div>
+
+                <div class="master-celeb-card">
+                    <div class="master-celeb-avatar">良</div>
+                    <div class="master-celeb-name">艾宝良</div>
+                    <div class="master-celeb-title">国家一级演员<br>有声演播艺术大师</div>
+                    <span class="master-celeb-badge">🎙 签约演播大咖</span>
                 </div>
+
+                <div class="master-celeb-card">
+                    <div class="master-celeb-avatar">杀</div>
+                    <div class="master-celeb-name">小连杀</div>
+                    <div class="master-celeb-title">喜马拉雅顶流主播<br>亿级播放量创作者</div>
+                    <span class="master-celeb-badge">🔥 有声L2核心主讲</span>
+                </div>
+
+                <div class="master-celeb-card">
+                    <div class="master-celeb-avatar">墨</div>
+                    <div class="master-celeb-name">李野墨</div>
+                    <div class="master-celeb-title">著名演播专家<br>资深声音艺术家</div>
+                    <span class="master-celeb-badge">🎙 演播艺术导师</span>
+                </div>
+
+            </div>
+
+            <!-- 第二层：核心教研师资 -->
+            <div class="masters-tier-label"><span>📚 核心教研师资 · 2026 Q1迭代主导</span></div>
+            <div class="master-teacher-grid">
+
+                <!-- 寇瑀恬 -->
+                <div class="master-teacher-card">
+                    <div class="master-teacher-avatar">恬</div>
+                    <div class="master-teacher-name">寇瑀恬</div>
+                    <div class="master-teacher-role">有声赛道核心教研</div>
+                    <div class="master-tag-wrap">
+                        <span class="master-tag voice">有声L2进阶</span>
+                        <span class="master-tag updated">🔄 迭代中</span>
+                        <span class="master-tag ai">AI剧社实战</span>
+                    </div>
+                </div>
+
+                <!-- 苏婷 -->
+                <div class="master-teacher-card">
+                    <div class="master-teacher-avatar">婷</div>
+                    <div class="master-teacher-name">苏婷</div>
+                    <div class="master-teacher-role">有声运营教研负责人</div>
+                    <div class="master-tag-wrap">
+                        <span class="master-tag voice">有声L3运营</span>
+                        <span class="master-tag updated">🔄 V3迭代</span>
+                        <span class="master-tag voice">起量策略</span>
+                    </div>
+                </div>
+
+                <!-- 刘秋韵 -->
+                <div class="master-teacher-card">
+                    <div class="master-teacher-avatar">韵</div>
+                    <div class="master-teacher-name">刘秋韵</div>
+                    <div class="master-teacher-role">AI短剧写作教研</div>
+                    <div class="master-tag-wrap">
+                        <span class="master-tag writing">写作L2</span>
+                        <span class="master-tag updated">🔄 迭代中</span>
+                        <span class="master-tag ai">AI剧本改编</span>
+                    </div>
+                </div>
+
+                <!-- 王敏婕 -->
+                <div class="master-teacher-card">
+                    <div class="master-teacher-avatar">婕</div>
+                    <div class="master-teacher-name">王敏婕</div>
+                    <div class="master-teacher-role">AI短视频教研负责人</div>
+                    <div class="master-tag-wrap">
+                        <span class="master-tag video">短视频L1</span>
+                        <span class="master-tag video">短视频L2</span>
+                        <span class="master-tag updated">🔄 迭代中</span>
+                    </div>
+                </div>
+
+                <!-- 杜帅锋（阿杜） -->
+                <div class="master-teacher-card">
+                    <div class="master-teacher-avatar">杜</div>
+                    <div class="master-teacher-name">杜帅锋</div>
+                    <div class="master-teacher-role">AI短视频实战教研</div>
+                    <div class="master-tag-wrap">
+                        <span class="master-tag video">短视频L1</span>
+                        <span class="master-tag video">短视频L2</span>
+                        <span class="master-tag ai">商单变现</span>
+                    </div>
+                </div>
+
+                <!-- 张昊然 -->
+                <div class="master-teacher-card">
+                    <div class="master-teacher-avatar">昊</div>
+                    <div class="master-teacher-name">张昊然</div>
+                    <div class="master-teacher-role">短视频高阶教研</div>
+                    <div class="master-tag-wrap">
+                        <span class="master-tag video">短视频L3</span>
+                        <span class="master-tag ai">进阶创作</span>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
