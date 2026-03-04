@@ -21,176 +21,439 @@
             --ltc-cash: #10b981;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
-            background: #f1f5f9; color: var(--dark); line-height: 1.6;
+            background: #f1f5f9;
+            color: var(--dark);
+            line-height: 1.6;
         }
 
-        .container { max-width: 1400px; margin: 0 auto; padding: 0 24px; }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
 
         header {
             background: linear-gradient(135deg, var(--dark) 0%, #1e293b 100%);
-            color: var(--white); padding: 32px 0;
+            color: var(--white);
+            padding: 32px 0;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
         }
-        header h1 { font-size: 2rem; margin-bottom: 8px; color: #38bdf8; }
-        header p { font-size: 1.05rem; color: #cbd5e1; }
+
+        header h1 {
+            font-size: 2rem;
+            margin-bottom: 8px;
+            color: #38bdf8;
+        }
+
+        header p {
+            font-size: 1.05rem;
+            color: #cbd5e1;
+        }
 
         .section-title {
-            margin: 40px 0 20px; position: relative; padding-left: 16px;
-            font-size: 1.5rem; color: var(--dark);
-            display: flex; align-items: center;
+            margin: 40px 0 20px;
+            position: relative;
+            padding-left: 16px;
+            font-size: 1.5rem;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
         }
+
         .section-title::before {
-            content: ''; position: absolute; left: 0; top: 4px; bottom: 4px;
-            width: 5px; background: var(--primary); border-radius: 4px;
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 4px;
+            bottom: 4px;
+            width: 5px;
+            background: var(--primary);
+            border-radius: 4px;
         }
 
         .card {
-            background: var(--white); border-radius: 12px; padding: 24px;
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.03);
+            background: var(--white);
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
             margin-bottom: 24px;
         }
 
         /* 投放数据大盘 */
         .data-header {
             background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-            border-radius: 12px; padding: 24px; margin-bottom: 24px; color: white;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 24px;
+            color: white;
         }
+
         .data-kpi-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 16px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 16px;
             margin-top: 20px;
         }
+
         .data-kpi {
-            background: rgba(255,255,255,0.08); border-radius: 10px; padding: 16px;
-            text-align: center; border: 1px solid rgba(255,255,255,0.12);
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
+            padding: 16px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.12);
         }
-        .data-kpi .val { font-size: 1.6rem; font-weight: 800; color: #38bdf8; }
-        .data-kpi .lbl { font-size: 0.75rem; color: #94a3b8; margin-top: 4px; }
+
+        .data-kpi .val {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: #38bdf8;
+        }
+
+        .data-kpi .lbl {
+            font-size: 0.75rem;
+            color: #94a3b8;
+            margin-top: 4px;
+        }
 
         /* Channel Table */
-        .channel-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
-        .channel-table th {
-            padding: 10px 14px; text-align: left; font-size: 0.75rem;
-            font-weight: 700; text-transform: uppercase; color: var(--gray);
-            background: #f8fafc; border-bottom: 2px solid #e2e8f0;
+        .channel-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.88rem;
         }
-        .channel-table td { padding: 11px 14px; border-bottom: 1px solid #f1f5f9; }
-        .channel-table tr:last-child td { border-bottom: none; }
-        .channel-table tr:hover td { background: #f8fafc; }
-        .rate-good { color: #16a34a; font-weight: 700; }
-        .rate-warn { color: #d97706; font-weight: 700; }
-        .rate-bad  { color: #dc2626; font-weight: 700; }
+
+        .channel-table th {
+            padding: 10px 14px;
+            text-align: left;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--gray);
+            background: #f8fafc;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .channel-table td {
+            padding: 11px 14px;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .channel-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .channel-table tr:hover td {
+            background: #f8fafc;
+        }
+
+        .rate-good {
+            color: #16a34a;
+            font-weight: 700;
+        }
+
+        .rate-warn {
+            color: #d97706;
+            font-weight: 700;
+        }
+
+        .rate-bad {
+            color: #dc2626;
+            font-weight: 700;
+        }
 
         .badge {
-            display: inline-flex; align-items: center; gap: 4px;
-            padding: 2px 8px; border-radius: 12px; font-size: 0.72rem; font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.72rem;
+            font-weight: 700;
         }
-        .badge-green { background: #dcfce7; color: #16a34a; }
-        .badge-red   { background: #fee2e2; color: #dc2626; }
-        .badge-yellow{ background: #fef3c7; color: #d97706; }
-        .badge-blue  { background: #dbeafe; color: #2563eb; }
+
+        .badge-green {
+            background: #dcfce7;
+            color: #16a34a;
+        }
+
+        .badge-red {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+
+        .badge-yellow {
+            background: #fef3c7;
+            color: #d97706;
+        }
+
+        .badge-blue {
+            background: #dbeafe;
+            color: #2563eb;
+        }
 
         /* Problem Analysis */
         .problem-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
         }
+
         .problem-card {
-            border-radius: 10px; padding: 18px;
+            border-radius: 10px;
+            padding: 18px;
             border-left: 4px solid currentColor;
         }
-        .problem-card.critical { background: #fff5f5; color: #dc2626; }
-        .problem-card.warning  { background: #fffbeb; color: #d97706; }
-        .problem-card.opportunity { background: #f0fdf4; color: #16a34a; }
 
-        .problem-card h4 { font-size: 0.95rem; margin-bottom: 8px; font-weight: 700; }
-        .problem-card ul { padding-left: 16px; font-size: 0.83rem; color: #334155; line-height: 1.8; }
+        .problem-card.critical {
+            background: #fff5f5;
+            color: #dc2626;
+        }
+
+        .problem-card.warning {
+            background: #fffbeb;
+            color: #d97706;
+        }
+
+        .problem-card.opportunity {
+            background: #f0fdf4;
+            color: #16a34a;
+        }
+
+        .problem-card h4 {
+            font-size: 0.95rem;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        .problem-card ul {
+            padding-left: 16px;
+            font-size: 0.83rem;
+            color: #334155;
+            line-height: 1.8;
+        }
 
         /* LTC board */
         .ltc-stages {
-            display: flex; gap: 16px; margin-bottom: 30px;
-            overflow-x: auto; padding-bottom: 15px;
+            display: flex;
+            gap: 16px;
+            margin-bottom: 30px;
+            overflow-x: auto;
+            padding-bottom: 15px;
         }
+
         .stage-box {
-            flex: 1; min-width: 280px; background: var(--white);
-            border-radius: 10px; border-top: 5px solid var(--gray);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            display: flex; flex-direction: column; overflow: hidden;
+            flex: 1;
+            min-width: 280px;
+            background: var(--white);
+            border-radius: 10px;
+            border-top: 5px solid var(--gray);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
         }
-        .stage-box:nth-child(1) { border-color: var(--ltc-lead); }
-        .stage-box:nth-child(2) { border-color: var(--ltc-opp); }
-        .stage-box:nth-child(3) { border-color: var(--ltc-contract); }
-        .stage-box:nth-child(4) { border-color: var(--ltc-cash); }
+
+        .stage-box:nth-child(1) {
+            border-color: var(--ltc-lead);
+        }
+
+        .stage-box:nth-child(2) {
+            border-color: var(--ltc-opp);
+        }
+
+        .stage-box:nth-child(3) {
+            border-color: var(--ltc-contract);
+        }
+
+        .stage-box:nth-child(4) {
+            border-color: var(--ltc-cash);
+        }
 
         .stage-header {
-            padding: 16px; background: var(--light);
-            border-bottom: 1px solid #e2e8f0; text-align: center;
+            padding: 16px;
+            background: var(--light);
+            border-bottom: 1px solid #e2e8f0;
+            text-align: center;
         }
-        .stage-header h3 { font-size: 1.1rem; color: var(--dark); margin-bottom: 4px; }
-        .stage-header p { font-size: 0.8rem; color: var(--gray); }
 
-        .stage-content { padding: 16px; flex-grow: 1; background: #fafafa; }
-        .task-list { display: flex; flex-direction: column; gap: 12px; }
+        .stage-header h3 {
+            font-size: 1.1rem;
+            color: var(--dark);
+            margin-bottom: 4px;
+        }
+
+        .stage-header p {
+            font-size: 0.8rem;
+            color: var(--gray);
+        }
+
+        .stage-content {
+            padding: 16px;
+            flex-grow: 1;
+            background: #fafafa;
+        }
+
+        .task-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
 
         .task-card {
-            background: var(--white); border: 1px solid #e2e8f0;
-            border-radius: 6px; padding: 12px; position: relative; transition: all 0.2s;
+            background: var(--white);
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            padding: 12px;
+            position: relative;
+            transition: all 0.2s;
         }
+
         .task-card:hover {
             border-color: #cbd5e1;
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
             transform: translateY(-2px);
         }
-        .task-card h4 { font-size: 0.95rem; color: var(--dark); margin-bottom: 6px; padding-right: 28px; }
-        .task-card p  { font-size: 0.8rem; color: #475569; margin-bottom: 8px; line-height: 1.4; }
+
+        .task-card h4 {
+            font-size: 0.95rem;
+            color: var(--dark);
+            margin-bottom: 6px;
+            padding-right: 28px;
+        }
+
+        .task-card p {
+            font-size: 0.8rem;
+            color: #475569;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
 
         /* status ring */
-        .task-card.executing { border-left: 3px solid #10b981; }
-        .task-card.blocked   { border-left: 3px solid #dc2626; }
-        .task-card.new-action{ border-left: 3px solid #f59e0b; }
-
-        .tags { display: flex; flex-wrap: wrap; gap: 6px; }
-        .tag {
-            font-size: 0.7rem; padding: 2px 8px;
-            background: #e2e8f0; color: #475569;
-            border-radius: 12px; font-weight: 600;
+        .task-card.executing {
+            border-left: 3px solid #10b981;
         }
-        .tag.alert   { background: #fee2e2; color: #dc2626; }
-        .tag.success { background: #dcfce7; color: #16a34a; }
-        .tag.info    { background: #dbeafe; color: #2563eb; }
-        .tag.warning { background: #fef3c7; color: #d97706; }
-        .tag.new     { background: #fdf4ff; color: #9333ea; border: 1px solid #e9d5ff; }
+
+        .task-card.blocked {
+            border-left: 3px solid #dc2626;
+        }
+
+        .task-card.new-action {
+            border-left: 3px solid #f59e0b;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .tag {
+            font-size: 0.7rem;
+            padding: 2px 8px;
+            background: #e2e8f0;
+            color: #475569;
+            border-radius: 12px;
+            font-weight: 600;
+        }
+
+        .tag.alert {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+
+        .tag.success {
+            background: #dcfce7;
+            color: #16a34a;
+        }
+
+        .tag.info {
+            background: #dbeafe;
+            color: #2563eb;
+        }
+
+        .tag.warning {
+            background: #fef3c7;
+            color: #d97706;
+        }
+
+        .tag.new {
+            background: #fdf4ff;
+            color: #9333ea;
+            border: 1px solid #e9d5ff;
+        }
 
         .owner-avatar {
-            position: absolute; top: 12px; right: 12px;
-            width: 24px; height: 24px; background: var(--dark); color: white;
-            border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            font-size: 0.7rem; font-weight: bold;
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            width: 24px;
+            height: 24px;
+            background: var(--dark);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: bold;
         }
 
         .verdict-bar {
-            padding: 20px 24px; border-radius: 10px;
+            padding: 20px 24px;
+            border-radius: 10px;
             background: linear-gradient(to right, #f8fafc, #f1f5f9);
-            border-left: 5px solid var(--accent); margin-top: 20px;
+            border-left: 5px solid var(--accent);
+            margin-top: 20px;
         }
+
         .verdict-score {
-            font-size: 1.8rem; font-weight: 800; color: var(--primary); margin-bottom: 10px;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 10px;
         }
+
         .verdict-item {
-            display: flex; align-items: flex-start; gap: 8px;
-            font-size: 0.88rem; color: #475569; margin-top: 8px; line-height: 1.5;
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            font-size: 0.88rem;
+            color: #475569;
+            margin-top: 8px;
+            line-height: 1.5;
         }
-        .verdict-item .icon { flex-shrink: 0; margin-top: 2px; }
+
+        .verdict-item .icon {
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
 
         @media (max-width: 1024px) {
-            .ltc-stages { flex-wrap: wrap; }
-            .stage-box  { min-width: 45%; }
+            .ltc-stages {
+                flex-wrap: wrap;
+            }
+
+            .stage-box {
+                min-width: 45%;
+            }
         }
+
         @media (max-width: 640px) {
-            .stage-box { min-width: 100%; }
-            .ltc-stages { flex-direction: column; }
+            .stage-box {
+                min-width: 100%;
+            }
+
+            .ltc-stages {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
@@ -207,22 +470,33 @@
 
     <div class="container" style="padding-top: 20px; padding-bottom: 40px;">
 
-        <!-- ══ 零、实时财务大盘（会计净收口径）══ -->
-        <h2 class="section-title">零、实时财务大盘（会计净收口径 · 更新至2026-03-04）</h2>
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+            <h2 class="section-title">零、实时财务大盘（会计净收口径 · 更新至2026-03-04）</h2>
+            <a href="Financial/SKU_Revenue_Analysis_2026.html" target="_blank"
+                style="background:var(--primary); color:white; padding:8px 16px; border-radius:6px; text-decoration:none; font-size:0.85rem; font-weight:bold; transition: background 0.3s;">📊
+                查看详细 SKU 营收分析大屏 →</a>
+        </div>
 
         <!-- 核心警示横幅 -->
-        <div style="background:linear-gradient(135deg,#7f1d1d,#991b1b); border-radius:12px; padding:20px 24px; margin-bottom:20px; color:white; display:flex; gap:20px; align-items:center; flex-wrap:wrap;">
+        <div
+            style="background:linear-gradient(135deg,#7f1d1d,#991b1b); border-radius:12px; padding:20px 24px; margin-bottom:20px; color:white; display:flex; gap:20px; align-items:center; flex-wrap:wrap;">
             <div style="font-size:2.5rem;">🚨</div>
             <div>
-                <div style="font-size:0.78rem; font-weight:700; color:#fca5a5; text-transform:uppercase; letter-spacing:0.06em; margin-bottom:6px;">核心警报</div>
-                <div style="font-size:1.1rem; font-weight:800; line-height:1.5;">2月净收入 <span style="color:#fbbf24;">¥1,987万</span>，同比2025年2月的 ¥7,151万，<span style="color:#fca5a5;">暴跌 -72.2%</span></div>
-                <div style="font-size:0.85rem; color:#fca5a5; margin-top:4px;">3月初截至今日（4日）仅 264万 · 1月同比-24% · 正在进入收入最低谷</div>
+                <div
+                    style="font-size:0.78rem; font-weight:700; color:#fca5a5; text-transform:uppercase; letter-spacing:0.06em; margin-bottom:6px;">
+                    核心警报</div>
+                <div style="font-size:1.1rem; font-weight:800; line-height:1.5;">2月净收入 <span
+                        style="color:#fbbf24;">¥1,987万</span>，同比2025年2月的 ¥7,151万，<span style="color:#fca5a5;">暴跌
+                        -72.2%</span></div>
+                <div style="font-size:0.85rem; color:#fca5a5; margin-top:4px;">3月初截至今日（4日）仅 264万 · 1月同比-24% · 正在进入收入最低谷
+                </div>
             </div>
         </div>
 
         <!-- 月度趋势对比 -->
         <div class="card" style="margin-bottom:20px;">
-            <h3 style="font-size:1rem; font-weight:700; color:var(--dark); margin-bottom:16px;">📈 2025-2026 月度净收入趋势（会计净收口径，单位：万元）</h3>
+            <h3 style="font-size:1rem; font-weight:700; color:var(--dark); margin-bottom:16px;">📈 2025-2026
+                月度净收入趋势（会计净收口径，单位：万元）</h3>
             <div style="overflow-x:auto;">
                 <table class="channel-table">
                     <thead>
@@ -237,33 +511,49 @@
                     </thead>
                     <tbody>
                         <tr style="opacity:0.6;">
-                            <td>2025-11</td><td style="text-align:right;">4,904</td><td style="text-align:right;">4,125</td><td style="text-align:right;font-weight:700;">9,035</td><td style="text-align:right;">45.7%</td>
+                            <td>2025-11</td>
+                            <td style="text-align:right;">4,904</td>
+                            <td style="text-align:right;">4,125</td>
+                            <td style="text-align:right;font-weight:700;">9,035</td>
+                            <td style="text-align:right;">45.7%</td>
                             <td><span class="badge badge-green">峰值</span></td>
                         </tr>
                         <tr style="opacity:0.6;">
-                            <td>2025-12</td><td style="text-align:right;">3,487</td><td style="text-align:right;">4,553</td><td style="text-align:right;font-weight:700;">8,044</td><td style="text-align:right;">56.6%</td>
+                            <td>2025-12</td>
+                            <td style="text-align:right;">3,487</td>
+                            <td style="text-align:right;">4,553</td>
+                            <td style="text-align:right;font-weight:700;">8,044</td>
+                            <td style="text-align:right;">56.6%</td>
                             <td><span class="badge badge-yellow">↓ 前端下滑 复购升</span></td>
                         </tr>
                         <tr style="background:#fff7ed;">
-                            <td><strong>2026-01</strong></td><td style="text-align:right;"><strong>2,048</strong></td><td style="text-align:right;"><strong>2,081</strong></td>
+                            <td><strong>2026-01</strong></td>
+                            <td style="text-align:right;"><strong>2,048</strong></td>
+                            <td style="text-align:right;"><strong>2,081</strong></td>
                             <td style="text-align:right;font-weight:800;color:#d97706;">4,131</td>
                             <td style="text-align:right;font-weight:700;">50.4%</td>
                             <td><span class="badge badge-red">同比 -24%</span></td>
                         </tr>
                         <tr style="background:#fef2f2;">
-                            <td><strong>2026-02</strong></td><td style="text-align:right;"><strong>741</strong></td><td style="text-align:right;"><strong>1,245</strong></td>
+                            <td><strong>2026-02</strong></td>
+                            <td style="text-align:right;"><strong>741</strong></td>
+                            <td style="text-align:right;"><strong>1,245</strong></td>
                             <td style="text-align:right;font-weight:800;color:#dc2626;">1,987</td>
                             <td style="text-align:right;font-weight:700;color:#dc2626;">62.7%</td>
                             <td><span class="badge badge-red">同比 -72.2% 🚨</span></td>
                         </tr>
                         <tr style="background:#fef2f2;">
-                            <td><strong>2026-03（截至4日）</strong></td><td style="text-align:right;"><strong>96</strong></td><td style="text-align:right;"><strong>168</strong></td>
+                            <td><strong>2026-03（截至4日）</strong></td>
+                            <td style="text-align:right;"><strong>96</strong></td>
+                            <td style="text-align:right;"><strong>168</strong></td>
                             <td style="text-align:right;font-weight:800;color:#dc2626;">264</td>
                             <td style="text-align:right;font-weight:700;color:#dc2626;">63.6%</td>
                             <td><span class="badge badge-red">仅4日数据</span></td>
                         </tr>
                         <tr style="background:#f0fdf4; border-top:2px solid #86efac;">
-                            <td><strong>2026 YTD合计</strong></td><td style="text-align:right;"><strong>2,885</strong></td><td style="text-align:right;"><strong>3,494</strong></td>
+                            <td><strong>2026 YTD合计</strong></td>
+                            <td style="text-align:right;"><strong>2,885</strong></td>
+                            <td style="text-align:right;"><strong>3,494</strong></td>
                             <td style="text-align:right;font-weight:800;color:#059669;">6,382</td>
                             <td style="text-align:right;font-weight:700;color:#059669;">54.7%</td>
                             <td><span class="badge badge-blue">复购支撑基本盘</span></td>
@@ -278,40 +568,51 @@
 
             <!-- SKU占比 -->
             <div class="card" style="margin-bottom:0;">
-                <h3 style="font-size:1rem; font-weight:700; color:var(--dark); margin-bottom:14px;">🗂️ SKU收入结构（截至3月4日，单位：万元）</h3>
+                <h3 style="font-size:1rem; font-weight:700; color:var(--dark); margin-bottom:14px;">🗂️
+                    SKU收入结构（截至3月4日，单位：万元）</h3>
                 <div style="display:flex; flex-direction:column; gap:8px;">
                     <div style="display:flex; align-items:center; gap:10px;">
                         <div style="width:100px; font-size:0.82rem; color:#374151; flex-shrink:0;">硬件复购</div>
                         <div style="flex:1; background:#e2e8f0; border-radius:4px; height:18px; overflow:hidden;">
-                            <div style="width:100%;height:100%;background:linear-gradient(90deg,#3b82f6,#60a5fa);border-radius:4px;"></div>
+                            <div
+                                style="width:100%;height:100%;background:linear-gradient(90deg,#3b82f6,#60a5fa);border-radius:4px;">
+                            </div>
                         </div>
                         <div style="font-weight:700; font-size:0.85rem; width:40px; text-align:right;">145</div>
                     </div>
                     <div style="display:flex; align-items:center; gap:10px;">
                         <div style="width:100px; font-size:0.82rem; color:#374151; flex-shrink:0;">攀登计划</div>
                         <div style="flex:1; background:#e2e8f0; border-radius:4px; height:18px; overflow:hidden;">
-                            <div style="width:62%;height:100%;background:linear-gradient(90deg,#8b5cf6,#a78bfa);border-radius:4px;"></div>
+                            <div
+                                style="width:62%;height:100%;background:linear-gradient(90deg,#8b5cf6,#a78bfa);border-radius:4px;">
+                            </div>
                         </div>
                         <div style="font-weight:700; font-size:0.85rem; width:40px; text-align:right;">90</div>
                     </div>
                     <div style="display:flex; align-items:center; gap:10px;">
                         <div style="width:100px; font-size:0.82rem; color:#374151; flex-shrink:0;">AI短剧写作</div>
                         <div style="flex:1; background:#e2e8f0; border-radius:4px; height:18px; overflow:hidden;">
-                            <div style="width:46%;height:100%;background:linear-gradient(90deg,#f59e0b,#fbbf24);border-radius:4px;"></div>
+                            <div
+                                style="width:46%;height:100%;background:linear-gradient(90deg,#f59e0b,#fbbf24);border-radius:4px;">
+                            </div>
                         </div>
                         <div style="font-weight:700; font-size:0.85rem; width:40px; text-align:right;">66</div>
                     </div>
                     <div style="display:flex; align-items:center; gap:10px;">
                         <div style="width:100px; font-size:0.82rem; color:#374151; flex-shrink:0;">AI短视频</div>
                         <div style="flex:1; background:#e2e8f0; border-radius:4px; height:18px; overflow:hidden;">
-                            <div style="width:41%;height:100%;background:linear-gradient(90deg,#10b981,#34d399);border-radius:4px;"></div>
+                            <div
+                                style="width:41%;height:100%;background:linear-gradient(90deg,#10b981,#34d399);border-radius:4px;">
+                            </div>
                         </div>
                         <div style="font-weight:700; font-size:0.85rem; width:40px; text-align:right;">60</div>
                     </div>
                     <div style="display:flex; align-items:center; gap:10px;">
                         <div style="width:100px; font-size:0.82rem; color:#374151; flex-shrink:0;">音频剪辑</div>
                         <div style="flex:1; background:#e2e8f0; border-radius:4px; height:18px; overflow:hidden;">
-                            <div style="width:19%;height:100%;background:linear-gradient(90deg,#6366f1,#818cf8);border-radius:4px;"></div>
+                            <div
+                                style="width:19%;height:100%;background:linear-gradient(90deg,#6366f1,#818cf8);border-radius:4px;">
+                            </div>
                         </div>
                         <div style="font-weight:700; font-size:0.85rem; width:40px; text-align:right;">28</div>
                     </div>
@@ -322,7 +623,8 @@
                         </div>
                         <div style="font-weight:700; font-size:0.85rem; width:40px; text-align:right;">73</div>
                     </div>
-                    <div style="margin-top:8px; padding-top:8px; border-top:1px solid #e2e8f0; font-size:0.82rem; color:#64748b;">
+                    <div
+                        style="margin-top:8px; padding-top:8px; border-top:1px solid #e2e8f0; font-size:0.82rem; color:#64748b;">
                         总计：<strong style="color:#1e293b;">462万</strong>（2026年YTD截至3月4日）
                     </div>
                 </div>
@@ -332,21 +634,34 @@
             <div class="card" style="margin-bottom:0;">
                 <h3 style="font-size:1rem; font-weight:700; color:var(--dark); margin-bottom:14px;">🔍 财务数据核心洞察</h3>
                 <div style="display:flex; flex-direction:column; gap:10px;">
-                    <div style="background:#fef2f2; border-radius:8px; padding:12px 14px; border-left:3px solid #dc2626;">
-                        <div style="font-weight:700; font-size:0.82rem; color:#dc2626; margin-bottom:4px;">🚨 2月前端新签仅 741万</div>
-                        <div style="font-size:0.8rem; color:#374151; line-height:1.6;">为2025年以来最低点（2025年2月为4,575万），同比萎缩 <strong>-83.8%</strong>。315窗口期压制是直接原因，但这也意味着流量投放几乎停摆。</div>
+                    <div
+                        style="background:#fef2f2; border-radius:8px; padding:12px 14px; border-left:3px solid #dc2626;">
+                        <div style="font-weight:700; font-size:0.82rem; color:#dc2626; margin-bottom:4px;">🚨 2月前端新签仅
+                            741万</div>
+                        <div style="font-size:0.8rem; color:#374151; line-height:1.6;">为2025年以来最低点（2025年2月为4,575万），同比萎缩
+                            <strong>-83.8%</strong>。315窗口期压制是直接原因，但这也意味着流量投放几乎停摆。</div>
                     </div>
-                    <div style="background:#fffbeb; border-radius:8px; padding:12px 14px; border-left:3px solid #d97706;">
-                        <div style="font-weight:700; font-size:0.82rem; color:#d97706; margin-bottom:4px;">⚠️ 复购成为唯一支柱（占比62.7%）</div>
-                        <div style="font-size:0.8rem; color:#374151; line-height:1.6;">2月后端复购 1,245万，占总收入62.7%。这是2025年全年复购占比（约43-47%）的历史新高，说明新签几乎断供的情况下，复购托底了整个业务。</div>
+                    <div
+                        style="background:#fffbeb; border-radius:8px; padding:12px 14px; border-left:3px solid #d97706;">
+                        <div style="font-weight:700; font-size:0.82rem; color:#d97706; margin-bottom:4px;">⚠️
+                            复购成为唯一支柱（占比62.7%）</div>
+                        <div style="font-size:0.8rem; color:#374151; line-height:1.6;">2月后端复购
+                            1,245万，占总收入62.7%。这是2025年全年复购占比（约43-47%）的历史新高，说明新签几乎断供的情况下，复购托底了整个业务。</div>
                     </div>
-                    <div style="background:#f0fdf4; border-radius:8px; padding:12px 14px; border-left:3px solid #16a34a;">
-                        <div style="font-weight:700; font-size:0.82rem; color:#16a34a; margin-bottom:4px;">✅ 硬件复购（145万）是3月最大机会点</div>
-                        <div style="font-size:0.8rem; color:#374151; line-height:1.6;">SKU结构中硬件复购排名第一，攀登计划（90万）第二，AI新品线（短剧+短视频=126万）合计超过攀登计划，是增量最快的品类。</div>
+                    <div
+                        style="background:#f0fdf4; border-radius:8px; padding:12px 14px; border-left:3px solid #16a34a;">
+                        <div style="font-weight:700; font-size:0.82rem; color:#16a34a; margin-bottom:4px;">✅
+                            硬件复购（145万）是3月最大机会点</div>
+                        <div style="font-size:0.8rem; color:#374151; line-height:1.6;">
+                            SKU结构中硬件复购排名第一，攀登计划（90万）第二，AI新品线（短剧+短视频=126万）合计超过攀登计划，是增量最快的品类。</div>
                     </div>
-                    <div style="background:#eff6ff; border-radius:8px; padding:12px 14px; border-left:3px solid #3b82f6;">
-                        <div style="font-weight:700; font-size:0.82rem; color:#2563eb; margin-bottom:4px;">📌 315后反弹节奏预判</div>
-                        <div style="font-size:0.8rem; color:#374151; line-height:1.6;">参照2025年节奏，3月通常是全年第二高峰（8,480万）。若315后信号良好，4月-7月应当是冲刺窗口。当前复购基本盘稳定，3月核心任务是<strong>守住复购 + 测试前端反弹弹性</strong>。</div>
+                    <div
+                        style="background:#eff6ff; border-radius:8px; padding:12px 14px; border-left:3px solid #3b82f6;">
+                        <div style="font-weight:700; font-size:0.82rem; color:#2563eb; margin-bottom:4px;">📌 315后反弹节奏预判
+                        </div>
+                        <div style="font-size:0.8rem; color:#374151; line-height:1.6;">
+                            参照2025年节奏，3月通常是全年第二高峰（8,480万）。若315后信号良好，4月-7月应当是冲刺窗口。当前复购基本盘稳定，3月核心任务是<strong>守住复购 +
+                                测试前端反弹弹性</strong>。</div>
                     </div>
                 </div>
             </div>
@@ -358,8 +673,11 @@
         <div class="data-header">
             <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:12px;">
                 <div>
-                    <div style="font-size:0.8rem; color:#94a3b8; font-weight:600; text-transform:uppercase; letter-spacing:0.05em;">业务线：喜播有声书 · 前端转化大盘</div>
-                    <div style="font-size:1.5rem; font-weight:800; color:white; margin-top:4px;">2月-3月初 综合转化率 2.65%</div>
+                    <div
+                        style="font-size:0.8rem; color:#94a3b8; font-weight:600; text-transform:uppercase; letter-spacing:0.05em;">
+                        业务线：喜播有声书 · 前端转化大盘</div>
+                    <div style="font-size:1.5rem; font-weight:800; color:white; margin-top:4px;">2月-3月初 综合转化率 2.65%
+                    </div>
                     <div style="font-size:0.85rem; color:#94a3b8; margin-top:4px;">月均目标线：≥2.5% ✅ 勉强达标，但结构风险隐患大</div>
                 </div>
                 <div style="text-align:right;">
@@ -367,17 +685,38 @@
                 </div>
             </div>
             <div class="data-kpi-grid">
-                <div class="data-kpi"><div class="val">¥899万</div><div class="lbl">区间总现金流</div></div>
-                <div class="data-kpi"><div class="val">2.65%</div><div class="lbl">综合转化率</div></div>
-                <div class="data-kpi"><div class="val">¥6,096</div><div class="lbl">正价平均客单价</div></div>
-                <div class="data-kpi"><div class="val">86,355</div><div class="lbl">总订单数（低价流量）</div></div>
-                <div class="data-kpi"><div class="val">48,222</div><div class="lbl">有效加微数</div></div>
-                <div class="data-kpi"><div class="val" style="color:#fb923c;">64%</div><div class="lbl">订单加微率</div></div>
-                <div class="data-kpi"><div class="val">1,491</div><div class="lbl">正价订单成交数</div></div>
+                <div class="data-kpi">
+                    <div class="val">¥899万</div>
+                    <div class="lbl">区间总现金流</div>
+                </div>
+                <div class="data-kpi">
+                    <div class="val">2.65%</div>
+                    <div class="lbl">综合转化率</div>
+                </div>
+                <div class="data-kpi">
+                    <div class="val">¥6,096</div>
+                    <div class="lbl">正价平均客单价</div>
+                </div>
+                <div class="data-kpi">
+                    <div class="val">86,355</div>
+                    <div class="lbl">总订单数（低价流量）</div>
+                </div>
+                <div class="data-kpi">
+                    <div class="val">48,222</div>
+                    <div class="lbl">有效加微数</div>
+                </div>
+                <div class="data-kpi">
+                    <div class="val" style="color:#fb923c;">64%</div>
+                    <div class="lbl">订单加微率</div>
+                </div>
+                <div class="data-kpi">
+                    <div class="val">1,491</div>
+                    <div class="lbl">正价订单成交数</div>
+                </div>
             </div>
         </div>
 
-                <!-- ══ 一、核心问题诊断 ══ -->
+        <!-- ══ 一、核心问题诊断 ══ -->
         <h2 class="section-title">一、投放策略核心问题诊断（基于2月-3月实际数据）</h2>
 
         <div class="problem-grid">
@@ -443,7 +782,8 @@
                         </div>
                         <div class="task-card executing">
                             <div class="owner-avatar">马</div>
-                            <h4>直播 + B站 作为冲刺增量引擎 <span class="badge badge-green" style="font-size:0.68em;">✅ 数据验证正确</span></h4>
+                            <h4>直播 + B站 作为冲刺增量引擎 <span class="badge badge-green" style="font-size:0.68em;">✅
+                                    数据验证正确</span></h4>
                             <p>直播转化率 5.62%、B站 4.41%——均为全渠道最优，证明马长久聚焦高质量渠道的方向正确。需立即制定扩量计划。</p>
                             <div class="tags">
                                 <span class="tag success">直播 5.62%</span>
@@ -453,7 +793,8 @@
                         </div>
                         <div class="task-card blocked">
                             <div class="owner-avatar">姚</div>
-                            <h4>APP Push 加微率修复 <span class="badge badge-red" style="font-size:0.68em;">🚨 执行异常</span></h4>
+                            <h4>APP Push 加微率修复 <span class="badge badge-red" style="font-size:0.68em;">🚨 执行异常</span>
+                            </h4>
                             <p>APP Push 加微率仅 44%（直播 95%），顶部漏斗严重漏水。需紧急排查吐码流程、企微账号限制及引导文案。</p>
                             <div class="tags">
                                 <span class="tag alert">加微率 44% ⚠️</span>
@@ -482,7 +823,8 @@
                     <div class="task-list">
                         <div class="task-card executing">
                             <div class="owner-avatar">马</div>
-                            <h4>"情绪 + 真实价值"销售重构 <span class="badge badge-green" style="font-size:0.68em;">✅ 方向正确</span></h4>
+                            <h4>"情绪 + 真实价值"销售重构 <span class="badge badge-green" style="font-size:0.68em;">✅ 方向正确</span>
+                            </h4>
                             <p>直播渠道 5.62% 转化率已验证"情绪塑造 + 真实案例"话术有效。需将直播话术标准化为 SOP，向私域、小红书渠道横向复制。</p>
                             <div class="tags">
                                 <span class="tag success">直播验证有效</span>
@@ -539,7 +881,8 @@
                         </div>
                         <div class="task-card new-action">
                             <div class="owner-avatar">杜</div>
-                            <h4>特殊关怀用户三层分级管控 <span class="badge badge-yellow" style="font-size:0.68em;">📌 3月新增</span></h4>
+                            <h4>特殊关怀用户三层分级管控 <span class="badge badge-yellow" style="font-size:0.68em;">📌 3月新增</span>
+                            </h4>
                             <p>大黑用户：强劝退（98%拦截）；大灰用户：加强告知 + 书面确认签字放行；普通用户：常规提示。已在 MC 环节内置系统判定。</p>
                             <div class="tags">
                                 <span class="tag new">三层分级</span>
@@ -577,7 +920,8 @@
                         </div>
                         <div class="task-card new-action">
                             <div class="owner-avatar">马</div>
-                            <h4>退费率攻坚 — 有声线 47%→25% <span class="badge badge-yellow" style="font-size:0.68em;">📌 3月优先级最高</span></h4>
+                            <h4>退费率攻坚 — 有声线 47%→25% <span class="badge badge-yellow" style="font-size:0.68em;">📌
+                                    3月优先级最高</span></h4>
                             <p>有声线首购 UE -9%，每卖一单亏损。根因是过度承诺 + 交付预期差距。铁三角话术合规改造是核心抓手，目标退费率降至 ≤25%。</p>
                             <div class="tags">
                                 <span class="tag alert">退费率 47% 🚨</span>
@@ -599,39 +943,47 @@
             <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px,1fr)); gap:16px;">
 
                 <div style="background:#f0fdf4; border-radius:10px; padding:16px; border:1px solid #a7f3d0;">
-                    <div style="font-weight:700; color:#16a34a; margin-bottom:8px; font-size:0.9rem;">✅ 执行正确 · 直播+B站高转化渠道聚焦</div>
+                    <div style="font-weight:700; color:#16a34a; margin-bottom:8px; font-size:0.9rem;">✅ 执行正确 ·
+                        直播+B站高转化渠道聚焦</div>
                     <div style="font-size:0.82rem; color:#374151; line-height:1.7;">
                         直播 5.62%、B站 4.41% 转化率完全验证"聚焦高质量流量来源"策略正确。
                         这两条渠道是 3月冲刺的最优增量抓手，应立即制定扩量 SOP。
                     </div>
-                    <div style="margin-top:10px; font-size:0.78rem; font-weight:700; color:#059669;">数据评分：直播=5.62% / 目标≥2.5% → 超额 124%</div>
+                    <div style="margin-top:10px; font-size:0.78rem; font-weight:700; color:#059669;">数据评分：直播=5.62% /
+                        目标≥2.5% → 超额 124%</div>
                 </div>
 
                 <div style="background:#fef2f2; border-radius:10px; padding:16px; border:1px solid #fca5a5;">
-                    <div style="font-weight:700; color:#dc2626; margin-bottom:8px; font-size:0.9rem;">🚨 执行异常 · 私域 MO 转化链路</div>
+                    <div style="font-weight:700; color:#dc2626; margin-bottom:8px; font-size:0.9rem;">🚨 执行异常 · 私域 MO
+                        转化链路</div>
                     <div style="font-size:0.82rem; color:#374151; line-height:1.7;">
                         私域转化率 1.37% 与策略目标严重背离。若马长久的策略是"私域深度运营提升复购"，
                         则当前执行层面存在严重断点——加微后的承接话术、暖场节奏、升单时机均需紧急复盘。
                     </div>
-                    <div style="margin-top:10px; font-size:0.78rem; font-weight:700; color:#dc2626;">数据评分：私域=1.37% / 目标≥2.5% → 不达标 45%</div>
+                    <div style="margin-top:10px; font-size:0.78rem; font-weight:700; color:#dc2626;">数据评分：私域=1.37% /
+                        目标≥2.5% → 不达标 45%</div>
                 </div>
 
                 <div style="background:#fffbeb; border-radius:10px; padding:16px; border:1px solid #fde68a;">
-                    <div style="font-weight:700; color:#d97706; margin-bottom:8px; font-size:0.9rem;">⚠️ 待验证 · APP Push 引流漏斗修复</div>
+                    <div style="font-weight:700; color:#d97706; margin-bottom:8px; font-size:0.9rem;">⚠️ 待验证 · APP Push
+                        引流漏斗修复</div>
                     <div style="font-size:0.82rem; color:#374151; line-height:1.7;">
                         APP Push 加微率 44%，直播 95%。这意味着策略中提到的"顶部流量拦截优化"
                         尚未有效落地。吐码引导、企微账号容量、引导文案均需逐一排查。
                     </div>
-                    <div style="margin-top:10px; font-size:0.78rem; font-weight:700; color:#d97706;">数据评分：加微率=44% / 基准 70%+ → 不达标 37%</div>
+                    <div style="margin-top:10px; font-size:0.78rem; font-weight:700; color:#d97706;">数据评分：加微率=44% / 基准
+                        70%+ → 不达标 37%</div>
                 </div>
 
                 <div style="background:#f0fdf4; border-radius:10px; padding:16px; border:1px solid #a7f3d0;">
-                    <div style="font-weight:700; color:#16a34a; margin-bottom:8px; font-size:0.9rem;">✅ 执行正确 · 铁三角话术白名单机制</div>
+                    <div style="font-weight:700; color:#16a34a; margin-bottom:8px; font-size:0.9rem;">✅ 执行正确 ·
+                        铁三角话术白名单机制</div>
                     <div style="font-size:0.82rem; color:#374151; line-height:1.7;">
                         马（业务）/ 康姐（风控）/ 苏老师（课程）三方书面确认机制已建立，
                         03-02 会议确认正在运行。这是保证 ML→MO→MCE 全链路合规的基础设施。
                     </div>
-                    <div style="margin-top:10px; font-size:0.78rem; font-weight:700; color:#059669;">执行评分：机制建立 ✅ / 首次话术清单审核中</div>
+                    <div style="margin-top:10px; font-size:0.78rem; font-weight:700; color:#059669;">执行评分：机制建立 ✅ /
+                        首次话术清单审核中</div>
                 </div>
 
             </div>
@@ -646,17 +998,21 @@
             </div>
             <div class="verdict-item">
                 <span class="icon">🚨</span>
-                <span><strong>私域 MO 链路是最大执行堵点</strong>：转化率 1.37% 意味着进了私域的用户超过 98% 没有转化——需要在本周内组织专题复盘，逐段排查加微后承接、话术节奏、升单时机。</span>
+                <span><strong>私域 MO 链路是最大执行堵点</strong>：转化率 1.37% 意味着进了私域的用户超过 98%
+                    没有转化——需要在本周内组织专题复盘，逐段排查加微后承接、话术节奏、升单时机。</span>
             </div>
             <div class="verdict-item">
                 <span class="icon">⚠️</span>
-                <span><strong>APP Push 加微漏斗优先级紧迫</strong>：每损失 1% 的加微率，就是损失约 500 个潜在转化机会。44%→70% 的改善空间如果落地，可释放约 1/3 的额外私域池。</span>
+                <span><strong>APP Push 加微漏斗优先级紧迫</strong>：每损失 1% 的加微率，就是损失约 500 个潜在转化机会。44%→70% 的改善空间如果落地，可释放约 1/3
+                    的额外私域池。</span>
             </div>
             <div class="verdict-item">
                 <span class="icon">📌</span>
-                <span><strong>退费率仍是 MCE 端最大利润漏洞</strong>：有声线 47% 退费率使首购 UE 为 -9%，前端所有转化努力都在 MCE 端被吞噬。铁三角话术管控机制是当前最核心的利润修复手段。</span>
+                <span><strong>退费率仍是 MCE 端最大利润漏洞</strong>：有声线 47% 退费率使首购 UE 为 -9%，前端所有转化努力都在 MCE
+                    端被吞噬。铁三角话术管控机制是当前最核心的利润修复手段。</span>
             </div>
-            <div style="margin-top:16px; padding:12px; background:rgba(37,99,235,0.06); border-radius:8px; font-size:0.85rem; color:#1e3a5f;">
+            <div
+                style="margin-top:16px; padding:12px; background:rgba(37,99,235,0.06); border-radius:8px; font-size:0.85rem; color:#1e3a5f;">
                 <strong>马长久核心策略是否在正确执行？</strong><br>
                 方向层面：✅ 正确——聚焦高转化渠道、铁三角合规话术机制已建立。<br>
                 执行层面：⚠️ 私域承接链路、APP Push 加微率两个关键环节存在严重执行断点，需在 3月第一周内专题攻关。退费率攻坚是战略级优先事项，需要直接 KPI 挂钩才能推动。
@@ -666,247 +1022,281 @@
     </div>
 
 
-        <!-- ══ 四、第一性原理深度诊断 ══ -->
-        <h2 class="section-title" style="margin-top:48px;">四、第一性原理深度诊断 · 资深投放视角（习惯问 Why）</h2>
+    <!-- ══ 四、第一性原理深度诊断 ══ -->
+    <h2 class="section-title" style="margin-top:48px;">四、第一性原理深度诊断 · 资深投放视角（习惯问 Why）</h2>
 
-        <div class="card" style="border-top: 4px solid #7c3aed; background: #fdfaff;">
-            <div style="background: linear-gradient(135deg, #4c1d95, #1e1b4b); border-radius: 10px; padding: 20px 24px; margin-bottom: 28px; color: white;">
-                <div style="font-size: 0.78rem; font-weight: 700; color: #c4b5fd; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 8px;">核心前提：先把表象放下</div>
-                <div style="font-size: 1.15rem; font-weight: 800; line-height: 1.5;">这份数据表面上是"渠道转化率差异"<br>本质上反映的是一个更深层的<span style="color:#fbbf24;">结构性认知错误</span></div>
-                <div style="margin-top: 12px; font-size: 0.85rem; color: #c4b5fd; line-height: 1.7;">
-                    我们把 <strong style="color:#fbbf24;">「获取线索」</strong> 和 <strong style="color:#fbbf24;">「建立购买意图」</strong> 混为一谈了。<br>
-                    这不是执行问题，这是漏斗架构的底层认知问题。
+    <div class="card" style="border-top: 4px solid #7c3aed; background: #fdfaff;">
+        <div
+            style="background: linear-gradient(135deg, #4c1d95, #1e1b4b); border-radius: 10px; padding: 20px 24px; margin-bottom: 28px; color: white;">
+            <div
+                style="font-size: 0.78rem; font-weight: 700; color: #c4b5fd; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 8px;">
+                核心前提：先把表象放下</div>
+            <div style="font-size: 1.15rem; font-weight: 800; line-height: 1.5;">这份数据表面上是"渠道转化率差异"<br>本质上反映的是一个更深层的<span
+                    style="color:#fbbf24;">结构性认知错误</span></div>
+            <div style="margin-top: 12px; font-size: 0.85rem; color: #c4b5fd; line-height: 1.7;">
+                我们把 <strong style="color:#fbbf24;">「获取线索」</strong> 和 <strong style="color:#fbbf24;">「建立购买意图」</strong>
+                混为一谈了。<br>
+                这不是执行问题，这是漏斗架构的底层认知问题。
+            </div>
+        </div>
+
+        <!-- Why 链条 -->
+        <div style="display:flex; flex-direction:column; gap:4px; margin-bottom:28px;">
+
+            <!-- Why 1 -->
+            <div style="background:#f8fafc; border-radius:10px; padding:18px 20px; border-left:4px solid #7c3aed;">
+                <div style="font-weight:800; font-size:0.9rem; color:#7c3aed; margin-bottom:10px;">🔍 Why 1 · 2.65%
+                    综合转化率的背后到底是什么？</div>
+                <div style="font-size:0.84rem; color:#334155; margin-bottom:10px; line-height:1.7;">
+                    表面看转化率 2.65%，但换一个角度算——漏斗里真正的问题在哪？
+                </div>
+                <div
+                    style="background:white; border-radius:8px; padding:14px 16px; font-family:monospace; font-size:0.85rem; color:#1e293b; line-height:2; border:1px solid #e2e8f0;">
+                    86,355 低价订单<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;↓ 64% 加微率<br>
+                    48,222 已加微（进入私域池）<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;↓ <strong style="color:#dc2626;">3.09% 真实私域转化率</strong><br>
+                    1,491 正价成交
+                </div>
+                <div
+                    style="margin-top:12px; background:#fef3c7; border-radius:6px; padding:12px 14px; font-size:0.83rem; color:#78350f; line-height:1.7;">
+                    <strong>真正的问题：</strong><br>
+                    有 <strong>46,731 个已经愿意加你微信的人</strong>，他们主动给了你联系方式，最后没有买单。<br>
+                    这 46,731 人是谁？为什么他们不买？这才是值得追问的核心。
                 </div>
             </div>
 
-            <!-- Why 链条 -->
-            <div style="display:flex; flex-direction:column; gap:4px; margin-bottom:28px;">
+            <div style="text-align:center; font-size:1.2rem; color:#c4b5fd; padding:4px;">↓</div>
 
-                <!-- Why 1 -->
-                <div style="background:#f8fafc; border-radius:10px; padding:18px 20px; border-left:4px solid #7c3aed;">
-                    <div style="font-weight:800; font-size:0.9rem; color:#7c3aed; margin-bottom:10px;">🔍 Why 1 · 2.65% 综合转化率的背后到底是什么？</div>
-                    <div style="font-size:0.84rem; color:#334155; margin-bottom:10px; line-height:1.7;">
-                        表面看转化率 2.65%，但换一个角度算——漏斗里真正的问题在哪？
+            <!-- Why 2 -->
+            <div style="background:#f8fafc; border-radius:10px; padding:18px 20px; border-left:4px solid #dc2626;">
+                <div style="font-weight:800; font-size:0.9rem; color:#dc2626; margin-bottom:10px;">🔍 Why 2 · 为什么直播
+                    5.62%，私域 1.37%？（理论上应该反过来）</div>
+                <div style="font-size:0.84rem; color:#334155; margin-bottom:12px; line-height:1.7;">
+                    私域理论上应该最高——用户已加微信、有主动意向、可个性化跟进。结果却是最低的 1.37%，比直播低 <strong>4 倍</strong>。这是反常的。
+                </div>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:12px;">
+                    <div style="background:#f0fdf4; border-radius:8px; padding:12px 14px; border:1px solid #86efac;">
+                        <div style="font-weight:700; font-size:0.8rem; color:#16a34a; margin-bottom:6px;">直播为什么高？</div>
+                        <div style="font-size:0.8rem; color:#374151; line-height:1.7;">用户主动看了 60-90 分钟<br>→ 情绪被持续调动 →
+                            到达峰值<br>→ 当场做决策<br><br><strong>意图在渠道内被完整建立</strong></div>
                     </div>
-                    <div style="background:white; border-radius:8px; padding:14px 16px; font-family:monospace; font-size:0.85rem; color:#1e293b; line-height:2; border:1px solid #e2e8f0;">
-                        86,355 低价订单<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;↓ 64% 加微率<br>
-                        48,222 已加微（进入私域池）<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;↓ <strong style="color:#dc2626;">3.09% 真实私域转化率</strong><br>
-                        1,491 正价成交
-                    </div>
-                    <div style="margin-top:12px; background:#fef3c7; border-radius:6px; padding:12px 14px; font-size:0.83rem; color:#78350f; line-height:1.7;">
-                        <strong>真正的问题：</strong><br>
-                        有 <strong>46,731 个已经愿意加你微信的人</strong>，他们主动给了你联系方式，最后没有买单。<br>
-                        这 46,731 人是谁？为什么他们不买？这才是值得追问的核心。
+                    <div style="background:#fef2f2; border-radius:8px; padding:12px 14px; border:1px solid #fca5a5;">
+                        <div style="font-weight:700; font-size:0.8rem; color:#dc2626; margin-bottom:6px;">私域为什么低？</div>
+                        <div style="font-size:0.8rem; color:#374151; line-height:1.7;">用户看了片段内容→加微信<br>→ 睡了一觉 →
+                            热情消散<br>→ 私域再来建立意图<br><br><strong>意图建立的接力发生了断裂</strong></div>
                     </div>
                 </div>
-
-                <div style="text-align:center; font-size:1.2rem; color:#c4b5fd; padding:4px;">↓</div>
-
-                <!-- Why 2 -->
-                <div style="background:#f8fafc; border-radius:10px; padding:18px 20px; border-left:4px solid #dc2626;">
-                    <div style="font-weight:800; font-size:0.9rem; color:#dc2626; margin-bottom:10px;">🔍 Why 2 · 为什么直播 5.62%，私域 1.37%？（理论上应该反过来）</div>
-                    <div style="font-size:0.84rem; color:#334155; margin-bottom:12px; line-height:1.7;">
-                        私域理论上应该最高——用户已加微信、有主动意向、可个性化跟进。结果却是最低的 1.37%，比直播低 <strong>4 倍</strong>。这是反常的。
-                    </div>
-                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:12px;">
-                        <div style="background:#f0fdf4; border-radius:8px; padding:12px 14px; border:1px solid #86efac;">
-                            <div style="font-weight:700; font-size:0.8rem; color:#16a34a; margin-bottom:6px;">直播为什么高？</div>
-                            <div style="font-size:0.8rem; color:#374151; line-height:1.7;">用户主动看了 60-90 分钟<br>→ 情绪被持续调动 → 到达峰值<br>→ 当场做决策<br><br><strong>意图在渠道内被完整建立</strong></div>
-                        </div>
-                        <div style="background:#fef2f2; border-radius:8px; padding:12px 14px; border:1px solid #fca5a5;">
-                            <div style="font-weight:700; font-size:0.8rem; color:#dc2626; margin-bottom:6px;">私域为什么低？</div>
-                            <div style="font-size:0.8rem; color:#374151; line-height:1.7;">用户看了片段内容→加微信<br>→ 睡了一觉 → 热情消散<br>→ 私域再来建立意图<br><br><strong>意图建立的接力发生了断裂</strong></div>
-                        </div>
-                    </div>
-                    <div style="background:#fff1f2; border-radius:6px; padding:12px 14px; font-size:0.83rem; color:#7f1d1d; line-height:1.7; border-left:3px solid #dc2626;">
-                        <strong>结论：这不是私域运营问题，这是流量来源的意图质量问题。</strong><br>
-                        只要用户进入私域时的状态是"好奇"而不是"想买"，私域转化率就不可能高。<br>
-                        用私域来弥补渠道没做完的工作，是在强迫一个不擅长建立意图的环节去做建立意图的事。
-                    </div>
-                </div>
-
-                <div style="text-align:center; font-size:1.2rem; color:#c4b5fd; padding:4px;">↓</div>
-
-                <!-- Why 3 -->
-                <div style="background:#f8fafc; border-radius:10px; padding:18px 20px; border-left:4px solid #d97706;">
-                    <div style="font-weight:800; font-size:0.9rem; color:#d97706; margin-bottom:10px;">🔍 Why 3 · APP Push 加微率 44% vs 直播 95%，根本差距在哪？</div>
-                    <div style="font-size:0.84rem; color:#334155; margin-bottom:12px; line-height:1.7;">
-                        很多人的直觉反应是：文案不够好、引导不到位、流程太复杂。这些都是答案，但不是根因。
-                    </div>
-                    <div style="background:#fffbeb; border-radius:8px; padding:14px 16px; font-size:0.83rem; color:#78350f; line-height:1.8; margin-bottom:10px;">
-                        <strong>第一性原理：用户加微信，意味着他们愿意建立更深层的联系。这需要一个理由——"加了对我有价值"。</strong><br><br>
-                        直播里：主播花了 60 分钟建立了信任和期待，"加了能领优惠/继续获得内容"——理由充分，95% 愿意加。<br><br>
-                        APP Push：一条冰冷的通知，用户还没看任何内容，就被要求加微信。<br>
-                        这等于路上遇到陌生人，<strong>第一句话就说"加我微信"</strong>。<br><br>
-                        44% 不是执行问题，是<strong>心智接触顺序搞错了</strong>——你不能在用户还没被内容打动之前，就要求信任动作。
-                    </div>
-                </div>
-
-                <div style="text-align:center; font-size:1.2rem; color:#c4b5fd; padding:4px;">↓</div>
-
-                <!-- Why 4 -->
-                <div style="background:#f8fafc; border-radius:10px; padding:18px 20px; border-left:4px solid #0369a1;">
-                    <div style="font-weight:800; font-size:0.9rem; color:#0369a1; margin-bottom:10px;">🔍 Why 4 · 站内资源位占 36% 流水，却没有 alpha。为什么我们放了最多资源在没有 alpha 的渠道？</div>
-                    <div style="font-size:0.84rem; color:#334155; margin-bottom:10px; line-height:1.7;">
-                        站内资源位转化率 2.66%，恰好等于全渠道均值——意味着它带不来任何额外优势。
-                    </div>
-                    <div style="display:grid; grid-template-columns: repeat(3,1fr); gap:10px; margin-bottom:12px;">
-                        <div style="background:white; border-radius:8px; padding:12px; border:1px solid #e2e8f0; text-align:center;">
-                            <div style="font-size:0.78rem; color:#64748b; margin-bottom:4px;">站内资源位</div>
-                            <div style="font-size:1.3rem; font-weight:800; color:#64748b;">36%</div>
-                            <div style="font-size:0.72rem; color:#94a3b8;">流水占比</div>
-                            <div style="font-size:0.75rem; color:#dc2626; margin-top:4px; font-weight:700;">转化率 = 均值<br>Alpha = 0</div>
-                        </div>
-                        <div style="background:white; border-radius:8px; padding:12px; border:1px solid #e2e8f0; text-align:center;">
-                            <div style="font-size:0.78rem; color:#64748b; margin-bottom:4px;">直播</div>
-                            <div style="font-size:1.3rem; font-weight:800; color:#16a34a;">16%</div>
-                            <div style="font-size:0.72rem; color:#94a3b8;">流水占比</div>
-                            <div style="font-size:0.75rem; color:#16a34a; margin-top:4px; font-weight:700;">转化率 5.62%<br>Alpha = +3.0x</div>
-                        </div>
-                        <div style="background:white; border-radius:8px; padding:12px; border:1px solid #e2e8f0; text-align:center;">
-                            <div style="font-size:0.78rem; color:#64748b; margin-bottom:4px;">B站</div>
-                            <div style="font-size:1.3rem; font-weight:800; color:#16a34a;">13%</div>
-                            <div style="font-size:0.72rem; color:#94a3b8;">流水占比</div>
-                            <div style="font-size:0.75rem; color:#16a34a; margin-top:4px; font-weight:700;">转化率 4.41%<br>Alpha = +1.7x</div>
-                        </div>
-                    </div>
-                    <div style="background:#eff6ff; border-radius:6px; padding:12px 14px; font-size:0.83rem; color:#1e3a5f; line-height:1.7; border-left:3px solid #0369a1;">
-                        <strong>为什么我们在没有 alpha 的渠道里放了最多资源？</strong><br>
-                        ① 它安全——合规风险低，不会出事；② 操作简单——不需要直播能力和内容生产；③ 历史惯性——以前就这么做，没人质疑过。<br>
-                        <strong>这是典型的"困于舒适区"的投放决策。</strong>最有效的渠道需要能力建设，最舒服的渠道没有 alpha，我们选了舒服的。
-                    </div>
-                </div>
-
-                <div style="text-align:center; font-size:1.2rem; color:#c4b5fd; padding:4px;">↓</div>
-
-                <!-- Why 5 -->
-                <div style="background:#f8fafc; border-radius:10px; padding:18px 20px; border-left:4px solid #be185d;">
-                    <div style="font-weight:800; font-size:0.9rem; color:#be185d; margin-bottom:10px;">🔍 Why 5 · 为什么小红书 1.44%，它理论上应该比私域强？</div>
-                    <div style="font-size:0.84rem; color:#334155; margin-bottom:12px; line-height:1.7;">
-                        小红书用户是被内容种草进来的，意图应该比冷线索更强。但结果和私域几乎一样烂。
-                    </div>
-                    <div style="background:white; border-radius:8px; padding:14px 16px; margin-bottom:10px; border:1px dashed #e2e8f0;">
-                        <div style="font-size:0.83rem; color:#374151; line-height:2;">
-                            用户在小红书看到的内容：<strong style="color:#be185d;">「声音变现 / 副业自由 / 月入过万」</strong>（感性、梦想、情绪）<br>
-                            进入私域后看到的：<strong style="color:#be185d;">课程大纲 / 功能介绍 / 价格</strong>（理性、功能、成本）<br>
-                            <br>
-                            用户在这次跳转中经历的是：<strong style="color:#dc2626;">期待 → 落差 → 意图消耗殆尽</strong>
-                        </div>
-                    </div>
-                    <div style="background:#fdf2f8; border-radius:6px; padding:12px 14px; font-size:0.83rem; color:#831843; line-height:1.7; border-left:3px solid #be185d;">
-                        <strong>这不是转化率问题，这是用户旅程一致性（User Journey Consistency）问题。</strong><br>
-                        来时是一种期待，接触后是另一种体验——购买意图在这个认知落差里被消耗殆尽。<br>
-                        修复方法：小红书的承接人和承接内容，必须和种草内容保持同一情绪温度和话语体系。
-                    </div>
+                <div
+                    style="background:#fff1f2; border-radius:6px; padding:12px 14px; font-size:0.83rem; color:#7f1d1d; line-height:1.7; border-left:3px solid #dc2626;">
+                    <strong>结论：这不是私域运营问题，这是流量来源的意图质量问题。</strong><br>
+                    只要用户进入私域时的状态是"好奇"而不是"想买"，私域转化率就不可能高。<br>
+                    用私域来弥补渠道没做完的工作，是在强迫一个不擅长建立意图的环节去做建立意图的事。
                 </div>
             </div>
 
-            <!-- 终极结论 -->
-            <div style="background: linear-gradient(135deg, #1e1b4b, #312e81); border-radius:12px; padding:24px; color:white; margin-bottom:24px;">
-                <div style="font-size:0.8rem; font-weight:700; color:#c4b5fd; text-transform:uppercase; letter-spacing:0.06em; margin-bottom:12px;">第一性原理 · 终极结论</div>
-                <div style="font-size:1.1rem; font-weight:800; color:#fbbf24; margin-bottom:16px; line-height:1.5;">
-                    所有渠道问题的根因只有一个：<br>我们把「获取线索」和「建立购买意图」混为一谈了。
+            <div style="text-align:center; font-size:1.2rem; color:#c4b5fd; padding:4px;">↓</div>
+
+            <!-- Why 3 -->
+            <div style="background:#f8fafc; border-radius:10px; padding:18px 20px; border-left:4px solid #d97706;">
+                <div style="font-weight:800; font-size:0.9rem; color:#d97706; margin-bottom:10px;">🔍 Why 3 · APP Push
+                    加微率 44% vs 直播 95%，根本差距在哪？</div>
+                <div style="font-size:0.84rem; color:#334155; margin-bottom:12px; line-height:1.7;">
+                    很多人的直觉反应是：文案不够好、引导不到位、流程太复杂。这些都是答案，但不是根因。
                 </div>
-                <div style="overflow-x:auto; margin-bottom:16px;">
-                    <table style="width:100%; border-collapse:collapse; font-size:0.82rem;">
-                        <thead>
-                            <tr style="border-bottom:1px solid rgba(255,255,255,0.2);">
-                                <th style="padding:8px 12px; text-align:left; color:#c4b5fd; font-weight:600;">渠道</th>
-                                <th style="padding:8px 12px; text-align:center; color:#c4b5fd; font-weight:600;">意图建立完整度</th>
-                                <th style="padding:8px 12px; text-align:center; color:#c4b5fd; font-weight:600;">转化率</th>
-                                <th style="padding:8px 12px; text-align:left; color:#c4b5fd; font-weight:600;">核心逻辑</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr style="border-bottom:1px solid rgba(255,255,255,0.08);">
-                                <td style="padding:8px 12px; font-weight:700;">📺 直播</td>
-                                <td style="padding:8px 12px; text-align:center; color:#4ade80;">★★★★★</td>
-                                <td style="padding:8px 12px; text-align:center; font-weight:800; color:#4ade80;">5.62%</td>
-                                <td style="padding:8px 12px; color:#94a3b8; font-size:0.78rem;">60-90分钟完整情绪旅程，意图在场内完整建立</td>
-                            </tr>
-                            <tr style="border-bottom:1px solid rgba(255,255,255,0.08);">
-                                <td style="padding:8px 12px; font-weight:700;">📱 B站</td>
-                                <td style="padding:8px 12px; text-align:center; color:#86efac;">★★★★</td>
-                                <td style="padding:8px 12px; text-align:center; font-weight:800; color:#86efac;">4.41%</td>
-                                <td style="padding:8px 12px; color:#94a3b8; font-size:0.78rem;">长视频内容预建意图，用户带着明确期望进入私域</td>
-                            </tr>
-                            <tr style="border-bottom:1px solid rgba(255,255,255,0.08);">
-                                <td style="padding:8px 12px; font-weight:700;">🏠 站内资源位</td>
-                                <td style="padding:8px 12px; text-align:center; color:#fbbf24;">★★★</td>
-                                <td style="padding:8px 12px; text-align:center; font-weight:700; color:#fbbf24;">2.66%</td>
-                                <td style="padding:8px 12px; color:#94a3b8; font-size:0.78rem;">平台内信任基础，部分意图，但无 alpha</td>
-                            </tr>
-                            <tr style="border-bottom:1px solid rgba(255,255,255,0.08);">
-                                <td style="padding:8px 12px; font-weight:700;">📖 小红书</td>
-                                <td style="padding:8px 12px; text-align:center; color:#f87171;">★★</td>
-                                <td style="padding:8px 12px; text-align:center; font-weight:700; color:#f87171;">1.44%</td>
-                                <td style="padding:8px 12px; color:#94a3b8; font-size:0.78rem;">内容碎片化，跨场景承接断裂，用户旅程一致性差</td>
-                            </tr>
-                            <tr>
-                                <td style="padding:8px 12px; font-weight:700;">👥 私域</td>
-                                <td style="padding:8px 12px; text-align:center; color:#f87171;">★</td>
-                                <td style="padding:8px 12px; text-align:center; font-weight:700; color:#f87171;">1.37%</td>
-                                <td style="padding:8px 12px; color:#94a3b8; font-size:0.78rem;">冷线索为主，私域没有从零建立意图的能力</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <div
+                    style="background:#fffbeb; border-radius:8px; padding:14px 16px; font-size:0.83rem; color:#78350f; line-height:1.8; margin-bottom:10px;">
+                    <strong>第一性原理：用户加微信，意味着他们愿意建立更深层的联系。这需要一个理由——"加了对我有价值"。</strong><br><br>
+                    直播里：主播花了 60 分钟建立了信任和期待，"加了能领优惠/继续获得内容"——理由充分，95% 愿意加。<br><br>
+                    APP Push：一条冰冷的通知，用户还没看任何内容，就被要求加微信。<br>
+                    这等于路上遇到陌生人，<strong>第一句话就说"加我微信"</strong>。<br><br>
+                    44% 不是执行问题，是<strong>心智接触顺序搞错了</strong>——你不能在用户还没被内容打动之前，就要求信任动作。
                 </div>
             </div>
 
-            <!-- 3件真正要做的事 -->
-            <h3 style="font-size:1rem; font-weight:700; color:#1e293b; margin-bottom:16px;">🎯 基于根因分析，真正需要做的只有 3 件事</h3>
-            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px,1fr)); gap:16px;">
+            <div style="text-align:center; font-size:1.2rem; color:#c4b5fd; padding:4px;">↓</div>
 
-                <div style="background:#f0fdf4; border-radius:10px; padding:18px; border:1px solid #86efac;">
-                    <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px;">
-                        <span style="background:#16a34a; color:white; border-radius:50%; width:26px; height:26px; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:0.88rem; flex-shrink:0;">1</span>
-                        <div style="font-weight:700; color:#15803d; font-size:0.95rem;">把直播当成「产品」来运营，而不是渠道</div>
+            <!-- Why 4 -->
+            <div style="background:#f8fafc; border-radius:10px; padding:18px 20px; border-left:4px solid #0369a1;">
+                <div style="font-weight:800; font-size:0.9rem; color:#0369a1; margin-bottom:10px;">🔍 Why 4 · 站内资源位占 36%
+                    流水，却没有 alpha。为什么我们放了最多资源在没有 alpha 的渠道？</div>
+                <div style="font-size:0.84rem; color:#334155; margin-bottom:10px; line-height:1.7;">
+                    站内资源位转化率 2.66%，恰好等于全渠道均值——意味着它带不来任何额外优势。
+                </div>
+                <div style="display:grid; grid-template-columns: repeat(3,1fr); gap:10px; margin-bottom:12px;">
+                    <div
+                        style="background:white; border-radius:8px; padding:12px; border:1px solid #e2e8f0; text-align:center;">
+                        <div style="font-size:0.78rem; color:#64748b; margin-bottom:4px;">站内资源位</div>
+                        <div style="font-size:1.3rem; font-weight:800; color:#64748b;">36%</div>
+                        <div style="font-size:0.72rem; color:#94a3b8;">流水占比</div>
+                        <div style="font-size:0.75rem; color:#dc2626; margin-top:4px; font-weight:700;">转化率 =
+                            均值<br>Alpha = 0</div>
                     </div>
-                    <div style="font-size:0.83rem; color:#374151; line-height:1.7;">
-                        直播的本质是一台"压缩意图建立周期"的机器。场次、主播、内容节奏、高光时刻、引导动作——每一个细节都是转化率的乘数。<br><br>
-                        <strong>需要做的：</strong>不是"多开几场直播"，而是把这台机器的 SOP 标准化，明确每个时间节点的话术设计、情绪曲线、引导动作，让它可被复制地规模化扩量。
+                    <div
+                        style="background:white; border-radius:8px; padding:12px; border:1px solid #e2e8f0; text-align:center;">
+                        <div style="font-size:0.78rem; color:#64748b; margin-bottom:4px;">直播</div>
+                        <div style="font-size:1.3rem; font-weight:800; color:#16a34a;">16%</div>
+                        <div style="font-size:0.72rem; color:#94a3b8;">流水占比</div>
+                        <div style="font-size:0.75rem; color:#16a34a; margin-top:4px; font-weight:700;">转化率
+                            5.62%<br>Alpha = +3.0x</div>
+                    </div>
+                    <div
+                        style="background:white; border-radius:8px; padding:12px; border:1px solid #e2e8f0; text-align:center;">
+                        <div style="font-size:0.78rem; color:#64748b; margin-bottom:4px;">B站</div>
+                        <div style="font-size:1.3rem; font-weight:800; color:#16a34a;">13%</div>
+                        <div style="font-size:0.72rem; color:#94a3b8;">流水占比</div>
+                        <div style="font-size:0.75rem; color:#16a34a; margin-top:4px; font-weight:700;">转化率
+                            4.41%<br>Alpha = +1.7x</div>
                     </div>
                 </div>
-
-                <div style="background:#eff6ff; border-radius:10px; padding:18px; border:1px solid #93c5fd;">
-                    <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px;">
-                        <span style="background:#2563eb; color:white; border-radius:50%; width:26px; height:26px; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:0.88rem; flex-shrink:0;">2</span>
-                        <div style="font-weight:700; color:#1d4ed8; font-size:0.95rem;">对私域线索做意图分级，停止用一套话术对待所有人</div>
-                    </div>
-                    <div style="font-size:0.83rem; color:#374151; line-height:1.7;">
-                        直播引流进私域（看了 60 分钟，热度高）vs 小红书引流进私域（刚看了 9 张图，热度低）——这是两类完全不同的人。<br><br>
-                        <strong>需要做的：</strong><br>
-                        高意图线索（直播/B站来源）→ 快速推进，48 小时内给决策机会。<br>
-                        低意图线索（小红书/Push来源）→ 先做 7 天内容教育，再推销售话术。
-                    </div>
-                </div>
-
-                <div style="background:#fdf4ff; border-radius:10px; padding:18px; border:1px solid #d8b4fe;">
-                    <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px;">
-                        <span style="background:#7c3aed; color:white; border-radius:50%; width:26px; height:26px; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:0.88rem; flex-shrink:0;">3</span>
-                        <div style="font-weight:700; color:#6d28d9; font-size:0.95rem;">APP Push 的使命重定义：先接触内容，再引导加微</div>
-                    </div>
-                    <div style="font-size:0.83rem; color:#374151; line-height:1.7;">
-                        Push 通知的第一目标应该是把用户拉回 APP 看内容，让内容建立意图，再在内容结尾自然引导加微——而不是 Push → 直接引导加微（跳过了内容这一步）。<br><br>
-                        <strong>当前的操作顺序：</strong>Push → 加微 → 内容（错的）<br>
-                        <strong>正确的操作顺序：</strong>Push → 内容 → 加微（先给价值，再要信任动作）
-                    </div>
+                <div
+                    style="background:#eff6ff; border-radius:6px; padding:12px 14px; font-size:0.83rem; color:#1e3a5f; line-height:1.7; border-left:3px solid #0369a1;">
+                    <strong>为什么我们在没有 alpha 的渠道里放了最多资源？</strong><br>
+                    ① 它安全——合规风险低，不会出事；② 操作简单——不需要直播能力和内容生产；③ 历史惯性——以前就这么做，没人质疑过。<br>
+                    <strong>这是典型的"困于舒适区"的投放决策。</strong>最有效的渠道需要能力建设，最舒服的渠道没有 alpha，我们选了舒服的。
                 </div>
             </div>
 
-            <div style="margin-top:20px; background:#fef3c7; border-radius:10px; padding:16px 20px; border-left:4px solid #d97706;">
-                <div style="font-weight:700; color:#92400e; font-size:0.9rem; margin-bottom:8px;">⚡ 一句话总结</div>
-                <div style="font-size:0.88rem; color:#78350f; line-height:1.7;">
-                    <strong>这份数据不需要更好的执行，它需要更正确的认知。</strong><br>
-                    在修复私域话术、优化 APP Push 文案之前，先问自己：进入这个环节的用户，购买意图是怎么来的？是我们建立的，还是假设它应该存在的？<br>
-                    直播之所以好使，是因为它诚实地把"建立意图"的责任留在了自己手里——其他渠道都在把这个责任甩给下一个环节。
+            <div style="text-align:center; font-size:1.2rem; color:#c4b5fd; padding:4px;">↓</div>
+
+            <!-- Why 5 -->
+            <div style="background:#f8fafc; border-radius:10px; padding:18px 20px; border-left:4px solid #be185d;">
+                <div style="font-weight:800; font-size:0.9rem; color:#be185d; margin-bottom:10px;">🔍 Why 5 · 为什么小红书
+                    1.44%，它理论上应该比私域强？</div>
+                <div style="font-size:0.84rem; color:#334155; margin-bottom:12px; line-height:1.7;">
+                    小红书用户是被内容种草进来的，意图应该比冷线索更强。但结果和私域几乎一样烂。
+                </div>
+                <div
+                    style="background:white; border-radius:8px; padding:14px 16px; margin-bottom:10px; border:1px dashed #e2e8f0;">
+                    <div style="font-size:0.83rem; color:#374151; line-height:2;">
+                        用户在小红书看到的内容：<strong style="color:#be185d;">「声音变现 / 副业自由 / 月入过万」</strong>（感性、梦想、情绪）<br>
+                        进入私域后看到的：<strong style="color:#be185d;">课程大纲 / 功能介绍 / 价格</strong>（理性、功能、成本）<br>
+                        <br>
+                        用户在这次跳转中经历的是：<strong style="color:#dc2626;">期待 → 落差 → 意图消耗殆尽</strong>
+                    </div>
+                </div>
+                <div
+                    style="background:#fdf2f8; border-radius:6px; padding:12px 14px; font-size:0.83rem; color:#831843; line-height:1.7; border-left:3px solid #be185d;">
+                    <strong>这不是转化率问题，这是用户旅程一致性（User Journey Consistency）问题。</strong><br>
+                    来时是一种期待，接触后是另一种体验——购买意图在这个认知落差里被消耗殆尽。<br>
+                    修复方法：小红书的承接人和承接内容，必须和种草内容保持同一情绪温度和话语体系。
                 </div>
             </div>
         </div>
 
-    <div style="text-align: center; color: #888; font-size: 0.9em; margin-top: 20px; padding: 20px 0; border-top: 1px solid #e2e8f0;">
+        <!-- 终极结论 -->
+        <div
+            style="background: linear-gradient(135deg, #1e1b4b, #312e81); border-radius:12px; padding:24px; color:white; margin-bottom:24px;">
+            <div
+                style="font-size:0.8rem; font-weight:700; color:#c4b5fd; text-transform:uppercase; letter-spacing:0.06em; margin-bottom:12px;">
+                第一性原理 · 终极结论</div>
+            <div style="font-size:1.1rem; font-weight:800; color:#fbbf24; margin-bottom:16px; line-height:1.5;">
+                所有渠道问题的根因只有一个：<br>我们把「获取线索」和「建立购买意图」混为一谈了。
+            </div>
+            <div style="overflow-x:auto; margin-bottom:16px;">
+                <table style="width:100%; border-collapse:collapse; font-size:0.82rem;">
+                    <thead>
+                        <tr style="border-bottom:1px solid rgba(255,255,255,0.2);">
+                            <th style="padding:8px 12px; text-align:left; color:#c4b5fd; font-weight:600;">渠道</th>
+                            <th style="padding:8px 12px; text-align:center; color:#c4b5fd; font-weight:600;">意图建立完整度
+                            </th>
+                            <th style="padding:8px 12px; text-align:center; color:#c4b5fd; font-weight:600;">转化率</th>
+                            <th style="padding:8px 12px; text-align:left; color:#c4b5fd; font-weight:600;">核心逻辑</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="border-bottom:1px solid rgba(255,255,255,0.08);">
+                            <td style="padding:8px 12px; font-weight:700;">📺 直播</td>
+                            <td style="padding:8px 12px; text-align:center; color:#4ade80;">★★★★★</td>
+                            <td style="padding:8px 12px; text-align:center; font-weight:800; color:#4ade80;">5.62%</td>
+                            <td style="padding:8px 12px; color:#94a3b8; font-size:0.78rem;">60-90分钟完整情绪旅程，意图在场内完整建立</td>
+                        </tr>
+                        <tr style="border-bottom:1px solid rgba(255,255,255,0.08);">
+                            <td style="padding:8px 12px; font-weight:700;">📱 B站</td>
+                            <td style="padding:8px 12px; text-align:center; color:#86efac;">★★★★</td>
+                            <td style="padding:8px 12px; text-align:center; font-weight:800; color:#86efac;">4.41%</td>
+                            <td style="padding:8px 12px; color:#94a3b8; font-size:0.78rem;">长视频内容预建意图，用户带着明确期望进入私域</td>
+                        </tr>
+                        <tr style="border-bottom:1px solid rgba(255,255,255,0.08);">
+                            <td style="padding:8px 12px; font-weight:700;">🏠 站内资源位</td>
+                            <td style="padding:8px 12px; text-align:center; color:#fbbf24;">★★★</td>
+                            <td style="padding:8px 12px; text-align:center; font-weight:700; color:#fbbf24;">2.66%</td>
+                            <td style="padding:8px 12px; color:#94a3b8; font-size:0.78rem;">平台内信任基础，部分意图，但无 alpha</td>
+                        </tr>
+                        <tr style="border-bottom:1px solid rgba(255,255,255,0.08);">
+                            <td style="padding:8px 12px; font-weight:700;">📖 小红书</td>
+                            <td style="padding:8px 12px; text-align:center; color:#f87171;">★★</td>
+                            <td style="padding:8px 12px; text-align:center; font-weight:700; color:#f87171;">1.44%</td>
+                            <td style="padding:8px 12px; color:#94a3b8; font-size:0.78rem;">内容碎片化，跨场景承接断裂，用户旅程一致性差</td>
+                        </tr>
+                        <tr>
+                            <td style="padding:8px 12px; font-weight:700;">👥 私域</td>
+                            <td style="padding:8px 12px; text-align:center; color:#f87171;">★</td>
+                            <td style="padding:8px 12px; text-align:center; font-weight:700; color:#f87171;">1.37%</td>
+                            <td style="padding:8px 12px; color:#94a3b8; font-size:0.78rem;">冷线索为主，私域没有从零建立意图的能力</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- 3件真正要做的事 -->
+        <h3 style="font-size:1rem; font-weight:700; color:#1e293b; margin-bottom:16px;">🎯 基于根因分析，真正需要做的只有 3 件事</h3>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px,1fr)); gap:16px;">
+
+            <div style="background:#f0fdf4; border-radius:10px; padding:18px; border:1px solid #86efac;">
+                <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px;">
+                    <span
+                        style="background:#16a34a; color:white; border-radius:50%; width:26px; height:26px; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:0.88rem; flex-shrink:0;">1</span>
+                    <div style="font-weight:700; color:#15803d; font-size:0.95rem;">把直播当成「产品」来运营，而不是渠道</div>
+                </div>
+                <div style="font-size:0.83rem; color:#374151; line-height:1.7;">
+                    直播的本质是一台"压缩意图建立周期"的机器。场次、主播、内容节奏、高光时刻、引导动作——每一个细节都是转化率的乘数。<br><br>
+                    <strong>需要做的：</strong>不是"多开几场直播"，而是把这台机器的 SOP 标准化，明确每个时间节点的话术设计、情绪曲线、引导动作，让它可被复制地规模化扩量。
+                </div>
+            </div>
+
+            <div style="background:#eff6ff; border-radius:10px; padding:18px; border:1px solid #93c5fd;">
+                <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px;">
+                    <span
+                        style="background:#2563eb; color:white; border-radius:50%; width:26px; height:26px; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:0.88rem; flex-shrink:0;">2</span>
+                    <div style="font-weight:700; color:#1d4ed8; font-size:0.95rem;">对私域线索做意图分级，停止用一套话术对待所有人</div>
+                </div>
+                <div style="font-size:0.83rem; color:#374151; line-height:1.7;">
+                    直播引流进私域（看了 60 分钟，热度高）vs 小红书引流进私域（刚看了 9 张图，热度低）——这是两类完全不同的人。<br><br>
+                    <strong>需要做的：</strong><br>
+                    高意图线索（直播/B站来源）→ 快速推进，48 小时内给决策机会。<br>
+                    低意图线索（小红书/Push来源）→ 先做 7 天内容教育，再推销售话术。
+                </div>
+            </div>
+
+            <div style="background:#fdf4ff; border-radius:10px; padding:18px; border:1px solid #d8b4fe;">
+                <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px;">
+                    <span
+                        style="background:#7c3aed; color:white; border-radius:50%; width:26px; height:26px; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:0.88rem; flex-shrink:0;">3</span>
+                    <div style="font-weight:700; color:#6d28d9; font-size:0.95rem;">APP Push 的使命重定义：先接触内容，再引导加微</div>
+                </div>
+                <div style="font-size:0.83rem; color:#374151; line-height:1.7;">
+                    Push 通知的第一目标应该是把用户拉回 APP 看内容，让内容建立意图，再在内容结尾自然引导加微——而不是 Push → 直接引导加微（跳过了内容这一步）。<br><br>
+                    <strong>当前的操作顺序：</strong>Push → 加微 → 内容（错的）<br>
+                    <strong>正确的操作顺序：</strong>Push → 内容 → 加微（先给价值，再要信任动作）
+                </div>
+            </div>
+        </div>
+
+        <div
+            style="margin-top:20px; background:#fef3c7; border-radius:10px; padding:16px 20px; border-left:4px solid #d97706;">
+            <div style="font-weight:700; color:#92400e; font-size:0.9rem; margin-bottom:8px;">⚡ 一句话总结</div>
+            <div style="font-size:0.88rem; color:#78350f; line-height:1.7;">
+                <strong>这份数据不需要更好的执行，它需要更正确的认知。</strong><br>
+                在修复私域话术、优化 APP Push 文案之前，先问自己：进入这个环节的用户，购买意图是怎么来的？是我们建立的，还是假设它应该存在的？<br>
+                直播之所以好使，是因为它诚实地把"建立意图"的责任留在了自己手里——其他渠道都在把这个责任甩给下一个环节。
+            </div>
+        </div>
+    </div>
+
+    <div
+        style="text-align: center; color: #888; font-size: 0.9em; margin-top: 20px; padding: 20px 0; border-top: 1px solid #e2e8f0;">
         [华为 LTC 业务流大盘] 马长久指挥作战室 · 投放数据更新至：2026年03月04日
     </div>
 </body>

@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>03-04 内部会议纪要：组织绩效与战略目标对齐</title>
+    <style>
+        :root {
+            --primary: #FF4500;
+            --dark: #1a1a1a;
+            --light: #f5f5f5;
+            --text: #333;
+            --red: #d32f2f;
+            --green: #2e7d32;
+            --purple: #8b5cf6;
+            --blue: #2563eb;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--text);
+            background: #fff;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--dark) 0%, #334155 100%);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        header h1 {
+            color: white;
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+        }
+
+        header .subtitle {
+            color: #ccc;
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        section {
+            padding: 40px 0;
+        }
+
+        h2 {
+            border-bottom: 3px solid var(--primary);
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+            display: inline-block;
+            color: var(--dark);
+        }
+
+        h3 {
+            margin-top: 30px;
+            color: var(--dark);
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .alert-box {
+            padding: 20px;
+            border-radius: 6px;
+            margin-bottom: 30px;
+            border: 1px solid transparent;
+            background-color: #f0f9ff;
+            border-color: #bae6fd;
+            color: #0369a1;
+        }
+
+        .card {
+            background: #f9f9f9;
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--primary);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+        }
+
+        .card.finance {
+            border-left-color: var(--green);
+            background: #f0fdf4;
+        }
+
+        .card.ai {
+            border-left-color: var(--purple);
+            background: #faf5ff;
+        }
+
+        .card.risk {
+            border-left-color: var(--red);
+            background: #fffafa;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: white;
+            margin-right: 10px;
+        }
+
+        .badge.green {
+            background: var(--green);
+        }
+
+        .badge.red {
+            background: var(--red);
+        }
+
+        .badge.purple {
+            background: var(--purple);
+        }
+
+        .badge.blue {
+            background: var(--blue);
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        .action-item {
+            background: #fff;
+            border: 1px dashed var(--primary);
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 6px;
+        }
+
+        .action-item strong {
+            color: var(--primary);
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            background: #f5f5f5;
+            color: #888;
+            font-size: 0.9rem;
+            margin-top: 50px;
+        }
+
+        .breadcrumb {
+            padding: 15px 0;
+            color: #666;
+            font-size: 0.9rem;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 30px;
+        }
+
+        .breadcrumb a {
+            color: var(--text);
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--primary);
+        }
+
+        .breadcrumb .separator {
+            margin: 0 8px;
+            color: #ccc;
+        }
+
+        table.meta-table {
+            width: 100%;
+            background: #f8fafc;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+            border: 1px solid #e2e8f0;
+        }
+
+        table.meta-table td {
+            padding: 8px 10px;
+        }
+
+        table.meta-table td:first-child {
+            font-weight: bold;
+            color: #475569;
+            width: 100px;
+        }
+
+        .highlight-val {
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="container">
+            <h1>03-04 内部会议纪要：组织绩效与战略目标对齐</h1>
+            <div class="subtitle">深化BSC指标体系，强化AI重构权重，加速脱离喜马后的独立生存能力建设</div>
+        </div>
+    </header>
+
+    <div class="container">
+
+        <nav class="breadcrumb">
+            <a href="../../index.html">首页</a>
+            <span class="separator">/</span>
+            <span>每周战略追踪</span>
+            <span class="separator">/</span>
+            <span>03-04 会议纪要</span>
+        </nav>
+
+        <table class="meta-table">
+            <tr>
+                <td>会议时间：</td>
+                <td>2026年3月4日 16:41 - 18:20</td>
+            </tr>
+            <tr>
+                <td>参会人员：</td>
+                <td>蒋德铭(CEO)、余建军(老于)、陈小雨、任婷、沈杰强、马长久等</td>
+            </tr>
+            <tr>
+                <td>会议主题：</td>
+                <td>2026年BSC目标对齐、组织绩效权重调整、第一/第二曲线战略平衡、AI重塑深度</td>
+            </tr>
+        </table>
+
+        <section>
+            <h2>核心经营目标 (Financial & Strategy)</h2>
+
+            <div class="card finance">
+                <h3><span class="badge green">财务</span>1. 2026年度经营防线</h3>
+                <p>在分离喜马中后台成本（每年增加约4000万）的背景下，确保独立生存与盈利。</p>
+                <ul>
+                    <li><strong>营收目标：</strong> 全年净营收 <span class="highlight-val">5 亿元</span> (扣除退费)。</li>
+                    <li><strong>利润目标：</strong> 净利润率 <span class="highlight-val">10%</span> (约 <span
+                            class="highlight-val">5000 万</span>)。</li>
+                    <li><strong>当前状态：</strong> 1-2月累计亏损约500万，目标在6月前实现单月盈亏平衡，下半年发力完成利润目标。</li>
+                </ul>
+            </div>
+
+            <div class="card risk">
+                <h3><span class="badge red">风控</span>2. 健康度评估体系：从“投诉率”到“毒性价值”</h3>
+                <p>引入更科学的健康度指标，识别并拦截高风险用户（大黑用户）。</p>
+                <ul>
+                    <li><strong>核心指标：</strong> <span class="highlight-val">百万元投诉权重订单金额</span>。</li>
+                    <li><strong>逻辑：</strong> 对不同严重程度的反馈设计阶梯权重（如：媒体/监管介入权重最高，表达不满次之），精准反映健康度而非简单的一刀切投诉率。</li>
+                    <li><strong>大黑拦截：</strong> 3.15前严守底线，3.15后适度松绑话术，给予用户合规范围内的“造梦价值”。</li>
+                </ul>
+            </div>
+
+            <div class="card ai">
+                <h3><span class="badge purple">AI重构</span>3. AI 数字化原生组织改造</h3>
+                <p>陈小雨、余建军高度关注 AI 在组织中的权力和深度，认为目前的 10% “学习成长”权重过低。</p>
+                <ul>
+                    <li><strong>权重调整：</strong> 建议大幅提升 AI 相关指标权重。领导层需以身作则，将 30% 以上精力投入 AI 解决方案，带动整体效率提升。</li>
+                    <li><strong>核心任务：</strong> 80% 的全职岗位实现 AI 重构，建立 AI 优秀实践者扩散机制。</li>
+                    <li><strong>底层逻辑：</strong> 用 AI 建立持续挖掘洞察需求的能力，提升产品与服务的核心竞争力。</li>
+                </ul>
+            </div>
+        </section>
+
+        <section>
+            <h2>关键讨论记录</h2>
+
+            <div class="card">
+                <h3>陈小雨：产品竞争力的根问题</h3>
+                <p>“AI系统自己没法直接出路，它只能基于既有系统发现不自洽。真正的解题需要回到产品和服务竞争力的根问题。如果在错误的方向上坚持，再大的勇气也是死的。”</p>
+                <p><strong>主张：</strong> 上半年必须达成对新产品、新服务、新商业模式底层逻辑的“真共识”，而非单纯卖梦想。必须用 AI 武装全员，实现“以一当十”的颠覆式效率。</p>
+            </div>
+
+            <div class="card">
+                <h3>蒋德铭：由“狩猎”转向“农耕”</h3>
+                <p>“今年战略定位为‘蓄力年’。6月之前是‘软着陆’期，严守合规底线，防止爆雷。同时验证第二曲线（订阅/大健康模型）的粘性，不追求瞬间爆发，追求健康持续。”</p>
+            </div>
+
+            <div class="card">
+                <h3>马长久：生存与合规的平衡木</h3>
+                <p>“目前销售转化率受限于高度收严的话术，跌至0.8%左右。我们需要在315之后，在杜康杰严控的边界内，找回可交付、可自洽的卖点，保证公司‘气不断’。”</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>后续待办 (Action Items)</h2>
+            <div class="action-item">
+                <strong>1. 财务模型校准：</strong> Jerry 安排财务负责人与马长久对接，针对“喜马离岸”后的新成本结构、AI减耗潜力、退费计提模型进行精细化测算。
+            </div>
+            <div class="action-item">
+                <strong>2. BSC权重迭代：</strong> 蒋德铭带队重新平衡 BSC 权重，特别是针对“学习与成长”模块中 AI 指标的牵引力设计。
+            </div>
+            <div class="action-item">
+                <strong>3. 服务权限对齐：</strong> 任婷落实陈苗等 SSC 人员的审批权限，确保剥离后学员服务的及时响应与响应质量。
+            </div>
+            <div class="action-item">
+                <strong>4. AI 优秀实践萃取：</strong> 整理目前各战役中 1% 的优秀 AI 应用案例，设计全员扩散机制。
+            </div>
+        </section>
+
+    </div>
+
+    <footer>
+        &copy; 2026 喜播集团战略办公室 | 内部资料，请勿外传
+    </footer>
+
+</body>
+
+</html>
