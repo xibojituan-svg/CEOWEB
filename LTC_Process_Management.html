@@ -16,264 +16,181 @@
             --white: #ffffff;
 
             --ltc-lead: #3b82f6;
-            /* ML: Manage Leads */
             --ltc-opp: #8b5cf6;
-            /* MO: Manage Opportunity */
             --ltc-contract: #f59e0b;
-            /* MC: Manage Contract */
             --ltc-cash: #10b981;
-            /* MCE: Manage Cash/Execution */
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
-            background: #f1f5f9;
-            color: var(--dark);
-            line-height: 1.6;
+            background: #f1f5f9; color: var(--dark); line-height: 1.6;
         }
 
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
+        .container { max-width: 1400px; margin: 0 auto; padding: 0 24px; }
 
         header {
             background: linear-gradient(135deg, var(--dark) 0%, #1e293b 100%);
-            color: var(--white);
-            padding: 32px 0;
+            color: var(--white); padding: 32px 0;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
         }
-
-        header h1 {
-            font-size: 2rem;
-            margin-bottom: 8px;
-            color: #38bdf8;
-        }
-
-        header p {
-            font-size: 1.05rem;
-            color: #cbd5e1;
-        }
+        header h1 { font-size: 2rem; margin-bottom: 8px; color: #38bdf8; }
+        header p { font-size: 1.05rem; color: #cbd5e1; }
 
         .section-title {
-            margin: 40px 0 20px;
-            position: relative;
-            padding-left: 16px;
-            font-size: 1.5rem;
-            color: var(--dark);
-            display: flex;
-            align-items: center;
+            margin: 40px 0 20px; position: relative; padding-left: 16px;
+            font-size: 1.5rem; color: var(--dark);
+            display: flex; align-items: center;
         }
-
         .section-title::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 4px;
-            bottom: 4px;
-            width: 5px;
-            background: var(--primary);
-            border-radius: 4px;
+            content: ''; position: absolute; left: 0; top: 4px; bottom: 4px;
+            width: 5px; background: var(--primary); border-radius: 4px;
         }
 
-        /* Card Setup */
         .card {
-            background: var(--white);
-            border-radius: 12px;
-            padding: 24px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            background: var(--white); border-radius: 12px; padding: 24px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.03);
             margin-bottom: 24px;
         }
 
-        /* 华为 LTC 流程图 */
-        .ltc-stages {
-            display: flex;
-            gap: 16px;
-            margin-bottom: 30px;
-            overflow-x: auto;
-            padding-bottom: 15px;
+        /* 投放数据大盘 */
+        .data-header {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            border-radius: 12px; padding: 24px; margin-bottom: 24px; color: white;
         }
-
-        .stage-box {
-            flex: 1;
-            min-width: 280px;
-            background: var(--white);
-            border-radius: 10px;
-            border-top: 5px solid var(--gray);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-        }
-
-        .stage-box:nth-child(1) {
-            border-color: var(--ltc-lead);
-        }
-
-        .stage-box:nth-child(2) {
-            border-color: var(--ltc-opp);
-        }
-
-        .stage-box:nth-child(3) {
-            border-color: var(--ltc-contract);
-        }
-
-        .stage-box:nth-child(4) {
-            border-color: var(--ltc-cash);
-        }
-
-        .stage-header {
-            padding: 16px;
-            background: var(--light);
-            border-bottom: 1px solid #e2e8f0;
-            text-align: center;
-        }
-
-        .stage-header h3 {
-            font-size: 1.15rem;
-            color: var(--dark);
-            margin-bottom: 4px;
-        }
-
-        .stage-header p {
-            font-size: 0.8rem;
-            color: var(--gray);
-        }
-
-        .stage-content {
-            padding: 16px;
-            flex-grow: 1;
-            background: #fafafa;
-        }
-
-        /* Task Cards */
-        .task-list {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .task-card {
-            background: var(--white);
-            border: 1px solid #e2e8f0;
-            border-radius: 6px;
-            padding: 12px;
-            position: relative;
-            transition: all 0.2s;
-        }
-
-        .task-card:hover {
-            border-color: #cbd5e1;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-            transform: translateY(-2px);
-        }
-
-        .task-card h4 {
-            font-size: 0.95rem;
-            color: var(--dark);
-            margin-bottom: 6px;
-            padding-right: 24px;
-        }
-
-        .task-card p {
-            font-size: 0.8rem;
-            color: #475569;
-            margin-bottom: 8px;
-            line-height: 1.4;
-        }
-
-        .tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-        }
-
-        .tag {
-            font-size: 0.7rem;
-            padding: 2px 8px;
-            background: #e2e8f0;
-            color: #475569;
-            border-radius: 12px;
-            font-weight: 600;
-        }
-
-        .tag.alert {
-            background: #fee2e2;
-            color: #dc2626;
-        }
-
-        .tag.success {
-            background: #dcfce7;
-            color: #16a34a;
-        }
-
-        .tag.info {
-            background: #dbeafe;
-            color: #2563eb;
-        }
-
-        .tag.warning {
-            background: #fef3c7;
-            color: #d97706;
-        }
-
-        .owner-avatar {
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            width: 24px;
-            height: 24px;
-            background: var(--dark);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.7rem;
-            font-weight: bold;
-        }
-
-        /* match scale */
-        .match-scale {
-            padding: 20px;
-            background: linear-gradient(to right, #f8fafc, #f1f5f9);
-            border-radius: 8px;
-            border-left: 4px solid var(--accent);
+        .data-kpi-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 16px;
             margin-top: 20px;
         }
-
-        .match-score {
-            font-size: 2rem;
-            font-weight: bold;
-            color: var(--primary);
-            margin-bottom: 10px;
+        .data-kpi {
+            background: rgba(255,255,255,0.08); border-radius: 10px; padding: 16px;
+            text-align: center; border: 1px solid rgba(255,255,255,0.12);
         }
+        .data-kpi .val { font-size: 1.6rem; font-weight: 800; color: #38bdf8; }
+        .data-kpi .lbl { font-size: 0.75rem; color: #94a3b8; margin-top: 4px; }
+
+        /* Channel Table */
+        .channel-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+        .channel-table th {
+            padding: 10px 14px; text-align: left; font-size: 0.75rem;
+            font-weight: 700; text-transform: uppercase; color: var(--gray);
+            background: #f8fafc; border-bottom: 2px solid #e2e8f0;
+        }
+        .channel-table td { padding: 11px 14px; border-bottom: 1px solid #f1f5f9; }
+        .channel-table tr:last-child td { border-bottom: none; }
+        .channel-table tr:hover td { background: #f8fafc; }
+        .rate-good { color: #16a34a; font-weight: 700; }
+        .rate-warn { color: #d97706; font-weight: 700; }
+        .rate-bad  { color: #dc2626; font-weight: 700; }
+
+        .badge {
+            display: inline-flex; align-items: center; gap: 4px;
+            padding: 2px 8px; border-radius: 12px; font-size: 0.72rem; font-weight: 700;
+        }
+        .badge-green { background: #dcfce7; color: #16a34a; }
+        .badge-red   { background: #fee2e2; color: #dc2626; }
+        .badge-yellow{ background: #fef3c7; color: #d97706; }
+        .badge-blue  { background: #dbeafe; color: #2563eb; }
+
+        /* Problem Analysis */
+        .problem-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px;
+        }
+        .problem-card {
+            border-radius: 10px; padding: 18px;
+            border-left: 4px solid currentColor;
+        }
+        .problem-card.critical { background: #fff5f5; color: #dc2626; }
+        .problem-card.warning  { background: #fffbeb; color: #d97706; }
+        .problem-card.opportunity { background: #f0fdf4; color: #16a34a; }
+
+        .problem-card h4 { font-size: 0.95rem; margin-bottom: 8px; font-weight: 700; }
+        .problem-card ul { padding-left: 16px; font-size: 0.83rem; color: #334155; line-height: 1.8; }
+
+        /* LTC board */
+        .ltc-stages {
+            display: flex; gap: 16px; margin-bottom: 30px;
+            overflow-x: auto; padding-bottom: 15px;
+        }
+        .stage-box {
+            flex: 1; min-width: 280px; background: var(--white);
+            border-radius: 10px; border-top: 5px solid var(--gray);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            display: flex; flex-direction: column; overflow: hidden;
+        }
+        .stage-box:nth-child(1) { border-color: var(--ltc-lead); }
+        .stage-box:nth-child(2) { border-color: var(--ltc-opp); }
+        .stage-box:nth-child(3) { border-color: var(--ltc-contract); }
+        .stage-box:nth-child(4) { border-color: var(--ltc-cash); }
+
+        .stage-header {
+            padding: 16px; background: var(--light);
+            border-bottom: 1px solid #e2e8f0; text-align: center;
+        }
+        .stage-header h3 { font-size: 1.1rem; color: var(--dark); margin-bottom: 4px; }
+        .stage-header p { font-size: 0.8rem; color: var(--gray); }
+
+        .stage-content { padding: 16px; flex-grow: 1; background: #fafafa; }
+        .task-list { display: flex; flex-direction: column; gap: 12px; }
+
+        .task-card {
+            background: var(--white); border: 1px solid #e2e8f0;
+            border-radius: 6px; padding: 12px; position: relative; transition: all 0.2s;
+        }
+        .task-card:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+            transform: translateY(-2px);
+        }
+        .task-card h4 { font-size: 0.95rem; color: var(--dark); margin-bottom: 6px; padding-right: 28px; }
+        .task-card p  { font-size: 0.8rem; color: #475569; margin-bottom: 8px; line-height: 1.4; }
+
+        /* status ring */
+        .task-card.executing { border-left: 3px solid #10b981; }
+        .task-card.blocked   { border-left: 3px solid #dc2626; }
+        .task-card.new-action{ border-left: 3px solid #f59e0b; }
+
+        .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+        .tag {
+            font-size: 0.7rem; padding: 2px 8px;
+            background: #e2e8f0; color: #475569;
+            border-radius: 12px; font-weight: 600;
+        }
+        .tag.alert   { background: #fee2e2; color: #dc2626; }
+        .tag.success { background: #dcfce7; color: #16a34a; }
+        .tag.info    { background: #dbeafe; color: #2563eb; }
+        .tag.warning { background: #fef3c7; color: #d97706; }
+        .tag.new     { background: #fdf4ff; color: #9333ea; border: 1px solid #e9d5ff; }
+
+        .owner-avatar {
+            position: absolute; top: 12px; right: 12px;
+            width: 24px; height: 24px; background: var(--dark); color: white;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 0.7rem; font-weight: bold;
+        }
+
+        .verdict-bar {
+            padding: 20px 24px; border-radius: 10px;
+            background: linear-gradient(to right, #f8fafc, #f1f5f9);
+            border-left: 5px solid var(--accent); margin-top: 20px;
+        }
+        .verdict-score {
+            font-size: 1.8rem; font-weight: 800; color: var(--primary); margin-bottom: 10px;
+        }
+        .verdict-item {
+            display: flex; align-items: flex-start; gap: 8px;
+            font-size: 0.88rem; color: #475569; margin-top: 8px; line-height: 1.5;
+        }
+        .verdict-item .icon { flex-shrink: 0; margin-top: 2px; }
 
         @media (max-width: 1024px) {
-            .ltc-stages {
-                flex-wrap: wrap;
-            }
-
-            .stage-box {
-                min-width: 45%;
-            }
+            .ltc-stages { flex-wrap: wrap; }
+            .stage-box  { min-width: 45%; }
         }
-
         @media (max-width: 640px) {
-            .stage-box {
-                min-width: 100%;
-            }
-
-            .ltc-stages {
-                flex-direction: column;
-            }
+            .stage-box { min-width: 100%; }
+            .ltc-stages { flex-direction: column; }
         }
     </style>
 </head>
@@ -283,43 +200,179 @@
         <div class="container">
             <h1>LTC (Lead to Cash) 业务全链路转化大盘</h1>
             <p>总指挥：马长久 (第一曲线负责人) | 核心目标：<a href="CleanRevenue.html"
-                    style="color:var(--primary); font-weight:bold; text-decoration: underline;">净营收 5.0亿 / 净利润 5000万</a>
-                | 基于华为 LTC 流程框架</p>
+                    style="color:#38bdf8; font-weight:bold; text-decoration: underline;">净营收 5.0亿 / 净利润 5000万</a>
+                | 数据更新至：2026年03月04日 · 基于华为 LTC 框架</p>
         </div>
     </header>
 
     <div class="container" style="padding-top: 20px; padding-bottom: 40px;">
 
-        <!-- LTC 模型概述 -->
-        <h2 class="section-title">一、LTC 架构与喜播当前业务逻辑的映射</h2>
-        <div class="card"
-            style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px;">
-            <div>
-                <h3 style="color: var(--primary); margin-bottom: 12px; font-size: 1.1rem;">什么是 LTC 工具论？</h3>
-                <p style="font-size: 0.95rem; color: #475569; margin-bottom: 12px;">华为 LTC
-                    是从“发现线索(Leads)”到“实现回款(Cash)”的端到端端业务流。不仅关注能不能将东西卖出去，更关注销售的质量、合同防范及真实的利润回水。</p>
-                <div
-                    style="background: var(--light); padding: 12px; border-radius: 8px; font-size: 0.85rem; color: #64748b;">
-                    <ul style="padding-left: 20px; line-height: 1.8;">
-                        <li><strong>ML (Manage Leads):</strong> 线索生成与筛选 (公海/投放)</li>
-                        <li><strong>MO (Manage Opps):</strong> 机会点培育与转化 (零元企微/体验营)</li>
-                        <li><strong>MC (Manage Contract):</strong> 谈判与签约确认 (支付与合规红线)</li>
-                        <li><strong>MCE (Manage Execution):</strong> 交付执行与回款复购 (正价班交付/长尾社群)</li>
-                    </ul>
+        <!-- ══ 零、2月-3月投放实况大盘 ══ -->
+        <h2 class="section-title">零、2月-3月 投放实况数据（2026-02-01 ~ 2026-03-03）</h2>
+
+        <div class="data-header">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:12px;">
+                <div>
+                    <div style="font-size:0.8rem; color:#94a3b8; font-weight:600; text-transform:uppercase; letter-spacing:0.05em;">业务线：喜播有声书 · 前端转化大盘</div>
+                    <div style="font-size:1.5rem; font-weight:800; color:white; margin-top:4px;">2月-3月初 综合转化率 2.65%</div>
+                    <div style="font-size:0.85rem; color:#94a3b8; margin-top:4px;">月均目标线：≥2.5% ✅ 勉强达标，但结构风险隐患大</div>
+                </div>
+                <div style="text-align:right;">
+                    <span class="badge badge-yellow" style="font-size:0.82em; padding:4px 12px;">⚠️ 渠道结构严重不均衡</span>
                 </div>
             </div>
-            <div>
-                <h3 style="color: #0f172a; margin-bottom: 12px; font-size: 1.1rem;">为什么要用 LTC 审视马长久的策略？</h3>
-                <p style="font-size: 0.95rem; color: #475569; margin-bottom: 12px;">
-                    过往，业务过度依赖前端投放和“适度造梦”做一锤子买卖，导致后端交付引发客诉（高退费率毁掉了Clean Revenue）。</p>
-                <p style="font-size: 0.95rem; color: #475569;">必须用 LTC 强制拉通“营销→销售→交付”的屏障，马长久的
-                    <strong>「流量洗源」</strong>、<strong>「兼顾情绪的真实价值销售」</strong>、<strong>「高满意度服务交付」</strong> 均可无缝对应此链路。
-                </p>
+            <div class="data-kpi-grid">
+                <div class="data-kpi">
+                    <div class="val">¥899万</div>
+                    <div class="lbl">区间总现金流</div>
+                </div>
+                <div class="data-kpi">
+                    <div class="val">2.65%</div>
+                    <div class="lbl">综合转化率</div>
+                </div>
+                <div class="data-kpi">
+                    <div class="val">¥6,096</div>
+                    <div class="lbl">正价平均客单价</div>
+                </div>
+                <div class="data-kpi">
+                    <div class="val">86,355</div>
+                    <div class="lbl">总订单数（低价流量）</div>
+                </div>
+                <div class="data-kpi">
+                    <div class="val">48,222</div>
+                    <div class="lbl">有效加微数</div>
+                </div>
+                <div class="data-kpi">
+                    <div class="val" style="color:#fb923c;">64%</div>
+                    <div class="lbl">订单加微率</div>
+                </div>
+                <div class="data-kpi">
+                    <div class="val">1,491</div>
+                    <div class="lbl">正价订单成交数</div>
+                </div>
             </div>
         </div>
 
-        <!-- 看板 Board -->
-        <h2 class="section-title">二、基于 LTC 流程的 GSA 核心战役作战大盘</h2>
+        <!-- 渠道明细 -->
+        <div class="card">
+            <h3 style="color:var(--dark); font-size:1.1rem; margin-bottom:16px;">📊 各渠道转化率详情（有声书线）</h3>
+            <div style="overflow-x:auto;">
+                <table class="channel-table">
+                    <thead>
+                        <tr>
+                            <th>渠道</th>
+                            <th>正价金额</th>
+                            <th>转化率</th>
+                            <th>加微率</th>
+                            <th>状态判断</th>
+                            <th>LTC 归属环节</th>
+                            <th>策略指令</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>📺 直播渠道</strong></td>
+                            <td>¥143.7万</td>
+                            <td><span class="rate-good">5.62%</span></td>
+                            <td><span class="rate-good">95%</span></td>
+                            <td><span class="badge badge-green">✅ 最优渠道</span></td>
+                            <td>ML → MO</td>
+                            <td>加大资源投入，复制爆款直播话术</td>
+                        </tr>
+                        <tr>
+                            <td><strong>📱 B站</strong></td>
+                            <td>¥114.7万</td>
+                            <td><span class="rate-good">4.41%</span></td>
+                            <td>—</td>
+                            <td><span class="badge badge-green">✅ 优质渠道</span></td>
+                            <td>ML</td>
+                            <td>持续扩量，内容矩阵深化</td>
+                        </tr>
+                        <tr>
+                            <td><strong>🏠 站内资源位</strong></td>
+                            <td>¥325.8万</td>
+                            <td><span class="rate-good">2.66%</span></td>
+                            <td>—</td>
+                            <td><span class="badge badge-blue">📌 基本盘</span></td>
+                            <td>ML</td>
+                            <td>维稳为主，优化投放人群包精准度</td>
+                        </tr>
+                        <tr>
+                            <td><strong>📖 小红书</strong></td>
+                            <td>¥32.9万</td>
+                            <td><span class="rate-bad">1.44%</span></td>
+                            <td>—</td>
+                            <td><span class="badge badge-red">🚨 转化异常</span></td>
+                            <td>ML → MO 断裂</td>
+                            <td>诊断：流量质量低 or 承接链路断裂</td>
+                        </tr>
+                        <tr>
+                            <td><strong>👥 私域</strong></td>
+                            <td>¥35.3万</td>
+                            <td><span class="rate-bad">1.37%</span></td>
+                            <td>—</td>
+                            <td><span class="badge badge-red">🚨 转化最低</span></td>
+                            <td>MO 失效</td>
+                            <td>紧急：私域 MO 话术/运营出严重问题</td>
+                        </tr>
+                        <tr style="background:#fff7ed;">
+                            <td><strong>📲 APP Push</strong></td>
+                            <td>—</td>
+                            <td>—</td>
+                            <td><span class="rate-bad">44%</span></td>
+                            <td><span class="badge badge-red">🚨 加微漏洞</span></td>
+                            <td>ML 漏斗顶部</td>
+                            <td>加微引导流程存在断点，大量流量白白流失</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- ══ 一、核心问题诊断 ══ -->
+        <h2 class="section-title">一、投放策略核心问题诊断（基于2月-3月实际数据）</h2>
+
+        <div class="problem-grid">
+            <div class="problem-card critical">
+                <h4>🚨 问题一：私域与小红书 MO 链路断裂</h4>
+                <ul>
+                    <li>私域转化率 1.37%，小红书 1.44%——均不到直播的 1/4</li>
+                    <li>现象：流量进来了，但漏斗中段（加微后承接/话术）丧失用户</li>
+                    <li>根因假设：①私域班主任承接话术太"说教"，缺乏情绪价值塑造；②小红书引流内容与落地页/承接人不匹配，用户温度消耗殆尽</li>
+                    <li><strong>危害：</strong>每月浪费数十万投放成本，ROI无法改善</li>
+                </ul>
+            </div>
+            <div class="problem-card critical">
+                <h4>🚨 问题二：APP Push 加微率仅 44%（行业基准 70%+）</h4>
+                <ul>
+                    <li>直播渠道加微率 95%，APP Push 仅 44%——差距接近一倍</li>
+                    <li>意味着超过一半的 APP 用户点击后没有成功加入私域池</li>
+                    <li>根因：吐码流程复杂 / 企微账号被限 / 引导文案转化力弱</li>
+                    <li><strong>危害：</strong>ML 漏斗顶部直接漏掉一半流量，后续所有 MO 机会丧失</li>
+                </ul>
+            </div>
+            <div class="problem-card warning">
+                <h4>⚠️ 问题三：渠道结构过于集中单点风险高</h4>
+                <ul>
+                    <li>站内资源位贡献 36% 总流水，但这属于平台内生流量，无法主动扩量</li>
+                    <li>直播 + B站 虽然转化率高，但规模较小（合计不到 30% 流水）</li>
+                    <li>一旦站内资源位政策调整，整体业绩将直接受损</li>
+                    <li><strong>建议：</strong>直播作为第二增长引擎，需制定明确扩量计划</li>
+                </ul>
+            </div>
+            <div class="problem-card opportunity">
+                <h4>✅ 机会：直播 + B站 是 3月冲刺的最优增量抓手</h4>
+                <ul>
+                    <li>直播 5.62% 转化率——是综合水平的 2.1 倍</li>
+                    <li>B站 4.41%——是综合水平的 1.7 倍</li>
+                    <li>两个渠道加微率高、用户温度高，话术复制成本低</li>
+                    <li><strong>立即行动：</strong>将直播话术固化 SOP，3月扩场次 + B站内容矩阵加密发布</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- ══ 二、LTC 核心战役看板（含数据验证） ══ -->
+        <h2 class="section-title">二、LTC 流程 GSA 作战大盘 · 含策略执行验证</h2>
 
         <div class="ltc-stages">
 
@@ -327,25 +380,44 @@
             <div class="stage-box">
                 <div class="stage-header">
                     <h3 style="color: var(--ltc-lead);">ML: 管理线索 (引流)</h3>
-                    <p>Lead Generation & Qualification</p>
+                    <p>Lead Generation &amp; Qualification</p>
                 </div>
                 <div class="stage-content">
                     <div class="task-list">
-                        <div class="task-card">
+                        <div class="task-card executing">
                             <div class="owner-avatar">马</div>
                             <h4>高转化安全素材投放恢复</h4>
-                            <p>重建并在4月全网投放“高转化安全素材”，打通核心账户重启流程。放弃“极速兜底致富”类违规引流。</p>
+                            <p>重建并推进合规投放素材。放弃"极速致富"类违规引流，转向真实案例驱动的价值型内容。</p>
                             <div class="tags">
                                 <span class="tag info">流量洗源</span>
                                 <span class="tag alert">禁违规承诺</span>
                             </div>
                         </div>
-                        <div class="task-card">
-                            <div class="owner-avatar">姚</div>
-                            <h4>需特殊关怀用户(羊毛党)前置过滤</h4>
-                            <p>全渠道风控黑名单拦截系统对接上线。杜绝拉低业务质量的高危线索流入公海。</p>
+                        <div class="task-card executing">
+                            <div class="owner-avatar">马</div>
+                            <h4>直播 + B站 作为冲刺增量引擎 <span class="badge badge-green" style="font-size:0.68em;">✅ 数据验证正确</span></h4>
+                            <p>直播转化率 5.62%、B站 4.41%——均为全渠道最优，证明马长久聚焦高质量渠道的方向正确。需立即制定扩量计划。</p>
                             <div class="tags">
-                                <span class="tag success">拦截率 100%目标</span>
+                                <span class="tag success">直播 5.62%</span>
+                                <span class="tag success">B站 4.41%</span>
+                                <span class="tag new">3月重点扩量</span>
+                            </div>
+                        </div>
+                        <div class="task-card blocked">
+                            <div class="owner-avatar">姚</div>
+                            <h4>APP Push 加微率修复 <span class="badge badge-red" style="font-size:0.68em;">🚨 执行异常</span></h4>
+                            <p>APP Push 加微率仅 44%（直播 95%），顶部漏斗严重漏水。需紧急排查吐码流程、企微账号限制及引导文案。</p>
+                            <div class="tags">
+                                <span class="tag alert">加微率 44% ⚠️</span>
+                                <span class="tag warning">紧急修复</span>
+                            </div>
+                        </div>
+                        <div class="task-card executing">
+                            <div class="owner-avatar">姚</div>
+                            <h4>需特殊关怀用户前置过滤</h4>
+                            <p>全渠道风控黑名单拦截系统对接上线，拦截率目标≥98%（三方已确认）。</p>
+                            <div class="tags">
+                                <span class="tag success">拦截率 ≥98%</span>
                             </div>
                         </div>
                     </div>
@@ -360,71 +432,109 @@
                 </div>
                 <div class="stage-content">
                     <div class="task-list">
-                        <div class="task-card">
+                        <div class="task-card executing">
                             <div class="owner-avatar">马</div>
-                            <h4>“情绪+真实价值”销售重构</h4>
-                            <p>针对A+平台变动重构转化漏斗。在不过度理想化风控的前提下，恢复“适度造梦”与情绪价值交付。</p>
+                            <h4>"情绪 + 真实价值"销售重构 <span class="badge badge-green" style="font-size:0.68em;">✅ 方向正确</span></h4>
+                            <p>直播渠道 5.62% 转化率已验证"情绪塑造 + 真实案例"话术有效。需将直播话术标准化为 SOP，向私域、小红书渠道横向复制。</p>
                             <div class="tags">
-                                <span class="tag warning">平衡转化与底线</span>
-                                <span class="tag">0元课转化率≥2.5%</span>
+                                <span class="tag success">直播验证有效</span>
+                                <span class="tag warning">需横向复制</span>
                             </div>
                         </div>
-                        <div class="task-card">
+                        <div class="task-card blocked">
+                            <div class="owner-avatar">马</div>
+                            <h4>私域 MO 承接链路修复 <span class="badge badge-red" style="font-size:0.68em;">🚨 核心堵点</span></h4>
+                            <p>私域转化率仅 1.37%，是最大的单点问题。根因疑为：加微后无有效暖场话术、班主任承接缺乏情绪价值、0元课到正价课跳转太急。</p>
+                            <div class="tags">
+                                <span class="tag alert">私域 1.37% ‼️</span>
+                                <span class="tag new">紧急诊断</span>
+                            </div>
+                        </div>
+                        <div class="task-card blocked">
+                            <div class="owner-avatar">马</div>
+                            <h4>小红书到私域承接断点修复 <span class="badge badge-red" style="font-size:0.68em;">🚨 执行异常</span></h4>
+                            <p>小红书转化率 1.44%。推断：小红书引流内容与承接人/落地页定位偏差大，用户进入私域后"温度骤降"。需重新对齐内容种草与承接话术。</p>
+                            <div class="tags">
+                                <span class="tag alert">小红书 1.44% ‼️</span>
+                                <span class="tag warning">内容-承接错位</span>
+                            </div>
+                        </div>
+                        <div class="task-card executing">
                             <div class="owner-avatar">杜</div>
-                            <h4>三方话术公审白名单机制</h4>
-                            <p>销售(马)、合规(杜)及CEO共同确认“标准白名单话术”，明确销售沟通的雷区与自由度。</p>
+                            <h4>铁三角话术白名单机制</h4>
+                            <p>马（业务）/ 康姐（风控）/ 苏老师（课程）三方书面确认合规话术边界，已建立标准流程，持续运行中。</p>
                             <div class="tags">
                                 <span class="tag alert">红线防范</span>
+                                <span class="tag success">三方签字确认</span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- 3. MC 管理合同 -->
+            <!-- 3. MC 管理交易 -->
             <div class="stage-box">
                 <div class="stage-header">
                     <h3 style="color: var(--ltc-contract);">MC: 管理交易 (决断风控)</h3>
-                    <p>Manage Contract & Payment</p>
+                    <p>Manage Contract &amp; Payment</p>
                 </div>
                 <div class="stage-content">
                     <div class="task-list">
-                        <div class="task-card">
+                        <div class="task-card executing">
                             <div class="owner-avatar">马</div>
-                            <h4>引入“冷静期支付确认”</h4>
-                            <p>在付款闭环环节，加入系统级的用户知情确认。将隐患掐死在签约(Payment)瞬间前，避免后期爆雷退费。</p>
+                            <h4>引入"冷静期支付确认"</h4>
+                            <p>在付款闭环环节，加入系统级的用户知情确认。将隐患掐死在签约前，避免后期爆雷退费。</p>
                             <div class="tags">
-                                <span class="tag success">保护Clean Revenue</span>
+                                <span class="tag success">保护 Clean Revenue</span>
                                 <span class="tag info">联调产研</span>
+                            </div>
+                        </div>
+                        <div class="task-card new-action">
+                            <div class="owner-avatar">杜</div>
+                            <h4>特殊关怀用户三层分级管控 <span class="badge badge-yellow" style="font-size:0.68em;">📌 3月新增</span></h4>
+                            <p>大黑用户：强劝退（98%拦截）；大灰用户：加强告知 + 书面确认签字放行；普通用户：常规提示。已在 MC 环节内置系统判定。</p>
+                            <div class="tags">
+                                <span class="tag new">三层分级</span>
+                                <span class="tag success">02-28 管理层确认</span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- 4. MCE 管理交付与回款 -->
+            <!-- 4. MCE 交付与变现 -->
             <div class="stage-box">
                 <div class="stage-header">
                     <h3 style="color: var(--ltc-cash);">MCE: 交付与变现 (复购)</h3>
-                    <p>Execution, Delivery & Cash</p>
+                    <p>Execution, Delivery &amp; Cash</p>
                 </div>
                 <div class="stage-content">
                     <div class="task-list">
-                        <div class="task-card">
+                        <div class="task-card executing">
                             <div class="owner-avatar">苏</div>
-                            <h4>“真人+AI”双轨伴学与精准复购</h4>
-                            <p>确保交付质量（NPS≥85）。班主任在情绪兴奋节点(如首个作品完成)进行1对1升单/复购推介（高毛利器材/进阶课）。</p>
+                            <h4>"真人 + AI"双轨伴学与精准复购</h4>
+                            <p>确保交付质量（NPS≥85）。班主任在情绪兴奋节点（首个作品完成）推介升单/复购。复购 UE 已达 40%，是最健康的利润来源。</p>
                             <div class="tags">
-                                <span class="tag success">复购提升20%</span>
+                                <span class="tag success">复购 UE 40%</span>
                                 <span class="tag info">协同教研(苏秦)</span>
                             </div>
                         </div>
-                        <div class="task-card">
+                        <div class="task-card executing">
                             <div class="owner-avatar">马</div>
                             <h4>长效社群与低价订阅变现</h4>
-                            <p>结业用户长尾运营：上线低单价付费包(工具使用权/打卡圈)，挖掘全生命周期的 LTV 价值。</p>
+                            <p>结业用户长尾运营：上线低单价付费包（工具权限/打卡圈），挖掘全生命周期 LTV。</p>
                             <div class="tags">
-                                <span class="tag warning">长尾现金流(Cash)</span>
+                                <span class="tag warning">长尾现金流</span>
+                            </div>
+                        </div>
+                        <div class="task-card new-action">
+                            <div class="owner-avatar">马</div>
+                            <h4>退费率攻坚 — 有声线 47%→25% <span class="badge badge-yellow" style="font-size:0.68em;">📌 3月优先级最高</span></h4>
+                            <p>有声线首购 UE -9%，每卖一单亏损。根因是过度承诺 + 交付预期差距。铁三角话术合规改造是核心抓手，目标退费率降至 ≤25%。</p>
+                            <div class="tags">
+                                <span class="tag alert">退费率 47% 🚨</span>
+                                <span class="tag new">铁三角管控</span>
+                                <span class="tag warning">月净利润关键</span>
                             </div>
                         </div>
                     </div>
@@ -433,27 +543,82 @@
 
         </div>
 
+        <!-- ══ 三、马长久核心策略执行验证 ══ -->
+        <h2 class="section-title">三、马长久核心策略执行验证评估</h2>
+
+        <div class="card">
+            <h3 style="font-size:1rem; font-weight:700; color:var(--dark); margin-bottom:20px;">基于2月-3月实测数据的策略一致性评分</h3>
+            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px,1fr)); gap:16px;">
+
+                <div style="background:#f0fdf4; border-radius:10px; padding:16px; border:1px solid #a7f3d0;">
+                    <div style="font-weight:700; color:#16a34a; margin-bottom:8px; font-size:0.9rem;">✅ 执行正确 · 直播+B站高转化渠道聚焦</div>
+                    <div style="font-size:0.82rem; color:#374151; line-height:1.7;">
+                        直播 5.62%、B站 4.41% 转化率完全验证"聚焦高质量流量来源"策略正确。
+                        这两条渠道是 3月冲刺的最优增量抓手，应立即制定扩量 SOP。
+                    </div>
+                    <div style="margin-top:10px; font-size:0.78rem; font-weight:700; color:#059669;">数据评分：直播=5.62% / 目标≥2.5% → 超额 124%</div>
+                </div>
+
+                <div style="background:#fef2f2; border-radius:10px; padding:16px; border:1px solid #fca5a5;">
+                    <div style="font-weight:700; color:#dc2626; margin-bottom:8px; font-size:0.9rem;">🚨 执行异常 · 私域 MO 转化链路</div>
+                    <div style="font-size:0.82rem; color:#374151; line-height:1.7;">
+                        私域转化率 1.37% 与策略目标严重背离。若马长久的策略是"私域深度运营提升复购"，
+                        则当前执行层面存在严重断点——加微后的承接话术、暖场节奏、升单时机均需紧急复盘。
+                    </div>
+                    <div style="margin-top:10px; font-size:0.78rem; font-weight:700; color:#dc2626;">数据评分：私域=1.37% / 目标≥2.5% → 不达标 45%</div>
+                </div>
+
+                <div style="background:#fffbeb; border-radius:10px; padding:16px; border:1px solid #fde68a;">
+                    <div style="font-weight:700; color:#d97706; margin-bottom:8px; font-size:0.9rem;">⚠️ 待验证 · APP Push 引流漏斗修复</div>
+                    <div style="font-size:0.82rem; color:#374151; line-height:1.7;">
+                        APP Push 加微率 44%，直播 95%。这意味着策略中提到的"顶部流量拦截优化"
+                        尚未有效落地。吐码引导、企微账号容量、引导文案均需逐一排查。
+                    </div>
+                    <div style="margin-top:10px; font-size:0.78rem; font-weight:700; color:#d97706;">数据评分：加微率=44% / 基准 70%+ → 不达标 37%</div>
+                </div>
+
+                <div style="background:#f0fdf4; border-radius:10px; padding:16px; border:1px solid #a7f3d0;">
+                    <div style="font-weight:700; color:#16a34a; margin-bottom:8px; font-size:0.9rem;">✅ 执行正确 · 铁三角话术白名单机制</div>
+                    <div style="font-size:0.82rem; color:#374151; line-height:1.7;">
+                        马（业务）/ 康姐（风控）/ 苏老师（课程）三方书面确认机制已建立，
+                        03-02 会议确认正在运行。这是保证 ML→MO→MCE 全链路合规的基础设施。
+                    </div>
+                    <div style="margin-top:10px; font-size:0.78rem; font-weight:700; color:#059669;">执行评分：机制建立 ✅ / 首次话术清单审核中</div>
+                </div>
+
+            </div>
+        </div>
+
         <!-- 总结评估 -->
-        <div class="match-scale">
-            <div class="match-score">匹配度诊断测评结论：高度契合 (90%)</div>
-            <p style="color: #334155; font-size: 0.95rem;">
-                <strong>分析：</strong> 马长久对于“第一曲线”的营收规划，完全贴合了 LTC 的核心精髓——<strong>不是片面追求 Leads 数量，而是对最终能留存沉淀的 Cash (净营收)
-                    负责</strong>。
-            </p>
-            <ul style="color: #475569; font-size: 0.9rem; margin-top: 10px;">
-                <li><strong>前端克制 (ML/MO端)：</strong> 放开了适度造梦（满足情绪价值引发冲动），但坚决挂载了需特殊关怀用户拦截和白名单规范。</li>
-                <li><strong>中后端重仓 (MC/MCE端)：</strong> 引入冷静期阻断风险，并在交付期基于满意的 NPS 做转化升单，而非强硬逼单。</li>
-                <li><strong>结论结论：</strong> 马总的策略不再是单点的“推广策略”，而是全链路打通的<strong>“端到端盈利策略”</strong>，能够有效支撑 <a
-                        href="CleanRevenue.html" style="color:var(--primary); font-weight:bold;">5.0 亿的 Clean
-                        Revenue (并守住 5000万净利润底线)</a>。</li>
-            </ul>
+        <div class="verdict-bar">
+            <div class="verdict-score">策略执行综合评分：68分 / 100 · 部分正确，存在关键堵点</div>
+            <div class="verdict-item">
+                <span class="icon">✅</span>
+                <span><strong>高转化渠道聚焦（直播/B站）方向正确</strong>：数据已验证，建议立即制定3月扩量 SOP，将直播话术固化为可复制的标准动作。</span>
+            </div>
+            <div class="verdict-item">
+                <span class="icon">🚨</span>
+                <span><strong>私域 MO 链路是最大执行堵点</strong>：转化率 1.37% 意味着进了私域的用户超过 98% 没有转化——需要在本周内组织专题复盘，逐段排查加微后承接、话术节奏、升单时机。</span>
+            </div>
+            <div class="verdict-item">
+                <span class="icon">⚠️</span>
+                <span><strong>APP Push 加微漏斗优先级紧迫</strong>：每损失 1% 的加微率，就是损失约 500 个潜在转化机会。44%→70% 的改善空间如果落地，可释放约 1/3 的额外私域池。</span>
+            </div>
+            <div class="verdict-item">
+                <span class="icon">📌</span>
+                <span><strong>退费率仍是 MCE 端最大利润漏洞</strong>：有声线 47% 退费率使首购 UE 为 -9%，前端所有转化努力都在 MCE 端被吞噬。铁三角话术管控机制是当前最核心的利润修复手段。</span>
+            </div>
+            <div style="margin-top:16px; padding:12px; background:rgba(37,99,235,0.06); border-radius:8px; font-size:0.85rem; color:#1e3a5f;">
+                <strong>马长久核心策略是否在正确执行？</strong><br>
+                方向层面：✅ 正确——聚焦高转化渠道、铁三角合规话术机制已建立。<br>
+                执行层面：⚠️ 私域承接链路、APP Push 加微率两个关键环节存在严重执行断点，需在 3月第一周内专题攻关。退费率攻坚是战略级优先事项，需要直接 KPI 挂钩才能推动。
+            </div>
         </div>
 
     </div>
 
-    <div
-        style="text-align: center; color: #888; font-size: 0.9em; margin-top: 20px; padding: 20px 0; border-top: 1px solid #e2e8f0;">
-        [华为 LTC 业务流大盘] 马长久指挥作战室 · 数据追踪至：2026年03月01日
+    <div style="text-align: center; color: #888; font-size: 0.9em; margin-top: 20px; padding: 20px 0; border-top: 1px solid #e2e8f0;">
+        [华为 LTC 业务流大盘] 马长久指挥作战室 · 投放数据更新至：2026年03月04日
     </div>
 </body>
 
