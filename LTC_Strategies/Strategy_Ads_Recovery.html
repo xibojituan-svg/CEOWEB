@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>策略追踪 - 高转化安全素材投放恢复</title>
+    <title>316 回血战役 - 投放增长策略评审 v1.0</title>
     <style>
         :root {
             --primary: #2563eb;
@@ -13,124 +14,1030 @@
             --success: #16a34a;
             --danger: #dc2626;
             --warning: #d97706;
+            --indigo: #4f46e5;
+            --teal: #0d9488;
         }
-        body { font-family: system-ui, sans-serif; background: #f1f5f9; color: var(--dark); line-height: 1.6; margin: 0; padding: 20px; }
-        .container { max-width: 1000px; margin: 0 auto; }
-        .header { background: linear-gradient(135deg, var(--dark) 0%, #1e293b 100%); padding: 30px; border-radius: 12px; color: white; margin-bottom: 24px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
-        .header h1 { margin: 0 0 10px 0; color: #38bdf8; font-size: 1.8rem; }
-        .header p { margin: 0; color: #cbd5e1; font-size: 0.95rem; }
-        .back-link { display: inline-block; margin-bottom: 20px; color: var(--primary); text-decoration: none; font-weight: bold; }
-        .back-link:hover { text-decoration: underline; }
-        .card { background: white; border-radius: 12px; padding: 24px; margin-bottom: 24px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
-        .card h2 { font-size: 1.2rem; margin-top: 0; margin-bottom: 16px; border-bottom: 2px solid #f1f5f9; padding-bottom: 10px; display: flex; align-items: center; gap: 8px; }
-        .status-badge { padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: bold; text-transform: uppercase; }
-        .status-executing { background: #dcfce7; color: var(--success); }
-        .status-blocked { background: #fee2e2; color: var(--danger); }
-        .status-new-action { background: #fef3c7; color: var(--warning); }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
-        .metric-box { background: #f8fafc; padding: 16px; border-radius: 8px; border-left: 4px solid var(--primary); }
-        .metric-box.danger { border-color: var(--danger); }
-        .metric-box.success { border-color: var(--success); }
-        .metric-value { font-size: 1.8rem; font-weight: 800; margin: 8px 0; }
-        .task-row { display: flex; align-items: flex-start; gap: 12px; padding: 12px 0; border-bottom: 1px dashed #e2e8f0; }
-        .task-row:last-child { border-bottom: none; }
-        .checkbox { width: 18px; height: 18px; border: 2px solid #cbd5e1; border-radius: 4px; flex-shrink: 0; margin-top: 4px; }
-        .checkbox.checked { background: var(--success); border-color: var(--success); display: flex; align-items: center; justify-content: center; }
-        .checkbox.checked::after { content: "✓"; color: white; font-size: 12px; }
-        
-        .timeline-item { position: relative; padding-left: 20px; padding-bottom: 20px; border-left: 2px solid #e2e8f0; }
-        .timeline-item::before { content: ""; position: absolute; left: -6px; top: 0; width: 10px; height: 10px; border-radius: 50%; background: var(--primary); }
-        .timeline-date { font-size: 0.8rem; color: var(--gray); font-weight: bold; }
-        .timeline-content { margin-top: 4px; font-size: 0.9rem; }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            background: #f1f5f9;
+            color: var(--dark);
+            line-height: 1.7;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 100%);
+            padding: 36px;
+            border-radius: 16px;
+            color: white;
+            margin-bottom: 28px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .header h1 {
+            margin: 8px 0 6px 0;
+            color: #38bdf8;
+            font-size: 1.9rem;
+        }
+
+        .header .meta {
+            color: #94a3b8;
+            font-size: 0.85rem;
+        }
+
+        .version-badge {
+            background: rgba(255, 255, 255, 0.1);
+            color: #e2e8f0;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            white-space: nowrap;
+        }
+
+        .status-badge {
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .status-in-progress {
+            background: #fef3c7;
+            color: var(--warning);
+        }
+
+        .status-critical {
+            background: #fee2e2;
+            color: var(--danger);
+        }
+
+        .status-good {
+            background: #dcfce7;
+            color: var(--success);
+        }
+
+        /* Cards */
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        }
+
+        .card h2 {
+            font-size: 1.15rem;
+            margin-top: 0;
+            margin-bottom: 16px;
+            border-bottom: 2px solid #f1f5f9;
+            padding-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .card h3 {
+            font-size: 1rem;
+            margin-bottom: 10px;
+            color: var(--indigo);
+        }
+
+        /* Grid */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+
+        @media (max-width: 768px) {
+
+            .grid-2,
+            .grid-3 {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Metric */
+        .metric-box {
+            background: #f8fafc;
+            padding: 16px;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .metric-box.danger {
+            border-color: var(--danger);
+        }
+
+        .metric-box.warning {
+            border-color: var(--warning);
+        }
+
+        .metric-box.success {
+            border-color: var(--success);
+        }
+
+        .metric-box.indigo {
+            border-color: var(--indigo);
+        }
+
+        .metric-label {
+            color: var(--gray);
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+
+        .metric-value {
+            font-size: 1.7rem;
+            font-weight: 800;
+            margin: 6px 0 4px 0;
+        }
+
+        .metric-desc {
+            font-size: 0.8rem;
+            color: #475569;
+        }
+
+        /* CEO评审 */
+        .ceo-review {
+            background: linear-gradient(135deg, #1e1b4b, #312e81);
+            color: white;
+            border-radius: 12px;
+            padding: 28px;
+            margin-bottom: 20px;
+        }
+
+        .ceo-review h2 {
+            color: #a5b4fc;
+            border-bottom-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .verdict {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .verdict-score {
+            font-size: 3rem;
+            font-weight: 900;
+            color: #fbbf24;
+        }
+
+        .verdict-text h3 {
+            margin: 0;
+            font-size: 1.1rem;
+            color: #e2e8f0;
+        }
+
+        .verdict-text p {
+            margin: 4px 0 0 0;
+            font-size: 0.9rem;
+            color: #94a3b8;
+        }
+
+        .ceo-point {
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .ceo-point.affirm {
+            background: rgba(16, 185, 129, 0.15);
+            border-left: 3px solid #10b981;
+        }
+
+        .ceo-point.challenge {
+            background: rgba(239, 68, 68, 0.15);
+            border-left: 3px solid #ef4444;
+        }
+
+        .ceo-point.directive {
+            background: rgba(251, 191, 36, 0.15);
+            border-left: 3px solid #fbbf24;
+        }
+
+        /* 信任矩阵 */
+        .trust-matrix {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .trust-card {
+            padding: 16px;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .trust-card .trust-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .trust-card .trust-title {
+            font-weight: 700;
+            font-size: 0.95rem;
+            margin-bottom: 6px;
+        }
+
+        .trust-card .trust-body {
+            font-size: 0.82rem;
+            color: #475569;
+            line-height: 1.5;
+        }
+
+        .trust-card .trust-kpi {
+            margin-top: 8px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            padding: 4px 8px;
+            border-radius: 4px;
+            display: inline-block;
+        }
+
+        .t-testing {
+            border-color: #a5b4fc;
+            background: #eef2ff;
+        }
+
+        .t-testing .trust-label,
+        .t-testing .trust-kpi {
+            color: #4338ca;
+            background: #c7d2fe;
+        }
+
+        .t-official {
+            border-color: #6ee7b7;
+            background: #ecfdf5;
+        }
+
+        .t-official .trust-label,
+        .t-official .trust-kpi {
+            color: #065f46;
+            background: #a7f3d0;
+        }
+
+        .t-content {
+            border-color: #fcd34d;
+            background: #fffbeb;
+        }
+
+        .t-content .trust-label,
+        .t-content .trust-kpi {
+            color: #92400e;
+            background: #fde68a;
+        }
+
+        .t-social {
+            border-color: #f9a8d4;
+            background: #fdf2f8;
+        }
+
+        .t-social .trust-label,
+        .t-social .trust-kpi {
+            color: #9d174d;
+            background: #fce7f3;
+        }
+
+        /* 渠道ROI表 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.88rem;
+        }
+
+        thead th {
+            background: #f1f5f9;
+            padding: 10px 12px;
+            text-align: left;
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            color: var(--gray);
+        }
+
+        tbody td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        tbody tr:hover {
+            background: #f8fafc;
+        }
+
+        .roi-badge {
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 10px;
+        }
+
+        .roi-green {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .roi-yellow {
+            background: #fef9c3;
+            color: #854d0e;
+        }
+
+        .roi-red {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .channel-action {
+            font-size: 0.78rem;
+            color: var(--indigo);
+            font-weight: 600;
+        }
+
+        /* 素材框架 */
+        .creative-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+
+        @media (max-width: 768px) {
+            .creative-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .creative-card {
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 14px;
+        }
+
+        .creative-card .tag {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: 3px 8px;
+            border-radius: 10px;
+            margin-bottom: 8px;
+            display: inline-block;
+        }
+
+        .tag-banned {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .tag-safe {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .tag-test {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .creative-card h4 {
+            margin: 0 0 6px 0;
+            font-size: 0.9rem;
+        }
+
+        .creative-card p {
+            margin: 0;
+            font-size: 0.8rem;
+            color: #475569;
+            line-height: 1.5;
+        }
+
+        /* 时间轴 */
+        .timeline {
+            position: relative;
+            padding-left: 28px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 8px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #e2e8f0;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: -24px;
+            top: 4px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--primary);
+            border: 2px solid white;
+            box-shadow: 0 0 0 2px var(--primary);
+        }
+
+        .timeline-dot.warning {
+            background: var(--warning);
+            box-shadow: 0 0 0 2px var(--warning);
+        }
+
+        .timeline-dot.success {
+            background: var(--success);
+            box-shadow: 0 0 0 2px var(--success);
+        }
+
+        .timeline-date {
+            font-size: 0.75rem;
+            color: var(--gray);
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .timeline-content {
+            margin-top: 2px;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        /* checklist */
+        .task-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 10px 0;
+            border-bottom: 1px dashed #e2e8f0;
+        }
+
+        .task-row:last-child {
+            border-bottom: none;
+        }
+
+        .checkbox {
+            width: 18px;
+            height: 18px;
+            border: 2px solid #cbd5e1;
+            border-radius: 4px;
+            flex-shrink: 0;
+            margin-top: 3px;
+        }
+
+        .checkbox.checked {
+            background: var(--success);
+            border-color: var(--success);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .checkbox.checked::after {
+            content: "✓";
+            color: white;
+            font-size: 11px;
+        }
+
+        .task-label {
+            flex: 1;
+        }
+
+        .task-label strong {
+            font-size: 0.9rem;
+            display: block;
+        }
+
+        .task-label span {
+            font-size: 0.78rem;
+            color: var(--gray);
+        }
+
+        .task-owner {
+            font-size: 0.75rem;
+            background: #f1f5f9;
+            color: var(--indigo);
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        /* 警告框 */
+        .alert {
+            border-radius: 8px;
+            padding: 14px 16px;
+            font-size: 0.88rem;
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+
+        .alert-red {
+            background: #fef2f2;
+            border-left: 4px solid var(--danger);
+            color: #7f1d1d;
+        }
+
+        .alert-yellow {
+            background: #fffbeb;
+            border-left: 4px solid var(--warning);
+            color: #78350f;
+        }
+
+        .alert-blue {
+            background: #eff6ff;
+            border-left: 4px solid var(--primary);
+            color: #1e3a8a;
+        }
+
+        .alert-green {
+            background: #f0fdf4;
+            border-left: 4px solid var(--success);
+            color: #14532d;
+        }
+
+        /* Dialogue Box 信任重建对话框 */
+        .dialogue-section {
+            background: #fafafa;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 12px;
+        }
+
+        .dialogue-section h4 {
+            margin: 0 0 12px 0;
+            font-size: 0.9rem;
+            color: #374151;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .open-q {
+            background: white;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 8px;
+            font-size: 0.85rem;
+            color: #1f2937;
+        }
+
+        .open-q::before {
+            content: '💬 ';
+        }
     </style>
 </head>
+
 <body>
     <div class="container">
         <a href="../LTC_Process_Management.html" class="back-link">← 返回 LTC 大盘</a>
-        
+
+        <!-- Header -->
         <div class="header">
-            <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+            <div class="header-top">
                 <div>
-                    <div style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; color: #94a3b8; margin-bottom: 8px;">所属阶段: ML: 管理线索</div>
-                    <h1>高转化安全素材投放恢复</h1>
-                    <p>策略负责人：马长久 / 杨蓉蓉</p>
+                    <div class="meta">战役代号: 316 回血战役 | 负责人: 杨蓉蓉 / 马长久</div>
+                    <h1>📈 投放增长恢复战役 · CEO 评审大盘</h1>
+                    <div class="meta">更新时间: 2026-03-05 &nbsp;|&nbsp; 基于方法论: Marketing Mode 1.0 × 第一性原理 × Pre-Mortem
+                    </div>
                 </div>
-                <span class="status-badge status-blocked">受阻/异常</span>
+                <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-end">
+                    <span class="version-badge">v1.0 · 首轮评审</span>
+                    <span class="status-badge status-in-progress">⚡ 评审进行中</span>
+                </div>
             </div>
         </div>
 
+        <!-- CEO 总体评审 -->
+        <div class="ceo-review">
+            <h2>🏛️ CEO 总体评审（第一轮）</h2>
+            <div class="verdict">
+                <div class="verdict-score">B+</div>
+                <div class="verdict-text">
+                    <h3>诊断扎实，信任重建部分仍停留在"形式层"，未触及用户心理的根本动机</h3>
+                    <p>方向判断正确，但执行颗粒度不够，且"信任重建"模块需要多轮深化对齐</p>
+                </div>
+            </div>
+
+            <div class="ceo-point affirm">
+                ✅ <strong>认可点 1 · 根本矛盾识别准确：</strong>
+                "核心矛盾不是流量贵，而是信任传递效率下降"——这个判断是第一性原理的体现。喜马拉雅品牌背书剥离 + 兼职卖点受限，导致历史跑量依赖的「平台信任×强需求」公式瞬间失效。认可这个起点。
+            </div>
+
+            <div class="ceo-point affirm">
+                ✅ <strong>认可点 2 · 渠道结构调整方向正确：</strong>
+                "提升私域占比至30%+，按ROI=0.8为红线，以人群包ROI而非渠道划分预算"——这是成熟的信息流优化方法论，方向上可执行。CPS/分销作为按效果付费的补充量级也是低风险的正确选择。
+            </div>
+
+            <div class="ceo-point challenge">
+                🔴 <strong>挑战点 1 · 信任重建策略停留在"资产清单"，缺乏用户心理机制：</strong>
+                目前的三个方向（大咖背书、官方机构、教学透明化）都是<strong>供给侧视角</strong>的信任资产建设，但没有回答用户侧的决策心理：用户为什么要信任我？他们在哪个触点发生了信任崩塌？修复信任的关键动作是否和我们目前的
+                CreativeSet 直接挂钩？这是本轮需要深化的核心命题。
+            </div>
+
+            <div class="ceo-point challenge">
+                🔴 <strong>挑战点 2 · 链路提效部分过于简单，"一键加V"不等于链路优化：</strong>
+                把"保底利润渠道均替换成一键加V"是一个换技术工具的行为，不是链路设计行为。链路优化的本质是：在用户的决策漏斗的哪一个断点给出最强干预？落地页的AIDA结构是否重构了？加V后的销售话术和信任建立后的新卖点是否对齐？这些都没有体现。
+            </div>
+
+            <div class="ceo-point directive">
+                📌 <strong>行动指令 · 信任重建需多轮对话深化（本页标记为 v1.0，持续迭代）：</strong>
+                信任重建策略不是一次规划就能完成的，需要：①先定义「新用户在哪个触点具体失去了信任」；②然后逐一设计修复方案；③用数据（到访-留资-成单各环节转化率）验证是否奏效。本页将随每轮对话迭代更新。
+            </div>
+        </div>
+
+        <!-- 核心指标 -->
         <div class="card">
-            <h2>🎯 策略目标与上下文</h2>
-            <p style="font-size: 1.05rem; line-height: 1.8; color: #334155;">重建并推进合规投放素材。放弃极速致富类违规引流，转向真实案例驱动的价值型内容。</p>
-            <div style="margin-top: 16px; padding: 16px; background: #eff6ff; border-radius: 8px; border-left: 4px solid var(--primary); font-size: 0.9rem;">
-                <strong>💡 战略意图：</strong>
-                该策略是实现「净营收 5.0亿 / 净利润 5000万」的必赢之战，关联用户持续付费的核心痛点。它的成功落地将直接影响此环节流水的转化效率与利润留存。
-            </div>
-        </div>
-
-        <div class="grid">
-            <div class="card">
-                <h2>📊 核心追踪指标 (KPI / OMTM)</h2>
+            <h2>📊 核心战役数据追踪（待接入实时数据）</h2>
+            <div class="grid-3">
+                <div class="metric-box warning">
+                    <div class="metric-label">整体线索成本 CPL</div>
+                    <div class="metric-value">↑5~15%</div>
+                    <div class="metric-desc">政策收紧导致环比上涨，需明确当前绝对值基准线</div>
+                </div>
+                <div class="metric-box indigo">
+                    <div class="metric-label">私域占比（目标）</div>
+                    <div class="metric-value">30%+</div>
+                    <div class="metric-desc">当前基线待测量；老带新激励方案需本周制定</div>
+                </div>
                 <div class="metric-box danger">
-                    <div style="color: var(--gray); font-size: 0.85rem; font-weight: bold;">当前状态指标</div>
-                    <div class="metric-value">待数据接入</div>
-                    <div style="color: #475569; font-size: 0.85rem;">目标值设定: 按照2026年Q1 OKR执行</div>
+                    <div class="metric-label">信息流 ROI 红线</div>
+                    <div class="metric-value">0.8</div>
+                    <div class="metric-desc">低于此值须即时降量；低于0.6人群包直接关停</div>
+                </div>
+            </div>
+            <div class="alert alert-yellow" style="margin-top:16px;">
+                ⚠️ <strong>数据盲点警告：</strong>目前方案中没有明确「信任重建前后」各关键转化率的 Baseline（基准线）。在没有 Baseline
+                的情况下，无法判断任何信任重建动作是否有效。<strong>第一优先级行动：本周内测量当前落地页 CTR、到访→留资转化率、留资→成单率</strong>，作为所有优化动作的参照起点。
+            </div>
+        </div>
+
+        <!-- 信任重建深度分析 -->
+        <div class="card">
+            <h2>🔐 信任重建策略 · 深度分析（v1.0）<span
+                    style="font-size:0.75rem;background:#fef3c7;color:#92400e;padding:3px 10px;border-radius:10px;margin-left:8px;">需多轮迭代</span>
+            </h2>
+
+            <div class="alert alert-blue" style="margin-bottom:20px;">
+                <strong>📐 方法论基础（来自 Marketing Mode Skill）：</strong><br>
+                信任 = 「熟悉度（Mere Exposure Effect）× 权威感（Authority Bias）× 社会证明（Social Proof）× 风险逆转（Loss Aversion 消除）」。<br>
+                目前方案主要覆盖"权威感"这一个维度，其他三个维度几乎缺位。
+            </div>
+
+            <div class="trust-matrix">
+                <div class="trust-card t-testing">
+                    <div class="trust-label">① 大咖背书</div>
+                    <div class="trust-title">权威信任 · 已测试</div>
+                    <div class="trust-body">
+                        张震、李满超等大咖挂名。
+                        <strong>现存问题：</strong>只是"挂名"而非"真实参与"。用户对"挂名大咖"的免疫力在2023年后已大幅提升，单纯背书的转化效果边际递减。<br>
+                        <strong>升级方向：</strong>公开课/答疑直播/大咖手写推荐信（实物化可截图传播）。
+                    </div>
+                    <span class="trust-kpi">指标：大咖内容CTR vs 普通素材CTR</span>
+                </div>
+                <div class="trust-card t-official">
+                    <div class="trust-label">② 机构合作</div>
+                    <div class="trust-title">制度信任 · 推进中</div>
+                    <div class="trust-body">
+                        录音师协会深化中。
+                        <strong>现存问题：</strong>行业协会对普通用户的认知度低，除非在落地页进行强视觉处理（协会logo、认证编号）否则无法形成有效信任传递。<br>
+                        <strong>升级方向：</strong>将认证证书做成「可查验」的独立URL，让用户自行验证真实性（极大提升可信度）。
+                    </div>
+                    <span class="trust-kpi">指标：认证页面访问率 & 证书下载率</span>
+                </div>
+                <div class="trust-card t-content">
+                    <div class="trust-label">③ 教学透明化</div>
+                    <div class="trust-title">内容信任 · 策略完整</div>
+                    <div class="trust-body">
+                        课程研发过程透明 + 体验课先行。
+                        <strong>评价：</strong>这是目前三个方向中「用户心理机制最强」的one，因为它触发了<strong>IKEA
+                            Effect（参与感提升价值感）</strong>和<strong>Endowment Effect（试用后更愿意购买）</strong>。<br>
+                        <strong>升级方向：</strong>体验课结束后立刻给出「你的测评报告」（哪怕是简单评级），制造Zeigarnik Effect（未完成感驱动行动）。
+                    </div>
+                    <span class="trust-kpi">指标：体验课→付费转化率（核心指标）</span>
+                </div>
+                <div class="trust-card t-social">
+                    <div class="trust-label">④ 缺失维度！</div>
+                    <div class="trust-title">社会证明（Social Proof）· 尚未涉及</div>
+                    <div class="trust-body">
+                        <strong>这是最大的信任漏洞：</strong>喜马拉雅背书消失后，原有的「平台量级背书」消失了，必须用真实用户案例来替代。<br>
+                        <strong>建议立刻启动：</strong>系统性收集「学员发圈截图+真实就业/接单故事」，在落地页、广告素材、销售群中高频展示（尤其是「普通人」而非精英用户的故事，降低决策门槛）。
+                    </div>
+                    <span class="trust-kpi">⚡ 急需补充：真实用户案例数量 & 引用频次</span>
                 </div>
             </div>
 
-            <div class="card">
-                <h2>⚠️ 风险与卡点扫描</h2>
-                
-                <div style="padding: 12px; background: #fef2f2; color: #b91c1c; border-radius: 6px; font-size: 0.9rem; line-height: 1.6;">
-                    <strong>阻碍落地的核心瓶颈：</strong><br>
-                    当前链路流转异常或资源受限，需在最近一次业务复盘会（周会）中作为优先级 Topic 解决。
+            <!-- 信任重建待深化的开放问题 -->
+            <div class="dialogue-section">
+                <h4>💬 本轮信任重建策略的开放问题（需与杨蓉蓉进一步对齐）</h4>
+                <div class="open-q">用户具体在哪个触点（广告曝光/落地页/私信/销售沟通）最容易产生"不信任"的行为信号？现在能拿到哪些数据？</div>
+                <div class="open-q">大咖背书测试的具体数据结果是什么？CTR提升了多少？到访→留资有没有变化？（需要数据，不需要感受）</div>
+                <div class="open-q">「技能提升、职业安全感」这类新卖点，有没有A/B测试过对比数据？和原来兼职副业卖点相比，CPL和转化率差距多少？</div>
+                <div class="open-q">销售团队的话术有没有随着信任重建策略同步更新？销售在接到「来自新素材」的线索时，开场白是什么？</div>
+            </div>
+        </div>
+
+        <!-- 渠道策略评审 -->
+        <div class="card">
+            <h2>📡 渠道结构评审与优化建议</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>渠道</th>
+                        <th>杨蓉蓉方案</th>
+                        <th>CEO评价</th>
+                        <th>ROI预期</th>
+                        <th>优先级动作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>私域/老带新</strong></td>
+                        <td>激活沉睡，激励老带新，提升至30%+</td>
+                        <td>✅ 方向正确，成本极低</td>
+                        <td><span class="roi-badge roi-green">极高</span></td>
+                        <td class="channel-action">本周制定老带新激励政策 + SOP</td>
+                    </tr>
+                    <tr>
+                        <td><strong>体验课/免费公开课</strong></td>
+                        <td>未单独列出</td>
+                        <td>⚠️ 严重缺失！这是信任重建的最强链路</td>
+                        <td><span class="roi-badge roi-green">高（信任杠杆）</span></td>
+                        <td class="channel-action">立刻规划一次大咖公开课，采集用户反馈作为素材</td>
+                    </tr>
+                    <tr>
+                        <td><strong>CPS/KOL分销</strong></td>
+                        <td>拓展垂直KOL、知识公众号、宝妈群主</td>
+                        <td>✅ 正确，按效果付费风险可控</td>
+                        <td><span class="roi-badge roi-yellow">中（依赖KOL质量）</span></td>
+                        <td class="channel-action">优先筛选「已有职场/技能提升」垂类受众的KOL</td>
+                    </tr>
+                    <tr>
+                        <td><strong>信息流（字节/腾讯）</strong></td>
+                        <td>ROI=0.8红线，按人群包划分预算</td>
+                        <td>✅ 人群包ROI优先于渠道ROI，逻辑正确</td>
+                        <td><span class="roi-badge roi-yellow">中，需持续优化</span></td>
+                        <td class="channel-action">每日成本监控SOP + ROI<0.6人群包24h关停机制< /td>
+                    </tr>
+                    <tr>
+                        <td><strong>小红书</strong></td>
+                        <td>卖点受限，未提及具体策略</td>
+                        <td>🔴 小红书是「真实用户故事」的天然场域，应主动布局</td>
+                        <td><span class="roi-badge roi-yellow">中（SEO+口碑双飞轮）</span></td>
+                        <td class="channel-action">安排5-10篇真实学员故事内容种草，测试自然搜索转化</td>
+                    </tr>
+                    <tr>
+                        <td><strong>站内资源位</strong></td>
+                        <td>争取App内推荐位、公众号互推</td>
+                        <td>✅ 低成本补量，但需要评估曝光→转化效率</td>
+                        <td><span class="roi-badge roi-green">高（低成本）</span></td>
+                        <td class="channel-action">确认App内推荐位每周曝光量级，设定留资转化率目标</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 素材方向重构 -->
+        <div class="card">
+            <h2>🎨 素材卖点方向重构（基于 PAS & AIDA 框架）</h2>
+            <div class="alert alert-red" style="margin-bottom:16px;">
+                ❌ <strong>禁止使用的方向（已受平台审核限制）：</strong>兼职/副业/赚钱/接单资源/快速月入xx
+            </div>
+            <div class="creative-grid">
+                <div class="creative-card">
+                    <span class="tag tag-safe">推荐使用</span>
+                    <h4>就业安全感叙事</h4>
+                    <p>「35岁以后，你还剩下几个不可替代的技能？」→ 触发 Loss Aversion（损失厌恶），驱动主动寻求技能保障。<br><strong>卖点内核：职业防御型学习。</strong></p>
+                </div>
+                <div class="creative-card">
+                    <span class="tag tag-safe">推荐使用</span>
+                    <h4>真实普通人的转变故事</h4>
+                    <p>用「非精英」的学员真实故事（宝妈、下岗职工、应届生），触发 Social Proof（社会证明）。「她和你一样，现在...」<br><strong>打破精英滤镜，降低决策门槛。</strong>
+                    </p>
+                </div>
+                <div class="creative-card">
+                    <span class="tag tag-safe">推荐使用</span>
+                    <h4>大咖亲授式公开课</h4>
+                    <p>不只是"大咖推荐"，而是「本周五 张震 直播送福利课」→ Fear of Missing Out +
+                        Authority。<br><strong>驱动即时行动，避免"以后再看"。</strong></p>
+                </div>
+                <div class="creative-card">
+                    <span class="tag tag-test">小流量测试</span>
+                    <h4>体检报告式个人诊断</h4>
+                    <p>「你的职场技能诊断报告」——让用户填写小表，给出个性化「能力缺口分析」。触发 Zeigarnik Effect（未完成感） + IKEA Effect（参与感）。</p>
+                </div>
+                <div class="creative-card">
+                    <span class="tag tag-test">小流量测试</span>
+                    <h4>学习过程透明化</h4>
+                    <p>「跟着我学30天」的Vlog视角，展示真实学员从0学习的每日进度。<br>弱化结果吹嘘，强化过程可信度。降低"太假"的心理门槛。</p>
+                </div>
+                <div class="creative-card">
+                    <span class="tag tag-banned">暂时禁用</span>
+                    <h4>收入/副业/赚钱卖点</h4>
+                    <p>当前字节、腾讯、小红书主流平台均屏蔽此类素材。即便改成暗示性的表达（如"多一份收入"）也无法通过机审。<br><strong>暂列禁用，等待平台政策松动。</strong></p>
                 </div>
             </div>
         </div>
 
+        <!-- 链路提效 -->
         <div class="card">
-            <h2>🛠️ 关键行动清单 (Checklist)</h2>
+            <h2>⚙️ 链路提效——待深化设计</h2>
+            <div class="alert alert-yellow">
+                ⚠️ 当前方案"一键加V替换保底利润渠道"过于简单，仅是工具替换，不是链路设计。真正的链路优化需要重新设计用户从「广告曝光→到访落地页→留资→微信接触→成单」的每个节点体验。
+            </div>
+            <div class="grid-2" style="margin-top:16px;">
+                <div>
+                    <h3>落地页 CRO 优先级清单</h3>
+                    <div class="task-row">
+                        <div class="checkbox"></div>
+                        <div class="task-label"><strong>首屏 Hero
+                                重构</strong><span>是否清晰呈现「新卖点（技能提升/安全感）」的价值主张？8-12字标题</span></div>
+                    </div>
+                    <div class="task-row">
+                        <div class="checkbox"></div>
+                        <div class="task-label"><strong>信任信号区加强</strong><span>大咖头像+真实证书logo+「已有X万人学习」等Social
+                                Proof模块是否存在？</span></div>
+                    </div>
+                    <div class="task-row">
+                        <div class="checkbox"></div>
+                        <div class="task-label"><strong>风险逆转承诺</strong><span>有无「7天免费体验」「不满意退款」等Loss Aversion消除机制？</span>
+                        </div>
+                    </div>
+                    <div class="task-row">
+                        <div class="checkbox"></div>
+                        <div class="task-label"><strong>CTA精简与提前</strong><span>首屏有没有留资入口？避免Hick's Law（选择过多导致放弃）</span>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h3>销售接量话术对齐（与增长联动）</h3>
+                    <div class="task-row">
+                        <div class="checkbox"></div>
+                        <div class="task-label">
+                            <strong>新素材→新话术对应表</strong><span>不同广告素材引流的用户，预期心理状态和关注点是不同的，需要差异化开场</span></div>
+                    </div>
+                    <div class="task-row">
+                        <div class="checkbox"></div>
+                        <div class="task-label">
+                            <strong>信任重建话术测试</strong><span>当用户问「喜马拉雅还合作吗？」「你们是正规机构吗？」时，销售的应答是否统一且有力？</span></div>
+                    </div>
+                    <div class="task-row">
+                        <div class="checkbox"></div>
+                        <div class="task-label"><strong>体验课→成单转化脚本</strong><span>公开课/体验课结束后的「趁热打铁」话术和限时优惠设计</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 行动清单 -->
+        <div class="card">
+            <h2>✅ 3周行动优先级清单</h2>
             <div class="task-row">
                 <div class="checkbox checked"></div>
-                <div>
-                    <strong>策略对齐与立项</strong>
-                    <div style="font-size: 0.8rem; color: var(--gray); margin-top: 4px;">由各条线业务负责人确认目标与打法。</div>
-                </div>
+                <div class="task-label"><strong>策略立项与评审对齐</strong><span>第一轮CEO评审完成，反馈记录至本页</span></div>
+                <span class="task-owner">已完成</span>
             </div>
             <div class="task-row">
                 <div class="checkbox"></div>
-                <div>
-                    <strong>SOP 流程制定与白名单确认</strong>
-                    <div style="font-size: 0.8rem; color: var(--gray); margin-top: 4px;">风控、教研、业务三方评审合规与体验边界。</div>
+                <div class="task-label"><strong>【本周】建立数据Baseline</strong><span>当前落地页CTR、到访→留资率、留资→成单率 三个核心转化率测量</span>
                 </div>
+                <span class="task-owner">杨蓉蓉 | Week1</span>
             </div>
             <div class="task-row">
                 <div class="checkbox"></div>
-                <div>
-                    <strong>首轮灰度测试与数据收集</strong>
-                    <div style="font-size: 0.8rem; color: var(--gray); margin-top: 4px;">分配小流量测试跑马机制，获取基准线(Baseline)。</div>
-                </div>
+                <div class="task-label"><strong>【本周】老带新激励SOP制定</strong><span>激励力度、传播素材、邀请链路 完整方案</span></div>
+                <span class="task-owner">杨蓉蓉 | Week1</span>
             </div>
             <div class="task-row">
                 <div class="checkbox"></div>
-                <div>
-                    <strong>全面铺开与基建固化</strong>
-                    <div style="font-size: 0.8rem; color: var(--gray); margin-top: 4px;">将其固化为 2026 常规作战动作与底层系统支持。</div>
+                <div class="task-label">
+                    <strong>【本周】新卖点素材A/B测试启动</strong><span>「技能提升/就业安全感」vs「普通人真实案例」，10%测试预算，跑5天</span></div>
+                <span class="task-owner">投放组 | Week1</span>
+            </div>
+            <div class="task-row">
+                <div class="checkbox"></div>
+                <div class="task-label"><strong>【第2周】信任重建策略第二轮对话</strong><span>拿着测试数据，开展信任重建方案的第二轮深化讨论，更新本页至v1.1</span>
+                </div>
+                <span class="task-owner">杨蓉蓉+CEO | Week2</span>
+            </div>
+            <div class="task-row">
+                <div class="checkbox"></div>
+                <div class="task-label"><strong>【第2周】落地页CRO重构启动</strong><span>基于Social Proof + Loss Aversion +
+                        新卖点重构首屏</span></div>
+                <span class="task-owner">产品/投放 | Week2</span>
+            </div>
+            <div class="task-row">
+                <div class="checkbox"></div>
+                <div class="task-label"><strong>【第3周】大咖公开课/直播策划落地</strong><span>实现"大咖真实参与"而非挂名，采集素材用于后续投放</span></div>
+                <span class="task-owner">杨蓉蓉+运营 | Week3</span>
+            </div>
+            <div class="task-row">
+                <div class="checkbox"></div>
+                <div class="task-label"><strong>【第3周】销售话术更新与培训</strong><span>基于新素材方向，与销售团队对齐接量话术和信任应答脚本</span></div>
+                <span class="task-owner">马长久+销售 | Week3</span>
+            </div>
+        </div>
+
+        <!-- 时间轴 -->
+        <div class="card">
+            <h2>📅 战役推进时间轴</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot success"></div>
+                    <div class="timeline-date">2026-03-05 · 已完成</div>
+                    <div class="timeline-content">📋 杨蓉蓉提交「316回血战役-增长」策略文档第一版；CEO 完成首轮评审，评级 B+，识别关键深化点。</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot warning"></div>
+                    <div class="timeline-date">2026-03-07（本周内）· 待执行</div>
+                    <div class="timeline-content">📊 建立数据Baseline；启动老带新SOP；启动新卖点A/B测试（10%预算隔离）。</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">2026-03-12（第2周）· 规划中</div>
+                    <div class="timeline-content">📈 信任重建策略第二轮深化对话（基于第一周数据）；落地页CRO重构启动；本页更新至 v1.1。</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">2026-03-20（第3周）· 规划中</div>
+                    <div class="timeline-content">🎙️ 大咖公开课/直播落地，采集真实用户反馈作为新素材素材；销售话术培训完成。</div>
                 </div>
             </div>
         </div>
 
-        <div class="card">
-            <h2>📅 策略推进时间轴</h2>
-            <div class="timeline-item">
-                <div class="timeline-date">2026-03-05</div>
-                <div class="timeline-content">作战大盘创建：由系统自动生成该策略追踪页面，移交执行团队跟进。</div>
-            </div>
-            <div class="timeline-item" style="border-left: 2px solid transparent;">
-                <div class="timeline-date">Next Step</div>
-                <div class="timeline-content" style="color: var(--gray);">等待首次执行数据回传与项目状态更新。</div>
+        <!-- 方法论来源 -->
+        <div class="card" style="background: #f8fafc; border: 1px dashed #cbd5e1;">
+            <h2 style="color: var(--gray);">📚 本次评审调用的方法论 Skill</h2>
+            <div style="display:flex;flex-wrap:wrap;gap:8px;font-size:0.8rem;">
+                <span
+                    style="background:#e0e7ff;color:#3730a3;padding:4px 12px;border-radius:12px;font-weight:600;">marketing-mode
+                    1.0 · Paid Ads & CRO</span>
+                <span style="background:#e0e7ff;color:#3730a3;padding:4px 12px;border-radius:12px;font-weight:600;">AIDA
+                    / PAS Copywriting Framework</span>
+                <span
+                    style="background:#e0e7ff;color:#3730a3;padding:4px 12px;border-radius:12px;font-weight:600;">Social
+                    Proof · Loss Aversion · Zeigarnik Effect</span>
+                <span
+                    style="background:#e0e7ff;color:#3730a3;padding:4px 12px;border-radius:12px;font-weight:600;">first-principles-decomposer</span>
+                <span style="background:#e0e7ff;color:#3730a3;padding:4px 12px;border-radius:12px;font-weight:600;">IKEA
+                    Effect · Endowment Effect</span>
+                <span
+                    style="background:#e0e7ff;color:#3730a3;padding:4px 12px;border-radius:12px;font-weight:600;">Funnel
+                    Optimization · Page CRO</span>
             </div>
         </div>
     </div>
 </body>
+
 </html>
