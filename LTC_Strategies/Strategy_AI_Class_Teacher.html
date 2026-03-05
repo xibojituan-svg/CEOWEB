@@ -366,65 +366,150 @@
             </div>
         </div>
 
-        <!-- 执行战报与计划 -->
+        <!-- 产研落地的 4 大刚性条件 -->
         <div class="card">
             <div class="card-header">
-                <div class="icon-wrap icon-indigo">📋</div>
-                <h2>里程碑与落地执行跟踪</h2>
+                <div class="icon-wrap" style="background: #fce7f3;">🎯</div>
+                <h2>实现“大象无形”：产研协同的 4 大生死线</h2>
             </div>
-            <div class="table-wrap">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>建设模块</th>
-                            <th>负责人 / 协助</th>
-                            <th>核心产出标准</th>
-                            <th>当前进度</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <strong>高爆语料清洗与建库</strong><br>
-                                意图解构模型训练
-                            </td>
-                            <td>谢媛 / 产研团队</td>
-                            <td>建立 100+ 退费/投诉典型触发语料集，完成泛化打标。</td>
-                            <td><span class="tag tag-active">进行中 - 3.12 验收</span></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <strong>系统闭环联调</strong><br>
-                                识别 → 暂停自动化 → 转人工
-                            </td>
-                            <td>产研协同开发</td>
-                            <td>精英业务线业务全流程系统跑通。验证工作台告警有效性。</td>
-                            <td><span class="tag tag-dev">待研发切入</span></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <strong>全自动日常 QA 上线</strong><br>
-                                替代“早晚功”“催单”动作
-                            </td>
-                            <td>产研团队</td>
-                            <td>自动匹配学员进度推送知识点、课程链接，准确率 > 95%。</td>
-                            <td><span class="tag tag-dev">规划中</span></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <strong>人工侧配套SOP（树洞模式）</strong><br>
-                                严禁销售红线的流程制度
-                            </td>
-                            <td>谢媛</td>
-                            <td>AI转交后，班主任执行纯安抚动作话术与质检机制定案。</td>
-                            <td><span class="tag tag-active">设计中</span></td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="metric-sub" style="margin-bottom: 20px;">
+                要做到前端感受“专属关怀”，后端依靠“雷达分发”，核心产研（姚涣团队）必须硬性满足以下 4 个闭环条件：
             </div>
-        </div>
 
-    </div>
+            <div style="display: flex; flex-direction: column; gap: 16px;">
+                <div
+                    style="background: #fff; border: 1px solid #e2e8f0; border-left: 4px solid #db2777; border-radius: 8px; padding: 16px;">
+                    <h3
+                        style="font-size: 1rem; color: #1e293b; margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
+                        <span
+                            style="background: #fdf2f8; color: #db2777; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem;">条件
+                            1</span>
+                        多维复合触发模型 (不只看关键词)
+                    </h3>
+                    <p style="font-size: 0.9rem; color: #475569; margin-bottom: 8px;">
+                        <strong>动作：</strong>建立长尾“微情绪”语料库（疲惫词/对比词等）；加入【行为异动】监控。
+                    </p>
+                    <div
+                        style="font-size: 0.85rem; color: #64748b; background: #f8fafc; padding: 10px; border-radius: 6px;">
+                        <strong>触发逻辑：</strong>连续 2 天不交作业（行为异常）+ 群里发了“进度好快跟不上”（语义） = 立刻标红判定高危。
+                    </div>
+                </div>
+
+                <div
+                    style="background: #fff; border: 1px solid #e2e8f0; border-left: 4px solid #eab308; border-radius: 8px; padding: 16px;">
+                    <h3
+                        style="font-size: 1rem; color: #1e293b; margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
+                        <span
+                            style="background: #fefce8; color: #ca8a04; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem;">条件
+                            2</span>
+                        AI 绝对静默与“秒级穿透”机制 (核心难点)
+                    </h3>
+                    <p style="font-size: 0.9rem; color: #475569; margin-bottom: 8px;">
+                        <strong>动作：</strong>一旦命中红/黄灯模型，该会话必须瞬间挂起 AI（闭嘴），不能发生机器智障回复。
+                    </p>
+                    <div
+                        style="font-size: 0.85rem; color: #64748b; background: #f8fafc; padding: 10px; border-radius: 6px;">
+                        <strong>拦截流转：</strong>给系统打隐形标签，通过 WebSockets 毫秒级强行置顶到班主任工单，使用强制红点告警。
+                    </div>
+                </div>
+
+                <div
+                    style="background: #fff; border: 1px solid #e2e8f0; border-left: 4px solid #3b82f6; border-radius: 8px; padding: 16px;">
+                    <h3
+                        style="font-size: 1rem; color: #1e293b; margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
+                        <span
+                            style="background: #eff6ff; color: #2563eb; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem;">条件
+                            3</span>
+                        上帝视角的工作台与“弹药库”
+                    </h3>
+                    <p style="font-size: 0.9rem; color: #475569; margin-bottom: 8px;">
+                        <strong>动作：</strong>不要让班主任去翻几百条聊天记录，后台必须结构化投喂脱水信息。
+                    </p>
+                    <div
+                        style="font-size: 0.85rem; color: #64748b; background: #f8fafc; padding: 10px; border-radius: 6px;">
+                        <strong>界面要求：</strong>告警卡片需包含“触发语句” + “萃取画像”；同时必须配置基于该情境的 3 条 <strong>SOP 共情破冰推文库</strong>
+                        供其一键下发。
+                    </div>
+                </div>
+
+                <div
+                    style="background: #fff; border: 1px solid #e2e8f0; border-left: 4px solid #10b981; border-radius: 8px; padding: 16px;">
+                    <h3
+                        style="font-size: 1rem; color: #1e293b; margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
+                        <span
+                            style="background: #ecfdf5; color: #059669; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem;">条件
+                            4</span>
+                        纯服务闭环与数据隔离屏障
+                    </h3>
+                    <p style="font-size: 0.9rem; color: #475569; margin-bottom: 8px;">
+                        <strong>动作：</strong>必须从系统层面上协助班主任切割“销售惯性”。
+                    </p>
+                    <div
+                        style="font-size: 0.85rem; color: #64748b; background: #f8fafc; padding: 10px; border-radius: 6px;">
+                        <strong>强制要求：</strong>处于红灯树洞模式下，工作台屏蔽快捷发送付款码组件；该安抚订单最终只考核 <strong>防流失率与 NPS</strong>。
+                    </div>
+                </div>
+            </div>
+
+            <!-- 执行战报与计划 -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="icon-wrap icon-indigo">📋</div>
+                    <h2>里程碑与落地执行跟踪</h2>
+                </div>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>建设模块</th>
+                                <th>负责人 / 协助</th>
+                                <th>核心产出标准</th>
+                                <th>当前进度</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <strong>高爆语料清洗与建库</strong><br>
+                                    意图解构模型训练
+                                </td>
+                                <td>谢媛 / 产研团队</td>
+                                <td>建立 100+ 退费/投诉典型触发语料集，完成泛化打标。</td>
+                                <td><span class="tag tag-active">进行中 - 3.12 验收</span></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>系统闭环联调</strong><br>
+                                    识别 → 暂停自动化 → 转人工
+                                </td>
+                                <td>产研协同开发</td>
+                                <td>精英业务线业务全流程系统跑通。验证工作台告警有效性。</td>
+                                <td><span class="tag tag-dev">待研发切入</span></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>全自动日常 QA 上线</strong><br>
+                                    替代“早晚功”“催单”动作
+                                </td>
+                                <td>产研团队</td>
+                                <td>自动匹配学员进度推送知识点、课程链接，准确率 > 95%。</td>
+                                <td><span class="tag tag-dev">规划中</span></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>人工侧配套SOP（树洞模式）</strong><br>
+                                    严禁销售红线的流程制度
+                                </td>
+                                <td>谢媛</td>
+                                <td>AI转交后，班主任执行纯安抚动作话术与质检机制定案。</td>
+                                <td><span class="tag tag-active">设计中</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
 </body>
 
 </html>
