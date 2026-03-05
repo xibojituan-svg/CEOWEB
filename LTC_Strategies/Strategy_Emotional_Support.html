@@ -1,0 +1,1092 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>情绪树洞服务体系 · 策略追踪大盘</title>
+    <style>
+        :root {
+            --primary: #7c3aed;
+            --primary-light: #ede9fe;
+            --primary-mid: #a78bfa;
+            --accent: #db2777;
+            --dark: #1e1b4b;
+            --gray: #6b7280;
+            --light: #fafafa;
+            --success: #059669;
+            --danger: #dc2626;
+            --warning: #d97706;
+            --teal: #0d9488;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, "PingFang SC", "Hiragino Sans GB", system-ui, sans-serif;
+            background: #f1f5f9;
+            color: #1e293b;
+            line-height: 1.7;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        a.back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        /* ── Header ── */
+        .header {
+            background: linear-gradient(135deg, #1e1b4b 0%, #4c1d95 60%, #7c3aed 100%);
+            border-radius: 16px;
+            padding: 40px 36px;
+            color: white;
+            margin-bottom: 28px;
+            box-shadow: 0 10px 30px rgba(124, 58, 237, .35);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '🌳';
+            position: absolute;
+            right: 36px;
+            top: 28px;
+            font-size: 5rem;
+            opacity: .12;
+        }
+
+        .header-meta {
+            font-size: .8rem;
+            color: #c4b5fd;
+            text-transform: uppercase;
+            letter-spacing: .06em;
+            margin-bottom: 8px;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            margin-bottom: 6px;
+            color: #ede9fe;
+        }
+
+        .header .subtitle {
+            font-size: .95rem;
+            color: #a5b4fc;
+        }
+
+        .header-bottom {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            padding: 5px 14px;
+            border-radius: 20px;
+            font-size: .78rem;
+            font-weight: 700;
+        }
+
+        .badge-miss {
+            background: rgba(239, 68, 68, .25);
+            color: #fca5a5;
+            border: 1px solid rgba(239, 68, 68, .4);
+        }
+
+        .badge-owner {
+            background: rgba(255, 255, 255, .15);
+            color: #e0e7ff;
+            border: 1px solid rgba(255, 255, 255, .2);
+        }
+
+        .badge-process {
+            background: rgba(167, 139, 250, .3);
+            color: #c4b5fd;
+            border: 1px solid rgba(167, 139, 250, .4);
+        }
+
+        /* ── Cards ── */
+        .card {
+            background: white;
+            border-radius: 14px;
+            padding: 24px;
+            margin-bottom: 22px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, .06);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 18px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #f1f5f9;
+        }
+
+        .card-header h2 {
+            font-size: 1.1rem;
+            color: #1e293b;
+        }
+
+        .card-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+
+        .icon-purple {
+            background: #ede9fe;
+        }
+
+        .icon-red {
+            background: #fee2e2;
+        }
+
+        .icon-green {
+            background: #dcfce7;
+        }
+
+        .icon-amber {
+            background: #fef3c7;
+        }
+
+        .icon-blue {
+            background: #dbeafe;
+        }
+
+        .icon-teal {
+            background: #ccfbf1;
+        }
+
+        /* ── Grids ── */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+
+        @media(max-width:768px) {
+
+            .grid-2,
+            .grid-3 {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ── Alert / Callout ── */
+        .callout {
+            border-radius: 10px;
+            padding: 14px 18px;
+            font-size: .88rem;
+            line-height: 1.65;
+            margin-bottom: 14px;
+        }
+
+        .callout-red {
+            background: #fef2f2;
+            border-left: 4px solid var(--danger);
+            color: #7f1d1d;
+        }
+
+        .callout-amber {
+            background: #fffbeb;
+            border-left: 4px solid var(--warning);
+            color: #78350f;
+        }
+
+        .callout-purple {
+            background: #f5f3ff;
+            border-left: 4px solid var(--primary);
+            color: #3b0764;
+        }
+
+        .callout-green {
+            background: #f0fdf4;
+            border-left: 4px solid var(--success);
+            color: #14532d;
+        }
+
+        .callout-teal {
+            background: #f0fdfa;
+            border-left: 4px solid var(--teal);
+            color: #134e4a;
+        }
+
+        /* ── VOC ── */
+        .voc-item {
+            background: #fafafa;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 12px 14px;
+            margin-bottom: 10px;
+            font-size: .85rem;
+            color: #374151;
+            line-height: 1.6;
+        }
+
+        .voc-item strong {
+            color: var(--primary);
+        }
+
+        .voc-tag {
+            display: inline-block;
+            font-size: .7rem;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 10px;
+            margin-right: 6px;
+            margin-bottom: 6px;
+        }
+
+        .voc-tag-red {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .voc-tag-amber {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .voc-tag-purple {
+            background: #ede9fe;
+            color: #5b21b6;
+        }
+
+        /* ── KPI Metrics ── */
+        .metric {
+            background: #f8fafc;
+            border-radius: 10px;
+            padding: 16px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .metric.danger {
+            border-color: var(--danger);
+        }
+
+        .metric.success {
+            border-color: var(--success);
+        }
+
+        .metric.amber {
+            border-color: var(--warning);
+        }
+
+        .metric-label {
+            font-size: .75rem;
+            text-transform: uppercase;
+            letter-spacing: .05em;
+            color: var(--gray);
+            font-weight: 700;
+        }
+
+        .metric-value {
+            font-size: 1.8rem;
+            font-weight: 900;
+            margin: 6px 0 4px;
+        }
+
+        .metric-desc {
+            font-size: .78rem;
+            color: #64748b;
+        }
+
+        /* ── Service Layers ── */
+        .layer {
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 14px;
+            border: 2px solid transparent;
+        }
+
+        .layer-l1 {
+            background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+            border-color: #86efac;
+        }
+
+        .layer-l2 {
+            background: linear-gradient(135deg, #eff6ff, #dbeafe);
+            border-color: #93c5fd;
+        }
+
+        .layer-l3 {
+            background: linear-gradient(135deg, #f5f3ff, #ede9fe);
+            border-color: #c4b5fd;
+        }
+
+        .layer-badge {
+            display: inline-block;
+            font-size: .75rem;
+            font-weight: 800;
+            padding: 3px 10px;
+            border-radius: 12px;
+            margin-bottom: 8px;
+        }
+
+        .l1-badge {
+            background: #16a34a;
+            color: white;
+        }
+
+        .l2-badge {
+            background: #2563eb;
+            color: white;
+        }
+
+        .l3-badge {
+            background: #7c3aed;
+            color: white;
+        }
+
+        .layer h3 {
+            font-size: 1rem;
+            margin-bottom: 6px;
+        }
+
+        .layer p {
+            font-size: .85rem;
+            color: #374151;
+            line-height: 1.6;
+        }
+
+        .layer-kpi {
+            margin-top: 10px;
+            font-size: .78rem;
+            font-weight: 700;
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 8px;
+        }
+
+        .l1-kpi {
+            background: #dcfce7;
+            color: #14532d;
+        }
+
+        .l2-kpi {
+            background: #dbeafe;
+            color: #1e3a8a;
+        }
+
+        .l3-kpi {
+            background: #ede9fe;
+            color: #3b0764;
+        }
+
+        /* ── Process Map ── */
+        .process-row {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 10px;
+            align-items: flex-start;
+        }
+
+        .process-tag {
+            flex-shrink: 0;
+            font-size: .75rem;
+            font-weight: 800;
+            padding: 4px 12px;
+            border-radius: 20px;
+            min-width: 56px;
+            text-align: center;
+            margin-top: 2px;
+        }
+
+        .tag-ltc {
+            background: #0d9488;
+            color: white;
+        }
+
+        .tag-itr {
+            background: #dc2626;
+            color: white;
+        }
+
+        .tag-ipd {
+            background: #7c3aed;
+            color: white;
+        }
+
+        .process-content {
+            flex: 1;
+            font-size: .87rem;
+            color: #374151;
+            line-height: 1.6;
+        }
+
+        .process-content strong {
+            color: #1e293b;
+        }
+
+        /* ── Timeline ── */
+        .timeline {
+            position: relative;
+            padding-left: 28px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 8px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #e2e8f0;
+        }
+
+        .tl-item {
+            position: relative;
+            margin-bottom: 22px;
+        }
+
+        .tl-dot {
+            position: absolute;
+            left: -24px;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: 2px solid white;
+            box-shadow: 0 0 0 2px var(--primary);
+            background: var(--primary);
+        }
+
+        .tl-dot.done {
+            background: var(--success);
+            box-shadow: 0 0 0 2px var(--success);
+        }
+
+        .tl-dot.warn {
+            background: var(--warning);
+            box-shadow: 0 0 0 2px var(--warning);
+        }
+
+        .tl-date {
+            font-size: .75rem;
+            text-transform: uppercase;
+            color: var(--gray);
+            font-weight: 700;
+        }
+
+        .tl-content {
+            margin-top: 3px;
+            font-size: .9rem;
+            line-height: 1.5;
+        }
+
+        /* ── Checklist ── */
+        .task {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 10px 0;
+            border-bottom: 1px dashed #e2e8f0;
+        }
+
+        .task:last-child {
+            border-bottom: none;
+        }
+
+        .cb {
+            width: 18px;
+            height: 18px;
+            border: 2px solid #cbd5e1;
+            border-radius: 4px;
+            flex-shrink: 0;
+            margin-top: 3px;
+        }
+
+        .cb.done {
+            background: var(--success);
+            border-color: var(--success);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 11px;
+        }
+
+        .task-body {
+            flex: 1;
+        }
+
+        .task-body strong {
+            font-size: .9rem;
+            display: block;
+        }
+
+        .task-body span {
+            font-size: .78rem;
+            color: var(--gray);
+        }
+
+        .task-owner {
+            font-size: .73rem;
+            background: #f1f5f9;
+            color: var(--primary);
+            padding: 2px 10px;
+            border-radius: 10px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        /* ── Role Decoupling ── */
+        .role-compare {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 16px;
+            align-items: center;
+        }
+
+        .role-box {
+            border-radius: 10px;
+            padding: 16px;
+        }
+
+        .role-old {
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+        }
+
+        .role-new {
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+        }
+
+        .role-box h4 {
+            font-size: .85rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .role-old h4 {
+            color: #991b1b;
+        }
+
+        .role-new h4 {
+            color: #166534;
+        }
+
+        .role-box ul {
+            font-size: .82rem;
+            line-height: 1.7;
+            padding-left: 14px;
+            color: #374151;
+        }
+
+        .role-arrow {
+            font-size: 1.5rem;
+            color: var(--gray);
+        }
+
+        @media(max-width:640px) {
+            .role-compare {
+                grid-template-columns: 1fr;
+            }
+
+            .role-arrow {
+                display: none;
+            }
+        }
+
+        /* ── Journey Map ── */
+        .journey {
+            overflow-x: auto;
+        }
+
+        .journey-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 600px;
+            font-size: .82rem;
+        }
+
+        .journey-table th {
+            background: #1e1b4b;
+            color: white;
+            padding: 10px 12px;
+            text-align: left;
+            font-size: .75rem;
+            text-transform: uppercase;
+            letter-spacing: .04em;
+        }
+
+        .journey-table td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #f1f5f9;
+            vertical-align: top;
+        }
+
+        .journey-table tr:hover td {
+            background: #fafafa;
+        }
+
+        .week-badge {
+            display: inline-block;
+            font-size: .7rem;
+            font-weight: 800;
+            padding: 2px 8px;
+            border-radius: 8px;
+            background: #1e1b4b;
+            color: white;
+        }
+
+        .risk-high {
+            color: #dc2626;
+            font-weight: 700;
+        }
+
+        .risk-mid {
+            color: #d97706;
+            font-weight: 700;
+        }
+
+        .action-tag {
+            display: inline-block;
+            font-size: .7rem;
+            font-weight: 700;
+            background: #ede9fe;
+            color: #5b21b6;
+            padding: 2px 8px;
+            border-radius: 8px;
+            margin-top: 4px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <a href="../LTC_Process_Management.html" class="back-link">← 返回 LTC 大盘</a>
+
+        <!-- Header -->
+        <div class="header">
+            <div class="header-meta">情绪服务 · 交付体验专项 · 首期建设</div>
+            <h1>🌳 学员情绪树洞服务体系</h1>
+            <div class="subtitle">将隐性情绪需求从班主任超负荷中解耦，构建有产品形态、有激励机制的情绪服务闭环</div>
+            <div class="header-bottom">
+                <span class="badge badge-miss">⚠️ 历史盲区：2025年无专项推进</span>
+                <span class="badge badge-owner">👤 负责人：谢媛</span>
+                <span class="badge badge-process">📌 归属：LTC交付 × ITR预防层 × IPD产品化</span>
+                <span class="badge badge-owner">📅 2026-03-05 启动</span>
+            </div>
+        </div>
+
+        <!-- 缘起：为什么这件事没有被做 -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-icon icon-red">🔍</div>
+                <h2>为什么这个服务没有被关注？复盘诊断</h2>
+            </div>
+            <div class="callout callout-red">
+                <strong>核心原因：</strong>谢媛 2025 年精力集中在复购销售转化，情绪服务这条线没有专项 Owner。结果是：班主任被迫承接了所有情绪服务，但无考核激励 →
+                执行质量极度依赖个人，且消耗了大量教学精力。
+            </div>
+            <div class="grid-2">
+                <div>
+                    <h3 style="font-size:.9rem;margin-bottom:10px;color:var(--danger);">📣 2025 年 VOC 中的直接信号（一直被忽视）</h3>
+                    <div class="voc-item">
+                        <span class="voc-tag voc-tag-purple">班主任反馈</span>
+                        <strong>【无极】</strong>班主任实际承担<strong>一对一的心理咨询、危机处理</strong>等多重职能，陪跑官仅群内一对多，私聊问题最终由班主任解决。
+                    </div>
+                    <div class="voc-item">
+                        <span class="voc-tag voc-tag-red">教学质量风险</span>
+                        <strong>【流浪核桃】</strong>一对一辅导课，人力消耗太大，<strong>最终主要在解决心理问题</strong>，不是教学。
+                    </div>
+                    <div class="voc-item">
+                        <span class="voc-tag voc-tag-amber">结营后流失</span>
+                        <strong>【浅夏的音符】</strong>一毕业没有班会了，没有课了，不知道该干嘛，<strong>一下子就陷入了空虚</strong>。
+                    </div>
+                    <div class="voc-item">
+                        <span class="voc-tag voc-tag-red">激励缺失</span>
+                        <strong>【雨方说】</strong>解决这些痛点，对我们来说是"花自己时间帮公司赚钱"，是<strong>纯粹的负收益行为</strong>。
+                    </div>
+                </div>
+                <div>
+                    <h3 style="font-size:.9rem;margin-bottom:10px;color:var(--primary);">🎯 JTBD：用户真正雇用"树洞"做什么？</h3>
+                    <div style="background:#f5f3ff;border-radius:10px;padding:16px;font-size:.85rem;line-height:1.8;">
+                        <div style="margin-bottom:10px;">
+                            <strong style="color:var(--primary);">用户任务：</strong><br>
+                            「当我努力学习却看不到改变时，我需要一个地方倾诉，<br>
+                            让我感觉自己没有白费、还有人在意我。」
+                        </div>
+                        <div style="display:grid;gap:8px;">
+                            <div style="background:white;border-radius:6px;padding:8px 12px;">
+                                <span style="font-size:.7rem;font-weight:800;color:#059669;">📋 功能需求</span><br>
+                                能说出心里话，不怕被评判，不影响班主任对自己的印象
+                            </div>
+                            <div style="background:white;border-radius:6px;padding:8px 12px;">
+                                <span style="font-size:.7rem;font-weight:800;color:#7c3aed;">💜 情绪需求</span><br>
+                                "被真正看见"——不是被应付，不是被推销
+                            </div>
+                            <div style="background:white;border-radius:6px;padding:8px 12px;">
+                                <span style="font-size:.7rem;font-weight:800;color:#2563eb;">👥 社交需求</span><br>
+                                "我是一个勇敢追梦的人"，而非"被割韭菜的中老年"
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 流程归属 -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-icon icon-purple">🗺️</div>
+                <h2>情绪服务属于哪个流程？三流程交界处的制度空白</h2>
+            </div>
+            <div class="callout callout-purple" style="margin-bottom:18px;">
+                情绪树洞横跨三个流程，但过去三个流程都没有把它管起来。现在需要明确归属，避免继续三不管。
+            </div>
+
+            <div class="process-row">
+                <span class="process-tag tag-ltc">LTC</span>
+                <div class="process-content">
+                    <strong>交付阶段（主战场）</strong>——将情绪服务节点嵌入营期 SOP，定义每一周的情绪风险与干预动作。负责把服务"排进日历"。
+                </div>
+            </div>
+            <div class="process-row">
+                <span class="process-tag tag-itr">ITR</span>
+                <div class="process-content">
+                    <strong>投诉预防层（L1·预警）</strong>——L1 AI 触发词监控捕获"学不会/想放弃/想退款"等高危情绪词，在变成投诉前主动干预。情绪树洞是 ITR 最便宜的"提前防守"。
+                </div>
+            </div>
+            <div class="process-row">
+                <span class="process-tag tag-ipd">IPD</span>
+                <div class="process-content">
+                    <strong>产品化（基础设施）</strong>——将情绪日记、匿名树洞、打卡回访设计成小程序内的正式功能（而非班主任的私聊），让服务有产品载体、可运营、可量化。
+                </div>
+            </div>
+
+            <div
+                style="margin-top:16px;background:#1e1b4b;border-radius:10px;padding:16px;color:#a5b4fc;font-size:.85rem;line-height:1.8;">
+                <strong style="color:#c4b5fd;">📌 归属结论：</strong>
+                主体在 <strong style="color:#4ade80;">LTC 交付阶段</strong>，由谢媛负责；
+                预警能力由 <strong style="color:#f87171;">ITR·杜康杰</strong> 协同 AI 系统支撑；
+                产品形态由 <strong style="color:#a78bfa;">IPD·产研</strong> 立项实现。
+                谢媛是"服务总设计师"，其他两端是能力提供方。
+            </div>
+        </div>
+
+        <!-- 三层服务体系 -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-icon icon-purple">🌳</div>
+                <h2>情绪树洞三层服务体系设计</h2>
+            </div>
+
+            <div class="layer layer-l1">
+                <span class="layer-badge l1-badge">L1 · 产品层</span>
+                <h3>🤖 自助倾诉 · AI 伴学日记</h3>
+                <p>
+                    在小程序内开放<strong>匿名"今日心情"入口</strong>，学员可每日用 30 秒写下当天的真实感受（无评判、不展示给班主任）。
+                    AI 读取情感词语，自动回应 1 句情绪共情语（如"你说的我都听到了，今天的你已经很勇敢了"），并打情绪标签。
+                    连续 2 天出现"沮丧/想放弃/太难了"等词，触发 L2 推送。
+                </p>
+                <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;">
+                    <span class="layer-kpi l1-kpi">📊 指标：日记使用率 &gt; 30%</span>
+                    <span class="layer-kpi l1-kpi">📊 AI 触发词命中率</span>
+                    <span class="layer-kpi l1-kpi">成本：≈ 0（AI 调用）</span>
+                </div>
+            </div>
+
+            <div class="layer layer-l2">
+                <span class="layer-badge l2-badge">L2 · 社群层</span>
+                <h3>👥 同伴互助 · 每周"真实的我"共同体</h3>
+                <p>
+                    班级群内设立固定节点：每周一次<strong>「晒真实」时刻</strong>——只允许说"本周我遇到的最难的事"，不允许晒成绩、不允许浮夸正能量。
+                    班主任设置<strong>规则锚点</strong>（不销售、不互相建议），让负面情绪合法流通。
+                    L1 触发的高危用户，由系统推送"有人想跟你说句话"，邀请进入 L3。
+                </p>
+                <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;">
+                    <span class="layer-kpi l2-kpi">📊 指标：晒真实周互动率 &gt; 40%</span>
+                    <span class="layer-kpi l2-kpi">📊 L1→L2 转化率</span>
+                    <span class="layer-kpi l2-kpi">成本：SOP 设计一次性</span>
+                </div>
+            </div>
+
+            <div class="layer layer-l3">
+                <span class="layer-badge l3-badge">L3 · 人工层</span>
+                <h3>🧑‍💼 专属陪伴 · 情绪陪跑官（独立于复购考核）</h3>
+                <p>
+                    设立<strong>独立于班主任的情绪陪跑官角色</strong>（可从优秀毕业学员、心理兴趣者中选拔）。
+                    每月 1 次主动触达高风险学员，<strong>硬性规定：不提课程、不提复购</strong>，只做"倾听+正向见证"。
+                    发现自我伤害风险时走绿色通道，告知班主任，由班主任判断是否开放退费出口。
+                </p>
+                <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;">
+                    <span class="layer-kpi l3-kpi">📊 指标：高危用户 7 日满意度 ≥ 4.5分</span>
+                    <span class="layer-kpi l3-kpi">📊 L3 挽留率 vs. 自然流失率差值</span>
+                    <span class="layer-kpi l3-kpi">KPI：≠ 复购率，= 满意度+投诉率</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 角色解耦 -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-icon icon-amber">⚖️</div>
+                <h2>角色解耦：把情绪服务从班主任身上完整剥离</h2>
+            </div>
+            <div class="callout callout-amber" style="margin-bottom:16px;">
+                班主任被同时要求"教课 + 情绪桶 + 复购销售"三件事，且没有激励。这是系统失败，不是人的失败。
+            </div>
+            <div class="role-compare">
+                <div class="role-box role-old">
+                    <h4>❌ 当前错误模型（班主任三合一）</h4>
+                    <ul>
+                        <li>教学进度管理</li>
+                        <li>一对一情绪安抚（隐性超负荷）</li>
+                        <li>复购转化销售</li>
+                        <li>危机处置兜底</li>
+                        <li>KPI = 复购率 + 完课率</li>
+                    </ul>
+                </div>
+                <div class="role-arrow">→</div>
+                <div class="role-box role-new">
+                    <h4>✅ 目标正确模型（职责清晰分工）</h4>
+                    <ul>
+                        <li><strong>班主任</strong>：聚焦教学进度 + 课程问题</li>
+                        <li><strong>情绪陪跑官（新）</strong>：专属情绪服务，与复购完全隔离</li>
+                        <li><strong>AI 树洞（L1）</strong>：承接日常倾诉 + 高危预警</li>
+                        <li><strong>班主任 KPI</strong>：满意度 + 完课率（剔除情绪任务）</li>
+                        <li><strong>情绪陪跑 KPI</strong>：满意度 + 投诉率下降（≠ 复购）</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- 营期触发地图 -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-icon icon-teal">📅</div>
+                <h2>营期每周情绪干预地图（嵌入 LTC 交付 SOP）</h2>
+            </div>
+            <div class="journey">
+                <table class="journey-table">
+                    <thead>
+                        <tr>
+                            <th>营期节点</th>
+                            <th>情绪高风险</th>
+                            <th>树洞触发动作</th>
+                            <th>触发层级</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="week-badge">第1周</span><br>入营期</td>
+                            <td class="risk-mid">期望过高 → 现实落差冲击</td>
+                            <td>发送"欢迎加入你的私人学习日记"邀请链接，主动给倾诉出口；说明"这里不会给你打分"</td>
+                            <td><span class="action-tag">L1 激活</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="week-badge">第3周</span><br>高难度期</td>
+                            <td class="risk-high">受挫、"我是不是太笨了"</td>
+                            <td>自动推送"第3周情绪预警帖"：你现在的感受很正常，附带3条普通学员的真实挣扎片段</td>
+                            <td><span class="action-tag">L1 主动推</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="week-badge">第5-6周</span><br>复购压力期</td>
+                            <td class="risk-high">学不会 + 复购双重夹击，极易产生受骗感</td>
+                            <td>AI 触发词监控："学不会/想放弃/太贵了/没什么用" → 24h内转 L2 社群支持，标记高危</td>
+                            <td><span class="action-tag">L1→L2 转</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="week-badge">第8周</span><br>毕业前</td>
+                            <td class="risk-mid">未变现焦虑 + 毕业后空虚预期</td>
+                            <td>组织"真实毕业分享日"——说一件没成功的事；让学员对结营后的迷茫有心理预期</td>
+                            <td><span class="action-tag">L2 社群仪式</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="week-badge">结营+7天</span><br>情绪真空期</td>
+                            <td class="risk-high">突然失去集体归属 → 负面情绪外溢至差评</td>
+                            <td>系统自动触发"7天回望"：发 1 张学员个人成长小结卡（AI生成），附"树洞仍开着"入口</td>
+                            <td><span class="action-tag">L1 自动触达</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="week-badge">结营+30天</span><br>沉默期</td>
+                            <td class="risk-mid">迷茫沉默 → 自然流失 or 负面口碑</td>
+                            <td>情绪陪跑官主动打 1 次非销售电话，问"你现在怎么样" — 硬性规定不提复购</td>
+                            <td><span class="action-tag">L3 人工触达</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- KPI与追踪 -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-icon icon-green">📊</div>
+                <h2>核心 KPI 追踪（情绪服务的成功标准）</h2>
+            </div>
+            <div class="callout callout-green" style="margin-bottom:16px;">
+                情绪服务的 KPI 必须和复购率解耦——否则"情绪陪跑官"会变成又一个销售角色，整个体系崩塌。
+            </div>
+            <div class="grid-3">
+                <div class="metric danger">
+                    <div class="metric-label">目前：主动退费申请率</div>
+                    <div class="metric-value" style="color:var(--danger);">待测量</div>
+                    <div class="metric-desc">情绪树洞上线后的核心对比基准——减少多少非教学原因的退费</div>
+                </div>
+                <div class="metric amber">
+                    <div class="metric-label">目标：高危用户7日满意度</div>
+                    <div class="metric-value" style="color:var(--warning);">≥ 4.5分</div>
+                    <div class="metric-desc">L3 情绪陪跑官服务后 7 天内的专项满意度调研结果</div>
+                </div>
+                <div class="metric success">
+                    <div class="metric-label">目标：情绪树洞日均使用率</div>
+                    <div class="metric-value" style="color:var(--success);">≥ 30%</div>
+                    <div class="metric-desc">在营学员每日打开 L1 日记入口的比例（验证需求真实性）</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-label">结营 30 天留存触达率</div>
+                    <div class="metric-value">100%</div>
+                    <div class="metric-desc">每位毕业学员在结营 30 天内必须被情绪陪跑官主动触达 1 次</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-label">班主任情绪请求分流比例</div>
+                    <div class="metric-value">≥ 70%</div>
+                    <div class="metric-desc">本应由班主任处理的情绪问题，转由 AI 或情绪陪跑官承接的比例</div>
+                </div>
+                <div class="metric danger">
+                    <div class="metric-label">严禁指标：情绪陪跑复购率</div>
+                    <div class="metric-value" style="color:var(--danger);">不考核</div>
+                    <div class="metric-desc">情绪陪跑官的绩效与复购率完全解耦，否则服务必然异化</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 行动清单 -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-icon icon-blue">✅</div>
+                <h2>谢媛 · 4 周启动行动清单</h2>
+            </div>
+            <div class="task">
+                <div class="cb done">✓</div>
+                <div class="task-body">
+                    <strong>【已完成】CEO 诊断与立项确认</strong>
+                    <span>情绪Tree洞确认为 2026 交付质量核心专项，谢媛确认为负责人</span>
+                </div>
+                <span class="task-owner">谢媛 · 完成</span>
+            </div>
+            <div class="task">
+                <div class="cb"></div>
+                <div class="task-body">
+                    <strong>【第1周】梳理情绪服务现状 Baseline</strong>
+                    <span>统计：班主任每天平均处理几次情绪类私聊？造成多少时间损耗？（发匿名问卷）</span>
+                </div>
+                <span class="task-owner">谢媛 · Week1</span>
+            </div>
+            <div class="task">
+                <div class="cb"></div>
+                <div class="task-body">
+                    <strong>【第1周】设计 L2 社群节点 SOP——"晒真实"周例行仪式</strong>
+                    <span>输出一份班主任操作手册（每周几发、发什么、如何管理负面发言不变成骚乱）</span>
+                </div>
+                <span class="task-owner">谢媛 · Week1</span>
+            </div>
+            <div class="task">
+                <div class="cb"></div>
+                <div class="task-body">
+                    <strong>【第2周】招募首批情绪陪跑官（3-5人试点）</strong>
+                    <span>从优秀毕业学员中筛选，有同理心，明确告知：考核标准是满意度，不是复购率</span>
+                </div>
+                <span class="task-owner">谢媛 · Week2</span>
+            </div>
+            <div class="task">
+                <div class="cb"></div>
+                <div class="task-body">
+                    <strong>【第2周】向产研提交 L1 产品需求文档（情绪日记 + 触发词预警）</strong>
+                    <span>联动 IPD：输出小程序情绪日记功能需求，AI 触发词词库初稿（20-30个核心词）</span>
+                </div>
+                <span class="task-owner">谢媛 + 产研 · Week2</span>
+            </div>
+            <div class="task">
+                <div class="cb"></div>
+                <div class="task-body">
+                    <strong>【第3周】向杜康杰同步 ITR 触发词预警集成需求</strong>
+                    <span>将情绪树洞的 L1 高危词汇接入 ITR 现有 AI 监控系统，实现投诉前置干预</span>
+                </div>
+                <span class="task-owner">谢媛 + 杜康杰 · Week3</span>
+            </div>
+            <div class="task">
+                <div class="cb"></div>
+                <div class="task-body">
+                    <strong>【第4周】在一个新营期灰度跑通完整三层流程</strong>
+                    <span>选 1 个班，全程手动模拟三层服务，采集数据，评估 L1 留存率、L3 满意度</span>
+                </div>
+                <span class="task-owner">谢媛 · Week4</span>
+            </div>
+        </div>
+
+        <!-- 时间轴 -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-icon icon-purple">📅</div>
+                <h2>推进时间轴</h2>
+            </div>
+            <div class="timeline">
+                <div class="tl-item">
+                    <div class="tl-dot done"></div>
+                    <div class="tl-date">2026-03-05 · 立项</div>
+                    <div class="tl-content">CEO 诊断确认情绪树洞为交付质量核心盲区；谢媛确认为专项负责人；本页创建。</div>
+                </div>
+                <div class="tl-item">
+                    <div class="tl-dot warn"></div>
+                    <div class="tl-date">2026-03-12 · 第一周交付</div>
+                    <div class="tl-content">完成班主任情绪负担 Baseline 调研；L2 社群"晒真实"SOP 初稿完成；向产研提交 L1 需求文档。</div>
+                </div>
+                <div class="tl-item">
+                    <div class="tl-dot"></div>
+                    <div class="tl-date">2026-03-19 · 第二周交付</div>
+                    <div class="tl-content">情绪陪跑官首批招募完成（3-5人）；培训启动；L1 触发词词库完成 &amp; 提交 ITR 系统集成。</div>
+                </div>
+                <div class="tl-item">
+                    <div class="tl-dot"></div>
+                    <div class="tl-date">2026-03-26 · 第三周交付</div>
+                    <div class="tl-content">ITR 触发词预警集成完成（联动杜康杰）；选定灰度班级，开始全流程手动模拟。</div>
+                </div>
+                <div class="tl-item">
+                    <div class="tl-dot"></div>
+                    <div class="tl-date">2026-04-05 · 首轮复盘</div>
+                    <div class="tl-content">灰度班级首轮数据采集完成；谢媛 + CEO 评审 KPI 表现；决定是否推全营期；更新本页数据。</div>
+                </div>
+            </div>
+        </div>
+
+        <div
+            style="text-align:center;color:#94a3b8;font-size:.82rem;padding:20px 0;border-top:1px solid #e2e8f0;margin-top:8px;">
+            情绪树洞服务体系 · 负责人：谢媛 · 创建：2026-03-05 · 版本 v1.0
+        </div>
+    </div>
+</body>
+
+</html>
