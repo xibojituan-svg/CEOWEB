@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>策略追踪 - 长效社群与低价订阅变现</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --dark: #0f172a;
+            --gray: #64748b;
+            --light: #f8fafc;
+            --success: #16a34a;
+            --danger: #dc2626;
+            --warning: #d97706;
+        }
+        body { font-family: system-ui, sans-serif; background: #f1f5f9; color: var(--dark); line-height: 1.6; margin: 0; padding: 20px; }
+        .container { max-width: 1000px; margin: 0 auto; }
+        .header { background: linear-gradient(135deg, var(--dark) 0%, #1e293b 100%); padding: 30px; border-radius: 12px; color: white; margin-bottom: 24px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+        .header h1 { margin: 0 0 10px 0; color: #38bdf8; font-size: 1.8rem; }
+        .header p { margin: 0; color: #cbd5e1; font-size: 0.95rem; }
+        .back-link { display: inline-block; margin-bottom: 20px; color: var(--primary); text-decoration: none; font-weight: bold; }
+        .back-link:hover { text-decoration: underline; }
+        .card { background: white; border-radius: 12px; padding: 24px; margin-bottom: 24px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .card h2 { font-size: 1.2rem; margin-top: 0; margin-bottom: 16px; border-bottom: 2px solid #f1f5f9; padding-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+        .status-badge { padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: bold; text-transform: uppercase; }
+        .status-executing { background: #dcfce7; color: var(--success); }
+        .status-blocked { background: #fee2e2; color: var(--danger); }
+        .status-new-action { background: #fef3c7; color: var(--warning); }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .metric-box { background: #f8fafc; padding: 16px; border-radius: 8px; border-left: 4px solid var(--primary); }
+        .metric-box.danger { border-color: var(--danger); }
+        .metric-box.success { border-color: var(--success); }
+        .metric-value { font-size: 1.8rem; font-weight: 800; margin: 8px 0; }
+        .task-row { display: flex; align-items: flex-start; gap: 12px; padding: 12px 0; border-bottom: 1px dashed #e2e8f0; }
+        .task-row:last-child { border-bottom: none; }
+        .checkbox { width: 18px; height: 18px; border: 2px solid #cbd5e1; border-radius: 4px; flex-shrink: 0; margin-top: 4px; }
+        .checkbox.checked { background: var(--success); border-color: var(--success); display: flex; align-items: center; justify-content: center; }
+        .checkbox.checked::after { content: "✓"; color: white; font-size: 12px; }
+        
+        .timeline-item { position: relative; padding-left: 20px; padding-bottom: 20px; border-left: 2px solid #e2e8f0; }
+        .timeline-item::before { content: ""; position: absolute; left: -6px; top: 0; width: 10px; height: 10px; border-radius: 50%; background: var(--primary); }
+        .timeline-date { font-size: 0.8rem; color: var(--gray); font-weight: bold; }
+        .timeline-content { margin-top: 4px; font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../LTC_Process_Management.html" class="back-link">← 返回 LTC 大盘</a>
+        
+        <div class="header">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                <div>
+                    <div style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; color: #94a3b8; margin-bottom: 8px;">所属阶段: MCE: 交付与变现</div>
+                    <h1>长效社群与低价订阅变现</h1>
+                    <p>策略负责人：马长久</p>
+                </div>
+                <span class="status-badge status-executing">执行中</span>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>🎯 策略目标与上下文</h2>
+            <p style="font-size: 1.05rem; line-height: 1.8; color: #334155;">结业用户长尾运营：上线低单价付费包（工具权限/打卡圈），挖掘全生命周期LTV。</p>
+            <div style="margin-top: 16px; padding: 16px; background: #eff6ff; border-radius: 8px; border-left: 4px solid var(--primary); font-size: 0.9rem;">
+                <strong>💡 战略意图：</strong>
+                该策略是实现「净营收 5.0亿 / 净利润 5000万」的必赢之战，关联用户持续付费的核心痛点。它的成功落地将直接影响此环节流水的转化效率与利润留存。
+            </div>
+        </div>
+
+        <div class="grid">
+            <div class="card">
+                <h2>📊 核心追踪指标 (KPI / OMTM)</h2>
+                <div class="metric-box success">
+                    <div style="color: var(--gray); font-size: 0.85rem; font-weight: bold;">当前状态指标</div>
+                    <div class="metric-value">待数据接入</div>
+                    <div style="color: #475569; font-size: 0.85rem;">目标值设定: 按照2026年Q1 OKR执行</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>⚠️ 风险与卡点扫描</h2>
+                
+                <div style="padding: 12px; background: #f0fdf4; color: #15803d; border-radius: 6px; font-size: 0.9rem; line-height: 1.6;">
+                    目前运行状态相对健康，需持续监控异常波动。
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>🛠️ 关键行动清单 (Checklist)</h2>
+            <div class="task-row">
+                <div class="checkbox checked"></div>
+                <div>
+                    <strong>策略对齐与立项</strong>
+                    <div style="font-size: 0.8rem; color: var(--gray); margin-top: 4px;">由各条线业务负责人确认目标与打法。</div>
+                </div>
+            </div>
+            <div class="task-row">
+                <div class="checkbox"></div>
+                <div>
+                    <strong>SOP 流程制定与白名单确认</strong>
+                    <div style="font-size: 0.8rem; color: var(--gray); margin-top: 4px;">风控、教研、业务三方评审合规与体验边界。</div>
+                </div>
+            </div>
+            <div class="task-row">
+                <div class="checkbox"></div>
+                <div>
+                    <strong>首轮灰度测试与数据收集</strong>
+                    <div style="font-size: 0.8rem; color: var(--gray); margin-top: 4px;">分配小流量测试跑马机制，获取基准线(Baseline)。</div>
+                </div>
+            </div>
+            <div class="task-row">
+                <div class="checkbox"></div>
+                <div>
+                    <strong>全面铺开与基建固化</strong>
+                    <div style="font-size: 0.8rem; color: var(--gray); margin-top: 4px;">将其固化为 2026 常规作战动作与底层系统支持。</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>📅 策略推进时间轴</h2>
+            <div class="timeline-item">
+                <div class="timeline-date">2026-03-05</div>
+                <div class="timeline-content">作战大盘创建：由系统自动生成该策略追踪页面，移交执行团队跟进。</div>
+            </div>
+            <div class="timeline-item" style="border-left: 2px solid transparent;">
+                <div class="timeline-date">Next Step</div>
+                <div class="timeline-content" style="color: var(--gray);">等待首次执行数据回传与项目状态更新。</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
