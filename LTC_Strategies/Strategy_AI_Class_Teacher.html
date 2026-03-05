@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 班主任基建 · 专项策略追踪</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-light: #eff6ff;
+            --accent: #f59e0b;
+            --dark: #0f172a;
+            --gray: #64748b;
+            --success: #10b981;
+            --danger: #ef4444;
+            --cyan: #06b6d4;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, "PingFang SC", "Hiragino Sans GB", system-ui, sans-serif;
+            background: #f8fafc;
+            color: #334155;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        a.back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        /* ── Header ── */
+        .header {
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+            border-radius: 16px;
+            padding: 40px 36px;
+            color: white;
+            margin-bottom: 28px;
+            box-shadow: 0 10px 30px rgba(37, 99, 235, .2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '🤖';
+            position: absolute;
+            right: -20px;
+            top: 10px;
+            font-size: 8rem;
+            opacity: .1;
+        }
+
+        .header-meta {
+            font-size: .8rem;
+            color: #93c5fd;
+            text-transform: uppercase;
+            letter-spacing: .06em;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        .header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 8px;
+            color: #ffffff;
+            font-weight: 900;
+            letter-spacing: -0.02em;
+        }
+
+        .header .subtitle {
+            font-size: 1rem;
+            color: #bfdbfe;
+            max-width: 80%;
+        }
+
+        /* ── Cards ── */
+        .card {
+            background: white;
+            border-radius: 14px;
+            padding: 28px;
+            margin-bottom: 24px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid #f1f5f9;
+        }
+
+        .card-header h2 {
+            font-size: 1.25rem;
+            color: #0f172a;
+            font-weight: 800;
+        }
+
+        .icon-wrap {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .icon-blue {
+            background: #dbeafe;
+        }
+
+        .icon-cyan {
+            background: #cffafe;
+        }
+
+        .icon-indigo {
+            background: #e0e7ff;
+        }
+
+        /* ── Dashboard Grid ── */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+
+        @media (max-width: 900px) {
+            .dashboard-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .metric-card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 20px;
+            transition: all 0.2s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .metric-card:hover {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .metric-top {
+            font-size: 0.8rem;
+            color: var(--gray);
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .metric-main {
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: #0f172a;
+            line-height: 1.1;
+            margin-bottom: 8px;
+        }
+
+        .metric-sub {
+            font-size: 0.85rem;
+            color: #475569;
+        }
+
+        .metric-progress {
+            height: 6px;
+            background: #e2e8f0;
+            border-radius: 4px;
+            margin-top: 12px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: var(--primary);
+            border-radius: 4px;
+        }
+
+        /* ── AI Value Prop Grid ── */
+        .value-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .value-item {
+            padding: 24px;
+            border-radius: 12px;
+            background: linear-gradient(to right, #ffffff, #f8fafc);
+            border-left: 4px solid var(--primary);
+            border: 1px solid #e2e8f0;
+            border-left-width: 4px;
+        }
+
+        .value-item.green {
+            border-left-color: var(--success);
+        }
+
+        .value-item.cyan {
+            border-left-color: var(--cyan);
+        }
+
+        .value-item h3 {
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+            color: #1e293b;
+        }
+
+        .value-item p {
+            font-size: 0.9rem;
+            color: #475569;
+        }
+
+        /* ── Workflow Table ── */
+        .table-wrap {
+            overflow-x: auto;
+            border-radius: 10px;
+            border: 1px solid #e2e8f0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        th {
+            background: #f1f5f9;
+            padding: 14px 16px;
+            text-align: left;
+            font-weight: 700;
+            color: #475569;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        td {
+            padding: 16px;
+            border-bottom: 1px solid #e2e8f0;
+            vertical-align: top;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            background: #f1f5f9;
+            color: #475569;
+            margin-bottom: 6px;
+        }
+
+        .tag-active {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .tag-dev {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <a href="../LTC_Process_Management.html" class="back-link">← 返回 LTC 大盘</a>
+
+        <div class="header">
+            <div class="header-meta">降本增效核心战役 · 第一曲线产研项目</div>
+            <h1>🤖 AI 班主任基建面板</h1>
+            <div class="subtitle">让机器释放运力，用系统做防爆雷达，重塑大课交付人效极限</div>
+        </div>
+
+        <!-- KPI 核心看板 -->
+        <div class="card">
+            <div class="card-header">
+                <div class="icon-wrap icon-blue">📈</div>
+                <h2>北极星指标：人效与阻断率</h2>
+            </div>
+            <div class="dashboard-grid">
+                <div class="metric-card">
+                    <div class="metric-top">人工时间释放率</div>
+                    <div class="metric-main" style="color:var(--primary);">40<span style="font-size:1.2rem;">%</span>
+                    </div>
+                    <div class="metric-sub">目标：班主任群公告、简单QA完全由AI承接。</div>
+                    <div class="metric-progress">
+                        <div class="progress-bar" style="width: 25%;"></div>
+                    </div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-top">高危预警拦截率</div>
+                    <div class="metric-main" style="color:var(--danger);">85<span style="font-size:1.2rem;">%</span>
+                    </div>
+                    <div class="metric-sub">投诉与退费用户通过AI情绪雷达提前预警。</div>
+                    <div class="metric-progress">
+                        <div class="progress-bar" style="background:var(--danger); width: 10%;"></div>
+                    </div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-top">AI 独立解决率</div>
+                    <div class="metric-main" style="color:var(--success);">60<span style="font-size:1.2rem;">%</span>
+                    </div>
+                    <div class="metric-sub">常规询问（课程链接、作业问题）不经人工。</div>
+                    <div class="metric-progress">
+                        <div class="progress-bar" style="background:var(--success); width: 40%;"></div>
+                    </div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-top">情绪阻断满意度</div>
+                    <div class="metric-main" style="color:var(--accent);">4.6<span style="font-size:1.2rem;">/5</span>
+                    </div>
+                    <div class="metric-sub">拦截进入人工"树洞模式"后的用户满意度。</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 战略解构 -->
+        <div class="card">
+            <div class="card-header">
+                <div class="icon-wrap icon-cyan">⚙️</div>
+                <h2>AI班主任功能定位与模型解构</h2>
+            </div>
+            <div class="value-grid">
+                <div class="value-item">
+                    <h3>💡 初阶：无情的效率机器 (取代 40% 取卡时间)</h3>
+                    <p>
+                        针对：发送上课通知、查验设备打不开、催收迟到作业等高频低智任务。<br>
+                        <strong>价值：</strong>将每天 6-7 小时的标准事务时间大幅度压缩，释放的算力强制圈定给情绪维稳，彻底解决“人效悖论”。
+                    </p>
+                </div>
+                <div class="value-item cyan">
+                    <h3>🩺 进阶：精准的防爆雷达 (实时探查冰山下负情绪)</h3>
+                    <p>
+                        针对：学得慢自卑、赚不到钱焦虑、对课程大纲失望等高位情感。<br>
+                        <strong>价值：</strong>建立强大的语料标库，学员发送“太难了/退货”等语义时，AI 不再“答非所问”，而是自动终止流水线问答，第一时间柔性安抚并触发后台紧急工单通报人工介入。
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 执行战报与计划 -->
+        <div class="card">
+            <div class="card-header">
+                <div class="icon-wrap icon-indigo">📋</div>
+                <h2>里程碑与落地执行跟踪</h2>
+            </div>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>建设模块</th>
+                            <th>负责人 / 协助</th>
+                            <th>核心产出标准</th>
+                            <th>当前进度</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <strong>高爆语料清洗与建库</strong><br>
+                                意图解构模型训练
+                            </td>
+                            <td>谢媛 / 产研团队</td>
+                            <td>建立 100+ 退费/投诉典型触发语料集，完成泛化打标。</td>
+                            <td><span class="tag tag-active">进行中 - 3.12 验收</span></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>系统闭环联调</strong><br>
+                                识别 → 暂停自动化 → 转人工
+                            </td>
+                            <td>产研协同开发</td>
+                            <td>精英业务线业务全流程系统跑通。验证工作台告警有效性。</td>
+                            <td><span class="tag tag-dev">待研发切入</span></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>全自动日常 QA 上线</strong><br>
+                                替代“早晚功”“催单”动作
+                            </td>
+                            <td>产研团队</td>
+                            <td>自动匹配学员进度推送知识点、课程链接，准确率 > 95%。</td>
+                            <td><span class="tag tag-dev">规划中</span></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>人工侧配套SOP（树洞模式）</strong><br>
+                                严禁销售红线的流程制度
+                            </td>
+                            <td>谢媛</td>
+                            <td>AI转交后，班主任执行纯安抚动作话术与质检机制定案。</td>
+                            <td><span class="tag tag-active">设计中</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>
