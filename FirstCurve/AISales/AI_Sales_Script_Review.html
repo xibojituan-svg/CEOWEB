@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 助教话术策略评审报告 2026 | 喜播</title>
+    <style>
+        :root {
+            --bg: #0f172a;
+            --surface: #1e293b;
+            --border: rgba(255, 255, 255, 0.08);
+            --text: #f1f5f9;
+            --muted: #94a3b8;
+            --green: #10b981;
+            --green-light: rgba(16, 185, 129, 0.1);
+            --red: #ef4444;
+            --red-light: rgba(239, 68, 68, 0.1);
+            --amber: #f59e0b;
+            --amber-light: rgba(245, 158, 11, 0.1);
+            --blue: #3b82f6;
+            --blue-light: rgba(59, 130, 246, 0.1);
+            --purple: #a78bfa;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.65;
+        }
+
+        /* ── TOPBAR ── */
+        .topbar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            padding: 0 24px;
+        }
+
+        .topbar-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 56px;
+        }
+
+        .topbar a {
+            color: var(--blue);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: .9rem;
+        }
+
+        /* ── LAYOUT ── */
+        .wrap {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px 100px;
+        }
+
+        /* ── HERO ── */
+        .hero {
+            background: linear-gradient(135deg, #1e1b4b, #0f172a);
+            border: 1px solid rgba(167, 139, 250, 0.2);
+            border-radius: 16px;
+            padding: 48px 40px;
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: 'REVIEW';
+            position: absolute;
+            right: -10px;
+            top: -20px;
+            font-size: 140px;
+            font-weight: 900;
+            color: rgba(167, 139, 250, 0.05);
+            pointer-events: none;
+            line-height: 1;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(167, 139, 250, 0.15);
+            border: 1px solid rgba(167, 139, 250, 0.3);
+            color: var(--purple);
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: .8rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            letter-spacing: 1px;
+        }
+
+        .hero h1 {
+            font-size: 2.1rem;
+            font-weight: 800;
+            line-height: 1.3;
+            margin-bottom: 12px;
+        }
+
+        .hero p {
+            color: var(--muted);
+            font-size: 1rem;
+            max-width: 700px;
+        }
+
+        .hero-meta {
+            display: flex;
+            gap: 24px;
+            margin-top: 24px;
+            flex-wrap: wrap;
+        }
+
+        .hero-stat {
+            text-align: center;
+        }
+
+        .hero-stat .val {
+            font-size: 2rem;
+            font-weight: 800;
+        }
+
+        .hero-stat .lbl {
+            font-size: .75rem;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* ── SECTION TITLE ── */
+        .section-title {
+            font-size: 1.15rem;
+            font-weight: 800;
+            margin: 40px 0 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding-left: 14px;
+            border-left: 4px solid var(--purple);
+        }
+
+        /* ── SCORE BOARD ── */
+        .score-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        @media (max-width: 680px) {
+            .score-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .score-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 28px 24px;
+            border-top: 4px solid transparent;
+            transition: transform .2s;
+        }
+
+        .score-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .score-card.green {
+            border-top-color: var(--green);
+        }
+
+        .score-card.amber {
+            border-top-color: var(--amber);
+        }
+
+        .score-card.red {
+            border-top-color: var(--red);
+        }
+
+        .score-num {
+            font-size: 3.5rem;
+            font-weight: 900;
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        .score-card.green .score-num {
+            color: var(--green);
+        }
+
+        .score-card.amber .score-num {
+            color: var(--amber);
+        }
+
+        .score-card.red .score-num {
+            color: var(--red);
+        }
+
+        .score-label {
+            font-size: .85rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .score-desc {
+            font-size: .8rem;
+            color: var(--muted);
+        }
+
+        .progress-bar {
+            height: 6px;
+            background: rgba(255, 255, 255, .08);
+            border-radius: 3px;
+            margin-top: 16px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            border-radius: 3px;
+            transition: width .6s ease;
+        }
+
+        .green .progress-fill {
+            background: var(--green);
+        }
+
+        .amber .progress-fill {
+            background: var(--amber);
+        }
+
+        .red .progress-fill {
+            background: var(--red);
+        }
+
+        /* ── COMPLIANCE TABLE ── */
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 30px;
+            margin-bottom: 24px;
+        }
+
+        .card h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .risk-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 0;
+        }
+
+        @media (max-width: 640px) {
+            .risk-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .risk-item {
+            background: rgba(255, 255, 255, .03);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 18px;
+        }
+
+        .risk-item h4 {
+            font-size: .9rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .risk-item.danger h4 {
+            color: var(--red);
+        }
+
+        .risk-item.warn h4 {
+            color: var(--amber);
+        }
+
+        .risk-item.good h4 {
+            color: var(--green);
+        }
+
+        .risk-item p {
+            font-size: .82rem;
+            color: var(--muted);
+            margin-bottom: 10px;
+        }
+
+        .count-badge {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: .75rem;
+            font-weight: 700;
+        }
+
+        .count-badge.red {
+            background: var(--red-light);
+            color: var(--red);
+        }
+
+        .count-badge.amber {
+            background: var(--amber-light);
+            color: var(--amber);
+        }
+
+        .count-badge.green {
+            background: var(--green-light);
+            color: var(--green);
+        }
+
+        /* ── COMPARE BLOCKS ── */
+        .compare-pair {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 640px) {
+            .compare-pair {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .cp-box {
+            border-radius: 10px;
+            padding: 18px;
+        }
+
+        .cp-box.bad {
+            background: rgba(239, 68, 68, .07);
+            border: 1.5px solid rgba(239, 68, 68, .2);
+        }
+
+        .cp-box.good {
+            background: rgba(16, 185, 129, .07);
+            border: 1.5px solid rgba(16, 185, 129, .2);
+        }
+
+        .cp-label {
+            font-size: .72rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .cp-box.bad .cp-label {
+            color: var(--red);
+        }
+
+        .cp-box.good .cp-label {
+            color: var(--green);
+        }
+
+        .cp-text {
+            font-size: .88rem;
+            line-height: 1.7;
+            border-radius: 6px;
+            padding: 12px;
+            background: rgba(255, 255, 255, .04);
+            font-style: italic;
+        }
+
+        .cp-box.bad .cp-text {
+            color: #fca5a5;
+            border-left: 3px solid var(--red);
+        }
+
+        .cp-box.good .cp-text {
+            color: #6ee7b7;
+            border-left: 3px solid var(--green);
+        }
+
+        .cp-analysis {
+            font-size: .8rem;
+            color: var(--muted);
+            margin-top: 10px;
+        }
+
+        /* ── CATEGORY STATS ── */
+        .cat-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .cat-row {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .cat-name {
+            flex: 0 0 120px;
+            font-size: .88rem;
+            font-weight: 600;
+            color: var(--muted);
+        }
+
+        .cat-bar-wrap {
+            flex: 1;
+            height: 22px;
+            background: rgba(255, 255, 255, .06);
+            border-radius: 11px;
+            overflow: hidden;
+        }
+
+        .cat-bar {
+            height: 100%;
+            border-radius: 11px;
+            display: flex;
+            align-items: center;
+            padding-left: 10px;
+            font-size: .75rem;
+            font-weight: 700;
+            color: rgba(255, 255, 255, .9);
+        }
+
+        .cat-count {
+            flex: 0 0 60px;
+            text-align: right;
+            font-size: .82rem;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        /* ── RECOMMENDATION ── */
+        .rec-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .rec-card {
+            background: rgba(255, 255, 255, .03);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 22px;
+        }
+
+        .rec-card .rec-num {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: .9rem;
+            margin-bottom: 12px;
+        }
+
+        .rec-card.urgent .rec-num {
+            background: var(--red-light);
+            color: var(--red);
+        }
+
+        .rec-card.important .rec-num {
+            background: var(--amber-light);
+            color: var(--amber);
+        }
+
+        .rec-card.optimize .rec-num {
+            background: var(--blue-light);
+            color: var(--blue);
+        }
+
+        .rec-card h4 {
+            font-size: .95rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .rec-card.urgent h4 {
+            color: var(--red);
+        }
+
+        .rec-card.important h4 {
+            color: var(--amber);
+        }
+
+        .rec-card.optimize h4 {
+            color: var(--blue);
+        }
+
+        .rec-card p {
+            font-size: .84rem;
+            color: var(--muted);
+        }
+
+        .rec-card ul {
+            padding-left: 18px;
+            margin-top: 8px;
+        }
+
+        .rec-card li {
+            font-size: .84rem;
+            color: var(--muted);
+            margin-bottom: 5px;
+        }
+
+        /* ── RED LINE TABLE ── */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            padding: 12px 16px;
+            text-align: left;
+            font-size: .78rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .05em;
+            color: var(--muted);
+            border-bottom: 1px solid var(--border);
+            background: rgba(255, 255, 255, .02);
+        }
+
+        td {
+            padding: 12px 16px;
+            font-size: .88rem;
+            border-bottom: 1px solid var(--border);
+            vertical-align: top;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover td {
+            background: rgba(255, 255, 255, .02);
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: .72rem;
+            font-weight: 700;
+        }
+
+        .tag.red {
+            background: var(--red-light);
+            color: var(--red);
+        }
+
+        .tag.amber {
+            background: var(--amber-light);
+            color: var(--amber);
+        }
+
+        .tag.green {
+            background: var(--green-light);
+            color: var(--green);
+        }
+
+        .tag.blue {
+            background: var(--blue-light);
+            color: var(--blue);
+        }
+
+        /* ── FOOTER ── */
+        .footer-nav {
+            background: var(--surface);
+            border-radius: 12px;
+            padding: 20px 24px;
+            margin-top: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .footer-nav a {
+            color: var(--blue);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: .9rem;
+        }
+
+        .footer-nav a:hover {
+            opacity: .8;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="topbar">
+        <div class="topbar-inner">
+            <a href="../../../SKU_Sales_Strategy_2026.html">← SKU 销售策略</a>
+            <span style="font-weight:700; font-size:.9rem;">AI 助教话术评审报告</span>
+            <span style="font-size:.8rem; color:var(--muted);">2026-03-06 评审</span>
+        </div>
+    </nav>
+
+    <div class="wrap">
+
+        <!-- HERO -->
+        <div class="hero">
+            <div class="hero-badge">🔍 AI 话术策略评审报告</div>
+            <h1>AI 助教策略库<br>合规 × 情商 × 转化率评审</h1>
+            <p>基于官方策略库 2396 条话术全量分析，从合规红线、情绪智商与商业转化三个维度出发，对每一个关键场景进行逐类评审，并提供改进建议与优化模板。</p>
+            <div class="hero-meta">
+                <div class="hero-stat">
+                    <div class="val" style="color: var(--purple);">2396</div>
+                    <div class="lbl">话术总量</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="val" style="color: var(--red);">36条</div>
+                    <div class="lbl">高危合规风险</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="val" style="color: var(--amber);">90条</div>
+                    <div class="lbl">中等风险预警</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="val" style="color: var(--green);">2270</div>
+                    <div class="lbl">合规通过基线</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SCORE BOARD -->
+        <div class="section-title">📊 三维综合评分</div>
+        <div class="score-grid">
+            <div class="score-card amber">
+                <div class="score-num">72</div>
+                <div class="score-label">合规安全分 / 100</div>
+                <div class="score-desc">含36条高风险"绝对化承诺/稳赚/保你"表达；3条收入明确夸大（月入过万直接量化）；须进行系统性脱敏替换。</div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width:72%"></div>
+                </div>
+            </div>
+            <div class="score-card green">
+                <div class="score-num">83</div>
+                <div class="score-label">情绪智商分 / 100</div>
+                <div class="score-desc">绝大多数话术拥有良好的共情表达和陪伴感，引用"我当时也是"等同理手法频率高。但老年人群陪跑话术中仍有一定压单迹象。</div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width:83%"></div>
+                </div>
+            </div>
+            <div class="score-card amber">
+                <div class="score-num">78</div>
+                <div class="score-label">商业转化分 / 100</div>
+                <div class="score-desc">引流到直播、预约鉴定的话术逻辑完整，用稀缺性和名额限制有效。但对异议/费用挑战场景的引导深度不足，平均回应层数偏少。</div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width:78%"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- COMPLIANCE RISK ANALYSIS -->
+        <div class="section-title">🚨 合规风险分级评审</div>
+        <div class="card">
+            <h3>💣 风险分布 (依严重程度分级)</h3>
+            <div class="risk-grid">
+                <div class="risk-item danger">
+                    <h4>🔴 L1 高危：绝对化语言承诺</h4>
+                    <p>使用"绝对不/绝对没有/保你/包你"等对客户做强绝对承诺的表达。在监管机构或法庭上，这类词语会被认定为"承诺性诱导"，是投诉和退费高发场景的直接导火索。</p>
+                    <span class="count-badge red">🚨 36 条</span>
+                    <ul style="padding-left:16px; margin-top:10px; color: var(--red); font-size:.82rem;">
+                        <li>"绝对不会有隐形收费"</li>
+                        <li>"保你不会落下内容"</li>
+                        <li>"绝对没有任何二次收费"</li>
+                    </ul>
+                </div>
+                <div class="risk-item warn">
+                    <h4>🟡 L2 中危：含蓄夸大变现预期</h4>
+                    <p>话术中虽未直接使用"月入过万"，但"时薪稳定在100元左右"、"积累作品后收入挺稳定"等表达会被用户理解成等价的变现承诺，特别是在老年/低知群体中容易形成预期落差。</p>
+                    <span class="count-badge amber">⚠️ 54 条</span>
+                    <ul style="padding-left:16px; margin-top:10px; color: var(--amber); font-size:.82rem;">
+                        <li>"时薪一般都可以稳定在100元左右"</li>
+                        <li>"精英版同学刚开始，时薪一般在80-100元左右"</li>
+                        <li>"收入挺稳定的，慢慢积累"</li>
+                    </ul>
+                </div>
+                <div class="risk-item warn">
+                    <h4>🟡 L2 中危：排他性接单暗示</h4>
+                    <p>"不报名是不能接单的"、"不买课就没有资源"等话术虽然事实正确，但其表达方式创造了"不付费就被关闭通道"的恐惧心理，可能被认定为诱导性消费。</p>
+                    <span class="count-badge amber">⚠️ 12 条</span>
+                </div>
+                <div class="risk-item good">
+                    <h4>🟢 合规优良：有限定词的正向表达</h4>
+                    <p>策略库中已有部分话术使用了"可能会"、"一般来说"、"仅供参考"等限定词，这是合规友好的话术模型，应作为模板推广至全库。</p>
+                    <span class="count-badge green">✅ 94 条</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- CATEGORY DISTRIBUTION -->
+        <div class="section-title">📋 话术场景分布与质量分析</div>
+        <div class="card">
+            <h3>📈 各场景话术数量 & 质量评估</h3>
+            <div class="cat-list">
+                <div class="cat-row">
+                    <div class="cat-name">转化引导</div>
+                    <div class="cat-bar-wrap">
+                        <div class="cat-bar" style="width:51%; background: linear-gradient(90deg, #3b82f6, #6366f1);">
+                            1223条 (51%)</div>
+                    </div>
+                    <div class="cat-count">
+                        <span class="tag amber">中等</span>
+                    </div>
+                </div>
+                <div class="cat-row">
+                    <div class="cat-name">未分类/其他</div>
+                    <div class="cat-bar-wrap">
+                        <div class="cat-bar" style="width:33%; background: linear-gradient(90deg, #64748b, #475569);">
+                            786条 (33%)</div>
+                    </div>
+                    <div class="cat-count">
+                        <span class="tag red">待优化</span>
+                    </div>
+                </div>
+                <div class="cat-row">
+                    <div class="cat-name">闲聊/感谢</div>
+                    <div class="cat-bar-wrap">
+                        <div class="cat-bar" style="width:11%; background: linear-gradient(90deg, #10b981, #059669);">
+                            266条 (11%)</div>
+                    </div>
+                    <div class="cat-count">
+                        <span class="tag green">优良</span>
+                    </div>
+                </div>
+                <div class="cat-row">
+                    <div class="cat-name">情绪安抚</div>
+                    <div class="cat-bar-wrap">
+                        <div class="cat-bar" style="width:2.4%; background: linear-gradient(90deg, #a78bfa, #7c3aed);">
+                            58条</div>
+                    </div>
+                    <div class="cat-count">
+                        <span class="tag green">优良</span>
+                    </div>
+                </div>
+                <div class="cat-row">
+                    <div class="cat-name">预期管理</div>
+                    <div class="cat-bar-wrap">
+                        <div class="cat-bar" style="width:1.1%; background: linear-gradient(90deg, #f59e0b, #d97706);">
+                            27条</div>
+                    </div>
+                    <div class="cat-count">
+                        <span class="tag red">严重不足</span>
+                    </div>
+                </div>
+                <div class="cat-row">
+                    <div class="cat-name">信任建立</div>
+                    <div class="cat-bar-wrap">
+                        <div class="cat-bar" style="width:.9%; background: linear-gradient(90deg, #22d3ee, #0891b2);">
+                            22条</div>
+                    </div>
+                    <div class="cat-count">
+                        <span class="tag red">严重不足</span>
+                    </div>
+                </div>
+                <div class="cat-row">
+                    <div class="cat-name">异议处理</div>
+                    <div class="cat-bar-wrap">
+                        <div class="cat-bar" style="width:.6%; background: linear-gradient(90deg, #ef4444, #dc2626);">
+                            14条</div>
+                    </div>
+                    <div class="cat-count">
+                        <span class="tag red">危险缺失</span>
+                    </div>
+                </div>
+                <div class="cat-row">
+                    <div class="cat-name">信任建立</div>
+                    <div class="cat-bar-wrap">
+                        <div class="cat-bar" style="width:.6%; background: linear-gradient(90deg, #f97316, #ea580c);">
+                            信任建立</div>
+                    </div>
+                    <div class="cat-count">
+                        <span class="tag red">危险缺失</span>
+                    </div>
+                </div>
+            </div>
+            <div
+                style="margin-top: 20px; padding: 16px; background: rgba(245,158,11,.08); border: 1px solid rgba(245,158,11,.2); border-radius: 8px;">
+                <strong style="color: var(--amber);">⚠️ 结构性问题：</strong>
+                <span style="font-size:.88rem; color:var(--muted);">转化引导占比超过51%，但"异议处理"（14条）和"预期管理"（27条）话术严重缺失。这意味着 AI
+                    助教极其擅长主动推销，但一旦用户产生顾虑、比价或投诉意图，应对能力几乎为零——这是导致后端投诉率高的核心根因之一。</span>
+            </div>
+        </div>
+
+        <!-- BEFORE AFTER COMPARE -->
+        <div class="section-title">⚖️ 核心场景对比：现有话术 vs 改进版</div>
+
+        <!-- Case 1 -->
+        <div class="card">
+            <h3>🔴 场景 1：用户询问"能赚多少钱？"（收入预期场景）</h3>
+            <div class="compare-pair">
+                <div class="cp-box bad">
+                    <div class="cp-label">❌ 当前话术（合规风险）</div>
+                    <div class="cp-text">
+                        "精英版同学刚开始时，时薪一般在80-100元左右。高阶版学员专业度和实战经验提升后，时薪通常能到150-200元……"
+                    </div>
+                    <div class="cp-analysis">⚠️ 问题：用精确数字定义收入范围，一旦交付不达预期即构成虚假承诺。且"通常能到150-200元"在老年/低知用户群中极易被理解为兜底保证。
+                    </div>
+                </div>
+                <div class="cp-box good">
+                    <div class="cp-label">✅ 改进版话术（合规 + 高情商）</div>
+                    <div class="cp-text">
+                        "收入情况因人而异，跟声音条件、练习时长和接单机会都有关系，我没法给你一个固定数字，因为那样反而是不诚实的。我能跟你说的是，行业里有很多同学是一边学一边慢慢接到项目的，你可以先从声音鉴定开始，看看自己的实际潜力是什么样的。"
+                    </div>
+                    <div class="cp-analysis">✅ 优势：拒绝给出绝对数字，但保留"有潜力"的期待；用"不诚实"来反衬诚意，降低用户防御；尾部引导行动（声音鉴定）保持转化节奏。</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Case 2 -->
+        <div class="card">
+            <h3>🔴 场景 2：用户说"是不是骗人的？"（信任危机场景）</h3>
+            <div class="compare-pair">
+                <div class="cp-box bad">
+                    <div class="cp-label">❌ 当前话术（绝对化语言）</div>
+                    <div class="cp-text">
+                        "这方面你放心，我们喜播的课程一次性缴费，后续内容更新都不会额外收费，绝对没有任何二次收费的问题……不用太担心这些问题，要是因为害怕而错过了新行业……"
+                    </div>
+                    <div class="cp-analysis">⚠️ 问题："绝对没有"是法律风险极高的表达；末尾暗含恐惧感的催促（"因为害怕而错过"）可能激化本就不信任的用户的反感。</div>
+                </div>
+                <div class="cp-box good">
+                    <div class="cp-label">✅ 改进版话术（合规 + 建立信任）</div>
+                    <div class="cp-text">
+                        "你有这个顾虑很正常，我刚接触的时候也是这么想的。我可以告诉你我自己的体验——喜播的收费结构是公开的，我们不靠欺骗来留住学员，靠的是真实的课程内容。如果你不放心，可以先完全免费地走完体验流程，自己感受一下，不需要在这个阶段做任何决定。"
+                    </div>
+                    <div class="cp-analysis">✅ 优势：以"自我体验"替代"绝对保证"，增加可信度；把"免费体验"作为降低决策门槛的工具，而非强推；彻底去除了恐惧紧迫感，让用户主动向前走。
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Case 3 -->
+        <div class="card">
+            <h3>🟡 场景 3：用户表示"太贵了/现在没钱"（价格异议场景）</h3>
+            <div class="compare-pair">
+                <div class="cp-box bad">
+                    <div class="cp-label">❌ 当前话术（场景缺失）</div>
+                    <div class="cp-text">
+                        【⚠️ 策略库中仅有 14 条异议处理话术，且大多为简单复述产品优势，未针对"没钱"、"太贵"场景提供有效的情感承接方案。】
+                    </div>
+                    <div class="cp-analysis">⚠️ 严重问题：面对价格异议时策略库几乎空白，AI 助教会陷入循环重复课程价值的僵局，或直接跳过处理，造成用户流失或更强的反感。</div>
+                </div>
+                <div class="cp-box good">
+                    <div class="cp-label">✅ 建议新增话术（情商 + 转化）</div>
+                    <div class="cp-text">
+                        "我理解，学费本来就不是小数目，能认真考虑这个问题说明你对钱是认真的人。我想先问一下——是现在真的资金不方便，还是不确定自己能不能坚持学下去？这两个问题的答案不太一样，我可以帮你想想不同的解决方法。"
+                    </div>
+                    <div class="cp-analysis">✅ 优势：先共情，再用提问拆解"贵"后面的真实顾虑（资金 or 信心），避免无效陷入价格拉锯；为后续定制化引导埋下路径。</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Case 4 -->
+        <div class="card">
+            <h3>🟢 场景 4：用户反馈学不会/有挫败感（情绪安抚场景 — 现有亮点）</h3>
+            <div class="compare-pair">
+                <div class="cp-box bad" style="background: rgba(15,23,42,.5); border-color: rgba(255,255,255,.1);">
+                    <div class="cp-label" style="color: var(--muted);">📋 典型示例（现有话术）</div>
+                    <div class="cp-text" style="color: #cbd5e1; border-left-color: rgba(255,255,255,.2);">
+                        "你能坚持，还愿意进步，真的很棒呀！其实你每次录音和反馈我都有认真听，像今天发的小程序作品，和最早那会儿比，已经有质的变化了。其实很多同学一开始都会觉得学不会，但只要坚持下来，给自己多点机会，进步真的会很明显哦……"
+                    </div>
+                    <div class="cp-analysis" style="color: var(--green);">✅ 情绪安抚场景话术已做得相当出色。使用具体成长对比（"今天 vs
+                        最早"）而非空洞夸奖，是高情商的核心体现。</div>
+                </div>
+                <div class="cp-box good">
+                    <div class="cp-label">💡 在此基础上可进一步强化</div>
+                    <div class="cp-text">
+                        "你的感受很正常，这个行业真的需要一点时间，不是因为你不行，而是专业素养本来就需要时间积累。我注意到你在[具体点]上其实已经比上周有明显改善了——你可能自己都没有发现。我们今天可以专门针对你卡住的地方，慢慢来。"
+                    </div>
+                    <div class="cp-analysis">✅ 进阶点：使用具体的个性化观察（用变量[具体点]替代泛化赞美），让用户感到被"真正看见"而非模板式应付，大实粉效果好。</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- RED LINE TABLE -->
+        <div class="section-title">🔴 合规红线词库 (必须替换)</div>
+        <div class="card">
+            <h3>禁用词与推荐替换表</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>风险等级</th>
+                        <th>当前高危词/句式</th>
+                        <th>触发场景</th>
+                        <th>推荐替换表达</th>
+                        <th>监管风险</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="tag red">L1 高危</span></td>
+                        <td style="color: var(--red);">"绝对没有任何二次收费"</td>
+                        <td>用户问收费问题</td>
+                        <td style="color: var(--green);">"目前公开的收费结构是XXXXXX，如果有变化会提前通知你"</td>
+                        <td>虚假承诺、诱导消费</td>
+                    </tr>
+                    <tr>
+                        <td><span class="tag red">L1 高危</span></td>
+                        <td style="color: var(--red);">"保你不会落下内容"</td>
+                        <td>用户无法参加直播</td>
+                        <td style="color: var(--green);">"我会尽力把资料补给你，但你自主复习也很重要"</td>
+                        <td>服务承诺兑付风险</td>
+                    </tr>
+                    <tr>
+                        <td><span class="tag red">L1 高危</span></td>
+                        <td style="color: var(--red);">"时薪稳定在100元"</td>
+                        <td>用户问收入</td>
+                        <td style="color: var(--green);">"行业里时薪因人而异，供你参考，具体结果取决于个人情况"</td>
+                        <td>收入夸大、引发退费</td>
+                    </tr>
+                    <tr>
+                        <td><span class="tag red">L1 高危</span></td>
+                        <td style="color: var(--red);">"绝对不会强制"</td>
+                        <td>安抚用户顾虑</td>
+                        <td style="color: var(--green);">"我们尊重你的选择，任何决定你都可以慢慢考虑"</td>
+                        <td>事后反转引发群诉</td>
+                    </tr>
+                    <tr>
+                        <td><span class="tag amber">L2 中危</span></td>
+                        <td style="color: var(--amber);">"不报名就没有接单机会"</td>
+                        <td>用户询问接单条件</td>
+                        <td style="color: var(--green);">"正式课程的学员可以访问平台内部资源，这是资源体系的设计规则"</td>
+                        <td>诱导消费、恐惧营销</td>
+                    </tr>
+                    <tr>
+                        <td><span class="tag amber">L2 中危</span></td>
+                        <td style="color: var(--amber);">"一定能进步很明显"</td>
+                        <td>鼓励学员</td>
+                        <td style="color: var(--green);">"坚持练习的同学一般都会看到改变，你的努力是有意义的"</td>
+                        <td>成果承诺引发期望落差</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- RECOMMENDATIONS -->
+        <div class="section-title">💡 系统性改进建议（优先级排序）</div>
+        <div class="rec-grid">
+            <div class="rec-card urgent">
+                <div class="rec-num">U1</div>
+                <h4>立即执行：绝对化语言全库脱敏</h4>
+                <p>对36条含"绝对/保你/包你"的话术进行批量替换，这是降低合规风险的最高优先级动作。</p>
+                <ul>
+                    <li>建立禁用词列表，每次策略库更新前自动扫描</li>
+                    <li>引入"限定词模板"（因人而异/一般来说/仅供参考）</li>
+                    <li>责任人：产品&法务，7天内完成</li>
+                </ul>
+            </div>
+            <div class="rec-card urgent">
+                <div class="rec-num">U2</div>
+                <h4>立即补充：异议处理话术体系</h4>
+                <p>当前仅14条价格异议话术，远不足以覆盖销售场景中20-30%的用户反对场景。</p>
+                <ul>
+                    <li>新增至少50条针对"太贵/没钱/不确定"的情境话术</li>
+                    <li>引入"提问型应对"代替"强势解释型"</li>
+                    <li>重点场景：比价、拖延决策、家人反对</li>
+                </ul>
+            </div>
+            <div class="rec-card important">
+                <div class="rec-num">P1</div>
+                <h4>重要优化：老年/特殊关怀用户专项话术</h4>
+                <p>现有话术设计的目标用户是"年轻女性"，但喜播核心客户中有大量中老年群体，缺乏专项适配。</p>
+                <ul>
+                    <li>基于"特殊关怀用户"标签分层，构建独立话术分支</li>
+                    <li>严格禁止对高危群体使用任何收入定量描述</li>
+                    <li>增加耐心重复型话术，降低操作门槛焦虑</li>
+                </ul>
+            </div>
+            <div class="rec-card important">
+                <div class="rec-num">P2</div>
+                <h4>重要优化：预期管理前置化</h4>
+                <p>收入预期管理话术仅27条，且大多出现在用户直接询问时。应在引流和转化早期就主动设置合理预期。</p>
+                <ul>
+                    <li>在体验营第1-2天设置"行业认知"话术模块</li>
+                    <li>主动提及"不是所有人都能快速变现"，降低期望差</li>
+                    <li>用"成长路径"替换"变现承诺"作为核心话题</li>
+                </ul>
+            </div>
+            <div class="rec-card optimize">
+                <div class="rec-num">O1</div>
+                <h4>长期优化：A/B测试机制建立</h4>
+                <p>话术库的2396条数据是静态的，没有反映真实的转化率表现。需要建立话术质量闭环。</p>
+                <ul>
+                    <li>对高频场景话术建立转化率追踪（加微/报名/留存）</li>
+                    <li>每月做一轮低效话术淘汰 + 高效话术扩展</li>
+                    <li>将退费/投诉场景反向标注回话术话题树</li>
+                </ul>
+            </div>
+            <div class="rec-card optimize">
+                <div class="rec-num">O2</div>
+                <h4>长期优化：情商话术标准化模板</h4>
+                <p>现有情绪安抚话术质量较好，但没有形成可复用的结构模板，导致质量参差不齐。</p>
+                <ul>
+                    <li>提取"共情→具体观察→行动引导"三段式模板</li>
+                    <li>针对关键情绪节点（挫败/焦虑/不信任）各建一套标准话术</li>
+                    <li>AI生成时严格遵循模板，减少"空洞鼓励"比例</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- FOOTER NAV -->
+        <div class="footer-nav">
+            <a href="../../../SKU_Sales_Strategy_2026.html">← 返回 SKU 销售策略（低退费高转化方法论）</a>
+            <a href="../../../ComplaintRate.html">投诉率大盘 →</a>
+            <a href="../../../NPS.html">NPS 满意度体系 →</a>
+            <a href="../../../LTC_Strategies/Strategy_Market_Brand_PR.html">市场公关体系 →</a>
+        </div>
+
+    </div>
+</body>
+
+</html>
