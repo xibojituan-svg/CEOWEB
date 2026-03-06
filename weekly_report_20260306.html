@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,6 +12,7 @@
             --light: #f5f5f5;
             --text: #333;
         }
+
         body {
             font-family: "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
             margin: 0;
@@ -19,11 +21,13 @@
             background: #f8fafc;
             line-height: 1.6;
         }
+
         .container {
             max-width: 900px;
             margin: 0 auto;
             padding: 40px 20px;
         }
+
         header {
             background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('pic/hero_bg.jpg');
             background-size: cover;
@@ -33,36 +37,41 @@
             text-align: center;
             border-radius: 12px;
             margin-bottom: 40px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
         }
+
         header h1 {
             margin: 0 0 10px 0;
             font-size: 2.2rem;
             color: white;
             letter-spacing: 1px;
         }
+
         header p {
             margin: 0;
             font-size: 1.1rem;
             opacity: 0.9;
         }
+
         .highlight {
             background-color: #fff;
             border-left: 5px solid var(--primary);
             padding: 20px;
             margin: 0 0 30px 0;
             border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
             font-size: 1.05rem;
         }
+
         .section {
             background: white;
             border: 1px solid #e2e8f0;
             border-radius: 10px;
             padding: 35px;
             margin-bottom: 30px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
         }
+
         .section h2 {
             color: var(--primary);
             border-bottom: 2px solid #f1f5f9;
@@ -70,6 +79,7 @@
             margin-top: 0;
             font-size: 1.6rem;
         }
+
         h3 {
             color: var(--dark);
             margin-top: 30px;
@@ -78,6 +88,7 @@
             align-items: center;
             gap: 10px;
         }
+
         h3::before {
             content: "";
             display: inline-block;
@@ -86,16 +97,21 @@
             background-color: var(--dark);
             border-radius: 3px;
         }
-        ul, ol {
+
+        ul,
+        ol {
             padding-left: 25px;
         }
+
         li {
             margin-bottom: 12px;
             color: #475569;
         }
+
         li strong {
             color: #1e293b;
         }
+
         .tag {
             display: inline-block;
             background: #f1f5f9;
@@ -107,9 +123,24 @@
             font-weight: 700;
             border: 1px solid #e2e8f0;
         }
-        .tag.tag-ipd { background: #eff6ff; color: #1d4ed8; border-color: #bfdbfe; }
-        .tag.tag-ltc { background: #ecfdf5; color: #047857; border-color: #a7f3d0; }
-        .tag.tag-itr { background: #fef2f2; color: #b91c1c; border-color: #fecaca; }
+
+        .tag.tag-ipd {
+            background: #eff6ff;
+            color: #1d4ed8;
+            border-color: #bfdbfe;
+        }
+
+        .tag.tag-ltc {
+            background: #ecfdf5;
+            color: #047857;
+            border-color: #a7f3d0;
+        }
+
+        .tag.tag-itr {
+            background: #fef2f2;
+            color: #b91c1c;
+            border-color: #fecaca;
+        }
 
         .footer {
             text-align: center;
@@ -119,6 +150,7 @@
             color: #64748b;
             font-size: 0.9rem;
         }
+
         .btn-back {
             display: inline-block;
             margin-top: 20px;
@@ -130,95 +162,68 @@
             font-weight: bold;
             transition: all 0.3s ease;
         }
+
         .btn-back:hover {
             background: var(--primary);
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(255,69,0,0.3);
+            box-shadow: 0 4px 12px rgba(255, 69, 0, 0.3);
         }
     </style>
 </head>
+
 <body>
 
-<div class="container">
-    <header>
-        <h1>本周战略落地总结与盘点报告</h1>
-        <p>【2026年2月第4周 - 3月第1周】(2.28 - 3.6)</p>
-    </header>
+    <div class="container">
+        <header>
+            <h1>本周战略落地总结与盘点报告</h1>
+            <p>【2026年2月第4周 - 3月第1周】(2.28 - 3.6)</p>
+        </header>
 
-    <div class="highlight">
-        <p style="margin: 0;"><strong>核心摘要：</strong>根据本周系统内提交的代码及文档变更（共计约30+次核心更新），本周我们在<strong>“战略蓝图向流程管线的转化”</strong>以及<strong>“合规与增长的平衡”</strong>上取得了突破性的进展。管理重心从“点状突破”正式走向“体系化、流程化”的底层系统搭建。</p>
-    </div>
-
-    <div class="section">
-        <h2>一、 战略落地核心进展（做了什么）</h2>
-
-        <h3>1. 三大核心管理流程（IPD/LTC/ITR）全面线上化与可视化</h3>
-        <ul>
-            <li><span class="tag tag-ipd">IPD</span> <strong>集成产品开发：</strong>完成了 <code>IPD SKU 经营看板</code> 大改版（采用移动端优先、明亮极简风格）并落地了详细的 <code>SKU管理PRD</code> 文档。成功将3月份实际迭代数据、L2课程（顶配引擎版）纳入系统追踪与版本控制。</li>
-            <li><span class="tag tag-ltc">LTC</span> <strong>线索到现金：</strong>新增了 <code>LTC 流程管理</code> 模块（LTC_Process_Management.html）。打通了从前端流量导流到后端交付的逻辑，并强化了针对转化率漏斗关键节点的监控。</li>
-            <li><span class="tag tag-itr">ITR</span> <strong>问题到解决：</strong>新增了 <code>ITR 流程管理</code> 模块（ITR_Process_Management.html）。打通了客服、客诉处置、退款分析的闭环，将其提升为公司级核心战略流程，构建了后方防线。</li>
-        </ul>
-
-        <h3>2. 核心大盘数字化看板基建完善</h3>
-        <ul>
-            <li><span class="tag">销售前线打通</span> <strong>组织战报与监控：</strong>重构并打通了 <code>销售视角看板 (sales_view)</code> 和 <code>总监视角看板 (director_dashboard)</code>。极大提升了一线销售与管理层的战区透明度。</li>
-            <li><span class="tag">财务精算</span> <strong>利润池护城河：</strong>建立并更新了 <code>第一曲线盈利模型测算 (FirstEarningsModel)</code> 和 <code>净化后营收 (CleanRevenue)</code> 核心财务分析模块，为高质量收入管理打下基石。</li>
-        </ul>
-
-        <h3>3. AI应用与产品线实质性升级</h3>
-        <ul>
-            <li><span class="tag">课程中台</span> <strong>旗舰产品重塑：</strong>正式更新了 <strong>L2 进阶课程（顶配引擎版）</strong> 的相关战略大纲和产品手册，并梳理了整体3月课程的迭代方向与价格策略。</li>
-            <li><span class="tag">AI实战</span> <strong>AI与销讲融合：</strong>落地了《AI助教话术策略库全量评审报告》，并将AI赋能与具体的SKU销售策略页面完成了极强的业务关联。</li>
-        </ul>
-    </div>
-
-    <div class="section">
-        <h2>二、 发现并推进的核心问题（复盘与化解）</h2>
-        <p style="color: #64748b; margin-bottom: 25px;">在战略落实到业务细节的过程中，本周集中暴露并重点推进解决了以下几类深水区博弈问题：</p>
-
-        <h3>1. 销售转化（Conversion）与 合规/客诉（Compliance）的天然博弈</h3>
-        <ul>
-            <li><strong>痛点暴露：</strong>在销售转化激进期，存在前端销售话术与后端质检标准的断层，极易导致前端签单、后端退费。</li>
-            <li><strong>推进落地：</strong>3月2日专门召开了内阁会议讨论<strong>《质检与销售策略对齐》</strong>。并在 CEO 首页系统性地加入了“合规天平（Compliance Scale）”模块，进一步更新了 <code>ConversionVsCompliance.html</code>（转化与合规分析表），从顶层树立了“既要增量又要守住合规底线”的价值观。</li>
-        </ul>
-
-        <h3>2. “高危异常用户”与潜在退款/投诉炸弹的处理真空期</h3>
-        <ul>
-            <li><strong>痛点暴露：</strong>以往面向高客诉风险人群及退款诉求，缺乏标准化和前置性的处理机制，往往被动响应。</li>
-            <li><strong>推进落地：</strong>大规模更新并确立了 <strong>风控知识库</strong>（如：《特殊关怀用户识别和处置政策》、《高危质检文档》等）。这标志着我们对客诉和退款的管理从被动扑火，转向了建章立制的<strong>“前置风控拦截”</strong>。</li>
-        </ul>
-
-        <h3>3. 周度执行动作的碎片化与信息损耗</h3>
-        <ul>
-            <li><strong>痛点暴露：</strong>高管和CEO的周度任务布置，与实际周会纪要、SOP分散脱节，导致追踪困难。</li>
-            <li><strong>推进落地：</strong>本周重构了周会管理模块，将《每周会议SOP》与具体的3月2日会议纪要融合重组为新的标准归档单元（<code>meeting_2026-03-02.html</code>），大幅增强了内阁决议向高管执行力系统(Executive Performance) 穿透的效率。</li>
-        </ul>
-    </div>
-
-    <div class="section">
-        <h2>三、 周末复盘与下周工作展望</h2>
-        
-        <div style="background: #f8fafc; padding: 20px; border-radius: 8px; margin-bottom: 25px; border-left: 4px solid #334155;">
-            <p style="margin: 0; color: #0f172a; font-weight: bold;">【核心总结论】</p>
-            <p style="margin: 10px 0 0 0; color: #475569;">如果说前阶段我们完成了“北极星指标”和战略地图（BSC）的绘制，<strong>本周则是彻底把手弄脏，用流程管线（IPD/LTC/ITR）和底层规则（风控/质检对齐）把战略焊死在了齿轮上</strong>。系统的产品化和规则的可量化都取得了长足进步。</p>
+        <div class="highlight">
+            <p style="margin: 0;"><strong>周末复盘 (03.06) vs. 周一内阁会计划
+                    (03.02)：</strong>本周核心检验了“既要合规又要转化”的战略落地。不再赘述过程，以下是系统本周跑出的真实业务结果。</p>
         </div>
 
-        <h3>下周推进建议（CEO视角备忘）</h3>
-        <ol>
-            <li><strong>L2新版课程的炮火测试：</strong>随着L2产品线的重磅大版本迭代，下周需密切通过新的 <code>sales_view</code> 看板追踪一线跑单反馈，验证新产品在LTC流程中的实际转化率表现。</li>
-            <li><strong>合规政策的“肌肉记忆”：</strong>3月2日刚达成的“质检与销售策略对齐”红线，下周需要重点抽测销售录音与实际话术是否真正开始纠偏，可通过“客诉率看板”进行滞后性追踪验证。</li>
-            <li><strong>第二曲线前瞻推进：</strong>本周我们稳固了第一曲线的系统盘，第二曲线（如健康管理、长寿逻辑等）推进较少（集中在2月底的探索）。在第一曲线防线稳固后，下周可考虑逐步释放AI研发或组织精力，为第二曲线探路。</li>
-        </ol>
-    </div>
+        <div class="section">
+            <h2 style="color: #10b981; border-bottom: 2px solid #d1fae5;">一、 进展顺利的【确定性结果】</h2>
+            <p style="color: #64748b; font-size: 0.9rem; margin-top: -10px; margin-bottom: 20px;">
+                对照周一设定的“打通管线”与“防范客诉”目标，已拿到结果：</p>
+            <ul>
+                <li><span class="tag tag-ipd"
+                        style="background:var(--dark); color:white; border-color:black;">基建通车</span> <strong>IPD / LTC /
+                        ITR 三大管线成功线上化：</strong>不再是文件口号，产品研发、导流转化、售后退费三大经脉的数据已在系统内（Board）真实流转。</li>
+                <li><span class="tag tag-itr"
+                        style="background:var(--dark); color:white; border-color:black;">风控见效</span>
+                    <strong>“高危用户拦截”与“百万客诉规则”硬着陆：</strong>周一定下的“不赚带血的钱”底线被系统严格执行，前端劣质单已被强制清洗，成功护住“5000万净利润”的底裤。</li>
+                <li><span class="tag tag-ltc"
+                        style="background:var(--dark); color:white; border-color:black;">弹药就位</span> <strong>L2
+                        进阶旗舰课（张震大咖版）定档上线：</strong>一季度最重要的利润引擎完成产品定义与系统录入。</li>
+            </ul>
+        </div>
 
-    <div style="text-align: center;">
-        <a href="index.html" class="btn-back">返回 CEO 看板首页</a>
-    </div>
+        <div class="section">
+            <h2 style="color: #ef4444; border-bottom: 2px solid #fee2e2;">二、 进展极不顺利的【流血事件】</h2>
+            <p style="color: #64748b; font-size: 0.9rem; margin-top: -10px; margin-bottom: 20px;">
+                对照周一设定的“质检与销售话术平衡”目标，结果严重偏离：</p>
+            <ul>
+                <li><strong style="color: #ef4444;">🚨 退费率全线雪崩（37.8%）：</strong>
+                    周一刚对齐了销售策略，但前端遗留的“过度承诺”遭遇交付期的“情绪反噬”，退款率击穿20%生死线，本周产出的净营收极度虚胖！</li>
+                <li><strong style="color: #f59e0b;">⚠️ 私域金矿死寂（转化率近 0%）：</strong> 123万存量兵力完全沉睡。在风控压力下，老旧洗脑话术全网失效，新的 AI
+                    转化话术未能产出实际单量。</li>
+                <li><strong style="color: #f59e0b;">⚠️ 兼职人效模型崩塌：</strong> 0-30天的兼职助教产出惨不忍睹，人工成本倒挂。如果不能强制推行 AI Copilot
+                    接管，后端服务承载力将很快面临上限。</li>
+            </ul>
+        </div>
 
-    <div class="footer">
-        <p>System Generated Weekly Report · Xibo Group CEO Dashboard</p>
+        <div style="text-align: center;">
+            <a href="index.html" class="btn-back">返回 CEO 看板首页</a>
+        </div>
+
+        <div class="footer">
+            <p>System Generated Weekly Report · Xibo Group CEO Dashboard</p>
+        </div>
     </div>
-</div>
 
 </body>
+
 </html>
