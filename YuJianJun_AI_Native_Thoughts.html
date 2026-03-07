@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>余建军最新想法：全面重构 AI 原生架构</title>
+    <!-- 引入 Mermaid 库以渲染图表 -->
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+    <style>
+        :root {
+            --primary: #FF4500;
+            --dark: #1a1a1a;
+            --light: #f5f5f5;
+            --text: #333;
+            --red: #d32f2f;
+            --green: #2e7d32;
+            --purple: #8b5cf6;
+            --blue: #2563eb;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--text);
+            background: #fff;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--dark) 0%, #334155 100%);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        header h1 {
+            color: white;
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+        }
+
+        header .subtitle {
+            color: #ccc;
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        section {
+            padding: 40px 0;
+        }
+
+        h2 {
+            border-bottom: 3px solid var(--primary);
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+            display: inline-block;
+            color: var(--dark);
+        }
+
+        h3 {
+            margin-top: 30px;
+            color: var(--dark);
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .card {
+            background: #f9f9f9;
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--primary);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+            transition: transform 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .card.finance {
+            border-left-color: var(--green);
+            background: #f0fdf4;
+        }
+
+        .card.ai {
+            border-left-color: var(--purple);
+            background: #faf5ff;
+        }
+
+        .card.risk {
+            border-left-color: var(--blue);
+            background: #f0f9ff;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: white;
+            margin-right: 10px;
+        }
+
+        .badge.green {
+            background: var(--green);
+        }
+
+        .badge.red {
+            background: var(--red);
+        }
+
+        .badge.purple {
+            background: var(--purple);
+        }
+
+        .badge.blue {
+            background: var(--blue);
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            background: #f5f5f5;
+            color: #888;
+            font-size: 0.9rem;
+            margin-top: 50px;
+        }
+
+        .breadcrumb {
+            padding: 15px 0;
+            color: #666;
+            font-size: 0.9rem;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 30px;
+        }
+
+        .breadcrumb a {
+            color: var(--text);
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--primary);
+        }
+
+        .breadcrumb .separator {
+            margin: 0 8px;
+            color: #ccc;
+        }
+
+        .mermaid {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            text-align: center;
+            margin: 30px 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .highlight-val {
+            font-weight: bold;
+            color: var(--primary);
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="container">
+            <h1>余建军核心观点：全面重构 AI 原生架构</h1>
+            <div class="subtitle">抛弃“打 AI 补丁”思维，打造全新业务流、数字员工网络与极简人类团队</div>
+        </div>
+    </header>
+
+    <div class="container">
+
+        <nav class="breadcrumb">
+            <a href="index.html">首页</a>
+            <span class="separator">/</span>
+            <span>最新战略与洞察</span>
+            <span class="separator">/</span>
+            <span>余建军最新想法</span>
+        </nav>
+
+        <section>
+            <h2>💡 核心观点总结</h2>
+
+            <div class="card finance">
+                <h3><span class="badge green">业务层面</span>1. 从“卖工具”走向“直接交付结果（OaaS）”</h3>
+                <ul>
+                    <li><strong>提质：</strong> 不再像传统 SaaS 那样单纯给用户一个工具，而是直接交付最终决定 <span
+                            class="highlight-val">(Output-as-a-Service)</span>。</li>
+                    <li><strong>重构：</strong> 打破过去的表单记录交互，转变成基于多模态（视觉识别食物、语音输入情绪、静默读取底座心率等）的极简交互路线。</li>
+                    <li><strong>壁垒：</strong> 真正的护城河不再是去调用某个大模型，而是把用户的生物学数据与心理情绪数据形成闭环反哺。</li>
+                </ul>
+            </div>
+
+            <div class="card ai">
+                <h3><span class="badge purple">组织层面</span>2. 全员 AI 化与数字员工崛起</h3>
+                <ul>
+                    <li><strong>重塑要求：</strong> 组织内 <span class="highlight-val">80% 的全职岗位必须实现 AI 重构</span>，高管需将至少 30%
+                        精力投入 AI 驱动创新，当前学习权重需被大幅提升。</li>
+                    <li><strong>数字员工：</strong> 需将 AI Agent 视为并在架构图中安插进具体的“工作岗位”（如担任首岗营养师），而人类应从“执行者”转变为“指挥者与AI的兜底者”。
+                    </li>
+                    <li><strong>提效文化：</strong> 极大压缩机械属性极强的执行链条工作，利用 AI 提效，大胆拥抱高信噪比的极速试错，杜绝那些冗长的会议和流程。</li>
+                </ul>
+            </div>
+
+            <div class="card risk">
+                <h3><span class="badge blue">人才层面</span>3. 寻找懂人性的“系统构建者”</h3>
+                <ul>
+                    <li><strong>特种作战：</strong> 抛弃传统的按职能划分的庞杂部门概念，更倾向于寻找 2-3 个具备跨界思维的“复合型超级个体”来拉通产品。</li>
+                    <li><strong>核心价值重塑：</strong> 因为执行层被 AI
+                        大幅替代，人类核心价值不再是纯粹的“干活加班”，而是转为“提出好问题”、“设计好框架”和具备“分辨生成式内容好坏的极致品味”。</li>
+                </ul>
+            </div>
+        </section>
+
+        <section>
+            <h2>📊 AI 原生组织结构图模式推演</h2>
+            <p>基于上述构想，在类似“AI 个性化健康教练”的项目中，未来的组织将不再按职能中心划分，人员结构被高度精简，绝大多数一线执行交由数字专家担任：</p>
+
+            <div class="mermaid">
+                graph TD
+                classDef human fill:#e1f5fe,stroke:#0288d1,stroke-width:2px,color:#01579b,stroke-dasharray: 5 5
+                classDef ai fill:#f3e5f5,stroke:#8e24aa,stroke-width:2px,color:#4a148c
+                classDef core fill:#fff8e1,stroke:#fbc02d,stroke-width:2px,color:#f57f17
+
+                Root["AI 原生核心管理层"]:::core
+
+                subgraph HumanTeam ["人类极简特战队 (3-5人超级个体)"]
+                H1["系统编排者 : 设计大逻辑与指令网络"]:::human
+                H2["首席医学官 : 定义科学红线与安全边界"]:::human
+                H3["增长黑客 : 基于 AI 投流素材矩阵获客"]:::human
+                end
+
+                subgraph AITeam ["数字专家委员会 (AI Agent 矩阵集群)"]
+                A1["前台教练 Agent : 高频自然语言互动 / 提供情绪价值"]:::ai
+                A2["后台营养师 Agent : 多模态计算饮食摄入 / 发起外卖接口"]:::ai
+                A3["医疗生理分析 Agent : 静默介入穿戴设备分析疲劳度 / 阈值调整"]:::ai
+                end
+
+                Root --> HumanTeam
+                Root --> AITeam
+
+                %% 人机协作与赋能关系
+                H1 -. "下达系统编排策略" .-> A1
+                H1 -. "审核与流转调度" .-> A2
+                H1 -. "审核与流转调度" .-> A3
+
+                H2 -. "注入医学干预逻辑安全底线" .-> A3
+                H2 -. "注入权威营养学规范" .-> A2
+
+                H3 -. "提取转化经验循环测试" .-> A1
+            </div>
+        </section>
+
+    </div>
+
+    <footer>
+        &copy; 2026 喜播集团战略办公室 | 本页面为内部战略解码呈现
+    </footer>
+
+</body>
+
+</html>
