@@ -186,6 +186,50 @@
             font-weight: bold;
             color: var(--primary);
         }
+
+        /* 手机端适配响应式设计 */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 20px;
+            }
+
+            header {
+                padding: 40px 0;
+            }
+
+            header h1 {
+                font-size: 1.6rem;
+                padding: 0 10px;
+            }
+
+            header .subtitle {
+                font-size: 0.95rem;
+                padding: 0 15px;
+            }
+
+            h2 {
+                font-size: 1.3rem;
+            }
+
+            h3 {
+                font-size: 1.1rem;
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .badge {
+                margin-bottom: 8px;
+            }
+
+            .card {
+                padding: 15px;
+            }
+
+            .mermaid {
+                padding: 10px;
+                overflow-x: auto;
+            }
+        }
     </style>
 </head>
 
