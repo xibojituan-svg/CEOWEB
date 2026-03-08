@@ -986,11 +986,19 @@
 
             <!-- 改善建议 -->
             <div class="card">
-                <h2>🎯 利润提升三大杠杆</h2>
+                <h2>🎯 利润提升四大核心杠杆与 LTV 战略</h2>
                 <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px">
                     <div
+                        style="background:var(--panel);border-radius:10px;padding:16px;border-left:3px solid var(--purple)">
+                        <div style="font-weight:700;color:var(--purple);margin-bottom:8px">杠杆1：构建“连续性消费”全生命周期 (LTV)
+                        </div>
+                        <div style="font-size:0.82rem;color:var(--muted);line-height:1.7">
+                            突破“一锤子买卖”模式，引入<strong>年度会员/算力订阅制</strong>。将销售和服务体系的终点延伸，通过高频、低客单价的持续续费，极大拉长用户生命周期，构建高粘性稳健底盘。
+                        </div>
+                    </div>
+                    <div
                         style="background:var(--panel);border-radius:10px;padding:16px;border-left:3px solid var(--green)">
-                        <div style="font-weight:700;color:var(--green);margin-bottom:8px">杠杆1：退费率 -5pp</div>
+                        <div style="font-weight:700;color:var(--green);margin-bottom:8px">杠杆2：退费率 -5pp</div>
                         <div style="font-size:0.82rem;color:var(--muted);line-height:1.7">
                             退费率从当前 ~18% 降至 13%，在 5亿净营收基础上相当于额外增加 <strong style="color:var(--green)">+¥3,125万</strong>
                             净利润（无需增加一分钱获客成本）。主要抓手：L2进阶课内容迭代提升满意度、课前期望值管理。
@@ -998,7 +1006,7 @@
                     </div>
                     <div
                         style="background:var(--panel);border-radius:10px;padding:16px;border-left:3px solid var(--blue)">
-                        <div style="font-weight:700;color:var(--blue);margin-bottom:8px">杠杆2：后端复购率 +10pp</div>
+                        <div style="font-weight:700;color:var(--blue);margin-bottom:8px">杠杆3：后端复购率 +10pp</div>
                         <div style="font-size:0.82rem;color:var(--muted);line-height:1.7">
                             L1→L2 转化率从 35% 提升至 45%，以 2025 约 4.4 万人的 L1 交付量计，可拉动后端收入约 <strong
                                 style="color:var(--blue)">+¥1.46亿</strong> GMV（零额外投放）。关键：L1 结营前提前构建进阶紧迫感。
@@ -1006,7 +1014,7 @@
                     </div>
                     <div
                         style="background:var(--panel);border-radius:10px;padding:16px;border-left:3px solid var(--yellow)">
-                        <div style="font-weight:700;color:var(--yellow);margin-bottom:8px">杠杆3：AI 线 SKU 占比提升</div>
+                        <div style="font-weight:700;color:var(--yellow);margin-bottom:8px">杠杆4：AI 线 SKU 占比提升</div>
                         <div style="font-size:0.82rem;color:var(--muted);line-height:1.7">
                             AI 短视频+写作线 UCR 高于有声线（交付成本低、无硬件），若占比从11% 提升至 20%，在总营收不变的前提下净利润率可提升约 <strong
                                 style="color:var(--yellow)">+3pp</strong>（即额外增加 ~¥1,500万净利润）。
@@ -1213,6 +1221,8 @@
                     { name: 'AI短剧写作L2', type: 'N', price: 3280, gmvShare: 0.004, cvr: 3, refund: 15, repurchase: 10, tax: 5.6, cogs: 18, cac: 40, target: 0.10e8 },
                     { name: '攀登大师班', type: 'M', price: 6880, gmvShare: 0.030, cvr: 15, refund: 8, repurchase: 10, tax: 5.6, cogs: 25, cac: 28, target: 0.25e8 },
                     { name: '张震IP产品', type: 'N', price: 3980, gmvShare: 0.006, cvr: 12, refund: 10, repurchase: 15, tax: 5.6, cogs: 30, cac: 25, target: 0.10e8 },
+                    { name: 'Xibo年度会员订阅', type: 'M', price: 599, gmvShare: 0.050, cvr: 20, refund: 2, repurchase: 85, tax: 5.6, cogs: 5, cac: 10, target: 0.25e8 },
+                    { name: 'AI算力与素材资源包', type: 'E', price: 99, gmvShare: 0.017, cvr: 25, refund: 1, repurchase: 95, tax: 5.6, cogs: 35, cac: 5, target: 0.15e8 },
                 ];
 
                 function ucr(s) { return Math.round(100 - s.refund - s.tax - s.cogs - s.cac); }
